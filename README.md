@@ -4,11 +4,18 @@ This README explains the step you need to do to generate the RDF for the GPML pa
 
 ## Get the data
 
-Download the plant pathways and save them in the `orig` folder:
+Download the plant pathways:
 
 ```shell
+gh repo clone pathway-lod/Cyc_to_wiki
+```
+
+and save them in the `orig` folder:
+
+```shell
+cd gpml-to-rdf
 mkdir orig; cd orig
-# copy the GPML files here
+cp ../../Cyc_to_wiki/biocyc_pathways_20251121085146/individual_pathways/*gpml
 ```
 
 Renamed the files and put the results in `orig-renamed/`:
@@ -17,4 +24,10 @@ Renamed the files and put the results in `orig-renamed/`:
 cd ..
 mkdir orig-renamed
 groovy createGPMLfiles.groovy
+```
+
+Then create the RDF with:
+
+```shell
+nice -20 make -j 12 rdf
 ```
