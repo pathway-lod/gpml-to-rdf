@@ -15,10 +15,10 @@ wp/Human/%.ttl: orig-renamed/%.gpml
 	@echo "Creating GPMLRDF and WPRDF from $< ..."
 	@mkdir -p wp/Human
 	@mkdir -p wp/gpml/Human
-	@xpath -q -e "string(/Pathway/@version)" $< | cut -d'_' -f2 | xargs java -cp ${GPMLRDFJAR} org.wikipathways.wp2rdf.CreateRDF $< wp/gpml/Human/ wp/Human/
+	@xpath -q -e "string(/Pathway/@version)" $< | cut -d'_' -f2 | xargs java -cp ${GPMLRDFJAR} org.wikipathways.wp2rdf.CreateRDF -d rdf.plantmetwiki.bioinformatics.nl $< wp/gpml/Human/ wp/Human/
 
 wp/gpml/Human/%.ttl: orig-renamed/%.gpml
 	@echo "Creating GPMLRDF and WPRDF from $< ..."
 	@mkdir -p wp/Human
 	@mkdir -p wp/gpml/Human
-	@xpath -q -e "string(/Pathway/@version)" $< | cut -d'_' -f2 | xargs java -cp ${GPMLRDFJAR} org.wikipathways.wp2rdf.CreateRDF $< wp/gpml/Human/ wp/Human/
+	@xpath -q -e "string(/Pathway/@version)" $< | cut -d'_' -f2 | xargs java -cp ${GPMLRDFJAR} org.wikipathways.wp2rdf.CreateRDF -d rdf.plantmetwiki.bioinformatics.nl $< wp/gpml/Human/ wp/Human/
