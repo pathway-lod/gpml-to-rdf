@@ -4,7 +4,7 @@ This README explains the step you need to do to generate the RDF for the GPML pa
 
 This code depends on the WikiPathways projects libGPML and GPMLRDF stack to create RDF.
 
-## Get the data
+## Preparing the data
 
 Download the plant pathways:
 
@@ -34,8 +34,20 @@ mkdir orig-react-renamed
 groovy createReactionfiles.groovy
 ```
 
+## Creating the RDF
+
 Then create the RDF with:
 
 ```shell
 nice -20 make -j 12 rdf
+```
+
+Aggregation into single files and validation can be done with (see
+[this page](https://openphacts.github.io/Documentation/rdfguide/):
+
+```shell
+find pw -name "*ttl" | xargs cat > all_pathways.ttl
+find react -name "*ttl" | xargs cat > all_reactions.ttl
+cat all_pathways.ttl | rapper -i turtle -t -q - . > /dev/null
+cat all_reactions.ttl | rapper -i turtle -t -q - . > /dev/null
 ```
