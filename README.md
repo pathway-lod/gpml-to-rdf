@@ -17,10 +17,10 @@ and save them in the `orig` folders:
 ```shell
 cd gpml-to-rdf
 mkdir orig-pw; cd orig-pw
-cp ../../Cyc_to_wiki/biocyc_pathways_20251206224344/individual_pathways/*gpml .
+cp ../../Cyc_to_wiki/biocyc_pathways_20251217115329/individual_pathways/*gpml .
 cd ..
 mkdir orig-react; cd orig-react
-cp ../../Cyc_to_wiki/biocyc_pathways_20251206224344/individual_reactions/*gpml .
+cp ../../Cyc_to_wiki/biocyc_pathways_20251217115329/individual_reactions/*gpml .
 cd ..
 ```
 
@@ -46,11 +46,11 @@ Aggregation into single files and validation can be done with (see
 [this page](https://openphacts.github.io/Documentation/rdfguide/):
 
 ```shell
-find pw -name "*ttl" | xargs cat > all_pathways.ttl
-find react -name "*ttl" | xargs cat > all_reactions.ttl
-cat all_pathways.ttl | rapper -i turtle -t -q - . > /dev/null
-cat all_reactions.ttl | rapper -i turtle -t -q - . > /dev/null
-cat all_pathways.ttl all_reactions.ttl > all.ttl
+find pw -name "*ttl" | xargs cat > all_pathways-20251217115329.ttl
+find react -name "*ttl" | xargs cat > all_reactions-20251217115329.ttl
+cat all_pathways-20251217115329.ttl all_reactions-20251217115329.ttl > all-20251217115329.ttl
+cat all_pathways-20251217115329.ttl | rapper -i turtle -t -q - . > /dev/null
+cat all_reactions-20251217115329.ttl | rapper -i turtle -t -q - . > /dev/null
 ```
 
 Some hotfixes:
