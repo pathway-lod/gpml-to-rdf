@@ -7,12 +7,18 @@ def object = jsonSlurper.parseText(fileContent)
 
 def organismData = new File("organisms.tsv").readLines()*.split('\t')
 organismCodes = new HashSet<String>();
+commonNames = new HashMap<String,String>();
 organismData.each { organism ->
   code = organism[3]
+  commonName = organism[2]
   if (organismCodes.contains(code)) {
     println "Duplicate found! -> " + code
   } else {
     organismCodes.add(code)
+  }
+  if ("" != commonName) {
+    println "Added $code -> $commonName"
+    commonNames.put(code, commonName)
   }
 }
 
@@ -53,7 +59,11 @@ object.each { search ->
         colTwo = searchName.substring(firstSpaceIndex).trim()
         ncbi = bestResult.recordId
         code = uniqueCode(searchName)
-        println "$colOne\t$colTwo\t\t$code\t$ncbi"
+        // println "$colOne\t$colTwo\t\t$code\t$ncbi"
+        // println "\t\tothers.put(\"$searchName\",\"$ncbi\");"
+        javaName = colOne + colTwo.substring(0,1).toUpperCase() + colTwo.substring(1)
+        optionalCommonName = (commonNames.containsKey(code)) ? "\"" + commonNames.get(code) +"\", " : "";
+        println "\t$javaName(\"$searchName\",\"$code\",$optionalCommonName$ncbi);"
       } else {}
     }
   }
