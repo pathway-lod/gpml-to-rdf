@@ -46,15 +46,15 @@ Aggregation into single files and validation can be done with (see
 [this page](https://openphacts.github.io/Documentation/rdfguide/):
 
 ```shell
-find pw -name "*ttl" | xargs cat > all_pathways-20251217115329.ttl
-find react -name "*ttl" | xargs cat > all_reactions-20251217115329.ttl
-cat all_pathways-20251217115329.ttl all_reactions-20251217115329.ttl > all-20251217115329.ttl
-cat all_pathways-20251217115329.ttl | rapper -i turtle -t -q - . > /dev/null
-cat all_reactions-20251217115329.ttl | rapper -i turtle -t -q - . > /dev/null
+find pw -name "*ttl" | xargs cat > all_pathways-20251217115329-2.ttl
+find react -name "*ttl" | xargs cat > all_reactions-20251217115329-2.ttl
+cat all_pathways-20251217115329-2.ttl all_reactions-20251217115329-2.ttl > all-20251217115329-2.ttl
+cat all_pathways-20251217115329-2.ttl | rapper -i turtle -t -q - . > /dev/null
+cat all_reactions-20251217115329-2.ttl | rapper -i turtle -t -q - . > /dev/null
 ```
 
 Some hotfixes:
 
 ```shell
-replace "identifiers.org/tair.locus" "identifiers.org/tair.name" -- all.ttl
+replace "identifiers.org/TAIR_gene_name" "identifiers.org/tair.name" -- all.ttl
 ```
