@@ -5,6 +5,7 @@ dependencies:
   - python=3.11
   - pip
   - requests
+  - groovy 
   - rdflib
   - lxml
   - click
