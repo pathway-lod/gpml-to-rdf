@@ -4,7 +4,8 @@ This README explains the step you need to do to generate the RDF for the GPML pa
 
 This code depends on the WikiPathways projects libGPML and GPMLRDF stack to create RDF.
 
-## Preparing the data
+## Preparing the data (Development mode)
+download from GitHub branch/commit
 
 Download the plant pathways:
 
@@ -32,6 +33,13 @@ mkdir orig-pw-renamed
 groovy createPathwayfiles.groovy
 mkdir orig-react-renamed
 groovy createReactionfiles.groovy
+```
+
+## Preparing the data (Release mode) 
+download from Zenodo record 10.5281/zenodo.18404067
+
+```bash 
+python scripts/download_gpml_input.py --clean
 ```
 
 ## Creating the RDF
