@@ -4,6 +4,13 @@ This README explains the step you need to do to generate the RDF for the GPML pa
 
 This code depends on the WikiPathways projects libGPML and GPMLRDF stack to create RDF.
 
+## Set up the environment 
+
+```bash
+mamba env create -f environment.yml
+conda activate plantmetwiki-rdf
+```
+
 ## Preparing the data (Development mode)
 download from GitHub branch/commit
 
@@ -50,8 +57,8 @@ Then create the RDF with:
 nice -20 make -j 12 rdf
 ```
 
-Aggregation into single files and validation can be done with (see
-[this page](https://openphacts.github.io/Documentation/rdfguide/):
+Aggregation into single files and validation can be done with 
+see [this page](https://openphacts.github.io/Documentation/rdfguide/):
 
 ```shell
 find pw -name "*ttl" | xargs cat > all_pathways-20251217115329-3.ttl

@@ -1,0 +1,16 @@
+name: plantmetwiki-rdf
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - requests
+  - rdflib
+  - lxml
+  - click
+  - tqdm
+  - pandas
+  - jupyter
+  - wget
+  - pip:
+      - SPARQLWrapper
