@@ -13,6 +13,7 @@ from pathlib import Path
 
 
 ZENODO_API = "https://zenodo.org/api/records/"
+DEFAULT_METADATA_FILE = Path("build/zenodo_gpml_metadata.json")
 
 
 def fetch_latest_record(concept_doi: str) -> dict:
@@ -24,13 +25,13 @@ def fetch_latest_record(concept_doi: str) -> dict:
         return json.load(response)
 
 
-def find_gpml_file(record: dict) -> str:
-    """Find the GPML zip file in Zenodo record."""
+def find_gpml_file(record: dict) -> dict:
+    """Find the GPML zip file metadata in Zenodo record."""
     for f in record["files"]:
         name = f["key"]
         if "gpml" in name.lower() and name.endswith(".zip"):
             print(f"Found GPML file: {name}")
-            return f["links"]["self"]
+            return f
 
     raise RuntimeError("No GPML zip file found in Zenodo record")
 
@@ -61,6 +62,50 @@ def copy_gpml_files(source_root: Path, pattern: str, output_dir: Path) -> int:
     return len(files)
 
 
+def write_metadata(
+    record: dict,
+    gpml_file: dict,
+    concept_doi: str,
+    pathway_count: int,
+    reaction_count: int,
+    metadata_file: Path = DEFAULT_METADATA_FILE,
+) -> None:
+    metadata = record.get("metadata", {})
+
+    output = {
+        "record_id": record.get("id"),
+        "conceptdoi": metadata.get("conceptdoi", concept_doi),
+        "doi": metadata.get("doi"),
+        "version": metadata.get("version"),
+        "title": metadata.get("title"),
+        "publication_date": metadata.get("publication_date"),
+        "license": metadata.get("license"),
+        "creators": metadata.get("creators", []),
+        "zenodo_record_url": record.get("links", {}).get("html"),
+        "zenodo_api_url": record.get("links", {}).get("self"),
+        "gpml_file": {
+            "key": gpml_file.get("key"),
+            "size": gpml_file.get("size"),
+            "checksum": gpml_file.get("checksum"),
+            "download_url": gpml_file.get("links", {}).get("self"),
+        },
+        "download_outputs": {
+            "pathway_count": pathway_count,
+            "reaction_count": reaction_count,
+            "pathways_dir": "orig-pw",
+            "reactions_dir": "orig-react",
+        },
+    }
+
+    metadata_file.parent.mkdir(parents=True, exist_ok=True)
+    metadata_file.write_text(
+        json.dumps(output, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    print(f"Metadata written to: {metadata_file}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Download latest GPML dataset from Zenodo concept DOI."
@@ -87,22 +132,14 @@ def main() -> int:
         pathways_dir.mkdir(parents=True, exist_ok=True)
         reactions_dir.mkdir(parents=True, exist_ok=True)
 
-    # --------------------------------------------------
-    # Resolve latest Zenodo record
-    # --------------------------------------------------
     record = fetch_latest_record(args.concept_doi)
 
     version = record["metadata"]["version"]
     print(f"Using version: {version}")
 
-    # --------------------------------------------------
-    # Find GPML ZIP file
-    # --------------------------------------------------
-    gpml_url = find_gpml_file(record)
+    gpml_file = find_gpml_file(record)
+    gpml_url = gpml_file["links"]["self"]
 
-    # --------------------------------------------------
-    # Download + extract
-    # --------------------------------------------------
     with tempfile.TemporaryDirectory() as tmp:
         tmp_dir = Path(tmp)
         zip_path = tmp_dir / "gpml.zip"
@@ -116,9 +153,6 @@ def main() -> int:
         with zipfile.ZipFile(zip_path, "r") as zf:
             zf.extractall(extract_dir)
 
-        # --------------------------------------------------
-        # Copy files
-        # --------------------------------------------------
         pw_count = copy_gpml_files(
             extract_dir,
             "individual_pathways",
@@ -130,6 +164,14 @@ def main() -> int:
             "individual_reactions",
             reactions_dir,
         )
+
+    write_metadata(
+        record=record,
+        gpml_file=gpml_file,
+        concept_doi=args.concept_doi,
+        pathway_count=pw_count,
+        reaction_count=rxn_count,
+    )
 
     print()
     print("✅ Done")

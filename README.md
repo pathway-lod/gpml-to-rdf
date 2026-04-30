@@ -99,6 +99,12 @@ Run the RDF conversion:
 make -B -j 12 rdf
 ```
 
+if the reactions were not converted, they can be forced with 
+
+```shell 
+make -B -j 12 reactrdf
+``` 
+
 The -B flag forces rebuilding. This is useful because the current Makefile reads pathways.txt and reactions.txt when Make starts, which can otherwise cause stale or missing target issues.
 
 ### Notes: 
@@ -250,4 +256,53 @@ Recommended Virtuoso graphs:
 http://rdf-plantmetwiki.bioinformatics.nl/graph/pathways
 http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-taxonomy-extra
 http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-properties-extra
+```
+
+# Full clean pipeline
+
+```bash 
+# 1. Create core WikiPathways RDF
+make -B -j 12 rdf
+
+# 2. Set version label used in output filenames
+VERSION="plantcyc17.0.0-gpml2021"
+
+# 3. Aggregate core RDF
+find pw -name "*.ttl" -print0 | xargs -0 cat > all_pathways-${VERSION}.ttl
+find react -name "*.ttl" -print0 | xargs -0 cat > all_reactions-${VERSION}.ttl
+
+cat all_pathways-${VERSION}.ttl \
+    all_reactions-${VERSION}.ttl \
+    > all-${VERSION}.ttl
+
+# 4. Apply hotfixes
+perl -pi -e 's|identifiers\.org/TAIR_gene_name|identifiers.org/tair.name|g' all-${VERSION}.ttl
+perl -pi -e 's|SLM_SLM%3A|SLM_|g' all-${VERSION}.ttl
+
+# 5. Create taxonomy extra RDF
+python scripts/create_gpml_taxonomy_extra_rdf.py \
+  --aggregate-file all_gpml_taxonomy_extra-${VERSION}.ttl
+
+# 6. Create GPML key-value extra RDF
+python scripts/create_gpml_properties_extra_rdf.py \
+  --aggregate-file all_gpml_properties_extra-${VERSION}.ttl
+
+# 7. Generate VoID metadata from Zenodo
+python scripts/create_void_from_zenodo.py \
+  --zenodo-record 19928985 \
+  --version "${VERSION}" \
+  --core-rdf all-${VERSION}.ttl \
+  --taxonomy-extra all_gpml_taxonomy_extra-${VERSION}.ttl \
+  --properties-extra all_gpml_properties_extra-${VERSION}.ttl \
+  --output void-${VERSION}.ttl
+
+# 8. Optional final bundles with VoID header prepended
+cat void-${VERSION}.ttl all-${VERSION}.ttl \
+  > plantmetwiki-core-${VERSION}.with-void.ttl
+
+cat void-${VERSION}.ttl all_gpml_taxonomy_extra-${VERSION}.ttl \
+  > plantmetwiki-taxonomy-extra-${VERSION}.with-void.ttl
+
+cat void-${VERSION}.ttl all_gpml_properties_extra-${VERSION}.ttl \
+  > plantmetwiki-properties-extra-${VERSION}.with-void.ttl
 ```
