@@ -3,4 +3,6 @@ pathways.txt
 reactions.txt
 react/
 pw/
+extra/
 *.ttl.gz
+*.ttl
