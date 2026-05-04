@@ -133,6 +133,8 @@ see [this page](https://openphacts.github.io/Documentation/rdfguide/):
 find pw -name "*.ttl" -print0 | xargs -0 cat > all_pathways-${VERSION}.ttl
 
 find react -name "*.ttl" -print0 | xargs -0 cat > all_reactions-${VERSION}.ttl
+
+cat all_pathways-${VERSION}.ttl all_reactions-${VERSION}.ttl > all-${VERSION}.ttl
 ```
 
 Some hotfixes:
@@ -258,51 +260,25 @@ http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-taxonomy-extra
 http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-properties-extra
 ```
 
-# Full clean pipeline
+## Create VoID file
 
-```bash 
-# 1. Create core WikiPathways RDF
-make -B -j 12 rdf
+The download step writes build/zenodo_gpml_metadata.json, the VoID step should read that file and describe the RDF bundles produced from that same input release.
 
-# 2. Set version label used in output filenames
-VERSION="plantcyc17.0.0-gpml2021"
+```bash
+VERSION=$(python -c 'import json; print(json.load(open("build/zenodo_gpml_metadata.json"))["version"])')
 
-# 3. Aggregate core RDF
-find pw -name "*.ttl" -print0 | xargs -0 cat > all_pathways-${VERSION}.ttl
-find react -name "*.ttl" -print0 | xargs -0 cat > all_reactions-${VERSION}.ttl
-
-cat all_pathways-${VERSION}.ttl \
-    all_reactions-${VERSION}.ttl \
-    > all-${VERSION}.ttl
-
-# 4. Apply hotfixes
-perl -pi -e 's|identifiers\.org/TAIR_gene_name|identifiers.org/tair.name|g' all-${VERSION}.ttl
-perl -pi -e 's|SLM_SLM%3A|SLM_|g' all-${VERSION}.ttl
-
-# 5. Create taxonomy extra RDF
-python scripts/create_gpml_taxonomy_extra_rdf.py \
-  --aggregate-file all_gpml_taxonomy_extra-${VERSION}.ttl
-
-# 6. Create GPML key-value extra RDF
-python scripts/create_gpml_properties_extra_rdf.py \
-  --aggregate-file all_gpml_properties_extra-${VERSION}.ttl
-
-# 7. Generate VoID metadata from Zenodo
-python scripts/create_void_from_zenodo.py \
-  --zenodo-record 19928985 \
-  --version "${VERSION}" \
+python scripts/create_void_from_metadata.py \
   --core-rdf all-${VERSION}.ttl \
   --taxonomy-extra all_gpml_taxonomy_extra-${VERSION}.ttl \
   --properties-extra all_gpml_properties_extra-${VERSION}.ttl \
   --output void-${VERSION}.ttl
 
-# 8. Optional final bundles with VoID header prepended
-cat void-${VERSION}.ttl all-${VERSION}.ttl \
-  > plantmetwiki-core-${VERSION}.with-void.ttl
-
-cat void-${VERSION}.ttl all_gpml_taxonomy_extra-${VERSION}.ttl \
-  > plantmetwiki-taxonomy-extra-${VERSION}.with-void.ttl
-
-cat void-${VERSION}.ttl all_gpml_properties_extra-${VERSION}.ttl \
-  > plantmetwiki-properties-extra-${VERSION}.with-void.ttl
 ```
+
+## Upload to Zenodo 
+export ZENODO_ACCESS_TOKEN="your-production-token"
+
+python scripts/upload_to_zenodo.py --source-record 18174552
+
+Fill the license information manually when editing and approving the entry: 
+`OPEN DATABASE LICENSE FOR THE PLANT METABOLIC NETWORK DATABASES`
