@@ -12,11 +12,14 @@ from pathlib import Path
 from typing import Any
 
 import requests
+from rdflib import Graph, URIRef
+from rdflib.namespace import DCTERMS
 
 
 ZENODO_API = "https://zenodo.org/api"
 SANDBOX_API = "https://sandbox.zenodo.org/api"
 METADATA_FILE = Path("build/zenodo_gpml_metadata.json")
+FOAF_PAGE = URIRef("http://xmlns.com/foaf/0.1/page")
 
 
 def require_token() -> str:
@@ -34,12 +37,7 @@ def api_base(use_sandbox: bool) -> str:
     return SANDBOX_API if use_sandbox else ZENODO_API
 
 
-def request_json(
-    method: str,
-    url: str,
-    token: str,
-    **kwargs: Any,
-) -> dict:
+def request_json(method: str, url: str, token: str, **kwargs: Any) -> dict:
     params = kwargs.pop("params", {})
     params["access_token"] = token
 
@@ -51,9 +49,7 @@ def request_json(
         print(response.text, file=sys.stderr)
         response.raise_for_status()
 
-    if response.text:
-        return response.json()
-    return {}
+    return response.json() if response.text else {}
 
 
 def load_build_metadata(path: Path = METADATA_FILE) -> dict:
@@ -63,8 +59,46 @@ def load_build_metadata(path: Path = METADATA_FILE) -> dict:
             "Run first:\n"
             "  python scripts/download_gpml_input.py --clean"
         )
-
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def read_license_from_void(void_file: Path) -> dict:
+    if not void_file.exists():
+        raise SystemExit(f"Missing VoID file: {void_file}")
+
+    graph = Graph()
+    graph.parse(void_file, format="turtle")
+
+    license_uri = None
+    for _, _, lic in graph.triples((None, DCTERMS.license, None)):
+        if isinstance(lic, URIRef):
+            license_uri = lic
+            break
+
+    if license_uri is None:
+        return {
+            "title": "Custom open license",
+            "page": "",
+            "description": "",
+            "rights": "",
+        }
+
+    title = graph.value(license_uri, DCTERMS.title)
+    description = graph.value(license_uri, DCTERMS.description)
+    page = graph.value(license_uri, FOAF_PAGE)
+
+    rights = None
+    for _, _, value in graph.triples((None, DCTERMS.rights, None)):
+        rights = value
+        break
+
+    return {
+        "license_uri": str(license_uri),
+        "title": str(title) if title else "Custom open license",
+        "description": str(description) if description else "",
+        "rights": str(rights) if rights else "",
+        "page": str(page) if page else "",
+    }
 
 
 def gzip_file(input_path: Path, output_path: Path, overwrite: bool = False) -> Path:
@@ -94,7 +128,7 @@ def prepare_files(version: str, overwrite: bool = False) -> list[Path]:
             + "\n".join(f"  - {p}" for p in missing)
         )
 
-    files = [
+    return [
         gzip_file(Path(f"all-{version}.ttl"), Path(f"all-{version}.ttl.gz"), overwrite),
         gzip_file(
             Path(f"all_gpml_taxonomy_extra-{version}.ttl"),
@@ -110,15 +144,9 @@ def prepare_files(version: str, overwrite: bool = False) -> list[Path]:
         METADATA_FILE,
     ]
 
-    return files
-
 
 def get_record_metadata(api: str, source_record: str, token: str) -> dict:
-    return request_json(
-        "GET",
-        f"{api}/records/{source_record}",
-        token,
-    )
+    return request_json("GET", f"{api}/records/{source_record}", token)
 
 
 def create_new_version(api: str, source_record: str, token: str) -> dict:
@@ -129,19 +157,13 @@ def create_new_version(api: str, source_record: str, token: str) -> dict:
         token,
     )
 
-    latest_draft_url = result["links"]["latest_draft"]
-    draft = request_json("GET", latest_draft_url, token)
-
+    draft = request_json("GET", result["links"]["latest_draft"], token)
     print(f"Created draft deposition: {draft['id']}")
     return draft
 
 
 def delete_existing_draft_files(api: str, draft: dict, token: str) -> None:
-    files = request_json(
-        "GET",
-        f"{api}/deposit/depositions/{draft['id']}/files",
-        token,
-    )
+    files = request_json("GET", f"{api}/deposit/depositions/{draft['id']}/files", token)
 
     for f in files:
         file_id = f["id"]
@@ -155,16 +177,11 @@ def delete_existing_draft_files(api: str, draft: dict, token: str) -> None:
 
 
 def upload_file(api: str, draft: dict, file_path: Path, token: str) -> None:
-    bucket_url = draft["links"]["bucket"]
-    upload_url = f"{bucket_url}/{file_path.name}"
+    upload_url = f"{draft['links']['bucket']}/{file_path.name}"
 
     print(f"Uploading: {file_path.name}")
     with file_path.open("rb") as fp:
-        response = requests.put(
-            upload_url,
-            data=fp,
-            params={"access_token": token},
-        )
+        response = requests.put(upload_url, data=fp, params={"access_token": token})
 
     if not response.ok:
         print(f"❌ Upload failed: {file_path}", file=sys.stderr)
@@ -178,12 +195,7 @@ def creators_from_existing_record(record: dict) -> list[dict]:
     if creators:
         return creators
 
-    return [
-        {
-            "name": "Willighagen, Egon",
-            "affiliation": "Maastricht University",
-        }
-    ]
+    return [{"name": "Willighagen, Egon"}]
 
 
 def update_draft_metadata(
@@ -199,13 +211,28 @@ def update_draft_metadata(
     gpml_file_key = build_metadata.get("gpml_file", {}).get("key")
 
     existing_metadata = source_record_metadata.get("metadata", {})
+    void_file = Path(f"void-{version}.ttl")
+    license_data = read_license_from_void(void_file)
+
+    license_title = license_data.get("title", "Custom open license")
+    license_page = license_data.get("page", "")
+    license_rights = license_data.get("rights") or license_data.get("description", "")
 
     description = (
         "<p>This is the Resource Description Framework created from the GPML "
         "versions of the PlantCyc pathways and reactions.</p>"
         f"<p>This release was generated from PlantCyc GPML input version "
         f"<strong>{version}</strong>.</p>"
+        f"<p><strong>License:</strong> {license_title}.</p>"
     )
+
+    if license_page:
+        description += (
+            f"<p>License page: <a href=\"{license_page}\">{license_page}</a>.</p>"
+        )
+
+    if license_rights:
+        description += f"<p>{license_rights}</p>"
 
     if zenodo_input_doi:
         description += (
@@ -227,15 +254,24 @@ def update_draft_metadata(
         "layer, a GPML property extra RDF layer, VoID metadata, and build metadata.</p>"
     )
 
+    notes = (
+        f"{license_title}\n\n"
+        f"{license_rights}\n\n"
+        f"License page: {license_page}\n\n"
+        f"License metadata is also encoded in {void_file.name} using "
+        "dcterms:license and dcterms:rights."
+    )
+
     metadata = {
         "metadata": {
             "title": "PlantMetWiki RDF",
             "upload_type": "dataset",
             "description": description,
+            "notes": notes,
             "creators": creators_from_existing_record(source_record_metadata),
             "version": version,
             "access_right": "open",
-            "license": existing_metadata.get("license") or "other-open",
+            "license": "other-open",
             "keywords": existing_metadata.get("keywords", [])
             or ["PlantMetWiki", "PlantCyc", "WikiPathways", "GPML", "RDF"],
             "related_identifiers": [
@@ -280,31 +316,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Create a new Zenodo version for PlantMetWiki RDF files."
     )
-    parser.add_argument(
-        "--source-record",
-        required=True,
-        help="Latest published Zenodo record ID to version from, e.g. 18174552",
-    )
-    parser.add_argument(
-        "--sandbox",
-        action="store_true",
-        help="Use sandbox.zenodo.org instead of production Zenodo.",
-    )
-    parser.add_argument(
-        "--publish",
-        action="store_true",
-        help="Publish the draft after uploading. Default is to leave as draft.",
-    )
-    parser.add_argument(
-        "--overwrite-gzip",
-        action="store_true",
-        help="Regenerate .ttl.gz files even if they already exist.",
-    )
-    parser.add_argument(
-        "--keep-existing-draft-files",
-        action="store_true",
-        help="Do not delete files imported into the new version draft.",
-    )
+    parser.add_argument("--source-record", required=True)
+    parser.add_argument("--sandbox", action="store_true")
+    parser.add_argument("--publish", action="store_true")
+    parser.add_argument("--overwrite-gzip", action="store_true")
+    parser.add_argument("--keep-existing-draft-files", action="store_true")
 
     args = parser.parse_args()
 
