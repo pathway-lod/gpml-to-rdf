@@ -10,7 +10,6 @@ from pathlib import Path
 NS = {"gpml": "http://pathvisio.org/GPML/2021"}
 
 PMW_BASE = "http://rdf-plantmetwiki.bioinformatics.nl"
-PMW_VOCAB = "http://rdf-plantmetwiki.bioinformatics.nl/vocab/"
 
 
 def ttl_uri(uri: str) -> str:
@@ -56,6 +55,23 @@ def property_lines(subject_uri: str, prop: ET.Element) -> list[str]:
     ]
 
 
+def pathway_identifier_lines(subject_uri: str, prop: ET.Element) -> list[str]:
+    key = prop.attrib.get("key")
+    value = prop.attrib.get("value")
+
+    if key != "UniqueID" or not value:
+        return []
+
+    plantcyc_uri = f"https://identifiers.org/plantcyc/{value}"
+
+    return [
+        f"{ttl_uri(subject_uri)} pmw:plantcycId {ttl_literal(value)} ;",
+        f"    dcterms:identifier {ttl_literal(value)} ;",
+        f"    dcterms:source {ttl_uri(plantcyc_uri)} .",
+        "",
+    ]
+
+
 def write_properties_ttl(gpml_file: Path, out_file: Path) -> None:
     tree = ET.parse(gpml_file)
     root = tree.getroot()
@@ -66,12 +82,14 @@ def write_properties_ttl(gpml_file: Path, out_file: Path) -> None:
 
     lines: list[str] = [
         "@prefix pmw: <http://rdf-plantmetwiki.bioinformatics.nl/vocab/> .",
+        "@prefix dcterms: <http://purl.org/dc/terms/> .",
         "",
     ]
 
     # Pathway-level properties
     for prop in root.findall("gpml:Property", NS):
         lines.extend(property_lines(pwy_uri, prop))
+        lines.extend(pathway_identifier_lines(pwy_uri, prop))
 
     # DataNode-level properties
     for dn in root.findall("gpml:DataNodes/gpml:DataNode", NS):
