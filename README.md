@@ -306,6 +306,8 @@ Run this after the full pipeline and before uploading to Zenodo. It checks:
 python scripts/validate_rdf.py
 ```
 
+The script prints a summary of passes and failures and exits with a non-zero code if any check fails, so it can be used in CI pipelines.
+
 Use `--skip-individual` to skip per-file parsing and only validate the bundles (faster, used in CI):
 
 ```shell
@@ -330,11 +332,13 @@ source .env
 python scripts/upload_to_zenodo.py --source-record 18174552
 ```
 
+This creates a **draft** Zenodo record — it is not published until you review and approve it in the Zenodo UI. To test against the Zenodo sandbox first, add `--sandbox`.
+
 `.env` is gitignored and will never be committed.
 
 ### Option B — GitHub Actions (recommended)
 
-A `workflow_dispatch` workflow at `.github/workflows/upload-zenodo.yml` runs the **full pipeline from scratch** (download GPML → rename → generate RDF → bundle → validate → upload), so no locally generated files are needed.
+A `workflow_dispatch` workflow at `.github/workflows/upload-zenodo.yml` runs the **full pipeline from scratch** (download GPML → rename → generate RDF → bundle → validate → upload), so no locally generated files are needed. Validation runs automatically before the upload step.
 
 1. Add `ZENODO_ACCESS_TOKEN` as a repository secret (Settings → Secrets and variables → Actions)
 2. Go to the **Actions** tab → **Upload to Zenodo** → **Run workflow**
@@ -366,12 +370,11 @@ Everything works end-to-end. Full pipeline summary:
   ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
   │ Audit            │ audit_gpml_properties.py                               │ 210 unique keys               │
   ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
-  │ Bundles          │ `find ...                                              │ cat`                          │
+  │ Bundles          │ find output/rdf/... | xargs cat > all-*.ttl            │ 3 bundle TTL files            │
   ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
-  │ VoID             │ create_void_from_metadata.py                           │ metadata file                 │
+  │ VoID             │ create_void_from_metadata.py                           │ void-*.ttl metadata file      │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Validate         │ validate_rdf.py                                        │ pass/fail per bundle          │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Upload           │ upload_to_zenodo.py --source-record 18174552           │ Zenodo draft record           │
   └──────────────────┴────────────────────────────────────────────────────────┴───────────────────────────────┘
-
-## TO DO: 
-1. an action to upload to Zenodo? 
-an action to validate the ttl files? 
-an action to check that the prefixes are correctly loaded and not duplicated? 
