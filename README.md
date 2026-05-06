@@ -18,12 +18,14 @@ The workflow has three layers:
 
 The plugin layers preserve PlantCyc-specific information while keeping the core WikiPathways RDF model unchanged.
 
-## Set up the environment 
+## Set up the environment
 
 ```bash
 mamba env create -f environment.yml
 conda activate plantmetwiki-rdf
 ```
+
+All Python and Groovy script commands below assume the environment is activated. The `make` step requires `conda run -n plantmetwiki-rdf make ...` explicitly because Make subshells do not inherit the activated conda environment and would otherwise use the system Java (which may be too old).
 
 ## Preparing the GPML input data 
 
