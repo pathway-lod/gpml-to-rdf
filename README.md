@@ -302,3 +302,34 @@ python scripts/upload_to_zenodo.py --source-record 18174552
 
 Fill the license information manually when editing and approving the entry:
 `OPEN DATABASE LICENSE FOR THE PLANT METABOLIC NETWORK DATABASES`
+
+# Summary notes (4th May 2026)
+
+Everything works end-to-end. Full pipeline summary:
+
+  ┌──────────────────┬────────────────────────────────────────────────────────┬───────────────────────────────┐
+  │       Step       │                        Command                         │            Result             │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Download         │ download_gpml_input.py --clean                         │ 1162 pathways, 1316 reactions │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Rename           │ createPathwayfiles.groovy / createReactionfiles.groovy │ PC1–PC1162, RC1–RC1316        │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Index            │ make pathways.txt reactions.txt                        │ Index files for Make          │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Core RDF         │ conda run make -B -k -j 12 rdf                         │ 1131/1162 pw, 792/1316 rx     │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Taxonomy extra   │ create_gpml_taxonomy_extra_rdf.py                      │ 2478 files → bundle           │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Properties extra │ create_gpml_properties_extra_rdf.py                    │ 2478 files → bundle           │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Audit            │ audit_gpml_properties.py                               │ 210 unique keys               │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Bundles          │ `find ...                                              │ cat`                          │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ VoID             │ create_void_from_metadata.py                           │ metadata file                 │
+  └──────────────────┴────────────────────────────────────────────────────────┴───────────────────────────────┘
+
+## TO DO: 
+1. an action to upload to Zenodo? 
+an action to validate the ttl files? 
+an action to check that the prefixes are correctly loaded and not duplicated? 
