@@ -1,0 +1,141 @@
+name: Upload to Zenodo
+
+# Triggered manually from the GitHub Actions tab.
+# Runs the full pipeline from scratch (download GPML → rename → generate RDF
+# → bundle → validate → upload) so the result is fully reproducible without
+# needing any locally generated files.
+#
+# Prerequisites:
+#   - Add ZENODO_ACCESS_TOKEN as a repository secret (Settings → Secrets)
+#   - The plantmetwiki-rdf conda environment is built from environment.yml
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_record:
+        description: 'Zenodo record ID to create a new version from'
+        required: true
+        default: '18174552'
+      publish:
+        description: 'Publish the Zenodo draft immediately (leave false to review first)'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240   # full pipeline can take ~1-2 h in CI
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up conda environment
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          environment-file: environment.yml
+          activate-environment: plantmetwiki-rdf
+          auto-activate-base: false
+
+      # ------------------------------------------------------------------
+      # Input data
+      # ------------------------------------------------------------------
+
+      - name: Download GPML input from Zenodo
+        shell: bash -el {0}
+        run: python scripts/download_gpml_input.py --clean
+
+      - name: Rename GPML files with stable PC*/RC* identifiers
+        shell: bash -el {0}
+        run: |
+          mkdir -p input/gpml/renamed/pathways
+          groovy scripts/createPathwayfiles.groovy
+
+          mkdir -p input/gpml/renamed/reactions
+          groovy scripts/createReactionfiles.groovy
+
+          make pathways.txt reactions.txt
+
+      # ------------------------------------------------------------------
+      # RDF generation
+      # ------------------------------------------------------------------
+
+      - name: Generate core WikiPathways RDF
+        shell: bash -el {0}
+        # -j 4 is conservative for shared CI runners; -k keeps going past
+        # individual GPML files that the converter cannot handle
+        run: make -B -k -j 4 rdf
+
+      - name: Generate taxonomy extra RDF
+        shell: bash -el {0}
+        run: python scripts/create_gpml_taxonomy_extra_rdf.py
+
+      - name: Generate GPML property extra RDF
+        shell: bash -el {0}
+        run: python scripts/create_gpml_properties_extra_rdf.py
+
+      # ------------------------------------------------------------------
+      # Assemble bundles
+      # ------------------------------------------------------------------
+
+      - name: Assemble and hotfix core bundle
+        shell: bash -el {0}
+        run: |
+          VERSION=$(python -c 'import json; print(json.load(open("build/zenodo_gpml_metadata.json"))["version"])')
+          echo "VERSION=${VERSION}" >> "$GITHUB_ENV"
+
+          mkdir -p output/bundles
+
+          find output/rdf/core/pathways -name "*.ttl" -print0 \
+            | xargs -0 cat > output/bundles/all_pathways-${VERSION}.ttl
+
+          find output/rdf/core/reactions -name "*.ttl" -print0 \
+            | xargs -0 cat > output/bundles/all_reactions-${VERSION}.ttl
+
+          cat output/bundles/all_pathways-${VERSION}.ttl \
+              output/bundles/all_reactions-${VERSION}.ttl \
+            > output/bundles/all-${VERSION}.ttl
+
+          # Identifier hotfixes
+          perl -pi -e 's|identifiers\.org/TAIR_gene_name|identifiers.org/tair.name|g' \
+            output/bundles/all-${VERSION}.ttl
+          perl -pi -e 's|SLM_SLM%3A|SLM_|g' \
+            output/bundles/all-${VERSION}.ttl
+
+      - name: Create VoID metadata file
+        shell: bash -el {0}
+        run: |
+          python scripts/create_void_from_metadata.py \
+            --core-rdf       output/bundles/all-${VERSION}.ttl \
+            --taxonomy-extra output/bundles/all_gpml_taxonomy_extra-${VERSION}.ttl \
+            --properties-extra output/bundles/all_gpml_properties_extra-${VERSION}.ttl \
+            --output         output/bundles/void-${VERSION}.ttl
+
+      # ------------------------------------------------------------------
+      # Validation
+      # ------------------------------------------------------------------
+
+      - name: Validate RDF bundles
+        shell: bash -el {0}
+        # --skip-individual avoids parsing thousands of small files in CI;
+        # the bundle-level checks are sufficient here
+        run: python scripts/validate_rdf.py --skip-individual
+
+      # ------------------------------------------------------------------
+      # Upload
+      # ------------------------------------------------------------------
+
+      - name: Upload to Zenodo
+        shell: bash -el {0}
+        env:
+          ZENODO_ACCESS_TOKEN: ${{ secrets.ZENODO_ACCESS_TOKEN }}
+        run: |
+          PUBLISH_FLAG=""
+          if [ "${{ inputs.publish }}" = "true" ]; then
+            PUBLISH_FLAG="--publish"
+          fi
+
+          python scripts/upload_to_zenodo.py \
+            --source-record ${{ inputs.source_record }} \
+            $PUBLISH_FLAG
