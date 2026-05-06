@@ -137,5 +137,5 @@ jobs:
           fi
 
           python scripts/upload_to_zenodo.py \
-            --source-record ${{ inputs.source_record }} \
+            --source-record "${{ inputs.source_record }}" \
             $PUBLISH_FLAG
