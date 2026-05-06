@@ -28,7 +28,9 @@ def require_token() -> str:
         raise SystemExit(
             "Missing ZENODO_ACCESS_TOKEN.\n"
             "Set it with:\n"
-            "  export ZENODO_ACCESS_TOKEN='your-token-here'"
+            "  cp .env.template .env\n"
+            "  # edit .env and fill in your token\n"
+            "  source .env"
         )
     return token
 
@@ -38,10 +40,10 @@ def api_base(use_sandbox: bool) -> str:
 
 
 def request_json(method: str, url: str, token: str, **kwargs: Any) -> dict:
-    params = kwargs.pop("params", {})
-    params["access_token"] = token
+    headers = kwargs.pop("headers", {})
+    headers["Authorization"] = f"Bearer {token}"
 
-    response = requests.request(method, url, params=params, **kwargs)
+    response = requests.request(method, url, headers=headers, **kwargs)
 
     if not response.ok:
         print(f"❌ Zenodo API error: {method} {url}", file=sys.stderr)
@@ -182,7 +184,9 @@ def upload_file(api: str, draft: dict, file_path: Path, token: str) -> None:
 
     print(f"Uploading: {file_path.name}")
     with file_path.open("rb") as fp:
-        response = requests.put(upload_url, data=fp, params={"access_token": token})
+        response = requests.put(
+            upload_url, data=fp, headers={"Authorization": f"Bearer {token}"}
+        )
 
     if not response.ok:
         print(f"❌ Upload failed: {file_path}", file=sys.stderr)
@@ -271,8 +275,8 @@ def update_draft_metadata(
             "notes": notes,
             "creators": creators_from_existing_record(source_record_metadata),
             "version": version,
-            "access_right": "open",
-            "license": "other-open",
+            "access_right": "open",   # legacy deposit API field; "open" = publicly accessible
+            "license": "other-open",   # closest Zenodo built-in for custom open licenses
             "keywords": existing_metadata.get("keywords", [])
             or ["PlantMetWiki", "PlantCyc", "WikiPathways", "GPML", "RDF"],
             "related_identifiers": [
