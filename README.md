@@ -176,8 +176,10 @@ It adds:
 * Specific wp:organism ncbi:<taxon> triples to GeneProduct and Protein nodes when GPML contains AnnotationRef taxonomy annotations.
 * The same species triples to biological identifier URIs such as UniProt where possible.
 
-Run : 
-`python scripts/create_gpml_taxonomy_extra_rdf.py` 
+Run (with the conda environment activated):
+```shell
+python scripts/create_gpml_taxonomy_extra_rdf.py
+```
 
 This creates: 
 ```shell 
@@ -215,8 +217,10 @@ LIMIT 50
 
 The property plugin preserves PlantCyc/GPML key-value pairs that may not be represented in the core WikiPathways RDF.
 
-Run: 
- `python scripts/create_gpml_properties_extra_rdf.py`
+Run (with the conda environment activated):
+```shell
+python scripts/create_gpml_properties_extra_rdf.py
+```
 
 This captures all <Property key="" value=""> entries from:
 
@@ -239,7 +243,9 @@ output/bundles/all_gpml_properties_extra-plantcyc17.0.0-gpml2021.ttl
 ## Auditing GPML property keys
 To inspect which GPML key-value properties exist and how often they occur:
 
-`python scripts/audit_gpml_properties.py`
+```shell
+python scripts/audit_gpml_properties.py
+```
 
 This creates:
 
