@@ -128,10 +128,28 @@ def process_directory(input_dir: Path, output_dir: Path) -> int:
 def aggregate_ttls(output_root: Path, aggregate_file: Path) -> None:
     ttl_files = sorted(output_root.rglob("*.ttl"))
 
+    # Collect unique @prefix lines in first-seen order so each prefix
+    # appears exactly once at the top of the bundle.
+    seen_prefixes: dict[str, str] = {}
+    for ttl in ttl_files:
+        with ttl.open(encoding="utf-8") as fh:
+            for line in fh:
+                stripped = line.strip()
+                if not stripped.startswith("@prefix"):
+                    break
+                parts = stripped.split()
+                if len(parts) >= 2 and parts[1] not in seen_prefixes:
+                    seen_prefixes[parts[1]] = stripped
+
     with aggregate_file.open("w", encoding="utf-8") as out:
+        for prefix_line in seen_prefixes.values():
+            out.write(prefix_line + "\n")
+        out.write("\n")
         for ttl in ttl_files:
-            out.write(ttl.read_text(encoding="utf-8"))
-            out.write("\n")
+            with ttl.open(encoding="utf-8") as fh:
+                for line in fh:
+                    if not line.strip().startswith("@prefix"):
+                        out.write(line)
 
     print(f"Aggregated {len(ttl_files)} TTL files into {aggregate_file}")
 
