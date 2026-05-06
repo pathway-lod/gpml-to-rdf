@@ -79,16 +79,19 @@ mkdir -p input/gpml/renamed/reactions
 groovy scripts/createReactionfiles.groovy
 ```
 
-This creates
-```shell 
-input/gpml/renamed/pathways/
-
-input/gpml/renamed/reactions/
-
-pathways.txt
-
-reactions.txt
+This populates:
 ```
+input/gpml/renamed/pathways/   ← PC1.gpml, PC2.gpml, ...
+input/gpml/renamed/reactions/  ← RC1.gpml, RC2.gpml, ...
+```
+
+Then generate the index files that Make requires before building RDF:
+
+```shell
+make pathways.txt reactions.txt
+```
+
+This creates `pathways.txt` and `reactions.txt` at the repo root. These must exist before running `make rdf`, because Make reads them at parse time to determine which targets to build.
 
 ## BridgeDB mapper 
 
