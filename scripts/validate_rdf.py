@@ -221,14 +221,12 @@ def main() -> int:
     # ------------------------------------------------------------------
     if not args.skip_individual:
         print("=== Individual TTL files (syntax) ===")
-        for subdir in sorted(rdf_dir.rglob("Human")):
-            passed, failed, errors = validate_individual_ttls(subdir)
-            ok = result(
-                str(subdir.relative_to(rdf_dir)),
-                errors,
-                note=f"{passed} OK, {failed} failed",
-            )
-            all_passed &= ok
+        passed, failed, errors = validate_individual_ttls(rdf_dir)
+        all_passed &= result(
+            str(rdf_dir),
+            errors,
+            note=f"{passed} OK, {failed} failed",
+        )
         print()
 
     # ------------------------------------------------------------------
