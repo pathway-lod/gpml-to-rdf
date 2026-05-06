@@ -102,16 +102,20 @@ This creates `pathways.txt` and `reactions.txt` at the repo root. These must exi
 Run the RDF conversion:
 
 ```shell
-make -B -j 12 rdf
+conda run -n plantmetwiki-rdf make -B -k -j 12 rdf
 ```
 
-if the reactions were not converted, they can be forced with 
+If only reactions need to be rebuilt:
 
-```shell 
-make -B -j 12 reactrdf
-``` 
+```shell
+conda run -n plantmetwiki-rdf make -B -k -j 12 reactrdf
+```
 
-The -B flag forces rebuilding. This is useful because the current Makefile reads pathways.txt and reactions.txt when Make starts, which can otherwise cause stale or missing target issues.
+Flags:
+- `-B`: force rebuild (required because Make reads `pathways.txt`/`reactions.txt` at parse time)
+- `-k`: keep going past individual file errors (some GPML files contain invalid groups that the converter cannot process)
+- `-j 12`: run 12 jobs in parallel
+- `conda run -n plantmetwiki-rdf`: ensures the correct Java version (11+) is used; the system Java may be too old
 
 ### Notes: 
 For each GPML file, two outputs are created:
