@@ -92,8 +92,8 @@ def write_metadata(
         "download_outputs": {
             "pathway_count": pathway_count,
             "reaction_count": reaction_count,
-            "pathways_dir": "orig-pw",
-            "reactions_dir": "orig-react",
+            "pathways_dir": "input/gpml/original/pathways",
+            "reactions_dir": "input/gpml/original/reactions",
         },
     }
 
@@ -116,8 +116,8 @@ def main() -> int:
         default="10.5281/zenodo.18404067",
         help="Zenodo concept DOI (default = latest PlantCyc GPML)",
     )
-    parser.add_argument("--pathways-dir", default="orig-pw")
-    parser.add_argument("--reactions-dir", default="orig-react")
+    parser.add_argument("--pathways-dir", default="input/gpml/original/pathways")
+    parser.add_argument("--reactions-dir", default="input/gpml/original/reactions")
     parser.add_argument("--clean", action="store_true")
 
     args = parser.parse_args()

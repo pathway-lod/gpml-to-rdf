@@ -114,11 +114,12 @@ def gzip_file(input_path: Path, output_path: Path, overwrite: bool = False) -> P
 
 
 def prepare_files(version: str, overwrite: bool = False) -> list[Path]:
+    bundles = Path("output/bundles")
     required = [
-        Path(f"all-{version}.ttl"),
-        Path(f"all_gpml_taxonomy_extra-{version}.ttl"),
-        Path(f"all_gpml_properties_extra-{version}.ttl"),
-        Path(f"void-{version}.ttl"),
+        bundles / f"all-{version}.ttl",
+        bundles / f"all_gpml_taxonomy_extra-{version}.ttl",
+        bundles / f"all_gpml_properties_extra-{version}.ttl",
+        bundles / f"void-{version}.ttl",
     ]
 
     missing = [p for p in required if not p.exists()]
@@ -129,18 +130,18 @@ def prepare_files(version: str, overwrite: bool = False) -> list[Path]:
         )
 
     return [
-        gzip_file(Path(f"all-{version}.ttl"), Path(f"all-{version}.ttl.gz"), overwrite),
+        gzip_file(bundles / f"all-{version}.ttl", bundles / f"all-{version}.ttl.gz", overwrite),
         gzip_file(
-            Path(f"all_gpml_taxonomy_extra-{version}.ttl"),
-            Path(f"all_gpml_taxonomy_extra-{version}.ttl.gz"),
+            bundles / f"all_gpml_taxonomy_extra-{version}.ttl",
+            bundles / f"all_gpml_taxonomy_extra-{version}.ttl.gz",
             overwrite,
         ),
         gzip_file(
-            Path(f"all_gpml_properties_extra-{version}.ttl"),
-            Path(f"all_gpml_properties_extra-{version}.ttl.gz"),
+            bundles / f"all_gpml_properties_extra-{version}.ttl",
+            bundles / f"all_gpml_properties_extra-{version}.ttl.gz",
             overwrite,
         ),
-        Path(f"void-{version}.ttl"),
+        bundles / f"void-{version}.ttl",
         METADATA_FILE,
     ]
 
@@ -211,7 +212,7 @@ def update_draft_metadata(
     gpml_file_key = build_metadata.get("gpml_file", {}).get("key")
 
     existing_metadata = source_record_metadata.get("metadata", {})
-    void_file = Path(f"void-{version}.ttl")
+    void_file = Path(f"output/bundles/void-{version}.ttl")
     license_data = read_license_from_void(void_file)
 
     license_title = license_data.get("title", "Custom open license")

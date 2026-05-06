@@ -39,6 +39,8 @@ Download from Zenodo record 10.5281/zenodo.18404067 withe the script
 python scripts/download_gpml_input.py --clean
 ```
 
+Files are saved to `input/gpml/original/pathways/` and `input/gpml/original/reactions/`.
+
 Option B: copy GPML files from a local GitHub checkout
 
 Useful for development branches.
@@ -49,14 +51,13 @@ Download the plant pathways download from GitHub branch/commit
 gh repo clone pathway-lod/Cyc_to_wiki
 ```
 Then copy the GPML files manually:
-and save them in the `orig` folders:
 
 ```shell
-mkdir -p orig-pw
-cp ../Cyc_to_wiki/<VERSION_FOLDER>/individual_pathways/*.gpml orig-pw/
+mkdir -p input/gpml/original/pathways
+cp ../Cyc_to_wiki/<VERSION_FOLDER>/individual_pathways/*.gpml input/gpml/original/pathways/
 
-mkdir -p orig-react
-cp ../Cyc_to_wiki/<VERSION_FOLDER>/individual_reactions/*.gpml orig-react/
+mkdir -p input/gpml/original/reactions
+cp ../Cyc_to_wiki/<VERSION_FOLDER>/individual_reactions/*.gpml input/gpml/original/reactions/
 ```
 
 Replace <VERSION_FOLDER> with the relevant folder, for example:
@@ -66,21 +67,21 @@ Replace <VERSION_FOLDER> with the relevant folder, for example:
 ## Rename the GPML files 
 The converter expects pathway and reaction files with stable PC* and RC* identifiers.
 
-Renamed the files and put the results in `orig-renamed/`:
+Rename the files and put the results in `input/gpml/renamed/`:
 
 ```shell
-mkdir orig-pw-renamed
-groovy createPathwayfiles.groovy
+mkdir -p input/gpml/renamed/pathways
+groovy scripts/createPathwayfiles.groovy
 
-mkdir orig-react-renamed
-groovy createReactionfiles.groovy
+mkdir -p input/gpml/renamed/reactions
+groovy scripts/createReactionfiles.groovy
 ```
 
 This creates
 ```shell 
-orig-pw-renamed/
+input/gpml/renamed/pathways/
 
-orig-react-renamed/
+input/gpml/renamed/reactions/
 
 pathways.txt
 
@@ -110,12 +111,12 @@ The -B flag forces rebuilding. This is useful because the current Makefile reads
 ### Notes: 
 For each GPML file, two outputs are created:
 
-1. pw/Human/
+1. `output/rdf/core/pathways/Human/`
 
 👉 WPRDF (WikiPathways RDF)
-This is the “standard” RDF model used by WikiPathways.
+This is the "standard" RDF model used by WikiPathways.
 
-2. pw/gpml/Human/
+2. `output/rdf/core/pathways/gpml/Human/`
 
 👉 GPMLRDF (raw GPML RDF)
 This is a more direct RDF representation of the GPML structure.
@@ -130,26 +131,28 @@ Aggregation into single files and validation can be done with
 see [this page](https://openphacts.github.io/Documentation/rdfguide/):
 
 ```shell
-find pw -name "*.ttl" -print0 | xargs -0 cat > all_pathways-${VERSION}.ttl
+mkdir -p output/bundles
 
-find react -name "*.ttl" -print0 | xargs -0 cat > all_reactions-${VERSION}.ttl
+find output/rdf/core/pathways -name "*.ttl" -print0 | xargs -0 cat > output/bundles/all_pathways-${VERSION}.ttl
 
-cat all_pathways-${VERSION}.ttl all_reactions-${VERSION}.ttl > all-${VERSION}.ttl
+find output/rdf/core/reactions -name "*.ttl" -print0 | xargs -0 cat > output/bundles/all_reactions-${VERSION}.ttl
+
+cat output/bundles/all_pathways-${VERSION}.ttl output/bundles/all_reactions-${VERSION}.ttl > output/bundles/all-${VERSION}.ttl
 ```
 
 Some hotfixes:
 
 ```shell
-perl -pi -e 's|identifiers\.org/TAIR_gene_name|identifiers.org/tair.name|g' all-${VERSION}.ttl
+perl -pi -e 's|identifiers\.org/TAIR_gene_name|identifiers.org/tair.name|g' output/bundles/all-${VERSION}.ttl
 
-perl -pi -e 's|SLM_SLM%3A|SLM_|g' all-${VERSION}.ttl
+perl -pi -e 's|SLM_SLM%3A|SLM_|g' output/bundles/all-${VERSION}.ttl
 ```
 
 Optional validation if rapper is availble 
 ```bash 
-rapper -i turtle -t -q all_pathways-${VERSION}.ttl > /dev/null
-rapper -i turtle -t -q all_reactions-${VERSION}.ttl > /dev/null
-rapper -i turtle -t -q all-${VERSION}.ttl > /dev/null
+rapper -i turtle -t -q output/bundles/all_pathways-${VERSION}.ttl > /dev/null
+rapper -i turtle -t -q output/bundles/all_reactions-${VERSION}.ttl > /dev/null
+rapper -i turtle -t -q output/bundles/all-${VERSION}.ttl > /dev/null
 ``` 
 
 
@@ -169,15 +172,15 @@ Run :
 
 This creates: 
 ```shell 
-extra-taxonomy/
-all_gpml_taxonomy_extra-plantcyc17.0.0-gpml2021.ttl
+output/rdf/taxonomy-extra/
+output/bundles/all_gpml_taxonomy_extra-plantcyc17.0.0-gpml2021.ttl
 ```
 
 Quick checks: 
 ```
-grep -R "ncbi:33090" extra-taxonomy | head
-grep -R "ncbi:3702" extra-taxonomy/reactions | head
-grep -R "ncbi:36774" extra-taxonomy/pathways | head
+grep -R "ncbi:33090" output/rdf/taxonomy-extra | head
+grep -R "ncbi:3702" output/rdf/taxonomy-extra/reactions | head
+grep -R "ncbi:36774" output/rdf/taxonomy-extra/pathways | head
 ```
 
 Suggested Virtuoso graph `http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-taxonomy-extra`
@@ -220,8 +223,8 @@ and writes them as pmw:gpmlProperty blank nodes.
 
 This creates:
 ```
-extra-properties/
-all_gpml_properties_extra-plantcyc17.0.0-gpml2021.ttl
+output/rdf/properties-extra/
+output/bundles/all_gpml_properties_extra-plantcyc17.0.0-gpml2021.ttl
 ```
 
 ## Auditing GPML property keys
@@ -232,9 +235,9 @@ To inspect which GPML key-value properties exist and how often they occur:
 This creates:
 
 ```
-gpml_property_audit_summary.csv
+output/audit/gpml_property_audit_summary.csv
 
-gpml_property_audit_by_scope.csv
+output/audit/gpml_property_audit_by_scope.csv
 
 ```
 
@@ -246,11 +249,11 @@ For a PlantCyc 17 GPML2021 build, the main files are:
 
 ```
 
-all-plantcyc17.0.0-gpml2021.ttl
+output/bundles/all-plantcyc17.0.0-gpml2021.ttl
 
-all_gpml_taxonomy_extra-plantcyc17.0.0-gpml2021.ttl
+output/bundles/all_gpml_taxonomy_extra-plantcyc17.0.0-gpml2021.ttl
 
-all_gpml_properties_extra-plantcyc17.0.0-gpml2021.ttl
+output/bundles/all_gpml_properties_extra-plantcyc17.0.0-gpml2021.ttl
 ```
 
 Recommended Virtuoso graphs:
@@ -268,10 +271,10 @@ The download step writes build/zenodo_gpml_metadata.json, the VoID step should r
 VERSION=$(python -c 'import json; print(json.load(open("build/zenodo_gpml_metadata.json"))["version"])')
 
 python scripts/create_void_from_metadata.py \
-  --core-rdf all-${VERSION}.ttl \
-  --taxonomy-extra all_gpml_taxonomy_extra-${VERSION}.ttl \
-  --properties-extra all_gpml_properties_extra-${VERSION}.ttl \
-  --output void-${VERSION}.ttl
+  --core-rdf output/bundles/all-${VERSION}.ttl \
+  --taxonomy-extra output/bundles/all_gpml_taxonomy_extra-${VERSION}.ttl \
+  --properties-extra output/bundles/all_gpml_properties_extra-${VERSION}.ttl \
+  --output output/bundles/void-${VERSION}.ttl
 
 ```
 
