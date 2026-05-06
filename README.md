@@ -332,10 +332,12 @@ cp .env.template .env
 # edit .env and set ZENODO_ACCESS_TOKEN=your-token-here
 ```
 
-Then source it before running the upload script (needed each new shell session):
+Then source it with auto-export before running the upload script (needed each new shell session):
 
 ```shell
+set -a
 source .env
+set +a
 python scripts/upload_to_zenodo.py --source-record 18174552
 ```
 
