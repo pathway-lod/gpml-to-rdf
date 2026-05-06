@@ -282,7 +282,7 @@ http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-properties-extra
 
 The download step writes build/zenodo_gpml_metadata.json, the VoID step should read that file and describe the RDF bundles produced from that same input release.
 
-```bash
+```shell
 VERSION=$(python -c 'import json; print(json.load(open("build/zenodo_gpml_metadata.json"))["version"])')
 
 python scripts/create_void_from_metadata.py \
@@ -293,10 +293,12 @@ python scripts/create_void_from_metadata.py \
 
 ```
 
-## Upload to Zenodo 
+## Upload to Zenodo
+
+```shell
 export ZENODO_ACCESS_TOKEN="your-production-token"
-
 python scripts/upload_to_zenodo.py --source-record 18174552
+```
 
-Fill the license information manually when editing and approving the entry: 
+Fill the license information manually when editing and approving the entry:
 `OPEN DATABASE LICENSE FOR THE PLANT METABOLIC NETWORK DATABASES`
