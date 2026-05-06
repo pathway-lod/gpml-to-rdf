@@ -280,7 +280,15 @@ http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-properties-extra
 
 ## Create VoID file
 
-The download step writes build/zenodo_gpml_metadata.json, the VoID step should read that file and describe the RDF bundles produced from that same input release.
+The VoID file is a single Turtle file that describes **all three RDF bundles** as separate `void:Dataset` entries:
+
+- **Core dataset** — `all-{VERSION}.ttl` (WikiPathways RDF from the Java converter)
+- **Taxonomy-extra dataset** — `all_gpml_taxonomy_extra-{VERSION}.ttl` (NCBI Taxonomy annotations)
+- **Properties-extra dataset** — `all_gpml_properties_extra-{VERSION}.ttl` (PlantCyc key-value properties)
+
+Each dataset entry records its title, description, version, license, byte size, and provenance (the source Zenodo DOI). The taxonomy and properties datasets are linked to the core dataset via `dcterms:isPartOf`.
+
+The download step writes `build/zenodo_gpml_metadata.json`; the VoID step reads that file to fill in version and provenance information.
 
 ```shell
 VERSION=$(python -c 'import json; print(json.load(open("build/zenodo_gpml_metadata.json"))["version"])')
