@@ -1,43 +1,43 @@
-PCWPRDFS := ${shell cat pathways.txt | sed -e 's/\(.*\)/pw\/Human\/\1.ttl/' }
-PCGPMLRDFS := ${shell cat pathways.txt | sed -e 's/\(.*\)/pw\/gpml\/Human\/\1.ttl/' }
-RCWPRDFS := ${shell cat reactions.txt | sed -e 's/\(.*\)/react\/Human\/\1.ttl/' }
-RCGPMLRDFS := ${shell cat reactions.txt | sed -e 's/\(.*\)/react\/gpml\/Human\/\1.ttl/' }
+PCWPRDFS := ${shell cat pathways.txt | sed -e 's/\(.*\)/output\/rdf\/core\/pathways\/Human\/\1.ttl/' }
+PCGPMLRDFS := ${shell cat pathways.txt | sed -e 's/\(.*\)/output\/rdf\/core\/pathways\/gpml\/Human\/\1.ttl/' }
+RCWPRDFS := ${shell cat reactions.txt | sed -e 's/\(.*\)/output\/rdf\/core\/reactions\/Human\/\1.ttl/' }
+RCGPMLRDFS := ${shell cat reactions.txt | sed -e 's/\(.*\)/output\/rdf\/core\/reactions\/gpml\/Human\/\1.ttl/' }
 
-GPMLRDFJAR = gpml2rdf-4.0.4-SNAPSHOT.jar
+GPMLRDFJAR = tools/gpml2rdf-4.0.4-SNAPSHOT.jar
 
 all: rdf
 
 rdf: pcrdf reactrdf
 
 pathways.txt:
-	@find orig-pw-renamed -name "*gpml" | cut -d'/' -f2 | sort | grep "PC" | cut -d'.' -f1 > pathways.txt
+	@find input/gpml/renamed/pathways -name "*.gpml" | xargs -I{} basename {} .gpml | sort | grep "^PC" > pathways.txt
 
 reactions.txt:
-	@find orig-react-renamed -name "*gpml" | cut -d'/' -f2 | sort | grep "RC" | cut -d'.' -f1 > reactions.txt
+	@find input/gpml/renamed/reactions -name "*.gpml" | xargs -I{} basename {} .gpml | sort | grep "^RC" > reactions.txt
 
 pcrdf: ${PCGPMLRDFS} ${PCWPRDFS}
 reactrdf: ${RCGPMLRDFS} ${RCWPRDFS}
 
-pw/Human/%.ttl: orig-pw-renamed/%.gpml
+output/rdf/core/pathways/Human/%.ttl: input/gpml/renamed/pathways/%.gpml
 	@echo "Creating GPMLRDF and WPRDF from $< ..."
-	@mkdir -p pw/Human
-	@mkdir -p pw/gpml/Human
-	@xpath -q -e "string(/Pathway/@version)" $< | cut -d'_' -f2 | xargs java -cp ${GPMLRDFJAR} org.wikipathways.wp2rdf.CreateRDF -d rdf-plantmetwiki.bioinformatics.nl $< pw/gpml/Human/ pw/Human/
+	@mkdir -p output/rdf/core/pathways/Human
+	@mkdir -p output/rdf/core/pathways/gpml/Human
+	@xpath -q -e "string(/Pathway/@version)" $< | cut -d'_' -f2 | xargs java -cp ${GPMLRDFJAR} org.wikipathways.wp2rdf.CreateRDF -d rdf-plantmetwiki.bioinformatics.nl $< output/rdf/core/pathways/gpml/Human/ output/rdf/core/pathways/Human/
 
-pw/gpml/Human/%.ttl: orig-pw-renamed/%.gpml
+output/rdf/core/pathways/gpml/Human/%.ttl: input/gpml/renamed/pathways/%.gpml
 	@echo "Creating GPMLRDF and WPRDF from $< ..."
-	@mkdir -p pw/Human
-	@mkdir -p pw/gpml/Human
-	@xpath -q -e "string(/Pathway/@version)" $< | cut -d'_' -f2 | xargs java -cp ${GPMLRDFJAR} org.wikipathways.wp2rdf.CreateRDF -d rdf-plantmetwiki.bioinformatics.nl $< pw/gpml/Human/ pw/Human/
+	@mkdir -p output/rdf/core/pathways/Human
+	@mkdir -p output/rdf/core/pathways/gpml/Human
+	@xpath -q -e "string(/Pathway/@version)" $< | cut -d'_' -f2 | xargs java -cp ${GPMLRDFJAR} org.wikipathways.wp2rdf.CreateRDF -d rdf-plantmetwiki.bioinformatics.nl $< output/rdf/core/pathways/gpml/Human/ output/rdf/core/pathways/Human/
 
-react/Human/%.ttl: orig-react-renamed/%.gpml
+output/rdf/core/reactions/Human/%.ttl: input/gpml/renamed/reactions/%.gpml
 	@echo "Creating GPMLRDF and WPRDF from $< ..."
-	@mkdir -p react/Human
-	@mkdir -p react/gpml/Human
-	@xpath -q -e "string(/Pathway/@version)" $< | cut -d'_' -f2 | xargs java -cp ${GPMLRDFJAR} org.wikipathways.wp2rdf.CreateRDF -d rdf-plantmetwiki.bioinformatics.nl $< react/gpml/Human/ react/Human/
+	@mkdir -p output/rdf/core/reactions/Human
+	@mkdir -p output/rdf/core/reactions/gpml/Human
+	@xpath -q -e "string(/Pathway/@version)" $< | cut -d'_' -f2 | xargs java -cp ${GPMLRDFJAR} org.wikipathways.wp2rdf.CreateRDF -d rdf-plantmetwiki.bioinformatics.nl $< output/rdf/core/reactions/gpml/Human/ output/rdf/core/reactions/Human/
 
-react/gpml/Human/%.ttl: orig-react-renamed/%.gpml
+output/rdf/core/reactions/gpml/Human/%.ttl: input/gpml/renamed/reactions/%.gpml
 	@echo "Creating GPMLRDF and WPRDF from $< ..."
-	@mkdir -p react/Human
-	@mkdir -p react/gpml/Human
-	@xpath -q -e "string(/Pathway/@version)" $< | cut -d'_' -f2 | xargs java -cp ${GPMLRDFJAR} org.wikipathways.wp2rdf.CreateRDF -d rdf-plantmetwiki.bioinformatics.nl $< react/gpml/Human/ react/Human/
+	@mkdir -p output/rdf/core/reactions/Human
+	@mkdir -p output/rdf/core/reactions/gpml/Human
+	@xpath -q -e "string(/Pathway/@version)" $< | cut -d'_' -f2 | xargs java -cp ${GPMLRDFJAR} org.wikipathways.wp2rdf.CreateRDF -d rdf-plantmetwiki.bioinformatics.nl $< output/rdf/core/reactions/gpml/Human/ output/rdf/core/reactions/Human/

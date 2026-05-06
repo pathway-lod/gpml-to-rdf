@@ -164,12 +164,12 @@ def main() -> None:
         )
     )
 
-    parser.add_argument("--pathways-dir", default="orig-pw-renamed")
-    parser.add_argument("--reactions-dir", default="orig-react-renamed")
-    parser.add_argument("--output-dir", default="extra-taxonomy")
+    parser.add_argument("--pathways-dir", default="input/gpml/renamed/pathways")
+    parser.add_argument("--reactions-dir", default="input/gpml/renamed/reactions")
+    parser.add_argument("--output-dir", default="output/rdf/taxonomy-extra")
     parser.add_argument(
         "--aggregate-file",
-        default="all_gpml_taxonomy_extra-plantcyc17.0.0-gpml2021.ttl",
+        default="output/bundles/all_gpml_taxonomy_extra-plantcyc17.0.0-gpml2021.ttl",
     )
     parser.add_argument("--no-aggregate", action="store_true")
 

@@ -18,12 +18,14 @@ The workflow has three layers:
 
 The plugin layers preserve PlantCyc-specific information while keeping the core WikiPathways RDF model unchanged.
 
-## Set up the environment 
+## Set up the environment
 
 ```bash
 mamba env create -f environment.yml
 conda activate plantmetwiki-rdf
 ```
+
+All Python and Groovy script commands below assume the environment is activated. The `make` step requires `conda run -n plantmetwiki-rdf make ...` explicitly because Make subshells do not inherit the activated conda environment and would otherwise use the system Java (which may be too old).
 
 ## Preparing the GPML input data 
 
@@ -39,6 +41,8 @@ Download from Zenodo record 10.5281/zenodo.18404067 withe the script
 python scripts/download_gpml_input.py --clean
 ```
 
+Files are saved to `input/gpml/original/pathways/` and `input/gpml/original/reactions/`.
+
 Option B: copy GPML files from a local GitHub checkout
 
 Useful for development branches.
@@ -49,14 +53,13 @@ Download the plant pathways download from GitHub branch/commit
 gh repo clone pathway-lod/Cyc_to_wiki
 ```
 Then copy the GPML files manually:
-and save them in the `orig` folders:
 
 ```shell
-mkdir -p orig-pw
-cp ../Cyc_to_wiki/<VERSION_FOLDER>/individual_pathways/*.gpml orig-pw/
+mkdir -p input/gpml/original/pathways
+cp ../Cyc_to_wiki/<VERSION_FOLDER>/individual_pathways/*.gpml input/gpml/original/pathways/
 
-mkdir -p orig-react
-cp ../Cyc_to_wiki/<VERSION_FOLDER>/individual_reactions/*.gpml orig-react/
+mkdir -p input/gpml/original/reactions
+cp ../Cyc_to_wiki/<VERSION_FOLDER>/individual_reactions/*.gpml input/gpml/original/reactions/
 ```
 
 Replace <VERSION_FOLDER> with the relevant folder, for example:
@@ -66,26 +69,29 @@ Replace <VERSION_FOLDER> with the relevant folder, for example:
 ## Rename the GPML files 
 The converter expects pathway and reaction files with stable PC* and RC* identifiers.
 
-Renamed the files and put the results in `orig-renamed/`:
+Rename the files and put the results in `input/gpml/renamed/`:
 
 ```shell
-mkdir orig-pw-renamed
-groovy createPathwayfiles.groovy
+mkdir -p input/gpml/renamed/pathways
+groovy scripts/createPathwayfiles.groovy
 
-mkdir orig-react-renamed
-groovy createReactionfiles.groovy
+mkdir -p input/gpml/renamed/reactions
+groovy scripts/createReactionfiles.groovy
 ```
 
-This creates
-```shell 
-orig-pw-renamed/
-
-orig-react-renamed/
-
-pathways.txt
-
-reactions.txt
+This populates:
 ```
+input/gpml/renamed/pathways/   ← PC1.gpml, PC2.gpml, ...
+input/gpml/renamed/reactions/  ← RC1.gpml, RC2.gpml, ...
+```
+
+Then generate the index files that Make requires before building RDF:
+
+```shell
+make pathways.txt reactions.txt
+```
+
+This creates `pathways.txt` and `reactions.txt` at the repo root. These must exist before running `make rdf`, because Make reads them at parse time to determine which targets to build.
 
 ## BridgeDB mapper 
 
@@ -96,26 +102,30 @@ reactions.txt
 Run the RDF conversion:
 
 ```shell
-make -B -j 12 rdf
+conda run -n plantmetwiki-rdf make -B -k -j 12 rdf
 ```
 
-if the reactions were not converted, they can be forced with 
+If only reactions need to be rebuilt:
 
-```shell 
-make -B -j 12 reactrdf
-``` 
+```shell
+conda run -n plantmetwiki-rdf make -B -k -j 12 reactrdf
+```
 
-The -B flag forces rebuilding. This is useful because the current Makefile reads pathways.txt and reactions.txt when Make starts, which can otherwise cause stale or missing target issues.
+Flags:
+- `-B`: force rebuild (required because Make reads `pathways.txt`/`reactions.txt` at parse time)
+- `-k`: keep going past individual file errors (some GPML files contain invalid groups that the converter cannot process)
+- `-j 12`: run 12 jobs in parallel
+- `conda run -n plantmetwiki-rdf`: ensures the correct Java version (11+) is used; the system Java may be too old
 
 ### Notes: 
 For each GPML file, two outputs are created:
 
-1. pw/Human/
+1. `output/rdf/core/pathways/Human/`
 
 👉 WPRDF (WikiPathways RDF)
-This is the “standard” RDF model used by WikiPathways.
+This is the "standard" RDF model used by WikiPathways.
 
-2. pw/gpml/Human/
+2. `output/rdf/core/pathways/gpml/Human/`
 
 👉 GPMLRDF (raw GPML RDF)
 This is a more direct RDF representation of the GPML structure.
@@ -130,26 +140,28 @@ Aggregation into single files and validation can be done with
 see [this page](https://openphacts.github.io/Documentation/rdfguide/):
 
 ```shell
-find pw -name "*.ttl" -print0 | xargs -0 cat > all_pathways-${VERSION}.ttl
+mkdir -p output/bundles
 
-find react -name "*.ttl" -print0 | xargs -0 cat > all_reactions-${VERSION}.ttl
+find output/rdf/core/pathways -name "*.ttl" -print0 | xargs -0 cat > output/bundles/all_pathways-${VERSION}.ttl
 
-cat all_pathways-${VERSION}.ttl all_reactions-${VERSION}.ttl > all-${VERSION}.ttl
+find output/rdf/core/reactions -name "*.ttl" -print0 | xargs -0 cat > output/bundles/all_reactions-${VERSION}.ttl
+
+cat output/bundles/all_pathways-${VERSION}.ttl output/bundles/all_reactions-${VERSION}.ttl > output/bundles/all-${VERSION}.ttl
 ```
 
 Some hotfixes:
 
 ```shell
-perl -pi -e 's|identifiers\.org/TAIR_gene_name|identifiers.org/tair.name|g' all-${VERSION}.ttl
+perl -pi -e 's|identifiers\.org/TAIR_gene_name|identifiers.org/tair.name|g' output/bundles/all-${VERSION}.ttl
 
-perl -pi -e 's|SLM_SLM%3A|SLM_|g' all-${VERSION}.ttl
+perl -pi -e 's|SLM_SLM%3A|SLM_|g' output/bundles/all-${VERSION}.ttl
 ```
 
 Optional validation if rapper is availble 
 ```bash 
-rapper -i turtle -t -q all_pathways-${VERSION}.ttl > /dev/null
-rapper -i turtle -t -q all_reactions-${VERSION}.ttl > /dev/null
-rapper -i turtle -t -q all-${VERSION}.ttl > /dev/null
+rapper -i turtle -t -q output/bundles/all_pathways-${VERSION}.ttl > /dev/null
+rapper -i turtle -t -q output/bundles/all_reactions-${VERSION}.ttl > /dev/null
+rapper -i turtle -t -q output/bundles/all-${VERSION}.ttl > /dev/null
 ``` 
 
 
@@ -164,20 +176,22 @@ It adds:
 * Specific wp:organism ncbi:<taxon> triples to GeneProduct and Protein nodes when GPML contains AnnotationRef taxonomy annotations.
 * The same species triples to biological identifier URIs such as UniProt where possible.
 
-Run : 
-`python scripts/create_gpml_taxonomy_extra_rdf.py` 
+Run (with the conda environment activated):
+```shell
+python scripts/create_gpml_taxonomy_extra_rdf.py
+```
 
 This creates: 
 ```shell 
-extra-taxonomy/
-all_gpml_taxonomy_extra-plantcyc17.0.0-gpml2021.ttl
+output/rdf/taxonomy-extra/
+output/bundles/all_gpml_taxonomy_extra-plantcyc17.0.0-gpml2021.ttl
 ```
 
 Quick checks: 
 ```
-grep -R "ncbi:33090" extra-taxonomy | head
-grep -R "ncbi:3702" extra-taxonomy/reactions | head
-grep -R "ncbi:36774" extra-taxonomy/pathways | head
+grep -R "ncbi:33090" output/rdf/taxonomy-extra | head
+grep -R "ncbi:3702" output/rdf/taxonomy-extra/reactions | head
+grep -R "ncbi:36774" output/rdf/taxonomy-extra/pathways | head
 ```
 
 Suggested Virtuoso graph `http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-taxonomy-extra`
@@ -203,8 +217,10 @@ LIMIT 50
 
 The property plugin preserves PlantCyc/GPML key-value pairs that may not be represented in the core WikiPathways RDF.
 
-Run: 
- `python scripts/create_gpml_properties_extra_rdf.py`
+Run (with the conda environment activated):
+```shell
+python scripts/create_gpml_properties_extra_rdf.py
+```
 
 This captures all <Property key="" value=""> entries from:
 
@@ -220,21 +236,23 @@ and writes them as pmw:gpmlProperty blank nodes.
 
 This creates:
 ```
-extra-properties/
-all_gpml_properties_extra-plantcyc17.0.0-gpml2021.ttl
+output/rdf/properties-extra/
+output/bundles/all_gpml_properties_extra-plantcyc17.0.0-gpml2021.ttl
 ```
 
 ## Auditing GPML property keys
 To inspect which GPML key-value properties exist and how often they occur:
 
-`python scripts/audit_gpml_properties.py`
+```shell
+python scripts/audit_gpml_properties.py
+```
 
 This creates:
 
 ```
-gpml_property_audit_summary.csv
+output/audit/gpml_property_audit_summary.csv
 
-gpml_property_audit_by_scope.csv
+output/audit/gpml_property_audit_by_scope.csv
 
 ```
 
@@ -246,11 +264,11 @@ For a PlantCyc 17 GPML2021 build, the main files are:
 
 ```
 
-all-plantcyc17.0.0-gpml2021.ttl
+output/bundles/all-plantcyc17.0.0-gpml2021.ttl
 
-all_gpml_taxonomy_extra-plantcyc17.0.0-gpml2021.ttl
+output/bundles/all_gpml_taxonomy_extra-plantcyc17.0.0-gpml2021.ttl
 
-all_gpml_properties_extra-plantcyc17.0.0-gpml2021.ttl
+output/bundles/all_gpml_properties_extra-plantcyc17.0.0-gpml2021.ttl
 ```
 
 Recommended Virtuoso graphs:
@@ -264,21 +282,54 @@ http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-properties-extra
 
 The download step writes build/zenodo_gpml_metadata.json, the VoID step should read that file and describe the RDF bundles produced from that same input release.
 
-```bash
+```shell
 VERSION=$(python -c 'import json; print(json.load(open("build/zenodo_gpml_metadata.json"))["version"])')
 
 python scripts/create_void_from_metadata.py \
-  --core-rdf all-${VERSION}.ttl \
-  --taxonomy-extra all_gpml_taxonomy_extra-${VERSION}.ttl \
-  --properties-extra all_gpml_properties_extra-${VERSION}.ttl \
-  --output void-${VERSION}.ttl
+  --core-rdf output/bundles/all-${VERSION}.ttl \
+  --taxonomy-extra output/bundles/all_gpml_taxonomy_extra-${VERSION}.ttl \
+  --properties-extra output/bundles/all_gpml_properties_extra-${VERSION}.ttl \
+  --output output/bundles/void-${VERSION}.ttl
 
 ```
 
-## Upload to Zenodo 
+## Upload to Zenodo
+
+```shell
 export ZENODO_ACCESS_TOKEN="your-production-token"
-
 python scripts/upload_to_zenodo.py --source-record 18174552
+```
 
-Fill the license information manually when editing and approving the entry: 
+Fill the license information manually when editing and approving the entry:
 `OPEN DATABASE LICENSE FOR THE PLANT METABOLIC NETWORK DATABASES`
+
+# Summary notes (4th May 2026)
+
+Everything works end-to-end. Full pipeline summary:
+
+  ┌──────────────────┬────────────────────────────────────────────────────────┬───────────────────────────────┐
+  │       Step       │                        Command                         │            Result             │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Download         │ download_gpml_input.py --clean                         │ 1162 pathways, 1316 reactions │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Rename           │ createPathwayfiles.groovy / createReactionfiles.groovy │ PC1–PC1162, RC1–RC1316        │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Index            │ make pathways.txt reactions.txt                        │ Index files for Make          │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Core RDF         │ conda run make -B -k -j 12 rdf                         │ 1131/1162 pw, 792/1316 rx     │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Taxonomy extra   │ create_gpml_taxonomy_extra_rdf.py                      │ 2478 files → bundle           │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Properties extra │ create_gpml_properties_extra_rdf.py                    │ 2478 files → bundle           │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Audit            │ audit_gpml_properties.py                               │ 210 unique keys               │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ Bundles          │ `find ...                                              │ cat`                          │
+  ├──────────────────┼────────────────────────────────────────────────────────┼───────────────────────────────┤
+  │ VoID             │ create_void_from_metadata.py                           │ metadata file                 │
+  └──────────────────┴────────────────────────────────────────────────────────┴───────────────────────────────┘
+
+## TO DO: 
+1. an action to upload to Zenodo? 
+an action to validate the ttl files? 
+an action to check that the prefixes are correctly loaded and not duplicated? 

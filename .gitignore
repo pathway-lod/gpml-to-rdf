@@ -1,11 +1,11 @@
-orig*/
+input/gpml/original/
+input/gpml/renamed/
 pathways.txt
 reactions.txt
-react/
-pw/
-extra/
+output/rdf/
+output/bundles/
 *.ttl.gz
 *.ttl
 build/
-# AI usage 
+# AI usage
 CLAUDE.md

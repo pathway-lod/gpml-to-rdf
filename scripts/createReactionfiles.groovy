@@ -10,7 +10,7 @@ import static groovy.io.FileType.FILES
 
 Map<String,List> failedTests = new HashMap<>();
 
-def dir = new File("orig-pw");
+def dir = new File("input/gpml/original/reactions");
 def files = [];
 dir.traverse(type: FILES, maxDepth: 0) {
   if (it.name.endsWith(".gpml")) {
@@ -21,9 +21,9 @@ dir.traverse(type: FILES, maxDepth: 0) {
 counter = 0
 files.each { file ->
   counter = counter + 1
-  wpid = "PC" + counter
+  wpid = "RC" + counter
   println file.name + " -> ${wpid}"
   source = new File(file.path)
-  target = new File("orig-pw-renamed/${wpid}.gpml")
+  target = new File("input/gpml/renamed/reactions/${wpid}.gpml")
   Files.copy(source.toPath(), target.toPath())
 }

@@ -62,10 +62,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="Audit GPML Property key usage in pathway and reaction files."
     )
-    parser.add_argument("--pathways-dir", default="orig-pw-renamed")
-    parser.add_argument("--reactions-dir", default="orig-react-renamed")
-    parser.add_argument("--summary", default="gpml_property_audit_summary.csv")
-    parser.add_argument("--by-scope", default="gpml_property_audit_by_scope.csv")
+    parser.add_argument("--pathways-dir", default="input/gpml/renamed/pathways")
+    parser.add_argument("--reactions-dir", default="input/gpml/renamed/reactions")
+    parser.add_argument("--summary", default="output/audit/gpml_property_audit_summary.csv")
+    parser.add_argument("--by-scope", default="output/audit/gpml_property_audit_by_scope.csv")
 
     args = parser.parse_args()
 
@@ -78,6 +78,7 @@ def main() -> None:
     for gpml_file in sorted(gpml_files):
         audit_file(gpml_file, counts, by_scope)
 
+    Path(args.summary).parent.mkdir(parents=True, exist_ok=True)
     write_summary_csv(counts, Path(args.summary))
     write_scope_csv(by_scope, Path(args.by_scope))
 
