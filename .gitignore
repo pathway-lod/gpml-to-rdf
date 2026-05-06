@@ -7,3 +7,5 @@ extra/
 *.ttl.gz
 *.ttl
 build/
+# AI usage 
+CLAUDE.md
