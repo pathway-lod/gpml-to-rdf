@@ -144,6 +144,25 @@ def validate_large_bundle(
     return errors
 
 
+def validate_prefix_uniqueness(path: Path) -> list[str]:
+    """Check that no @prefix declaration is repeated in a bundle file."""
+    errors: list[str] = []
+    counts: dict[str, int] = {}
+    with path.open(encoding="utf-8", errors="replace") as fh:
+        for line in fh:
+            stripped = line.strip()
+            if stripped.startswith("@prefix"):
+                parts = stripped.split()
+                if len(parts) >= 2:
+                    key = parts[1]
+                    counts[key] = counts.get(key, 0) + 1
+
+    duplicates = {k: v for k, v in counts.items() if v > 1}
+    for prefix, count in sorted(duplicates.items()):
+        errors.append(f"@prefix {prefix} declared {count} times")
+    return errors
+
+
 def validate_void(path: Path) -> list[str]:
     """Full RDFlib parse of the VoID file + structural check."""
     errors: list[str] = []
@@ -217,23 +236,32 @@ def main() -> int:
     # ------------------------------------------------------------------
     print("=== Bundle files ===")
 
+    taxonomy_bundle = bundles / f"all_gpml_taxonomy_extra-{version}.ttl"
+    properties_bundle = bundles / f"all_gpml_properties_extra-{version}.ttl"
+    core_bundle = bundles / f"all-{version}.ttl"
+    void_file = bundles / f"void-{version}.ttl"
+
     # Taxonomy extra — small enough for full RDFlib parse
-    errors = validate_taxonomy_bundle(
-        bundles / f"all_gpml_taxonomy_extra-{version}.ttl"
-    )
+    errors = validate_taxonomy_bundle(taxonomy_bundle)
     all_passed &= result("taxonomy-extra bundle (RDFlib)", errors)
+
+    errors = validate_prefix_uniqueness(taxonomy_bundle)
+    all_passed &= result("taxonomy-extra bundle (prefix uniqueness)", errors)
 
     # Properties extra — large, use size + pattern scan
     errors = validate_large_bundle(
-        bundles / f"all_gpml_properties_extra-{version}.ttl",
+        properties_bundle,
         min_size_mb=50,
         required_patterns=["pmw:gpmlProperty", "pmw:key"],
     )
     all_passed &= result("properties-extra bundle (size + patterns)", errors)
 
+    errors = validate_prefix_uniqueness(properties_bundle)
+    all_passed &= result("properties-extra bundle (prefix uniqueness)", errors)
+
     # Core bundle — large, use size + pattern scan
     errors = validate_large_bundle(
-        bundles / f"all-{version}.ttl",
+        core_bundle,
         min_size_mb=100,
         required_patterns=[
             "wp:organism",
@@ -242,8 +270,11 @@ def main() -> int:
     )
     all_passed &= result("core bundle (size + patterns)", errors)
 
+    errors = validate_prefix_uniqueness(core_bundle)
+    all_passed &= result("core bundle (prefix uniqueness)", errors)
+
     # VoID — small, full RDFlib parse
-    errors = validate_void(bundles / f"void-{version}.ttl")
+    errors = validate_void(void_file)
     all_passed &= result("void file (RDFlib)", errors)
 
     # ------------------------------------------------------------------
