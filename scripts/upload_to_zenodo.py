@@ -30,7 +30,8 @@ def require_token() -> str:
             "Set it with:\n"
             "  cp .env.template .env\n"
             "  # edit .env and fill in your token\n"
-            "  source .env"
+            "  # then export variables while sourcing it\n"
+            "  set -a; source .env; set +a"
         )
     return token
 
