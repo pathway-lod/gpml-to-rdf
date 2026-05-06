@@ -130,26 +130,26 @@ This is the "standard" RDF model used by WikiPathways.
 👉 GPMLRDF (raw GPML RDF)
 This is a more direct RDF representation of the GPML structure.
 
-## Aggregation and validation 
+## Aggregation
 
 Set a version label for the output files:
 
-`VERSION="plantcyc17.0.0-gpml2021"`
-
-Aggregation into single files and validation can be done with 
-see [this page](https://openphacts.github.io/Documentation/rdfguide/):
-
 ```shell
-mkdir -p output/bundles
-
-find output/rdf/core/pathways -name "*.ttl" -print0 | xargs -0 cat > output/bundles/all_pathways-${VERSION}.ttl
-
-find output/rdf/core/reactions -name "*.ttl" -print0 | xargs -0 cat > output/bundles/all_reactions-${VERSION}.ttl
-
-cat output/bundles/all_pathways-${VERSION}.ttl output/bundles/all_reactions-${VERSION}.ttl > output/bundles/all-${VERSION}.ttl
+VERSION="plantcyc17.0.0-gpml2021"
 ```
 
-Some hotfixes:
+Use `scripts/bundle_rdf.py` to assemble the core bundle. Unlike a plain `cat`, it writes each `@prefix` declaration exactly once at the top of the output file, so prefixes are never duplicated across the thousands of individual TTL files:
+
+```shell
+python scripts/bundle_rdf.py \
+  --input-dir output/rdf/core/pathways \
+  --input-dir output/rdf/core/reactions \
+  --output    output/bundles/all-${VERSION}.ttl
+```
+
+The taxonomy-extra and properties-extra bundles are assembled automatically (with the same prefix deduplication) when you run their respective scripts (see below).
+
+Apply hotfixes to normalise some identifiers in the core bundle:
 
 ```shell
 perl -pi -e 's|identifiers\.org/TAIR_gene_name|identifiers.org/tair.name|g' output/bundles/all-${VERSION}.ttl
@@ -157,12 +157,11 @@ perl -pi -e 's|identifiers\.org/TAIR_gene_name|identifiers.org/tair.name|g' outp
 perl -pi -e 's|SLM_SLM%3A|SLM_|g' output/bundles/all-${VERSION}.ttl
 ```
 
-Optional validation if rapper is availble 
-```bash 
-rapper -i turtle -t -q output/bundles/all_pathways-${VERSION}.ttl > /dev/null
-rapper -i turtle -t -q output/bundles/all_reactions-${VERSION}.ttl > /dev/null
+Optional syntax validation with `rapper` (if available):
+
+```bash
 rapper -i turtle -t -q output/bundles/all-${VERSION}.ttl > /dev/null
-``` 
+```
 
 
 

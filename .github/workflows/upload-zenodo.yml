@@ -85,17 +85,12 @@ jobs:
           VERSION=$(python -c 'import json; print(json.load(open("build/zenodo_gpml_metadata.json"))["version"])')
           echo "VERSION=${VERSION}" >> "$GITHUB_ENV"
 
-          mkdir -p output/bundles
-
-          find output/rdf/core/pathways -name "*.ttl" -print0 \
-            | xargs -0 cat > output/bundles/all_pathways-${VERSION}.ttl
-
-          find output/rdf/core/reactions -name "*.ttl" -print0 \
-            | xargs -0 cat > output/bundles/all_reactions-${VERSION}.ttl
-
-          cat output/bundles/all_pathways-${VERSION}.ttl \
-              output/bundles/all_reactions-${VERSION}.ttl \
-            > output/bundles/all-${VERSION}.ttl
+          # bundle_rdf.py writes each @prefix exactly once at the top,
+          # avoiding duplicate prefix declarations from the individual TTL files.
+          python scripts/bundle_rdf.py \
+            --input-dir output/rdf/core/pathways \
+            --input-dir output/rdf/core/reactions \
+            --output    output/bundles/all-${VERSION}.ttl
 
           # Identifier hotfixes
           perl -pi -e 's|identifiers\.org/TAIR_gene_name|identifiers.org/tair.name|g' \
