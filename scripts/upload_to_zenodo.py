@@ -153,14 +153,51 @@ def get_record_metadata(api: str, source_record: str, token: str) -> dict:
     return request_json("GET", f"{api}/records/{source_record}", token)
 
 
+def find_existing_draft(api: str, source_record: str, token: str) -> dict | None:
+    """Search depositions for an open draft that is a new version of source_record."""
+    source = request_json("GET", f"{api}/deposit/depositions/{source_record}", token)
+    concept_id = source.get("conceptrecid")
+
+    drafts = request_json("GET", f"{api}/deposit/depositions?status=draft&size=50", token)
+    for draft in drafts:
+        if (
+            draft.get("state") == "unsubmitted"
+            and draft.get("conceptrecid") == concept_id
+            and str(draft.get("id")) != str(source_record)
+        ):
+            # The list response omits some links (e.g. bucket); fetch full details.
+            return request_json("GET", f"{api}/deposit/depositions/{draft['id']}", token)
+    return None
+
+
 def create_new_version(api: str, source_record: str, token: str) -> dict:
     print(f"Creating new Zenodo version from record {source_record}...")
-    result = request_json(
-        "POST",
+
+    response = requests.post(
         f"{api}/deposit/depositions/{source_record}/actions/newversion",
-        token,
+        headers={"Authorization": f"Bearer {token}"},
     )
 
+    # Zenodo returns 400 "Please remove all files first" when there is already
+    # an open draft for this record.  Search depositions for an existing draft
+    # that belongs to the same concept record and use it directly.
+    if response.status_code == 400 and "remove all files" in response.text:
+        print("ℹ️  An open draft already exists — searching for it...")
+        draft = find_existing_draft(api, source_record, token)
+        if draft is None:
+            print("❌ Could not locate the existing draft.", file=sys.stderr)
+            print(response.text, file=sys.stderr)
+            response.raise_for_status()
+        print(f"Using existing draft deposition: {draft['id']}")
+        return draft
+
+    if not response.ok:
+        print(f"❌ Zenodo API error: POST newversion", file=sys.stderr)
+        print(f"Status: {response.status_code}", file=sys.stderr)
+        print(response.text, file=sys.stderr)
+        response.raise_for_status()
+
+    result = response.json()
     draft = request_json("GET", result["links"]["latest_draft"], token)
     print(f"Created draft deposition: {draft['id']}")
     return draft
