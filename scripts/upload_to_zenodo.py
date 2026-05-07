@@ -145,7 +145,6 @@ def prepare_files(version: str, overwrite: bool = False) -> list[Path]:
             overwrite,
         ),
         bundles / f"void-{version}.ttl",
-        METADATA_FILE,
     ]
 
 

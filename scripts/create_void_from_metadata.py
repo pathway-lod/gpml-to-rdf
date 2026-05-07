@@ -192,11 +192,12 @@ def main() -> None:
         lines.append(f"{ttl_uri(core_dataset)} foaf:page {ttl_uri(record_url)} .")
         lines.append("")
 
-    if publication_date:
-        lines.append(f"{ttl_uri(core_dataset)} dcterms:issued {ttl_literal(publication_date)}^^xsd:date .")
-        lines.append(f"{ttl_uri(taxonomy_dataset)} dcterms:issued {ttl_literal(publication_date)}^^xsd:date .")
-        lines.append(f"{ttl_uri(properties_dataset)} dcterms:issued {ttl_literal(publication_date)}^^xsd:date .")
-        lines.append("")
+    # dcterms:issued = date the RDF was generated (today), not the GPML input date.
+    # The GPML input date is already captured via dcterms:source / pav:derivedFrom above.
+    lines.append(f"{ttl_uri(core_dataset)} dcterms:issued {ttl_literal(today)}^^xsd:date .")
+    lines.append(f"{ttl_uri(taxonomy_dataset)} dcterms:issued {ttl_literal(today)}^^xsd:date .")
+    lines.append(f"{ttl_uri(properties_dataset)} dcterms:issued {ttl_literal(today)}^^xsd:date .")
+    lines.append("")
 
     add_pmn_license_to_dataset(lines, core_dataset)
     add_pmn_license_to_dataset(lines, taxonomy_dataset)
