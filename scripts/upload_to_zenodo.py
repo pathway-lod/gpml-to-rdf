@@ -28,7 +28,10 @@ def require_token() -> str:
         raise SystemExit(
             "Missing ZENODO_ACCESS_TOKEN.\n"
             "Set it with:\n"
-            "  export ZENODO_ACCESS_TOKEN='your-token-here'"
+            "  cp .env.template .env\n"
+            "  # edit .env and fill in your token\n"
+            "  # then export variables while sourcing it\n"
+            "  set -a; source .env; set +a"
         )
     return token
 
@@ -38,10 +41,10 @@ def api_base(use_sandbox: bool) -> str:
 
 
 def request_json(method: str, url: str, token: str, **kwargs: Any) -> dict:
-    params = kwargs.pop("params", {})
-    params["access_token"] = token
+    headers = kwargs.pop("headers", {})
+    headers["Authorization"] = f"Bearer {token}"
 
-    response = requests.request(method, url, params=params, **kwargs)
+    response = requests.request(method, url, headers=headers, **kwargs)
 
     if not response.ok:
         print(f"❌ Zenodo API error: {method} {url}", file=sys.stderr)
@@ -142,7 +145,6 @@ def prepare_files(version: str, overwrite: bool = False) -> list[Path]:
             overwrite,
         ),
         bundles / f"void-{version}.ttl",
-        METADATA_FILE,
     ]
 
 
@@ -150,14 +152,51 @@ def get_record_metadata(api: str, source_record: str, token: str) -> dict:
     return request_json("GET", f"{api}/records/{source_record}", token)
 
 
+def find_existing_draft(api: str, source_record: str, token: str) -> dict | None:
+    """Search depositions for an open draft that is a new version of source_record."""
+    source = request_json("GET", f"{api}/deposit/depositions/{source_record}", token)
+    concept_id = source.get("conceptrecid")
+
+    drafts = request_json("GET", f"{api}/deposit/depositions?status=draft&size=50", token)
+    for draft in drafts:
+        if (
+            draft.get("state") == "unsubmitted"
+            and draft.get("conceptrecid") == concept_id
+            and str(draft.get("id")) != str(source_record)
+        ):
+            # The list response omits some links (e.g. bucket); fetch full details.
+            return request_json("GET", f"{api}/deposit/depositions/{draft['id']}", token)
+    return None
+
+
 def create_new_version(api: str, source_record: str, token: str) -> dict:
     print(f"Creating new Zenodo version from record {source_record}...")
-    result = request_json(
-        "POST",
+
+    response = requests.post(
         f"{api}/deposit/depositions/{source_record}/actions/newversion",
-        token,
+        headers={"Authorization": f"Bearer {token}"},
     )
 
+    # Zenodo returns 400 "Please remove all files first" when there is already
+    # an open draft for this record.  Search depositions for an existing draft
+    # that belongs to the same concept record and use it directly.
+    if response.status_code == 400 and "remove all files" in response.text:
+        print("ℹ️  An open draft already exists — searching for it...")
+        draft = find_existing_draft(api, source_record, token)
+        if draft is None:
+            print("❌ Could not locate the existing draft.", file=sys.stderr)
+            print(response.text, file=sys.stderr)
+            response.raise_for_status()
+        print(f"Using existing draft deposition: {draft['id']}")
+        return draft
+
+    if not response.ok:
+        print(f"❌ Zenodo API error: POST newversion", file=sys.stderr)
+        print(f"Status: {response.status_code}", file=sys.stderr)
+        print(response.text, file=sys.stderr)
+        response.raise_for_status()
+
+    result = response.json()
     draft = request_json("GET", result["links"]["latest_draft"], token)
     print(f"Created draft deposition: {draft['id']}")
     return draft
@@ -182,7 +221,9 @@ def upload_file(api: str, draft: dict, file_path: Path, token: str) -> None:
 
     print(f"Uploading: {file_path.name}")
     with file_path.open("rb") as fp:
-        response = requests.put(upload_url, data=fp, params={"access_token": token})
+        response = requests.put(
+            upload_url, data=fp, headers={"Authorization": f"Bearer {token}"}
+        )
 
     if not response.ok:
         print(f"❌ Upload failed: {file_path}", file=sys.stderr)
@@ -271,8 +312,8 @@ def update_draft_metadata(
             "notes": notes,
             "creators": creators_from_existing_record(source_record_metadata),
             "version": version,
-            "access_right": "open",
-            "license": "other-open",
+            "access_right": "open",   # legacy deposit API field; "open" = publicly accessible
+            "license": "other-open",   # closest Zenodo built-in for custom open licenses
             "keywords": existing_metadata.get("keywords", [])
             or ["PlantMetWiki", "PlantCyc", "WikiPathways", "GPML", "RDF"],
             "related_identifiers": [
