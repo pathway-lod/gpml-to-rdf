@@ -14,6 +14,7 @@ PMW_BASE = "http://rdf-plantmetwiki.bioinformatics.nl"
 VIRIDIPLANTAE_TAXON = "33090"
 
 DATASOURCE_URI = {
+    # Proteins / genes
     "uniprot": "https://identifiers.org/uniprot/",
     "Uniprot": "https://identifiers.org/uniprot/",
     "Uniprot-TrEMBL": "https://identifiers.org/uniprot/",
@@ -22,6 +23,13 @@ DATASOURCE_URI = {
     "TAIR gene name": "https://identifiers.org/tair.name/",
     "tair.name": "https://identifiers.org/tair.name/",
     "Entrez Gene": "https://identifiers.org/ncbigene/",
+    # Metabolites
+    "InChIKey": "https://identifiers.org/inchikey/",
+    "ChEBI": "https://identifiers.org/chebi/",
+    "MetaNetX": "https://identifiers.org/metanetx.chemical/",
+    "PubChem-compound": "https://identifiers.org/pubchem.compound/",
+    "KEGG Compound": "https://identifiers.org/kegg.compound/",
+    "HMDB": "https://identifiers.org/hmdb/",
 }
 
 
@@ -92,7 +100,7 @@ def write_taxonomy_ttl(gpml_file: Path, out_file: Path) -> None:
 
     for dn in root.findall("gpml:DataNodes/gpml:DataNode", NS):
         dn_type = dn.attrib.get("type")
-        if dn_type not in {"GeneProduct", "Protein"}:
+        if dn_type not in {"GeneProduct", "Protein", "Metabolite"}:
             continue
 
         element_id = dn.attrib.get("elementId")
