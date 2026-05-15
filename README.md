@@ -216,6 +216,7 @@ Apply hotfixes to normalise identifiers:
 ```bash
 perl -pi -e 's|identifiers\.org/TAIR_gene_name|identifiers.org/tair.name|g' output/bundles/all-${VERSION}.ttl
 perl -pi -e 's|SLM_SLM%3A|SLM_|g' output/bundles/all-${VERSION}.ttl
+perl -pi -e 's|/obo/NCBI Taxonomy_|/obo/NCBITaxon_|g' output/bundles/all-${VERSION}.ttl
 ```
 
 Optional syntax validation (requires `rapper`):
