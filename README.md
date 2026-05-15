@@ -1,6 +1,6 @@
 # GPML to RDF for PlantMetWiki
 
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18174552-blue)](https://doi.org/10.5281/zenodo.18174552)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.17967619-blue)](https://doi.org/10.5281/zenodo.17967619)
 [![GitHub Release](https://img.shields.io/github/v/release/pathway-lod/gpml-to-rdf?include_prereleases&sort=semver&display_name=tag&logo=github)](https://github.com/pathway-lod/gpml-to-rdf/releases)
 [![PlantMetWiki](https://img.shields.io/static/v1?label=web&message=PlantMetWiki&color=brightgreen)](https://plantmetwiki.bioinformatics.nl/)
 
@@ -19,16 +19,17 @@ The plugin layers preserve PlantCyc-specific information while keeping the core 
 ## Pipeline overview
 
 ```
-1. Download GPML      →  input/gpml/original/
-2. Rename files       →  input/gpml/renamed/   (stable PC*/RC* identifiers)
-3. Generate index     →  pathways.txt, reactions.txt
-4. Core RDF           →  output/rdf/core/
-5. Taxonomy extra     →  output/rdf/taxonomy-extra/
-6. Properties extra   →  output/rdf/properties-extra/
-7. Bundle             →  output/bundles/all-*.ttl
-8. VoID metadata      →  output/bundles/void-*.ttl
-9. Validate           →  pass/fail per bundle
-10. Upload to Zenodo  →  draft record
+1.  Download GPML         →  input/gpml/original/
+2.  Rename files          →  input/gpml/renamed/   (stable PC*/RC* identifiers)
+3.  Generate index        →  pathways.txt, reactions.txt
+4.  Core RDF              →  output/rdf/core/
+5.  Taxonomy extra        →  output/rdf/taxonomy-extra/
+6.  NCBI IRI mappings     →  output/bundles/ncbi_iri_mappings-*.ttl
+7.  Properties extra      →  output/rdf/properties-extra/
+8.  Bundle                →  output/bundles/all-*.ttl
+9.  VoID metadata         →  output/bundles/void-*.ttl
+10. Validate              →  pass/fail per bundle
+11. Upload to Zenodo      →  draft record
 ```
 
 ---
@@ -133,7 +134,49 @@ Suggested Virtuoso graph: `http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-
 
 ---
 
-## 6. Generate GPML property extra RDF
+## 6. Generate NCBI IRI mappings
+
+Our taxonomy-extra RDF uses OBO Foundry IRIs (`obo:NCBITaxon_3702`), while BioPortal uses a different namespace (`bioontology.org/ontology/NCBITAXON/3702`). This step generates a small TTL file with `owl:sameAs` and `skos:exactMatch` triples mapping every NCBI taxon ID that appears in our data to its BioPortal equivalent:
+
+```bash
+python scripts/create_ncbi_iri_mappings.py
+```
+
+Output: `output/bundles/ncbi_iri_mappings-<VERSION>.ttl` (~424 mapping pairs for PlantCyc 17.0.0).
+
+Load into Virtuoso as a named graph:
+```
+http://rdf-plantmetwiki.bioinformatics.nl/graph/ncbi-iri-mappings
+```
+
+This enables **federated SPARQL queries** against BioPortal's endpoint to retrieve taxon labels, ranks, and hierarchy without downloading the full NCBI Taxonomy ontology (~1 GB). Requires a free BioPortal API key — set `BIOPORTAL_API_KEY` in your `.env` file (see `.env.template`).
+
+Example federated query (run on Virtuoso after loading all graphs):
+
+```sparql
+PREFIX wp:   <http://vocabularies.wikipathways.org/wp#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?node ?obo_taxon ?label
+WHERE {
+  GRAPH <http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-taxonomy-extra> {
+      ?node wp:organism ?obo_taxon .
+      FILTER(?obo_taxon != <http://purl.obolibrary.org/obo/NCBITaxon_33090>)
+  }
+  GRAPH <http://rdf-plantmetwiki.bioinformatics.nl/graph/ncbi-iri-mappings> {
+      ?obo_taxon owl:sameAs ?bioportal_taxon .
+  }
+  SERVICE <https://sparql.bioontology.org/ontology/NCBITAXON?apikey=YOUR_KEY> {
+      ?bioportal_taxon rdfs:label ?label .
+  }
+}
+LIMIT 20
+```
+
+---
+
+## 7. Generate GPML property extra RDF
 
 Preserves all `<Property key="" value="">` elements from Pathway, DataNode, and Interaction elements as `pmw:gpmlProperty` blank nodes:
 
@@ -155,7 +198,7 @@ Suggested Virtuoso graph: `http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-
 
 ---
 
-## 7. Bundle core RDF
+## 8. Bundle core RDF
 
 Set a version label and assemble the core bundle. `bundle_rdf.py` writes each `@prefix` declaration exactly once at the top so prefixes are never duplicated across the thousands of individual TTL files:
 
@@ -183,7 +226,7 @@ rapper -i turtle -t -q output/bundles/all-${VERSION}.ttl > /dev/null
 
 ---
 
-## 8. Create VoID metadata
+## 10. Create VoID metadata
 
 ```bash
 VERSION=$(python -c 'import json; print(json.load(open("build/zenodo_gpml_metadata.json"))["version"])')
@@ -192,12 +235,13 @@ python scripts/create_void_from_metadata.py \
   --core-rdf         output/bundles/all-${VERSION}.ttl \
   --taxonomy-extra   output/bundles/all_gpml_taxonomy_extra-${VERSION}.ttl \
   --properties-extra output/bundles/all_gpml_properties_extra-${VERSION}.ttl \
+  --ncbi-mappings    output/bundles/ncbi_iri_mappings-${VERSION}.ttl \
   --output           output/bundles/void-${VERSION}.ttl
 ```
 
 ---
 
-## 9. Validate RDF bundles
+## 11. Validate RDF bundles
 
 Run before uploading to Zenodo. Checks individual TTL files, bundle sizes, expected predicates, and the VoID file:
 
@@ -213,7 +257,7 @@ python scripts/validate_rdf.py --skip-individual
 
 ---
 
-## 10. Upload to Zenodo
+## 12. Upload to Zenodo
 
 ### Option A — local upload
 

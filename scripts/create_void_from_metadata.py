@@ -109,6 +109,8 @@ def main() -> None:
     parser.add_argument("--core-rdf", required=True)
     parser.add_argument("--taxonomy-extra", required=True)
     parser.add_argument("--properties-extra", required=True)
+    parser.add_argument("--ncbi-mappings", default=None,
+                        help="Path to ncbi_iri_mappings-*.ttl (optional)")
     parser.add_argument("--output", required=True)
 
     args = parser.parse_args()
@@ -125,9 +127,10 @@ def main() -> None:
     today = dt.date.today().isoformat()
 
     base = "http://rdf-plantmetwiki.bioinformatics.nl/dataset"
-    core_dataset = f"{base}/{version}/core"
-    taxonomy_dataset = f"{base}/{version}/taxonomy-extra"
+    core_dataset       = f"{base}/{version}/core"
+    taxonomy_dataset   = f"{base}/{version}/taxonomy-extra"
     properties_dataset = f"{base}/{version}/properties-extra"
+    mappings_dataset   = f"{base}/{version}/ncbi-iri-mappings"
 
     lines = [
         "@prefix void:    <http://rdfs.org/ns/void#> .",
@@ -171,21 +174,31 @@ def main() -> None:
             f"    dcterms:hasVersion {ttl_literal(version)} ;",
             f"    pav:createdOn {ttl_literal(today)}^^xsd:date .",
             "",
+            f"{ttl_uri(mappings_dataset)} a void:Linkset ;",
+            f"    dcterms:title {ttl_literal('NCBI Taxonomy IRI mappings: OBO Foundry to BioPortal', 'en')} ;",
+            f"    dcterms:description {ttl_literal('owl:sameAs and skos:exactMatch triples mapping OBO Foundry NCBI Taxonomy IRIs (purl.obolibrary.org/obo/NCBITaxon_X) to BioPortal IRIs (purl.bioontology.org/ontology/NCBITAXON/X) for every taxon that appears in the taxonomy-extra dataset. Enables federated SPARQL queries against BioPortal.', 'en')} ;",
+            f"    void:subjectsTarget {ttl_uri('http://purl.obolibrary.org/obo/ncbitaxon.owl')} ;",
+            f"    void:objectsTarget  {ttl_uri('https://bioportal.bioontology.org/ontologies/NCBITAXON')} ;",
+            f"    void:linkPredicate  <http://www.w3.org/2002/07/owl#sameAs> ;",
+            f"    dcterms:isPartOf {ttl_uri(taxonomy_dataset)} ;",
+            f"    dcterms:hasVersion {ttl_literal(version)} ;",
+            f"    pav:createdOn {ttl_literal(today)}^^xsd:date .",
+            "",
         ]
     )
 
+    all_datasets = [core_dataset, taxonomy_dataset, properties_dataset, mappings_dataset]
+
     if doi:
         source_uri = f"https://doi.org/{doi}"
-        lines.append(f"{ttl_uri(core_dataset)} dcterms:source {ttl_uri(source_uri)} .")
-        lines.append(f"{ttl_uri(taxonomy_dataset)} dcterms:source {ttl_uri(source_uri)} .")
-        lines.append(f"{ttl_uri(properties_dataset)} dcterms:source {ttl_uri(source_uri)} .")
+        for ds in all_datasets:
+            lines.append(f"{ttl_uri(ds)} dcterms:source {ttl_uri(source_uri)} .")
         lines.append("")
 
     if conceptdoi:
         concept_uri = f"https://doi.org/{conceptdoi}"
-        lines.append(f"{ttl_uri(core_dataset)} pav:derivedFrom {ttl_uri(concept_uri)} .")
-        lines.append(f"{ttl_uri(taxonomy_dataset)} pav:derivedFrom {ttl_uri(concept_uri)} .")
-        lines.append(f"{ttl_uri(properties_dataset)} pav:derivedFrom {ttl_uri(concept_uri)} .")
+        for ds in all_datasets:
+            lines.append(f"{ttl_uri(ds)} pav:derivedFrom {ttl_uri(concept_uri)} .")
         lines.append("")
 
     if record_url:
@@ -194,18 +207,18 @@ def main() -> None:
 
     # dcterms:issued = date the RDF was generated (today), not the GPML input date.
     # The GPML input date is already captured via dcterms:source / pav:derivedFrom above.
-    lines.append(f"{ttl_uri(core_dataset)} dcterms:issued {ttl_literal(today)}^^xsd:date .")
-    lines.append(f"{ttl_uri(taxonomy_dataset)} dcterms:issued {ttl_literal(today)}^^xsd:date .")
-    lines.append(f"{ttl_uri(properties_dataset)} dcterms:issued {ttl_literal(today)}^^xsd:date .")
+    for ds in all_datasets:
+        lines.append(f"{ttl_uri(ds)} dcterms:issued {ttl_literal(today)}^^xsd:date .")
     lines.append("")
 
-    add_pmn_license_to_dataset(lines, core_dataset)
-    add_pmn_license_to_dataset(lines, taxonomy_dataset)
-    add_pmn_license_to_dataset(lines, properties_dataset)
+    for ds in all_datasets:
+        add_pmn_license_to_dataset(lines, ds)
 
     add_dataset_file_info(lines, core_dataset, Path(args.core_rdf))
     add_dataset_file_info(lines, taxonomy_dataset, Path(args.taxonomy_extra))
     add_dataset_file_info(lines, properties_dataset, Path(args.properties_extra))
+    if args.ncbi_mappings:
+        add_dataset_file_info(lines, mappings_dataset, Path(args.ncbi_mappings))
 
     Path(args.output).write_text("\n".join(lines), encoding="utf-8")
     print(f"Wrote VoID metadata: {args.output}")
