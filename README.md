@@ -1,5 +1,9 @@
 # GPML to RDF for PlantMetWiki
 
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18174552-blue)](https://doi.org/10.5281/zenodo.18174552)
+[![GitHub Release](https://img.shields.io/github/v/release/pathway-lod/gpml-to-rdf?include_prereleases&sort=semver&display_name=tag&logo=github)](https://github.com/pathway-lod/gpml-to-rdf/releases)
+[![PlantMetWiki](https://img.shields.io/static/v1?label=web&message=PlantMetWiki&color=brightgreen)](https://plantmetwiki.bioinformatics.nl/)
+
 Converts PlantCyc-derived GPML2021 pathway and reaction files into RDF using the WikiPathways GPMLRDF stack. The output feeds the [PlantMetWiki](https://plantmetwiki.bioinformatics.nl/) SPARQL endpoint.
 
 ## Three-layer RDF architecture
