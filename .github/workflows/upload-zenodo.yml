@@ -71,6 +71,10 @@ jobs:
         shell: bash -el {0}
         run: python scripts/create_gpml_taxonomy_extra_rdf.py
 
+      - name: Generate NCBI IRI mappings (OBO → BioPortal)
+        shell: bash -el {0}
+        run: python scripts/create_ncbi_iri_mappings.py
+
       - name: Generate GPML property extra RDF
         shell: bash -el {0}
         run: python scripts/create_gpml_properties_extra_rdf.py
