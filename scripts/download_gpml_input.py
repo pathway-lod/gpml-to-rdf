@@ -7,7 +7,9 @@ import json
 import shutil
 import sys
 import tempfile
+import time
 import urllib.request
+import urllib.error
 import zipfile
 from pathlib import Path
 
@@ -16,13 +18,27 @@ ZENODO_API = "https://zenodo.org/api/records/"
 DEFAULT_METADATA_FILE = Path("build/zenodo_gpml_metadata.json")
 
 
+def fetch_with_retry(url: str, retries: int = 5, backoff: float = 10.0) -> dict:
+    """Fetch a URL with exponential backoff on 503 errors."""
+    for attempt in range(1, retries + 1):
+        try:
+            with urllib.request.urlopen(url) as response:
+                return json.load(response)
+        except urllib.error.HTTPError as e:
+            if e.code == 503 and attempt < retries:
+                wait = backoff * (2 ** (attempt - 1))
+                print(f"  Zenodo returned 503 (attempt {attempt}/{retries}), retrying in {wait:.0f}s...")
+                time.sleep(wait)
+            else:
+                raise
+    raise RuntimeError("Unreachable")
+
+
 def fetch_latest_record(concept_doi: str) -> dict:
     """Resolve concept DOI to latest Zenodo record."""
     url = ZENODO_API + concept_doi.split(".")[-1]
     print(f"Resolving Zenodo concept DOI: {url}")
-
-    with urllib.request.urlopen(url) as response:
-        return json.load(response)
+    return fetch_with_retry(url)
 
 
 def find_gpml_file(record: dict) -> dict:
@@ -36,10 +52,20 @@ def find_gpml_file(record: dict) -> dict:
     raise RuntimeError("No GPML zip file found in Zenodo record")
 
 
-def download_file(url: str, output: Path) -> None:
+def download_file(url: str, output: Path, retries: int = 5, backoff: float = 10.0) -> None:
     print(f"Downloading: {url}")
-    urllib.request.urlretrieve(url, output)
-    print(f"Saved: {output}")
+    for attempt in range(1, retries + 1):
+        try:
+            urllib.request.urlretrieve(url, output)
+            print(f"Saved: {output}")
+            return
+        except urllib.error.HTTPError as e:
+            if e.code == 503 and attempt < retries:
+                wait = backoff * (2 ** (attempt - 1))
+                print(f"  503 on download (attempt {attempt}/{retries}), retrying in {wait:.0f}s...")
+                time.sleep(wait)
+            else:
+                raise
 
 
 def clean_dir(path: Path) -> None:
