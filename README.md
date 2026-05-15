@@ -254,3 +254,23 @@ http://rdf-plantmetwiki.bioinformatics.nl/graph/pathways
 http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-taxonomy-extra
 http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-properties-extra
 ```
+
+---
+
+## Query development workflow
+
+SPARQL queries are developed interactively against the local TTL bundles before being deployed to the production endpoint and test repositories.
+
+**Step 1 — develop locally** using the Jupyter notebook:
+
+```bash
+conda activate plantmetwiki-rdf
+jupyter notebook notebooks/explore_taxonomy_rdf.ipynb
+```
+
+The notebook loads the taxonomy extra bundle via `rdflib` (no server required) and provides ready-to-run queries for verifying Viridiplantae pathway annotations, per-node species distributions, multi-species pathways, and biological entity URI annotations. A sandbox cell is included for writing new queries from scratch.
+
+**Step 2 — deploy to production** once a query is validated:
+
+- **[Snorql-UI](https://github.com/pathway-lod/Snorql-UI)** — the SPARQL query interface served at the PlantMetWiki endpoint; add example queries here to make them available in the UI
+- **[SPARQLQueries](https://github.com/pathway-lod/SPARQLQueries)** — the curated query library and test suite; add and document finalized queries here
