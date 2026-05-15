@@ -19,13 +19,16 @@ from __future__ import annotations
 
 import os
 import sys
+import urllib.request
+import urllib.parse
+import json as _json
 from pathlib import Path
 
 from rdflib import Graph
-from SPARQLWrapper import SPARQLWrapper, JSON
 
 
-BIOPORTAL_ENDPOINT = "https://sparql.bioontology.org/sparql"
+BIOPORTAL_SPARQL   = "https://sparql.bioontology.org/sparql"   # may be unavailable
+BIOPORTAL_REST     = "https://data.bioontology.org/ontologies/NCBITAXON/classes"
 OBO_BASE           = "http://purl.obolibrary.org/obo/NCBITaxon_"
 BIOPORTAL_BASE     = "http://purl.bioontology.org/ontology/NCBITAXON/"
 
@@ -50,27 +53,26 @@ def check_mapping_file(mapping_file: Path) -> int:
     return owl_sameAs
 
 
+def lookup_bioportal_label(api_key: str, taxon_id: str) -> str | None:
+    """Fetch the prefLabel for a single NCBI taxon ID via BioPortal REST API."""
+    encoded = urllib.parse.quote(f"{BIOPORTAL_BASE}{taxon_id}", safe="")
+    url = f"{BIOPORTAL_REST}/{encoded}?apikey={api_key}"
+    try:
+        with urllib.request.urlopen(url, timeout=15) as r:
+            data = _json.load(r)
+            return data.get("prefLabel")
+    except Exception:
+        return None
+
+
 def query_bioportal_labels(api_key: str, taxon_ids: list[str]) -> dict[str, str]:
-    """Query BioPortal for rdfs:label of a list of NCBI taxon IDs."""
-    sparql = SPARQLWrapper(BIOPORTAL_ENDPOINT)
-    sparql.addParameter("apikey", api_key)
-    sparql.setReturnFormat(JSON)
-
-    values = " ".join(f"<{BIOPORTAL_BASE}{tid}>" for tid in taxon_ids)
-    sparql.setQuery(f"""
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        SELECT ?taxon ?label
-        WHERE {{
-            VALUES ?taxon {{ {values} }}
-            ?taxon rdfs:label ?label .
-        }}
-    """)
-
-    results = sparql.query().convert()
-    return {
-        r["taxon"]["value"].split("/")[-1]: r["label"]["value"]
-        for r in results["results"]["bindings"]
-    }
+    """Fetch labels for a list of NCBI taxon IDs via BioPortal REST API."""
+    results = {}
+    for tid in taxon_ids:
+        label = lookup_bioportal_label(api_key, tid)
+        if label:
+            results[tid] = label
+    return results
 
 
 def main() -> int:
@@ -98,7 +100,7 @@ def main() -> int:
         return 0
 
     # 2 — Test BioPortal endpoint
-    print(f"\n── Testing BioPortal SPARQL endpoint ({BIOPORTAL_ENDPOINT})")
+    print(f"\n── Testing BioPortal REST API ({BIOPORTAL_REST})")
     print(f"   Querying labels for {len(TEST_TAXA)} well-known taxa...")
 
     try:
