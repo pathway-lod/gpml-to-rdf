@@ -8,7 +8,10 @@ from pathlib import Path
 from urllib.parse import quote
 
 
+import re as _re
+
 NS = {"gpml": "http://pathvisio.org/GPML/2021"}
+_TAX_PREFIX = _re.compile(r"^TAX-(\d+)$")
 
 PMW_BASE = "http://rdf-plantmetwiki.bioinformatics.nl"
 VIRIDIPLANTAE_TAXON = "33090"
@@ -76,6 +79,11 @@ def extract_taxonomy_map(root: ET.Element) -> dict[str, str]:
 
         if datasource == "NCBI Taxonomy" and identifier:
             taxonomy[ann_id] = identifier
+        elif datasource == "Taxonomy" and identifier:
+            # TAX-XXXX is BioCyc's encoding of NCBI Taxonomy IDs
+            m = _TAX_PREFIX.match(identifier)
+            if m:
+                taxonomy[ann_id] = m.group(1)
 
     return taxonomy
 
