@@ -142,7 +142,7 @@ Our taxonomy-extra RDF uses OBO Foundry IRIs (`obo:NCBITaxon_3702`), while BioPo
 python scripts/create_ncbi_iri_mappings.py
 ```
 
-Output: `output/bundles/ncbi_iri_mappings-<VERSION>.ttl` (~413 mapping pairs for PlantCyc 17.0.0).
+Output: `output/bundles/ncbi_iri_mappings-<VERSION>.ttl` (~424 mapping pairs for PlantCyc 17.0.0).
 
 Load into Virtuoso as a named graph:
 ```
@@ -235,6 +235,7 @@ python scripts/create_void_from_metadata.py \
   --core-rdf         output/bundles/all-${VERSION}.ttl \
   --taxonomy-extra   output/bundles/all_gpml_taxonomy_extra-${VERSION}.ttl \
   --properties-extra output/bundles/all_gpml_properties_extra-${VERSION}.ttl \
+  --ncbi-mappings    output/bundles/ncbi_iri_mappings-${VERSION}.ttl \
   --output           output/bundles/void-${VERSION}.ttl
 ```
 

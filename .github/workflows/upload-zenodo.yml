@@ -106,10 +106,11 @@ jobs:
         shell: bash -el {0}
         run: |
           python scripts/create_void_from_metadata.py \
-            --core-rdf       output/bundles/all-${VERSION}.ttl \
-            --taxonomy-extra output/bundles/all_gpml_taxonomy_extra-${VERSION}.ttl \
+            --core-rdf         output/bundles/all-${VERSION}.ttl \
+            --taxonomy-extra   output/bundles/all_gpml_taxonomy_extra-${VERSION}.ttl \
             --properties-extra output/bundles/all_gpml_properties_extra-${VERSION}.ttl \
-            --output         output/bundles/void-${VERSION}.ttl
+            --ncbi-mappings    output/bundles/ncbi_iri_mappings-${VERSION}.ttl \
+            --output           output/bundles/void-${VERSION}.ttl
 
       # ------------------------------------------------------------------
       # Validation
