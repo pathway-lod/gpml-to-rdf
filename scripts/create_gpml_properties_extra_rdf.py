@@ -10,7 +10,8 @@ from pathlib import Path
 NS = {"gpml": "http://pathvisio.org/GPML/2021"}
 
 PMW_BASE = "http://rdf-plantmetwiki.bioinformatics.nl"
-PMN_PATHWAY_BASE = "https://pmn.plantcyc.org/pathway?orgid=PLANT&id="
+PMN_PATHWAY_BASE  = "https://pmn.plantcyc.org/pathway?orgid=PLANT&id="
+PMN_REACTION_BASE = "https://pmn.plantcyc.org/reaction?orgid=PLANT&id="
 
 
 def ttl_uri(uri: str) -> str:

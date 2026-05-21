@@ -15,6 +15,8 @@ _TAX_PREFIX = _re.compile(r"^TAX-(\d+)$")
 
 PMW_BASE = "http://rdf-plantmetwiki.bioinformatics.nl"
 VIRIDIPLANTAE_TAXON = "33090"
+PMN_PATHWAY_PAGE  = "https://pmn.plantcyc.org/pathway?orgid=PLANT&id="
+PMN_REACTION_PAGE = "https://pmn.plantcyc.org/reaction?orgid=PLANT&id="
 
 DATASOURCE_URI = {
     # Proteins / genes
@@ -88,7 +90,16 @@ def extract_taxonomy_map(root: ET.Element) -> dict[str, str]:
     return taxonomy
 
 
-def write_taxonomy_ttl(gpml_file: Path, out_file: Path) -> None:
+def extract_plantcyc_id(root: ET.Element) -> str | None:
+    """Return the UniqueID property value from the pathway-level Properties."""
+    for prop in root.findall("gpml:Property", NS):
+        if prop.attrib.get("key") == "UniqueID":
+            return prop.attrib.get("value") or None
+    return None
+
+
+def write_taxonomy_ttl(gpml_file: Path, out_file: Path,
+                       pmn_page_base: str = PMN_PATHWAY_PAGE) -> None:
     tree = ET.parse(gpml_file)
     root = tree.getroot()
 
@@ -97,12 +108,24 @@ def write_taxonomy_ttl(gpml_file: Path, out_file: Path) -> None:
     pwy_uri = pathway_uri(pathway_id, version)
 
     taxonomy = extract_taxonomy_map(root)
+    plantcyc_id = extract_plantcyc_id(root)
+
+    # Build the pathway-level block: wp:organism + foaf:page (if UniqueID known)
+    if plantcyc_id:
+        pmn_page_uri = f"{pmn_page_base}{plantcyc_id}"
+        pwy_block = (
+            f"{ttl_uri(pwy_uri)} wp:organism ncbi:{VIRIDIPLANTAE_TAXON} ;\n"
+            f"    foaf:page {ttl_uri(pmn_page_uri)} ."
+        )
+    else:
+        pwy_block = f"{ttl_uri(pwy_uri)} wp:organism ncbi:{VIRIDIPLANTAE_TAXON} ."
 
     lines: list[str] = [
-        "@prefix wp: <http://vocabularies.wikipathways.org/wp#> .",
+        "@prefix wp:   <http://vocabularies.wikipathways.org/wp#> .",
         "@prefix ncbi: <http://purl.obolibrary.org/obo/NCBITaxon_> .",
+        "@prefix foaf: <http://xmlns.com/foaf/0.1/> .",
         "",
-        f"{ttl_uri(pwy_uri)} wp:organism ncbi:{VIRIDIPLANTAE_TAXON} .",
+        pwy_block,
         "",
     ]
 
@@ -150,11 +173,16 @@ def write_taxonomy_ttl(gpml_file: Path, out_file: Path) -> None:
     out_file.write_text("\n".join(lines), encoding="utf-8")
 
 
-def process_directory(input_dir: Path, output_dir: Path) -> int:
+def process_directory(input_dir: Path, output_dir: Path,
+                       pmn_page_base: str = PMN_PATHWAY_PAGE) -> int:
     count = 0
 
     for gpml_file in sorted(input_dir.glob("*.gpml")):
-        write_taxonomy_ttl(gpml_file, output_dir / f"{gpml_file.stem}.ttl")
+        write_taxonomy_ttl(
+            gpml_file,
+            output_dir / f"{gpml_file.stem}.ttl",
+            pmn_page_base=pmn_page_base,
+        )
         count += 1
 
     return count
@@ -214,11 +242,13 @@ def main() -> None:
     pathway_count = process_directory(
         Path(args.pathways_dir),
         output_root / "pathways",
+        pmn_page_base=PMN_PATHWAY_PAGE,
     )
 
     reaction_count = process_directory(
         Path(args.reactions_dir),
         output_root / "reactions",
+        pmn_page_base=PMN_REACTION_PAGE,
     )
 
     print(f"Pathway taxonomy TTL files:  {pathway_count}")
