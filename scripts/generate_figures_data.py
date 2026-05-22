@@ -1,34 +1,50 @@
 #!/usr/bin/env python3
-"""Generate figure-ready CSVs from the local RDF bundles.
+"""Generate figure-ready CSVs from the PlantMetWiki RDF data.
 
-Reads output/bundles/*.ttl, runs SPARQL queries via rdflib (no Virtuoso
-required), and writes CSVs to notebooks/figures/output/.
+Strategy
+--------
+- **Core queries** (per-pathway counts, interaction types, pathway titles):
+  SPARQLWrapper → local Virtuoso (fast, indexed).
+  Virtuoso must have the data loaded; it uses the same TTL files, so
+  reproducibility is preserved.
 
-The notebook notebooks/plantmetwiki_figures.ipynb loads these CSVs
-and produces the actual figures.
+- **Species queries** (taxonomy-extra bundle, ~4 MB):
+  rdflib on the local TTL file — fast because the bundle is small.
+  Cross-graph join between taxonomy-extra and core is done in Python.
+
+Why not rdflib for everything?
+  Loading the 309 MB core bundle into rdflib takes 2-3 min and queries
+  are unindexed; simple COUNT queries can take 10+ min. Virtuoso indexes
+  the same data and answers in seconds.
 
 Usage
 -----
     conda activate plantmetwiki-rdf
+
+    # Default: local Virtuoso at localhost:8890
     python scripts/generate_figures_data.py
 
-    # Specify bundles directory explicitly
-    python scripts/generate_figures_data.py --bundles output/bundles
+    # Custom endpoint
+    python scripts/generate_figures_data.py --endpoint http://localhost:8890/sparql
 
-    # Skip reloading the large core bundle if already generated
-    python scripts/generate_figures_data.py --skip-core
+    # Named graph (if data is in a specific graph)
+    python scripts/generate_figures_data.py --graph http://rdf-plantmetwiki.bioinformatics.nl/graph/pathways
+
+    # Use rdflib fallback for core too (slow, no Virtuoso needed)
+    python scripts/generate_figures_data.py --no-virtuoso
 """
 
 from __future__ import annotations
 
 import argparse
+import json
 from pathlib import Path
 
 import pandas as pd
 from rdflib import Graph
+from SPARQLWrapper import SPARQLWrapper, JSON
 
-
-# ── Namespaces ────────────────────────────────────────────────────────────────
+# ── Prefixes ──────────────────────────────────────────────────────────────────
 PREFIXES = """
 PREFIX wp:      <http://vocabularies.wikipathways.org/wp#>
 PREFIX ncbi:    <http://purl.obolibrary.org/obo/NCBITaxon_>
@@ -38,10 +54,35 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 
 WP = "http://vocabularies.wikipathways.org/wp#"
 WP_INTERACTION = WP + "Interaction"
+DEFAULT_ENDPOINT = "http://localhost:8890/sparql"
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
+# ── SPARQL helpers ────────────────────────────────────────────────────────────
 
-def sparql(g: Graph, query: str) -> pd.DataFrame:
+def sparql_endpoint(endpoint: str, query: str,
+                    graph: str | None = None,
+                    timeout: int = 120) -> pd.DataFrame:
+    """Run a SELECT query against a Virtuoso SPARQL endpoint."""
+    sw = SPARQLWrapper(endpoint)
+    sw.setReturnFormat(JSON)
+    sw.setTimeout(timeout)
+    if graph:
+        full_query = f"PREFIX wp: <{WP}>\n{PREFIXES}\n" \
+                     f"SELECT * WHERE {{ GRAPH <{graph}> {{ {query.strip().lstrip('SELECT').split('WHERE')[1]} }} }}"
+        # Simpler: just wrap with FROM NAMED
+        full_query = PREFIXES + f"\n{query.strip()}"
+        sw.addParameter("default-graph-uri", graph)
+    else:
+        full_query = PREFIXES + "\n" + query.strip()
+    sw.setQuery(full_query)
+    results = sw.query().convert()
+    vars_ = results["head"]["vars"]
+    rows  = [{v: r.get(v, {}).get("value", "") for v in vars_}
+              for r in results["results"]["bindings"]]
+    return pd.DataFrame(rows, columns=vars_)
+
+
+def sparql_rdflib(g: Graph, query: str) -> pd.DataFrame:
+    """Run a SELECT query on an rdflib Graph."""
     results = g.query(PREFIXES + query)
     return pd.DataFrame(results, columns=[str(v) for v in results.vars])
 
@@ -53,94 +94,129 @@ def save_csv(df: pd.DataFrame, out_dir: Path, name: str) -> pd.DataFrame:
     return df
 
 
-# ── Queries ───────────────────────────────────────────────────────────────────
+# ── Core queries (Virtuoso) ───────────────────────────────────────────────────
 
-def query_genes_per_pathway(g: Graph, out_dir: Path) -> pd.DataFrame:
-    print("Genes per pathway ...")
-    return save_csv(sparql(g, """
+CORE_QUERIES = {
+    "genes_per_pathway.csv": """
         SELECT ?pwID ?title (COUNT(DISTINCT ?entity) AS ?count)
         WHERE {
             ?entity a wp:GeneProduct ;
                     dcterms:isPartOf ?pwID .
             ?pwID rdfs:label ?title .
+            FILTER(CONTAINS(STR(?pwID), "/pathways/"))
         }
         GROUP BY ?pwID ?title
         ORDER BY DESC(?count)
-    """), out_dir, "genes_per_pathway.csv")
-
-
-def query_metabolites_per_pathway(g: Graph, out_dir: Path) -> pd.DataFrame:
-    print("Metabolites per pathway ...")
-    return save_csv(sparql(g, """
+    """,
+    "metabolites_per_pathway.csv": """
         SELECT ?pwID ?title (COUNT(DISTINCT ?entity) AS ?count)
         WHERE {
             ?entity a wp:Metabolite ;
                     dcterms:isPartOf ?pwID .
             ?pwID rdfs:label ?title .
+            FILTER(CONTAINS(STR(?pwID), "/pathways/"))
         }
         GROUP BY ?pwID ?title
         ORDER BY DESC(?count)
-    """), out_dir, "metabolites_per_pathway.csv")
-
-
-def query_enzymes_per_pathway(g: Graph, out_dir: Path) -> pd.DataFrame:
-    print("Enzymes (Protein) per pathway ...")
-    return save_csv(sparql(g, """
+    """,
+    "enzymes_per_pathway.csv": """
         SELECT ?pwID ?title (COUNT(DISTINCT ?entity) AS ?count)
         WHERE {
             ?entity a wp:Protein ;
                     dcterms:isPartOf ?pwID .
             ?pwID rdfs:label ?title .
+            FILTER(CONTAINS(STR(?pwID), "/pathways/"))
         }
         GROUP BY ?pwID ?title
         ORDER BY DESC(?count)
-    """), out_dir, "enzymes_per_pathway.csv")
-
-
-def query_conversions_per_pathway(g: Graph, out_dir: Path) -> pd.DataFrame:
-    print("Conversions per pathway ...")
-    return save_csv(sparql(g, """
+    """,
+    "conversions_per_pathway.csv": """
         SELECT ?pwID ?title (COUNT(DISTINCT ?interaction) AS ?count)
         WHERE {
             ?interaction a wp:Conversion ;
                          dcterms:isPartOf ?pwID .
             ?pwID rdfs:label ?title .
+            FILTER(CONTAINS(STR(?pwID), "/pathways/"))
         }
         GROUP BY ?pwID ?title
         ORDER BY DESC(?count)
-    """), out_dir, "conversions_per_pathway.csv")
-
-
-def query_interaction_types(g: Graph, out_dir: Path) -> pd.DataFrame:
-    print("Interaction types ...")
-    return save_csv(sparql(g, """
+    """,
+    "interaction_types.csv": """
         SELECT ?type (COUNT(DISTINCT ?interaction) AS ?n)
         WHERE {
             ?interaction a ?type .
-            FILTER(STRSTARTS(STR(?type), "http://vocabularies.wikipathways.org/wp#"))
+            FILTER(STRSTARTS(STR(?type),
+                   "http://vocabularies.wikipathways.org/wp#"))
         }
         GROUP BY ?type
         ORDER BY DESC(?n)
-    """), out_dir, "interaction_types.csv")
-
-
-def query_pathway_titles(g: Graph, out_dir: Path) -> pd.DataFrame:
-    print("Pathway titles ...")
-    return save_csv(sparql(g, """
+    """,
+    "pathway_titles.csv": """
         SELECT DISTINCT ?pwID ?title
         WHERE {
             ?pwID a wp:Pathway ; rdfs:label ?title .
             FILTER(CONTAINS(STR(?pwID), "/pathways/"))
         }
-    """), out_dir, "pathway_titles.csv")
+    """,
+}
 
 
-def query_species_per_pathway(g_core: Graph, g_tax: Graph, out_dir: Path) -> pd.DataFrame:
-    """Two-graph join in Python (avoids slow SPARQL federation on huge graphs)."""
-    print("Species per pathway (two-step Python join) ...")
+def run_core_queries_virtuoso(endpoint: str, out_dir: Path,
+                               graph: str | None = None) -> None:
+    """Run all core queries against Virtuoso and save CSVs."""
+    print(f"Querying Virtuoso at {endpoint} ...")
+    for name, query in CORE_QUERIES.items():
+        print(f"  {name} ...")
+        try:
+            df = sparql_endpoint(endpoint, query, graph=graph)
+            save_csv(df, out_dir, name)
+        except Exception as e:
+            print(f"  [ERROR] {name}: {e}")
 
-    print("  Step 1: entity → pathway + DataNode URI (core) ...")
-    entity_pathway = sparql(g_core, """
+
+def run_core_queries_rdflib(core_file: Path, out_dir: Path) -> Graph:
+    """Fallback: load core bundle into rdflib and run queries (slow)."""
+    print(f"Loading core bundle via rdflib (~2 min): {core_file.name} ...")
+    g = Graph()
+    g.parse(str(core_file), format="turtle")
+    print(f"  {len(g):,} triples loaded")
+    for name, query in CORE_QUERIES.items():
+        print(f"  {name} ...")
+        save_csv(sparql_rdflib(g, query), out_dir, name)
+    return g
+
+
+# ── Taxonomy queries (rdflib, fast) ──────────────────────────────────────────
+
+def run_taxonomy_queries(tax_file: Path, out_dir: Path,
+                          g_core_rdflib: Graph | None = None,
+                          endpoint: str | None = None,
+                          graph: str | None = None) -> None:
+    """Species per pathway and per-species metrics.
+
+    Taxonomy bundle is small (~4 MB) → rdflib is fast.
+    Cross-graph join with core is done in Python.
+    """
+    print(f"\nLoading taxonomy bundle (rdflib): {tax_file.name} ...")
+    g_tax = Graph()
+    g_tax.parse(str(tax_file), format="turtle")
+    print(f"  {len(g_tax):,} triples")
+
+    # Step 1: DataNode → taxon (from taxonomy bundle)
+    print("  DataNode → taxon pairs ...")
+    node_to_taxon = sparql_rdflib(g_tax, """
+        SELECT DISTINCT ?node ?species
+        WHERE {
+            ?node wp:organism ?species .
+            FILTER(?species != ncbi:33090)
+            FILTER(CONTAINS(STR(?node), "/DataNode/"))
+        }
+    """)
+    print(f"    {len(node_to_taxon):,} pairs")
+
+    # Step 2: entity → pathway + DataNode URI (from core)
+    print("  Entity → pathway + DataNode URI ...")
+    ep_query = """
         SELECT DISTINCT ?entity ?pwID ?datanode
         WHERE {
             ?entity dcterms:isPartOf ?pwID ;
@@ -148,73 +224,60 @@ def query_species_per_pathway(g_core: Graph, g_tax: Graph, out_dir: Path) -> pd.
             FILTER(CONTAINS(STR(?pwID), "/pathways/"))
             FILTER(CONTAINS(STR(?datanode), "/DataNode/"))
         }
-    """)
+    """
+    if endpoint:
+        entity_pathway = sparql_endpoint(endpoint, ep_query, graph=graph)
+    else:
+        entity_pathway = sparql_rdflib(g_core_rdflib, ep_query)
     print(f"    {len(entity_pathway):,} entity→pathway pairs")
 
-    print("  Step 2: DataNode → taxon (taxonomy-extra) ...")
-    node_to_taxon = sparql(g_tax, """
-        SELECT DISTINCT ?node ?species
-        WHERE {
-            ?node wp:organism ?species .
-            FILTER(?species != ncbi:33090)
-            FILTER(CONTAINS(STR(?node), "/DataNode/"))
-        }
-    """)
-    print(f"    {len(node_to_taxon):,} DataNode→taxon pairs")
-
-    print("  Step 3: Python join → species per pathway ...")
-    merged = entity_pathway.merge(
-        node_to_taxon.rename(columns={"node": "datanode"}), on="datanode", how="inner"
+    # Step 3: Python join → species per pathway
+    merged_sp = entity_pathway.merge(
+        node_to_taxon.rename(columns={"node": "datanode"}),
+        on="datanode", how="inner"
     )
     species_pw = (
-        merged.groupby("pwID")["species"]
-        .nunique()
-        .reset_index()
+        merged_sp.groupby("pwID")["species"]
+        .nunique().reset_index()
         .rename(columns={"species": "count"})
         .sort_values("count", ascending=False)
     )
-    return save_csv(species_pw, out_dir, "species_per_pathway.csv")
+    save_csv(species_pw, out_dir, "species_per_pathway.csv")
 
-
-def query_per_species_metrics(g_core: Graph, g_tax: Graph,
-                               node_to_taxon: pd.DataFrame,
-                               out_dir: Path) -> pd.DataFrame:
-    """Per-species pathway/gene/enzyme/metabolite counts (Python join)."""
-    print("Per-species metrics (Python join) ...")
-
-    node_types = sparql(g_core, f"""
+    # Step 4: per-species metrics
+    print("  Per-species metrics (Python join) ...")
+    nt_query = """
         SELECT DISTINCT ?entity ?type ?datanode ?pwID
-        WHERE {{
+        WHERE {
             ?entity a ?type ;
                     dcterms:isPartOf ?pwID ;
                     wp:isAbout ?datanode .
             FILTER(?type IN (wp:GeneProduct, wp:Protein, wp:Metabolite))
             FILTER(CONTAINS(STR(?pwID), "/pathways/"))
             FILTER(CONTAINS(STR(?datanode), "/DataNode/"))
-        }}
-    """)
-    print(f"  {len(node_types):,} entity-type-pathway triples")
+        }
+    """
+    if endpoint:
+        node_types = sparql_endpoint(endpoint, nt_query, graph=graph)
+    else:
+        node_types = sparql_rdflib(g_core_rdflib, nt_query)
 
     joined = node_to_taxon.rename(columns={"node": "datanode"}).merge(
         node_types, on="datanode", how="inner"
     )
-
     per_species = (
-        joined.groupby("species")
-        .agg(
+        joined.groupby("species").agg(
             pathways    = ("pwID",   "nunique"),
             genes       = ("entity", lambda x: x[joined.loc[x.index, "type"] == WP + "GeneProduct"].nunique()),
             enzymes     = ("entity", lambda x: x[joined.loc[x.index, "type"] == WP + "Protein"].nunique()),
             metabolites = ("entity", lambda x: x[joined.loc[x.index, "type"] == WP + "Metabolite"].nunique()),
-        )
-        .reset_index()
-        .sort_values("pathways", ascending=False)
+        ).reset_index().sort_values("pathways", ascending=False)
     )
     per_species["species"] = per_species["species"].apply(
         lambda x: str(x).split("/")[-1].replace("NCBITaxon_", "ncbi:")
         if str(x).startswith("http") else x
     )
-    return save_csv(per_species, out_dir, "per_species_nrs.csv")
+    save_csv(per_species, out_dir, "per_species_nrs.csv")
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
@@ -222,13 +285,17 @@ def query_per_species_metrics(g_core: Graph, g_tax: Graph,
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--bundles",   type=Path, default=Path("output/bundles"),
-                   help="Directory containing *.ttl bundle files")
-    p.add_argument("--out-dir",   type=Path,
+    p.add_argument("--endpoint",    default=DEFAULT_ENDPOINT,
+                   help=f"Virtuoso SPARQL endpoint (default: {DEFAULT_ENDPOINT})")
+    p.add_argument("--graph",       default=None,
+                   help="Named graph URI to query (optional)")
+    p.add_argument("--bundles",     type=Path, default=Path("output/bundles"),
+                   help="Local TTL bundles directory (for taxonomy + rdflib fallback)")
+    p.add_argument("--out-dir",     type=Path,
                    default=Path("notebooks/figures/output"),
                    help="Output directory for CSVs")
-    p.add_argument("--skip-core", action="store_true",
-                   help="Skip reloading core bundle if CSVs already exist")
+    p.add_argument("--no-virtuoso", action="store_true",
+                   help="Use rdflib for all queries (slow, no Virtuoso needed)")
     return p.parse_args()
 
 
@@ -236,65 +303,47 @@ def main() -> int:
     args = parse_args()
     args.out_dir.mkdir(parents=True, exist_ok=True)
 
-    # ── Auto-detect version ────────────────────────────────────────────────
-    core_files = sorted(args.bundles.glob("all-*.ttl"))
-    if not core_files:
-        print(f"[ERROR] No core bundle (all-*.ttl) found in {args.bundles}")
+    # Auto-detect taxonomy bundle
+    tax_files = sorted(args.bundles.glob("all_gpml_taxonomy_extra-*.ttl"))
+    if not tax_files:
+        print(f"[ERROR] No taxonomy bundle found in {args.bundles}")
         return 1
-    version = core_files[-1].stem.replace("all-", "")
-    core_file = args.bundles / f"all-{version}.ttl"
-    tax_file  = args.bundles / f"all_gpml_taxonomy_extra-{version}.ttl"
+    tax_file = tax_files[-1]
 
-    print(f"Version:  {version}")
-    print(f"Core:     {core_file.name}  ({core_file.stat().st_size/1e6:.0f} MB)")
-    print(f"Taxonomy: {tax_file.name}  ({tax_file.stat().st_size/1e6:.1f} MB)")
-    print(f"Output:   {args.out_dir}\n")
+    print(f"Output: {args.out_dir}")
+    print(f"Taxonomy bundle: {tax_file.name} ({tax_file.stat().st_size/1e6:.1f} MB)\n")
 
-    # ── Load taxonomy (small, always) ──────────────────────────────────────
-    print("Loading taxonomy bundle (~4 MB) ...")
-    g_tax = Graph()
-    g_tax.parse(str(tax_file), format="turtle")
-    print(f"  {len(g_tax):,} triples\n")
+    g_core_rdflib: Graph | None = None
+    endpoint: str | None = None
 
-    # Pre-fetch node→taxon for Python joins (reused across queries)
-    print("Fetching DataNode→taxon pairs from taxonomy bundle ...")
-    node_to_taxon = sparql(g_tax, """
-        SELECT DISTINCT ?node ?species
-        WHERE {
-            ?node wp:organism ?species .
-            FILTER(?species != ncbi:33090)
-            FILTER(CONTAINS(STR(?node), "/DataNode/"))
-        }
-    """)
-    print(f"  {len(node_to_taxon):,} pairs\n")
+    if args.no_virtuoso:
+        # Slow fallback: rdflib for everything
+        core_files = sorted(args.bundles.glob("all-*.ttl"))
+        if not core_files:
+            print(f"[ERROR] No core bundle found in {args.bundles}")
+            return 1
+        print("[--no-virtuoso] Using rdflib for all queries (slow) ...")
+        g_core_rdflib = run_core_queries_rdflib(core_files[-1], args.out_dir)
+    else:
+        # Fast path: Virtuoso for core queries
+        try:
+            test = sparql_endpoint(args.endpoint,
+                                   "SELECT (COUNT(*) AS ?n) WHERE { ?s ?p ?o } LIMIT 1",
+                                   timeout=5)
+            print(f"✔ Virtuoso reachable at {args.endpoint}")
+        except Exception as e:
+            print(f"[ERROR] Cannot reach Virtuoso at {args.endpoint}: {e}")
+            print("  → Run with --no-virtuoso to use rdflib fallback (slow)")
+            return 1
+        endpoint = args.endpoint
+        print()
+        run_core_queries_virtuoso(args.endpoint, args.out_dir, graph=args.graph)
 
-    # ── Load core (large) ──────────────────────────────────────────────────
-    if args.skip_core:
-        existing = list(args.out_dir.glob("genes_per_pathway.csv"))
-        if existing:
-            print("[--skip-core] Core CSVs already present — skipping bundle load.")
-            print("  Re-running taxonomy-only queries and species join ...")
-            g_core = None
-        else:
-            args.skip_core = False
-
-    if not args.skip_core:
-        print(f"Loading core bundle (~300 MB, 1-2 min) ...")
-        g_core = Graph()
-        g_core.parse(str(core_file), format="turtle")
-        print(f"  {len(g_core):,} triples\n")
-
-        print("── Core queries ──────────────────────────────────────────────")
-        query_genes_per_pathway(g_core, args.out_dir)
-        query_metabolites_per_pathway(g_core, args.out_dir)
-        query_enzymes_per_pathway(g_core, args.out_dir)
-        query_conversions_per_pathway(g_core, args.out_dir)
-        query_interaction_types(g_core, args.out_dir)
-        query_pathway_titles(g_core, args.out_dir)
-
-    print("\n── Cross-graph queries (Python join) ─────────────────────────")
-    query_species_per_pathway(g_core, g_tax, args.out_dir)
-    query_per_species_metrics(g_core, g_tax, node_to_taxon, args.out_dir)
+    print()
+    run_taxonomy_queries(tax_file, args.out_dir,
+                         g_core_rdflib=g_core_rdflib,
+                         endpoint=endpoint,
+                         graph=args.graph)
 
     print(f"\n✔ All CSVs written to {args.out_dir}")
     print("  Open notebooks/plantmetwiki_figures.ipynb to generate figures.")
