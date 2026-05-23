@@ -79,7 +79,7 @@ def extract_taxonomy_map(root: ET.Element) -> dict[str, str]:
         identifier = xref.attrib.get("identifier")
         datasource = xref.attrib.get("dataSource")
 
-        if datasource == "NCBI Taxonomy" and identifier:
+        if datasource in ("NCBI Taxonomy", "NCBITaxon") and identifier:
             taxonomy[ann_id] = identifier
         elif datasource == "Taxonomy" and identifier:
             # TAX-XXXX is BioCyc's encoding of NCBI Taxonomy IDs
