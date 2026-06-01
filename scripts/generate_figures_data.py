@@ -173,50 +173,59 @@ def species_per_pathway(ep: str, out_dir: Path) -> pd.DataFrame:
 
 
 def per_species_nrs(ep: str, out_dir: Path) -> pd.DataFrame:
-    """Per-species counts: pathways, genes, enzymes, metabolites.
+    """Per-species counts: pathways, genes, enzymes.
 
-    Uses Virtuoso's native cross-graph join — no rdflib or Python merge needed.
+    Three separate simple queries joined in Python — much faster than a single
+    complex cross-graph OPTIONAL query, which times out on large datasets.
     """
-    print("Per-species metrics (cross-graph, may take ~1 min) ...")
-    return save(sparql(ep, f"""
-        SELECT ?species
-               (COUNT(DISTINCT ?pwID)    AS ?pathways)
-               (COUNT(DISTINCT ?gene)    AS ?genes)
-               (COUNT(DISTINCT ?protein) AS ?enzymes)
-               (COUNT(DISTINCT ?metab)   AS ?metabolites)
+    print("Per-species metrics (3 separate queries + Python join) ...")
+
+    # Q1: pathways per species
+    print("  pathways per species ...")
+    q_pw = sparql(ep, f"""
+        SELECT ?taxon ?species (COUNT(DISTINCT ?pw) AS ?pathways)
         WHERE {{
-            # Taxon label from NCBITaxon ontology
-            GRAPH <{G_NCBI}> {{
-                ?taxon rdfs:label ?species .
-            }}
-            # Species-annotated DataNode in taxonomy-extra
-            GRAPH <{G_TAX}> {{
-                ?node wp:organism ?taxon .
-                FILTER(?taxon != ncbi:33090)
-            }}
-            # DataNode membership in a pathway (core graph)
-            GRAPH <{G_PW}> {{
-                ?node dcterms:isPartOf ?pwID .
-                FILTER(CONTAINS(STR(?pwID), "/pathways/"))
-                OPTIONAL {{
-                    ?gene a wp:GeneProduct ;
-                          dcterms:isPartOf ?pwID ;
-                          wp:organism ?taxon .
-                }}
-                OPTIONAL {{
-                    ?protein a wp:Protein ;
-                             dcterms:isPartOf ?pwID ;
-                             wp:organism ?taxon .
-                }}
-                OPTIONAL {{
-                    ?metab a wp:Metabolite ;
-                           dcterms:isPartOf ?pwID .
-                }}
-            }}
+            GRAPH <{G_TAX}> {{ ?node wp:organism ?taxon . FILTER(?taxon != ncbi:33090) }}
+            GRAPH <{G_PW}>  {{ ?node dcterms:isPartOf ?pw .
+                               FILTER(CONTAINS(STR(?pw), "/pathways/")) }}
+            GRAPH <{G_NCBI}> {{ ?taxon rdfs:label ?species . }}
         }}
-        GROUP BY ?species
-        ORDER BY DESC(?pathways)
-    """, timeout=600), out_dir, "per_species_nrs.csv")
+        GROUP BY ?taxon ?species
+    """)
+    print(f"    {len(q_pw):,} species")
+
+    # Q2: genes per species (entity has wp:organism AND a wp:GeneProduct)
+    print("  genes per species ...")
+    q_genes = sparql(ep, f"""
+        SELECT ?taxon (COUNT(DISTINCT ?entity) AS ?genes)
+        WHERE {{
+            GRAPH <{G_TAX}> {{ ?entity wp:organism ?taxon . FILTER(?taxon != ncbi:33090) }}
+            GRAPH <{G_PW}>  {{ ?entity a wp:GeneProduct . }}
+        }}
+        GROUP BY ?taxon
+    """)
+
+    # Q3: enzymes per species
+    print("  enzymes per species ...")
+    q_enzymes = sparql(ep, f"""
+        SELECT ?taxon (COUNT(DISTINCT ?entity) AS ?enzymes)
+        WHERE {{
+            GRAPH <{G_TAX}> {{ ?entity wp:organism ?taxon . FILTER(?taxon != ncbi:33090) }}
+            GRAPH <{G_PW}>  {{ ?entity a wp:Protein . }}
+        }}
+        GROUP BY ?taxon
+    """)
+
+    # Join in Python
+    df = (q_pw
+          .merge(q_genes,   on="taxon", how="left")
+          .merge(q_enzymes, on="taxon", how="left")
+          .fillna(0))
+    for col in ("pathways", "genes", "enzymes"):
+        df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0).astype(int)
+    df = df.sort_values("pathways", ascending=False)
+
+    return save(df[["species", "pathways", "genes", "enzymes"]], out_dir, "per_species_nrs.csv")
 
 
 # ── CLI ───────────────────────────────────────────────────────────────────────

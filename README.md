@@ -302,6 +302,81 @@ http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-properties-extra
 
 ---
 
+## Generating publication figures
+
+Publication-quality figures are generated from Virtuoso via SPARQLWrapper — no local TTL files needed after the initial pipeline run.
+
+### Architecture
+
+```
+Virtuoso (graph/pathways + graph/gpml-taxonomy-extra + graph/ncbitaxon)
+    │
+    ▼  python scripts/generate_figures_data.py   (~30 sec)
+notebooks/figures/output/*.csv        ← committed to git
+    │
+    ▼  notebooks/plantmetwiki_figures.ipynb      (loads CSVs, no Virtuoso needed)
+notebooks/figures/output/*.pdf/.svg
+```
+
+### Step 1 — generate CSV data from Virtuoso
+
+```bash
+conda activate plantmetwiki-rdf
+
+# Full run (includes per-species metrics, ~5 min)
+python scripts/generate_figures_data.py
+
+# Skip the slower per-species query for quick iteration
+python scripts/generate_figures_data.py --skip-species
+
+# Custom endpoint
+python scripts/generate_figures_data.py --endpoint http://localhost:8890/sparql
+```
+
+CSVs are written to `notebooks/figures/output/` and committed to git so figures can be regenerated without a running Virtuoso instance.
+
+**Queries used:**
+
+| CSV | Graph(s) | What it captures |
+|---|---|---|
+| `genes_per_pathway.csv` | `graph/pathways` | GeneProduct count per pathway |
+| `metabolites_per_pathway.csv` | `graph/pathways` | Metabolite count per pathway |
+| `enzymes_per_pathway.csv` | `graph/pathways` | Protein count per pathway |
+| `conversions_per_pathway.csv` | `graph/pathways` | Conversion count per pathway |
+| `interaction_types.csv` | `graph/pathways` | All wp: interaction type counts |
+| `pathway_titles.csv` | `graph/pathways` | pwID → dc:title |
+| `species_per_pathway.csv` | `graph/pathways` + `graph/gpml-taxonomy-extra` | Unique species per pathway |
+| `per_species_nrs.csv` | all three graphs + `graph/ncbitaxon` | Pathways/genes/enzymes/metabolites per species, with NCBI labels |
+
+Note: pathway titles use `dc:title` (not `rdfs:label`) in this dataset.
+Species annotations are at the **DataNode level** in `graph/gpml-taxonomy-extra`, not at the pathway level — queries must join across named graphs.
+
+### Step 2 — generate figures
+
+```bash
+conda activate plantmetwiki-rdf
+jupyter notebook notebooks/plantmetwiki_figures.ipynb
+```
+
+The notebook reads the pre-computed CSVs and produces:
+- Overview bar chart (pathways, genes, metabolites, enzymes, interactions)
+- Cumulative coverage curves per content type
+- Interaction types panel
+- Species metrics stacked bar (top 50 species)
+- Scatter: genes vs metabolites per pathway
+
+### Reproducibility
+
+When the underlying data changes (new Zenodo release), regenerate the CSVs and commit them:
+
+```bash
+python scripts/generate_figures_data.py
+git add notebooks/figures/output/*.csv
+git commit -m "Update figure data for new release"
+```
+
+---
+
 ## Query development workflow
 
 SPARQL queries are developed interactively against the local TTL bundles before being deployed to the production endpoint and test repositories.
