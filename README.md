@@ -24,12 +24,13 @@ The plugin layers preserve PlantCyc-specific information while keeping the core 
 3.  Generate index        →  pathways.txt, reactions.txt
 4.  Core RDF              →  output/rdf/core/
 5.  Taxonomy extra        →  output/rdf/taxonomy-extra/
-6.  NCBI IRI mappings     →  output/bundles/ncbi_iri_mappings-*.ttl
-7.  Properties extra      →  output/rdf/properties-extra/
-8.  Bundle                →  output/bundles/all-*.ttl
-9.  VoID metadata         →  output/bundles/void-*.ttl
-10. Validate              →  pass/fail per bundle
-11. Upload to Zenodo      →  draft record
+6.  Properties extra      →  output/rdf/properties-extra/
+7.  Bundle                →  output/bundles/all-*.ttl
+8.  VoID metadata         →  output/bundles/void-*.ttl
+9.  Validate              →  pass/fail per bundle
+10. Upload to Zenodo      →  draft record
+
+NCBI Taxonomy labels are resolved at the SPARQL-endpoint side by loading the OBO Foundry `ncbitaxon.owl` (CC0) into a dedicated `graph/ncbitaxon` graph in Virtuoso — see the [Snorql-UI repo](https://github.com/pathway-lod/Snorql-UI) (`scripts/load-graphs/load-ncbitaxon.sh`). The pipeline emits OBO Foundry IRIs (`http://purl.obolibrary.org/obo/NCBITaxon_<id>`) that match those IRIs exactly, so a simple cross-graph join replaces the older OBO↔BioPortal `owl:sameAs` mapping.
 ```
 
 ---
@@ -134,45 +135,33 @@ Suggested Virtuoso graph: `http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-
 
 ---
 
-## 6. Generate NCBI IRI mappings
+## 6. Resolving NCBI Taxonomy labels (handled at the SPARQL endpoint)
 
-Our taxonomy-extra RDF uses OBO Foundry IRIs (`obo:NCBITaxon_3702`), while BioPortal uses a different namespace (`bioontology.org/ontology/NCBITAXON/3702`). This step generates a small TTL file with `owl:sameAs` and `skos:exactMatch` triples mapping every NCBI taxon ID that appears in our data to its BioPortal equivalent:
+The taxonomy-extra bundle emits OBO Foundry IRIs (`http://purl.obolibrary.org/obo/NCBITaxon_<id>`) which match the canonical IRIs used by the NCBITaxon ontology published by OBO Foundry. Label resolution and reasoning over the taxonomy are therefore done **at the SPARQL endpoint**, by loading the OBO Foundry release of NCBITaxon (CC0) into a dedicated named graph next to the pathway data.
 
-```bash
-python scripts/create_ncbi_iri_mappings.py
-```
+The loader script and instructions live in the Snorql-UI repository:
+- https://github.com/pathway-lod/Snorql-UI → `scripts/load-graphs/load-ncbitaxon.sh`
 
-Output: `output/bundles/ncbi_iri_mappings-<VERSION>.ttl` (~424 mapping pairs for PlantCyc 17.0.0).
-
-Load into Virtuoso as a named graph:
-```
-http://rdf-plantmetwiki.bioinformatics.nl/graph/ncbi-iri-mappings
-```
-
-This enables **federated SPARQL queries** against BioPortal's endpoint to retrieve taxon labels, ranks, and hierarchy without downloading the full NCBI Taxonomy ontology (~1 GB). Requires a free BioPortal API key — set `BIOPORTAL_API_KEY` in your `.env` file (see `.env.template`).
-
-Example federated query (run on Virtuoso after loading all graphs):
+Example cross-graph query (label lookup, no federation required):
 
 ```sparql
 PREFIX wp:   <http://vocabularies.wikipathways.org/wp#>
-PREFIX owl:  <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?node ?obo_taxon ?label
+SELECT ?taxon ?label (COUNT(DISTINCT ?pwy) AS ?n_pathways)
 WHERE {
   GRAPH <http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-taxonomy-extra> {
-      ?node wp:organism ?obo_taxon .
-      FILTER(?obo_taxon != <http://purl.obolibrary.org/obo/NCBITaxon_33090>)
+    ?pwy wp:organism ?taxon .
   }
-  GRAPH <http://rdf-plantmetwiki.bioinformatics.nl/graph/ncbi-iri-mappings> {
-      ?obo_taxon owl:sameAs ?bioportal_taxon .
-  }
-  SERVICE <https://sparql.bioontology.org/ontology/NCBITAXON?apikey=YOUR_KEY> {
-      ?bioportal_taxon rdfs:label ?label .
+  GRAPH <http://rdf-plantmetwiki.bioinformatics.nl/graph/ncbitaxon> {
+    ?taxon rdfs:label ?label .
   }
 }
-LIMIT 20
+GROUP BY ?taxon ?label
+ORDER BY DESC(?n_pathways)
 ```
+
+A previous version of the pipeline published OBO↔BioPortal `owl:sameAs` mappings to enable federated queries against BioPortal. That approach has been retired because (1) the OBO Foundry release is CC0 (BioPortal is not freely redistributable), (2) hosting NCBITaxon locally avoids a runtime federation dependency, and (3) the pathway IRIs already use the OBO Foundry IRI scheme, so no IRI mapping is needed.
 
 ---
 
@@ -235,7 +224,6 @@ python scripts/create_void_from_metadata.py \
   --core-rdf         output/bundles/all-${VERSION}.ttl \
   --taxonomy-extra   output/bundles/all_gpml_taxonomy_extra-${VERSION}.ttl \
   --properties-extra output/bundles/all_gpml_properties_extra-${VERSION}.ttl \
-  --ncbi-mappings    output/bundles/ncbi_iri_mappings-${VERSION}.ttl \
   --output           output/bundles/void-${VERSION}.ttl
 ```
 
