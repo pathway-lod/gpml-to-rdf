@@ -1,301 +1,238 @@
 #!/usr/bin/env python3
-"""Generate figure-ready CSVs from the PlantMetWiki RDF data.
+"""Generate figure-ready CSVs by querying the local Virtuoso instance.
 
-Strategy
---------
-- **Core queries** (per-pathway counts, interaction types, pathway titles):
-  SPARQLWrapper → local Virtuoso (fast, indexed).
-  Virtuoso must have the data loaded; it uses the same TTL files, so
-  reproducibility is preserved.
+All queries run via SPARQLWrapper against the PlantMetWiki named graphs.
+No local TTL files are required — Virtuoso must be running and loaded.
 
-- **Species queries** (taxonomy-extra bundle, ~4 MB):
-  rdflib on the local TTL file — fast because the bundle is small.
-  Cross-graph join between taxonomy-extra and core is done in Python.
-
-Why not rdflib for everything?
-  Loading the 309 MB core bundle into rdflib takes 2-3 min and queries
-  are unindexed; simple COUNT queries can take 10+ min. Virtuoso indexes
-  the same data and answers in seconds.
+Named graphs used:
+  graph/pathways              — core WikiPathways RDF
+  graph/gpml-taxonomy-extra   — per-DataNode species annotations
+  graph/ncbitaxon             — NCBITaxon ontology for label resolution
 
 Usage
 -----
     conda activate plantmetwiki-rdf
-
-    # Default: local Virtuoso at localhost:8890
-    python scripts/generate_figures_data.py
-
-    # Custom endpoint
+    python scripts/generate_figures_data.py                    # default localhost:8890
     python scripts/generate_figures_data.py --endpoint http://localhost:8890/sparql
-
-    # Named graph (if data is in a specific graph)
-    python scripts/generate_figures_data.py --graph http://rdf-plantmetwiki.bioinformatics.nl/graph/pathways
-
-    # Use rdflib fallback for core too (slow, no Virtuoso needed)
-    python scripts/generate_figures_data.py --no-virtuoso
+    python scripts/generate_figures_data.py --out-dir notebooks/figures/output
 """
 
 from __future__ import annotations
 
 import argparse
-import json
 from pathlib import Path
 
 import pandas as pd
-from rdflib import Graph
 from SPARQLWrapper import SPARQLWrapper, JSON
 
-# ── Prefixes ──────────────────────────────────────────────────────────────────
-PREFIXES = """
-PREFIX wp:      <http://vocabularies.wikipathways.org/wp#>
-PREFIX ncbi:    <http://purl.obolibrary.org/obo/NCBITaxon_>
-PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX dcterms: <http://purl.org/dc/terms/>
-"""
+# ── Named graph URIs ──────────────────────────────────────────────────────────
+G_PW   = "http://rdf-plantmetwiki.bioinformatics.nl/graph/pathways"
+G_TAX  = "http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-taxonomy-extra"
+G_NCBI = "http://rdf-plantmetwiki.bioinformatics.nl/graph/ncbitaxon"
 
-WP = "http://vocabularies.wikipathways.org/wp#"
-WP_INTERACTION = WP + "Interaction"
 DEFAULT_ENDPOINT = "http://localhost:8890/sparql"
 
-# ── SPARQL helpers ────────────────────────────────────────────────────────────
+WP             = "http://vocabularies.wikipathways.org/wp#"
+WP_INTERACTION = WP + "Interaction"
 
-def sparql_endpoint(endpoint: str, query: str,
-                    graph: str | None = None,
-                    timeout: int = 120) -> pd.DataFrame:
-    """Run a SELECT query against a Virtuoso SPARQL endpoint."""
+PREFIXES = f"""
+PREFIX wp:      <{WP}>
+PREFIX dc:      <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ncbi:    <http://purl.obolibrary.org/obo/NCBITaxon_>
+"""
+
+# ── SPARQL helper ─────────────────────────────────────────────────────────────
+
+def sparql(endpoint: str, query: str, timeout: int = 300) -> pd.DataFrame:
+    """Run a SELECT query against Virtuoso; return results as a DataFrame."""
     sw = SPARQLWrapper(endpoint)
     sw.setReturnFormat(JSON)
     sw.setTimeout(timeout)
-    if graph:
-        full_query = f"PREFIX wp: <{WP}>\n{PREFIXES}\n" \
-                     f"SELECT * WHERE {{ GRAPH <{graph}> {{ {query.strip().lstrip('SELECT').split('WHERE')[1]} }} }}"
-        # Simpler: just wrap with FROM NAMED
-        full_query = PREFIXES + f"\n{query.strip()}"
-        sw.addParameter("default-graph-uri", graph)
-    else:
-        full_query = PREFIXES + "\n" + query.strip()
-    sw.setQuery(full_query)
+    sw.setQuery(PREFIXES + "\n" + query.strip())
     results = sw.query().convert()
-    vars_ = results["head"]["vars"]
-    rows  = [{v: r.get(v, {}).get("value", "") for v in vars_}
-              for r in results["results"]["bindings"]]
+    vars_   = results["head"]["vars"]
+    rows    = [{v: r.get(v, {}).get("value", "") for v in vars_}
+               for r in results["results"]["bindings"]]
     return pd.DataFrame(rows, columns=vars_)
 
 
-def sparql_rdflib(g: Graph, query: str) -> pd.DataFrame:
-    """Run a SELECT query on an rdflib Graph."""
-    results = g.query(PREFIXES + query)
-    return pd.DataFrame(results, columns=[str(v) for v in results.vars])
-
-
-def save_csv(df: pd.DataFrame, out_dir: Path, name: str) -> pd.DataFrame:
+def save(df: pd.DataFrame, out_dir: Path, name: str) -> pd.DataFrame:
     path = out_dir / name
     df.to_csv(path, index=False)
     print(f"  ✔ {name}  ({len(df):,} rows)")
     return df
 
 
-# ── Core queries (Virtuoso) ───────────────────────────────────────────────────
+# ── Core pathway queries (graph/pathways) ────────────────────────────────────
+# All use dc:title — pathways do NOT have rdfs:label in this dataset.
 
-CORE_QUERIES = {
-    "genes_per_pathway.csv": """
-        SELECT ?pwID ?title (COUNT(DISTINCT ?entity) AS ?count)
-        WHERE {
-            ?entity a wp:GeneProduct ;
-                    dcterms:isPartOf ?pwID .
-            ?pwID rdfs:label ?title .
+def genes_per_pathway(ep: str, out_dir: Path) -> pd.DataFrame:
+    print("Genes per pathway ...")
+    return save(sparql(ep, f"""
+        SELECT ?pwID (STR(?titleLit) AS ?title) (COUNT(DISTINCT ?entity) AS ?count)
+        FROM <{G_PW}>
+        WHERE {{
+            ?entity a wp:GeneProduct ; dcterms:isPartOf ?pwID .
+            ?pwID dc:title ?titleLit .
             FILTER(CONTAINS(STR(?pwID), "/pathways/"))
-        }
-        GROUP BY ?pwID ?title
-        ORDER BY DESC(?count)
-    """,
-    "metabolites_per_pathway.csv": """
-        SELECT ?pwID ?title (COUNT(DISTINCT ?entity) AS ?count)
-        WHERE {
-            ?entity a wp:Metabolite ;
-                    dcterms:isPartOf ?pwID .
-            ?pwID rdfs:label ?title .
+        }}
+        GROUP BY ?pwID ?titleLit ORDER BY DESC(?count)
+    """), out_dir, "genes_per_pathway.csv")
+
+
+def metabolites_per_pathway(ep: str, out_dir: Path) -> pd.DataFrame:
+    print("Metabolites per pathway ...")
+    return save(sparql(ep, f"""
+        SELECT ?pwID (STR(?titleLit) AS ?title) (COUNT(DISTINCT ?entity) AS ?count)
+        FROM <{G_PW}>
+        WHERE {{
+            ?entity a wp:Metabolite ; dcterms:isPartOf ?pwID .
+            ?pwID dc:title ?titleLit .
             FILTER(CONTAINS(STR(?pwID), "/pathways/"))
-        }
-        GROUP BY ?pwID ?title
-        ORDER BY DESC(?count)
-    """,
-    "enzymes_per_pathway.csv": """
-        SELECT ?pwID ?title (COUNT(DISTINCT ?entity) AS ?count)
-        WHERE {
-            ?entity a wp:Protein ;
-                    dcterms:isPartOf ?pwID .
-            ?pwID rdfs:label ?title .
+        }}
+        GROUP BY ?pwID ?titleLit ORDER BY DESC(?count)
+    """), out_dir, "metabolites_per_pathway.csv")
+
+
+def enzymes_per_pathway(ep: str, out_dir: Path) -> pd.DataFrame:
+    print("Enzymes (Protein) per pathway ...")
+    return save(sparql(ep, f"""
+        SELECT ?pwID (STR(?titleLit) AS ?title) (COUNT(DISTINCT ?entity) AS ?count)
+        FROM <{G_PW}>
+        WHERE {{
+            ?entity a wp:Protein ; dcterms:isPartOf ?pwID .
+            ?pwID dc:title ?titleLit .
             FILTER(CONTAINS(STR(?pwID), "/pathways/"))
-        }
-        GROUP BY ?pwID ?title
-        ORDER BY DESC(?count)
-    """,
-    "conversions_per_pathway.csv": """
-        SELECT ?pwID ?title (COUNT(DISTINCT ?interaction) AS ?count)
-        WHERE {
-            ?interaction a wp:Conversion ;
-                         dcterms:isPartOf ?pwID .
-            ?pwID rdfs:label ?title .
+        }}
+        GROUP BY ?pwID ?titleLit ORDER BY DESC(?count)
+    """), out_dir, "enzymes_per_pathway.csv")
+
+
+def conversions_per_pathway(ep: str, out_dir: Path) -> pd.DataFrame:
+    print("Conversions per pathway ...")
+    return save(sparql(ep, f"""
+        SELECT ?pwID (STR(?titleLit) AS ?title) (COUNT(DISTINCT ?interaction) AS ?count)
+        FROM <{G_PW}>
+        WHERE {{
+            ?interaction a wp:Conversion ; dcterms:isPartOf ?pwID .
+            ?pwID dc:title ?titleLit .
             FILTER(CONTAINS(STR(?pwID), "/pathways/"))
-        }
-        GROUP BY ?pwID ?title
-        ORDER BY DESC(?count)
-    """,
-    "interaction_types.csv": """
+        }}
+        GROUP BY ?pwID ?titleLit ORDER BY DESC(?count)
+    """), out_dir, "conversions_per_pathway.csv")
+
+
+def interaction_types(ep: str, out_dir: Path) -> pd.DataFrame:
+    print("Interaction types ...")
+    return save(sparql(ep, f"""
         SELECT ?type (COUNT(DISTINCT ?interaction) AS ?n)
-        WHERE {
+        FROM <{G_PW}>
+        WHERE {{
             ?interaction a ?type .
-            FILTER(STRSTARTS(STR(?type),
-                   "http://vocabularies.wikipathways.org/wp#"))
-        }
-        GROUP BY ?type
-        ORDER BY DESC(?n)
-    """,
-    "pathway_titles.csv": """
-        SELECT DISTINCT ?pwID ?title
-        WHERE {
-            ?pwID a wp:Pathway ; rdfs:label ?title .
+            FILTER(STRSTARTS(STR(?type), "{WP}"))
+        }}
+        GROUP BY ?type ORDER BY DESC(?n)
+    """), out_dir, "interaction_types.csv")
+
+
+def pathway_titles(ep: str, out_dir: Path) -> pd.DataFrame:
+    print("Pathway titles ...")
+    return save(sparql(ep, f"""
+        SELECT DISTINCT ?pwID (STR(?titleLit) AS ?title)
+        FROM <{G_PW}>
+        WHERE {{
+            ?pwID a wp:Pathway ; dc:title ?titleLit .
             FILTER(CONTAINS(STR(?pwID), "/pathways/"))
-        }
-    """,
-}
+        }}
+    """), out_dir, "pathway_titles.csv")
 
 
-def run_core_queries_virtuoso(endpoint: str, out_dir: Path,
-                               graph: str | None = None) -> None:
-    """Run all core queries against Virtuoso and save CSVs."""
-    print(f"Querying Virtuoso at {endpoint} ...")
-    for name, query in CORE_QUERIES.items():
-        print(f"  {name} ...")
-        try:
-            df = sparql_endpoint(endpoint, query, graph=graph)
-            save_csv(df, out_dir, name)
-        except Exception as e:
-            print(f"  [ERROR] {name}: {e}")
+# ── Species queries (3-graph join via Virtuoso) ───────────────────────────────
+# Species are at the DataNode level in graph/gpml-taxonomy-extra.
+# Labels come from graph/ncbitaxon (OBO Foundry NCBITaxon ontology).
+
+def species_per_pathway(ep: str, out_dir: Path) -> pd.DataFrame:
+    """Count unique species per pathway via cross-graph SPARQL join."""
+    print("Species per pathway (3-graph join) ...")
+    return save(sparql(ep, f"""
+        SELECT ?pwID (COUNT(DISTINCT ?taxon) AS ?count)
+        WHERE {{
+            GRAPH <{G_TAX}> {{
+                ?node wp:organism ?taxon .
+                FILTER(?taxon != ncbi:33090)
+            }}
+            GRAPH <{G_PW}> {{
+                ?node dcterms:isPartOf ?pwID .
+                FILTER(CONTAINS(STR(?pwID), "/pathways/"))
+            }}
+        }}
+        GROUP BY ?pwID ORDER BY DESC(?count)
+    """), out_dir, "species_per_pathway.csv")
 
 
-def run_core_queries_rdflib(core_file: Path, out_dir: Path) -> Graph:
-    """Fallback: load core bundle into rdflib and run queries (slow)."""
-    print(f"Loading core bundle via rdflib (~2 min): {core_file.name} ...")
-    g = Graph()
-    g.parse(str(core_file), format="turtle")
-    print(f"  {len(g):,} triples loaded")
-    for name, query in CORE_QUERIES.items():
-        print(f"  {name} ...")
-        save_csv(sparql_rdflib(g, query), out_dir, name)
-    return g
+def per_species_nrs(ep: str, out_dir: Path) -> pd.DataFrame:
+    """Per-species counts: pathways, genes, enzymes, metabolites.
 
-
-# ── Taxonomy queries (rdflib, fast) ──────────────────────────────────────────
-
-def run_taxonomy_queries(tax_file: Path, out_dir: Path,
-                          g_core_rdflib: Graph | None = None,
-                          endpoint: str | None = None,
-                          graph: str | None = None) -> None:
-    """Species per pathway and per-species metrics.
-
-    Taxonomy bundle is small (~4 MB) → rdflib is fast.
-    Cross-graph join with core is done in Python.
+    Uses Virtuoso's native cross-graph join — no rdflib or Python merge needed.
     """
-    print(f"\nLoading taxonomy bundle (rdflib): {tax_file.name} ...")
-    g_tax = Graph()
-    g_tax.parse(str(tax_file), format="turtle")
-    print(f"  {len(g_tax):,} triples")
-
-    # Step 1: DataNode → taxon (from taxonomy bundle)
-    print("  DataNode → taxon pairs ...")
-    node_to_taxon = sparql_rdflib(g_tax, """
-        SELECT DISTINCT ?node ?species
-        WHERE {
-            ?node wp:organism ?species .
-            FILTER(?species != ncbi:33090)
-            FILTER(CONTAINS(STR(?node), "/DataNode/"))
-        }
-    """)
-    print(f"    {len(node_to_taxon):,} pairs")
-
-    # Step 2: entity → pathway + DataNode URI (from core)
-    print("  Entity → pathway + DataNode URI ...")
-    ep_query = """
-        SELECT DISTINCT ?entity ?pwID ?datanode
-        WHERE {
-            ?entity dcterms:isPartOf ?pwID ;
-                    wp:isAbout ?datanode .
-            FILTER(CONTAINS(STR(?pwID), "/pathways/"))
-            FILTER(CONTAINS(STR(?datanode), "/DataNode/"))
-        }
-    """
-    if endpoint:
-        entity_pathway = sparql_endpoint(endpoint, ep_query, graph=graph)
-    else:
-        entity_pathway = sparql_rdflib(g_core_rdflib, ep_query)
-    print(f"    {len(entity_pathway):,} entity→pathway pairs")
-
-    # Step 3: Python join → species per pathway
-    merged_sp = entity_pathway.merge(
-        node_to_taxon.rename(columns={"node": "datanode"}),
-        on="datanode", how="inner"
-    )
-    species_pw = (
-        merged_sp.groupby("pwID")["species"]
-        .nunique().reset_index()
-        .rename(columns={"species": "count"})
-        .sort_values("count", ascending=False)
-    )
-    save_csv(species_pw, out_dir, "species_per_pathway.csv")
-
-    # Step 4: per-species metrics
-    print("  Per-species metrics (Python join) ...")
-    nt_query = """
-        SELECT DISTINCT ?entity ?type ?datanode ?pwID
-        WHERE {
-            ?entity a ?type ;
-                    dcterms:isPartOf ?pwID ;
-                    wp:isAbout ?datanode .
-            FILTER(?type IN (wp:GeneProduct, wp:Protein, wp:Metabolite))
-            FILTER(CONTAINS(STR(?pwID), "/pathways/"))
-            FILTER(CONTAINS(STR(?datanode), "/DataNode/"))
-        }
-    """
-    if endpoint:
-        node_types = sparql_endpoint(endpoint, nt_query, graph=graph)
-    else:
-        node_types = sparql_rdflib(g_core_rdflib, nt_query)
-
-    joined = node_to_taxon.rename(columns={"node": "datanode"}).merge(
-        node_types, on="datanode", how="inner"
-    )
-    per_species = (
-        joined.groupby("species").agg(
-            pathways    = ("pwID",   "nunique"),
-            genes       = ("entity", lambda x: x[joined.loc[x.index, "type"] == WP + "GeneProduct"].nunique()),
-            enzymes     = ("entity", lambda x: x[joined.loc[x.index, "type"] == WP + "Protein"].nunique()),
-            metabolites = ("entity", lambda x: x[joined.loc[x.index, "type"] == WP + "Metabolite"].nunique()),
-        ).reset_index().sort_values("pathways", ascending=False)
-    )
-    per_species["species"] = per_species["species"].apply(
-        lambda x: str(x).split("/")[-1].replace("NCBITaxon_", "ncbi:")
-        if str(x).startswith("http") else x
-    )
-    save_csv(per_species, out_dir, "per_species_nrs.csv")
+    print("Per-species metrics (cross-graph, may take ~1 min) ...")
+    return save(sparql(ep, f"""
+        SELECT ?species
+               (COUNT(DISTINCT ?pwID)    AS ?pathways)
+               (COUNT(DISTINCT ?gene)    AS ?genes)
+               (COUNT(DISTINCT ?protein) AS ?enzymes)
+               (COUNT(DISTINCT ?metab)   AS ?metabolites)
+        WHERE {{
+            # Taxon label from NCBITaxon ontology
+            GRAPH <{G_NCBI}> {{
+                ?taxon rdfs:label ?species .
+            }}
+            # Species-annotated DataNode in taxonomy-extra
+            GRAPH <{G_TAX}> {{
+                ?node wp:organism ?taxon .
+                FILTER(?taxon != ncbi:33090)
+            }}
+            # DataNode membership in a pathway (core graph)
+            GRAPH <{G_PW}> {{
+                ?node dcterms:isPartOf ?pwID .
+                FILTER(CONTAINS(STR(?pwID), "/pathways/"))
+                OPTIONAL {{
+                    ?gene a wp:GeneProduct ;
+                          dcterms:isPartOf ?pwID ;
+                          wp:organism ?taxon .
+                }}
+                OPTIONAL {{
+                    ?protein a wp:Protein ;
+                             dcterms:isPartOf ?pwID ;
+                             wp:organism ?taxon .
+                }}
+                OPTIONAL {{
+                    ?metab a wp:Metabolite ;
+                           dcterms:isPartOf ?pwID .
+                }}
+            }}
+        }}
+        GROUP BY ?species
+        ORDER BY DESC(?pathways)
+    """, timeout=600), out_dir, "per_species_nrs.csv")
 
 
-# ── Main ──────────────────────────────────────────────────────────────────────
+# ── CLI ───────────────────────────────────────────────────────────────────────
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description=__doc__,
-                                formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--endpoint",    default=DEFAULT_ENDPOINT,
+    p = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    p.add_argument("--endpoint", default=DEFAULT_ENDPOINT,
                    help=f"Virtuoso SPARQL endpoint (default: {DEFAULT_ENDPOINT})")
-    p.add_argument("--graph",       default=None,
-                   help="Named graph URI to query (optional)")
-    p.add_argument("--bundles",     type=Path, default=Path("output/bundles"),
-                   help="Local TTL bundles directory (for taxonomy + rdflib fallback)")
-    p.add_argument("--out-dir",     type=Path,
+    p.add_argument("--out-dir", type=Path,
                    default=Path("notebooks/figures/output"),
                    help="Output directory for CSVs")
-    p.add_argument("--no-virtuoso", action="store_true",
-                   help="Use rdflib for all queries (slow, no Virtuoso needed)")
+    p.add_argument("--skip-species", action="store_true",
+                   help="Skip slow per-species metrics query")
     return p.parse_args()
 
 
@@ -303,47 +240,36 @@ def main() -> int:
     args = parse_args()
     args.out_dir.mkdir(parents=True, exist_ok=True)
 
-    # Auto-detect taxonomy bundle
-    tax_files = sorted(args.bundles.glob("all_gpml_taxonomy_extra-*.ttl"))
-    if not tax_files:
-        print(f"[ERROR] No taxonomy bundle found in {args.bundles}")
+    # Quick connectivity check
+    try:
+        test = sparql(args.endpoint,
+                      "SELECT (COUNT(*) AS ?n) WHERE { ?s ?p ?o } LIMIT 1",
+                      timeout=5)
+        print(f"✔ Virtuoso reachable at {args.endpoint}")
+    except Exception as e:
+        print(f"ERROR: Cannot reach Virtuoso at {args.endpoint}: {e}")
+        print("  Make sure Virtuoso is running: docker compose up -d virtuoso")
         return 1
-    tax_file = tax_files[-1]
 
-    print(f"Output: {args.out_dir}")
-    print(f"Taxonomy bundle: {tax_file.name} ({tax_file.stat().st_size/1e6:.1f} MB)\n")
+    print(f"Output: {args.out_dir}\n")
 
-    g_core_rdflib: Graph | None = None
-    endpoint: str | None = None
+    # ── Core pathway queries ──────────────────────────────────────────────────
+    print("── Core pathway queries ─────────────────────────────────────")
+    genes_per_pathway(args.endpoint, args.out_dir)
+    metabolites_per_pathway(args.endpoint, args.out_dir)
+    enzymes_per_pathway(args.endpoint, args.out_dir)
+    conversions_per_pathway(args.endpoint, args.out_dir)
+    interaction_types(args.endpoint, args.out_dir)
+    pathway_titles(args.endpoint, args.out_dir)
 
-    if args.no_virtuoso:
-        # Slow fallback: rdflib for everything
-        core_files = sorted(args.bundles.glob("all-*.ttl"))
-        if not core_files:
-            print(f"[ERROR] No core bundle found in {args.bundles}")
-            return 1
-        print("[--no-virtuoso] Using rdflib for all queries (slow) ...")
-        g_core_rdflib = run_core_queries_rdflib(core_files[-1], args.out_dir)
+    # ── Species queries ───────────────────────────────────────────────────────
+    print("\n── Species queries (multi-graph) ────────────────────────────")
+    species_per_pathway(args.endpoint, args.out_dir)
+
+    if not args.skip_species:
+        per_species_nrs(args.endpoint, args.out_dir)
     else:
-        # Fast path: Virtuoso for core queries
-        try:
-            test = sparql_endpoint(args.endpoint,
-                                   "SELECT (COUNT(*) AS ?n) WHERE { ?s ?p ?o } LIMIT 1",
-                                   timeout=5)
-            print(f"✔ Virtuoso reachable at {args.endpoint}")
-        except Exception as e:
-            print(f"[ERROR] Cannot reach Virtuoso at {args.endpoint}: {e}")
-            print("  → Run with --no-virtuoso to use rdflib fallback (slow)")
-            return 1
-        endpoint = args.endpoint
-        print()
-        run_core_queries_virtuoso(args.endpoint, args.out_dir, graph=args.graph)
-
-    print()
-    run_taxonomy_queries(tax_file, args.out_dir,
-                         g_core_rdflib=g_core_rdflib,
-                         endpoint=endpoint,
-                         graph=args.graph)
+        print("  [--skip-species] skipping per_species_nrs.csv")
 
     print(f"\n✔ All CSVs written to {args.out_dir}")
     print("  Open notebooks/plantmetwiki_figures.ipynb to generate figures.")
