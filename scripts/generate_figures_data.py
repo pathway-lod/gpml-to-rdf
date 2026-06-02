@@ -166,17 +166,14 @@ def annotation_summary(ep: str, out_dir: Path) -> pd.DataFrame:
         """)
         total = int(total_df["n"].iloc[0])
 
-        if entity_label in ("genes", "enzymes"):
-            ann_df = sparql(ep, f"""
-                SELECT (COUNT(DISTINCT ?e) AS ?n)
-                WHERE {{
-                    GRAPH <{G_TAX}> {{ ?e wp:organism ?t . FILTER(?t != ncbi:33090) }}
-                    GRAPH <{G_PW}>  {{ ?e a {wp_class} }}
-                }}
-            """)
-            annotated = int(ann_df["n"].iloc[0])
-        else:
-            annotated = 0
+        ann_df = sparql(ep, f"""
+            SELECT (COUNT(DISTINCT ?e) AS ?n)
+            WHERE {{
+                GRAPH <{G_TAX}> {{ ?e wp:organism ?t . FILTER(?t != ncbi:33090) }}
+                GRAPH <{G_PW}>  {{ ?e a {wp_class} }}
+            }}
+        """)
+        annotated = int(ann_df["n"].iloc[0])
 
         rows.append({"entity": entity_label, "total": total, "annotated": annotated})
         print(f"  {entity_label}: total={total:,}  annotated={annotated:,}")
