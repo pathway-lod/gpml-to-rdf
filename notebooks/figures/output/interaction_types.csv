@@ -1,0 +1,17 @@
+type,n
+http://vocabularies.wikipathways.org/wp#Interaction,54800
+http://vocabularies.wikipathways.org/wp#DirectedInteraction,44934
+http://vocabularies.wikipathways.org/wp#Conversion,19927
+http://vocabularies.wikipathways.org/wp#Catalysis,12359
+http://vocabularies.wikipathways.org/wp#DataNode,11138
+http://vocabularies.wikipathways.org/wp#TranscriptionTranslation,8280
+http://vocabularies.wikipathways.org/wp#PublicationReference,5722
+http://vocabularies.wikipathways.org/wp#Metabolite,4577
+http://vocabularies.wikipathways.org/wp#Protein,3750
+http://vocabularies.wikipathways.org/wp#Inhibition,3486
+http://vocabularies.wikipathways.org/wp#GeneProduct,2758
+http://vocabularies.wikipathways.org/wp#Pathway,2478
+http://vocabularies.wikipathways.org/wp#Stimulation,865
+http://vocabularies.wikipathways.org/wp#Complex,70
+http://vocabularies.wikipathways.org/wp#ComplexBinding,70
+http://vocabularies.wikipathways.org/wp#Binding,70

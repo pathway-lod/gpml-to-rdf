@@ -11,7 +11,9 @@ dependencies:
   - click
   - tqdm
   - pandas
+  - matplotlib
   - jupyter
   - wget
   - pip:
       - SPARQLWrapper
+      - adjustText
