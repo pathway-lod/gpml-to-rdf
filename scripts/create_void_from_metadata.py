@@ -109,8 +109,6 @@ def main() -> None:
     parser.add_argument("--core-rdf", required=True)
     parser.add_argument("--taxonomy-extra", required=True)
     parser.add_argument("--properties-extra", required=True)
-    parser.add_argument("--ncbi-mappings", default=None,
-                        help="Path to ncbi_iri_mappings-*.ttl (optional)")
     parser.add_argument("--output", required=True)
 
     args = parser.parse_args()
@@ -130,7 +128,6 @@ def main() -> None:
     core_dataset       = f"{base}/{version}/core"
     taxonomy_dataset   = f"{base}/{version}/taxonomy-extra"
     properties_dataset = f"{base}/{version}/properties-extra"
-    mappings_dataset   = f"{base}/{version}/ncbi-iri-mappings"
 
     lines = [
         "@prefix void:    <http://rdfs.org/ns/void#> .",
@@ -174,20 +171,10 @@ def main() -> None:
             f"    dcterms:hasVersion {ttl_literal(version)} ;",
             f"    pav:createdOn {ttl_literal(today)}^^xsd:date .",
             "",
-            f"{ttl_uri(mappings_dataset)} a void:Linkset ;",
-            f"    dcterms:title {ttl_literal('NCBI Taxonomy IRI mappings: OBO Foundry to BioPortal', 'en')} ;",
-            f"    dcterms:description {ttl_literal('owl:sameAs and skos:exactMatch triples mapping OBO Foundry NCBI Taxonomy IRIs (purl.obolibrary.org/obo/NCBITaxon_X) to BioPortal IRIs (purl.bioontology.org/ontology/NCBITAXON/X) for every taxon that appears in the taxonomy-extra dataset. Enables federated SPARQL queries against BioPortal.', 'en')} ;",
-            f"    void:subjectsTarget {ttl_uri('http://purl.obolibrary.org/obo/ncbitaxon.owl')} ;",
-            f"    void:objectsTarget  {ttl_uri('https://bioportal.bioontology.org/ontologies/NCBITAXON')} ;",
-            f"    void:linkPredicate  <http://www.w3.org/2002/07/owl#sameAs> ;",
-            f"    dcterms:isPartOf {ttl_uri(taxonomy_dataset)} ;",
-            f"    dcterms:hasVersion {ttl_literal(version)} ;",
-            f"    pav:createdOn {ttl_literal(today)}^^xsd:date .",
-            "",
         ]
     )
 
-    all_datasets = [core_dataset, taxonomy_dataset, properties_dataset, mappings_dataset]
+    all_datasets = [core_dataset, taxonomy_dataset, properties_dataset]
 
     if doi:
         source_uri = f"https://doi.org/{doi}"
@@ -217,8 +204,6 @@ def main() -> None:
     add_dataset_file_info(lines, core_dataset, Path(args.core_rdf))
     add_dataset_file_info(lines, taxonomy_dataset, Path(args.taxonomy_extra))
     add_dataset_file_info(lines, properties_dataset, Path(args.properties_extra))
-    if args.ncbi_mappings:
-        add_dataset_file_info(lines, mappings_dataset, Path(args.ncbi_mappings))
 
     Path(args.output).write_text("\n".join(lines), encoding="utf-8")
     print(f"Wrote VoID metadata: {args.output}")

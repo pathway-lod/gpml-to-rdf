@@ -10,6 +10,8 @@ from pathlib import Path
 NS = {"gpml": "http://pathvisio.org/GPML/2021"}
 
 PMW_BASE = "http://rdf-plantmetwiki.bioinformatics.nl"
+PMN_PATHWAY_BASE  = "https://pmn.plantcyc.org/pathway?orgid=PLANT&id="
+PMN_REACTION_BASE = "https://pmn.plantcyc.org/reaction?orgid=PLANT&id="
 
 
 def ttl_uri(uri: str) -> str:
@@ -63,11 +65,13 @@ def pathway_identifier_lines(subject_uri: str, prop: ET.Element) -> list[str]:
         return []
 
     plantcyc_uri = f"https://identifiers.org/plantcyc/{value}"
+    pmn_page_uri  = f"{PMN_PATHWAY_BASE}{value}"
 
     return [
         f"{ttl_uri(subject_uri)} pmw:plantcycId {ttl_literal(value)} ;",
         f"    dcterms:identifier {ttl_literal(value)} ;",
-        f"    dcterms:source {ttl_uri(plantcyc_uri)} .",
+        f"    dcterms:source {ttl_uri(plantcyc_uri)} ;",
+        f"    foaf:page {ttl_uri(pmn_page_uri)} .",
         "",
     ]
 
@@ -83,6 +87,7 @@ def write_properties_ttl(gpml_file: Path, out_file: Path) -> None:
     lines: list[str] = [
         "@prefix pmw: <http://rdf-plantmetwiki.bioinformatics.nl/vocab/> .",
         "@prefix dcterms: <http://purl.org/dc/terms/> .",
+        "@prefix foaf: <http://xmlns.com/foaf/0.1/> .",
         "",
     ]
 

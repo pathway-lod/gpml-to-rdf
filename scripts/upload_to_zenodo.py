@@ -122,7 +122,6 @@ def prepare_files(version: str, overwrite: bool = False) -> list[Path]:
         bundles / f"all-{version}.ttl",
         bundles / f"all_gpml_taxonomy_extra-{version}.ttl",
         bundles / f"all_gpml_properties_extra-{version}.ttl",
-        bundles / f"ncbi_iri_mappings-{version}.ttl",
         bundles / f"void-{version}.ttl",
     ]
 
@@ -145,7 +144,6 @@ def prepare_files(version: str, overwrite: bool = False) -> list[Path]:
             bundles / f"all_gpml_properties_extra-{version}.ttl.gz",
             overwrite,
         ),
-        bundles / f"ncbi_iri_mappings-{version}.ttl",
         bundles / f"void-{version}.ttl",
     ]
 
