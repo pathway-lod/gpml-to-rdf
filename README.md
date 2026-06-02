@@ -154,7 +154,7 @@ This enables **federated SPARQL queries** against BioPortal's endpoint to retrie
 Example federated query (run on Virtuoso after loading all graphs):
 
 ```sparql
-PREFIX wp:   <http://vocabularies.wikipathways.org/wp#>
+PREFIX wp:   <wp#>
 PREFIX owl:  <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
@@ -173,6 +173,8 @@ WHERE {
 }
 LIMIT 20
 ```
+
+> **Note:** `wp:` is the WikiPathways vocabulary (`http://vocabularies.wikipathways.org/wp#`).
 
 ---
 
