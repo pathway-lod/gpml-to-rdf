@@ -144,6 +144,46 @@ def pathway_titles(ep: str, out_dir: Path) -> pd.DataFrame:
     """), out_dir, "pathway_titles.csv")
 
 
+def annotation_summary(ep: str, out_dir: Path) -> pd.DataFrame:
+    """For each major entity type: total distinct nodes vs directly species-annotated nodes.
+
+    'Directly annotated' means the entity itself carries wp:organism in
+    graph/gpml-taxonomy-extra (only genes and enzymes in PlantCyc).
+    Metabolites have no direct wp:organism triple — their count in the
+    'annotated' column is 0 by definition.
+    """
+    print("Annotation summary (total vs species-annotated per entity type) ...")
+    rows = []
+    for entity_label, wp_class in [
+        ("genes",       "wp:GeneProduct"),
+        ("enzymes",     "wp:Protein"),
+        ("metabolites", "wp:Metabolite"),
+    ]:
+        total_df = sparql(ep, f"""
+            SELECT (COUNT(DISTINCT ?e) AS ?n)
+            FROM <{G_PW}>
+            WHERE {{ ?e a {wp_class} }}
+        """)
+        total = int(total_df["n"].iloc[0])
+
+        if entity_label in ("genes", "enzymes"):
+            ann_df = sparql(ep, f"""
+                SELECT (COUNT(DISTINCT ?e) AS ?n)
+                WHERE {{
+                    GRAPH <{G_TAX}> {{ ?e wp:organism ?t . FILTER(?t != ncbi:33090) }}
+                    GRAPH <{G_PW}>  {{ ?e a {wp_class} }}
+                }}
+            """)
+            annotated = int(ann_df["n"].iloc[0])
+        else:
+            annotated = 0
+
+        rows.append({"entity": entity_label, "total": total, "annotated": annotated})
+        print(f"  {entity_label}: total={total:,}  annotated={annotated:,}")
+
+    return save(pd.DataFrame(rows), out_dir, "annotation_summary.csv")
+
+
 # ── Species queries (3-graph join via Virtuoso) ───────────────────────────────
 # Species are at the DataNode level in graph/gpml-taxonomy-extra.
 # Labels come from graph/ncbitaxon (OBO Foundry NCBITaxon ontology).
@@ -325,6 +365,7 @@ def main() -> int:
     conversions_per_pathway(args.endpoint, args.out_dir)
     interaction_types(args.endpoint, args.out_dir)
     pathway_titles(args.endpoint, args.out_dir)
+    annotation_summary(args.endpoint, args.out_dir)
 
     # ── Species queries ───────────────────────────────────────────────────────
     print("\n── Species queries (multi-graph) ────────────────────────────")
