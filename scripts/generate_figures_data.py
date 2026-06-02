@@ -74,9 +74,8 @@ def genes_per_pathway(ep: str, out_dir: Path) -> pd.DataFrame:
         SELECT ?pwID (STR(?titleLit) AS ?title) (COUNT(DISTINCT ?entity) AS ?count)
         FROM <{G_PW}>
         WHERE {{
+            ?pwID a wp:Pathway ; dc:title ?titleLit .
             ?entity a wp:GeneProduct ; dcterms:isPartOf ?pwID .
-            ?pwID dc:title ?titleLit .
-            FILTER(CONTAINS(STR(?pwID), "/pathways/"))
         }}
         GROUP BY ?pwID ?titleLit ORDER BY DESC(?count)
     """), out_dir, "genes_per_pathway.csv")
@@ -88,9 +87,8 @@ def metabolites_per_pathway(ep: str, out_dir: Path) -> pd.DataFrame:
         SELECT ?pwID (STR(?titleLit) AS ?title) (COUNT(DISTINCT ?entity) AS ?count)
         FROM <{G_PW}>
         WHERE {{
+            ?pwID a wp:Pathway ; dc:title ?titleLit .
             ?entity a wp:Metabolite ; dcterms:isPartOf ?pwID .
-            ?pwID dc:title ?titleLit .
-            FILTER(CONTAINS(STR(?pwID), "/pathways/"))
         }}
         GROUP BY ?pwID ?titleLit ORDER BY DESC(?count)
     """), out_dir, "metabolites_per_pathway.csv")
@@ -102,9 +100,8 @@ def enzymes_per_pathway(ep: str, out_dir: Path) -> pd.DataFrame:
         SELECT ?pwID (STR(?titleLit) AS ?title) (COUNT(DISTINCT ?entity) AS ?count)
         FROM <{G_PW}>
         WHERE {{
+            ?pwID a wp:Pathway ; dc:title ?titleLit .
             ?entity a wp:Protein ; dcterms:isPartOf ?pwID .
-            ?pwID dc:title ?titleLit .
-            FILTER(CONTAINS(STR(?pwID), "/pathways/"))
         }}
         GROUP BY ?pwID ?titleLit ORDER BY DESC(?count)
     """), out_dir, "enzymes_per_pathway.csv")
@@ -116,9 +113,8 @@ def conversions_per_pathway(ep: str, out_dir: Path) -> pd.DataFrame:
         SELECT ?pwID (STR(?titleLit) AS ?title) (COUNT(DISTINCT ?interaction) AS ?count)
         FROM <{G_PW}>
         WHERE {{
+            ?pwID a wp:Pathway ; dc:title ?titleLit .
             ?interaction a wp:Conversion ; dcterms:isPartOf ?pwID .
-            ?pwID dc:title ?titleLit .
-            FILTER(CONTAINS(STR(?pwID), "/pathways/"))
         }}
         GROUP BY ?pwID ?titleLit ORDER BY DESC(?count)
     """), out_dir, "conversions_per_pathway.csv")
@@ -144,7 +140,6 @@ def pathway_titles(ep: str, out_dir: Path) -> pd.DataFrame:
         FROM <{G_PW}>
         WHERE {{
             ?pwID a wp:Pathway ; dc:title ?titleLit .
-            FILTER(CONTAINS(STR(?pwID), "/pathways/"))
         }}
     """), out_dir, "pathway_titles.csv")
 
@@ -165,7 +160,7 @@ def species_per_pathway(ep: str, out_dir: Path) -> pd.DataFrame:
             }}
             GRAPH <{G_PW}> {{
                 ?node dcterms:isPartOf ?pwID .
-                FILTER(CONTAINS(STR(?pwID), "/pathways/"))
+                ?pwID a wp:Pathway .
             }}
         }}
         GROUP BY ?pwID ORDER BY DESC(?count)
