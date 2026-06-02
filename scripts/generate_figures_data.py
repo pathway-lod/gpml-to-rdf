@@ -168,29 +168,35 @@ def species_per_pathway(ep: str, out_dir: Path) -> pd.DataFrame:
 
 
 def per_species_nrs(ep: str, out_dir: Path) -> pd.DataFrame:
-    """Per-species counts: pathways, genes, enzymes.
+    """Per-species counts: pathways, genes, enzymes + indirect metabolites/conversions/publications.
 
-    Three separate simple queries joined in Python — much faster than a single
-    complex cross-graph OPTIONAL query, which times out on large datasets.
+    Two annotation strategies:
+      DIRECT  — wp:organism on the entity itself (only genes/proteins in PlantCyc)
+      INDIRECT — via pathway co-occurrence: if a gene of species X is in pathway P,
+                 then all metabolites, conversions, and publications in P are
+                 attributed to species X.
+
+    Six queries joined in Python (each simple enough not to time out).
     """
-    print("Per-species metrics (3 separate queries + Python join) ...")
+    print("Per-species metrics (direct + indirect, 6 queries + Python join) ...")
 
-    # Q1: pathways per species
-    print("  pathways per species ...")
+    # ── Direct annotations ────────────────────────────────────────────────────
+
+    # Q1: pathways per species (direct: gene/protein node in pathway)
+    print("  pathways per species (direct) ...")
     q_pw = sparql(ep, f"""
         SELECT ?taxon ?species (COUNT(DISTINCT ?pw) AS ?pathways)
         WHERE {{
-            GRAPH <{G_TAX}> {{ ?node wp:organism ?taxon . FILTER(?taxon != ncbi:33090) }}
-            GRAPH <{G_PW}>  {{ ?node dcterms:isPartOf ?pw .
-                               FILTER(CONTAINS(STR(?pw), "/pathways/")) }}
+            GRAPH <{G_TAX}>  {{ ?node wp:organism ?taxon . FILTER(?taxon != ncbi:33090) }}
+            GRAPH <{G_PW}>   {{ ?node dcterms:isPartOf ?pw . ?pw a wp:Pathway . }}
             GRAPH <{G_NCBI}> {{ ?taxon rdfs:label ?species . }}
         }}
         GROUP BY ?taxon ?species
     """)
     print(f"    {len(q_pw):,} species")
 
-    # Q2: genes per species (entity has wp:organism AND a wp:GeneProduct)
-    print("  genes per species ...")
+    # Q2: genes per species (direct)
+    print("  genes per species (direct) ...")
     q_genes = sparql(ep, f"""
         SELECT ?taxon (COUNT(DISTINCT ?entity) AS ?genes)
         WHERE {{
@@ -200,8 +206,8 @@ def per_species_nrs(ep: str, out_dir: Path) -> pd.DataFrame:
         GROUP BY ?taxon
     """)
 
-    # Q3: enzymes per species
-    print("  enzymes per species ...")
+    # Q3: enzymes per species (direct)
+    print("  enzymes per species (direct) ...")
     q_enzymes = sparql(ep, f"""
         SELECT ?taxon (COUNT(DISTINCT ?entity) AS ?enzymes)
         WHERE {{
@@ -211,16 +217,70 @@ def per_species_nrs(ep: str, out_dir: Path) -> pd.DataFrame:
         GROUP BY ?taxon
     """)
 
-    # Join in Python
+    # ── Indirect annotations via shared pathway ───────────────────────────────
+    # Strategy: species X has gene G in pathway P → count entities in P.
+    # Biologically: if Arabidopsis enzymes appear in flavone biosynthesis,
+    # the flavones (metabolites) and reactions (conversions) in that pathway
+    # are "Arabidopsis-relevant" in this resource.
+
+    # Q4: metabolites per species (indirect via pathway)
+    print("  metabolites per species (indirect via shared pathway) ...")
+    q_metabolites = sparql(ep, f"""
+        SELECT ?taxon (COUNT(DISTINCT ?metabolite) AS ?metabolites)
+        WHERE {{
+            GRAPH <{G_TAX}> {{ ?geneNode wp:organism ?taxon . FILTER(?taxon != ncbi:33090) }}
+            GRAPH <{G_PW}>  {{
+                ?geneNode dcterms:isPartOf ?pw . ?pw a wp:Pathway .
+                ?metabolite a wp:Metabolite ; dcterms:isPartOf ?pw .
+            }}
+        }}
+        GROUP BY ?taxon
+    """)
+
+    # Q5: conversions per species (indirect via pathway)
+    print("  conversions per species (indirect via shared pathway) ...")
+    q_conversions = sparql(ep, f"""
+        SELECT ?taxon (COUNT(DISTINCT ?conversion) AS ?conversions)
+        WHERE {{
+            GRAPH <{G_TAX}> {{ ?geneNode wp:organism ?taxon . FILTER(?taxon != ncbi:33090) }}
+            GRAPH <{G_PW}>  {{
+                ?geneNode dcterms:isPartOf ?pw . ?pw a wp:Pathway .
+                ?conversion a wp:Conversion ; dcterms:isPartOf ?pw .
+            }}
+        }}
+        GROUP BY ?taxon
+    """)
+
+    # Q6: publications per species (indirect via pathway references)
+    print("  publications per species (indirect via pathway references) ...")
+    q_pubs = sparql(ep, f"""
+        PREFIX cito: <http://purl.org/spar/cito/>
+        SELECT ?taxon (COUNT(DISTINCT ?pub) AS ?publications)
+        WHERE {{
+            GRAPH <{G_TAX}> {{ ?geneNode wp:organism ?taxon . FILTER(?taxon != ncbi:33090) }}
+            GRAPH <{G_PW}>  {{
+                ?geneNode dcterms:isPartOf ?pw . ?pw a wp:Pathway .
+                ?pw (dcterms:references | cito:cites) ?pub .
+            }}
+        }}
+        GROUP BY ?taxon
+    """)
+
+    # ── Join all results in Python ────────────────────────────────────────────
     df = (q_pw
-          .merge(q_genes,   on="taxon", how="left")
-          .merge(q_enzymes, on="taxon", how="left")
+          .merge(q_genes,       on="taxon", how="left")
+          .merge(q_enzymes,     on="taxon", how="left")
+          .merge(q_metabolites, on="taxon", how="left")
+          .merge(q_conversions, on="taxon", how="left")
+          .merge(q_pubs,        on="taxon", how="left")
           .fillna(0))
-    for col in ("pathways", "genes", "enzymes"):
+    for col in ("pathways", "genes", "enzymes", "metabolites", "conversions", "publications"):
         df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0).astype(int)
     df = df.sort_values("pathways", ascending=False)
 
-    return save(df[["species", "pathways", "genes", "enzymes"]], out_dir, "per_species_nrs.csv")
+    return save(df[["species", "pathways", "genes", "enzymes",
+                     "metabolites", "conversions", "publications"]],
+                out_dir, "per_species_nrs.csv")
 
 
 # ── CLI ───────────────────────────────────────────────────────────────────────

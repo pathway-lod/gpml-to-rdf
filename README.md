@@ -351,6 +351,36 @@ CSVs are written to `notebooks/figures/output/` and committed to git so figures 
 Note: pathway titles use `dc:title` (not `rdfs:label`) in this dataset.
 Species annotations are at the **DataNode level** in `graph/gpml-taxonomy-extra`, not at the pathway level — queries must join across named graphs.
 
+### Species annotation model and indirect metrics
+
+**Why only genes and enzymes have direct species tags:**
+`wp:organism` annotations exist only on GeneProduct and Protein entities, derived from PlantCyc's `proteins.dat` SPECIES field. Metabolites, conversions (biochemical reactions), and publications have no direct species annotation — they represent shared biochemistry that occurs across organisms.
+
+**Extended figure strategy — indirect association via shared pathway:**
+
+```
+species X → gene G (wp:organism ncbi:3702 in graph/gpml-taxonomy-extra)
+                │
+                ▼ gene G is in pathway P (dcterms:isPartOf in graph/pathways)
+pathway P also contains:
+    metabolites M   → attributed to species X (pathway co-occurrence)
+    conversions C   → attributed to species X (pathway co-occurrence)
+    publications R  → attributed to species X (pathway references)
+```
+
+This is biologically sound: if *Arabidopsis thaliana* has annotated enzymes in the flavone biosynthesis pathway, the flavones (metabolites) and biochemical steps (conversions) in that pathway are Arabidopsis-relevant in this resource. Publications are the papers supporting the pathway where Arabidopsis genes appear.
+
+The `per_species_nrs.csv` captures all six metrics per species:
+
+| Column | Annotation | Strategy |
+|---|---|---|
+| `genes` | GeneProduct entities | Direct `wp:organism` |
+| `enzymes` | Protein entities | Direct `wp:organism` |
+| `metabolites` | Metabolite entities in shared pathways | Indirect via pathway |
+| `conversions` | Conversion interactions in shared pathways | Indirect via pathway |
+| `publications` | Pathway references for shared pathways | Indirect via pathway |
+| `pathways` | Distinct pathways containing annotated genes | Cross-graph join |
+
 ### Step 2 — generate figures
 
 ```bash
