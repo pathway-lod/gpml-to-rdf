@@ -188,8 +188,17 @@ def main() -> None:
             lines.append(f"{ttl_uri(ds)} pav:derivedFrom {ttl_uri(concept_uri)} .")
         lines.append("")
 
-    if record_url:
-        lines.append(f"{ttl_uri(core_dataset)} foaf:page {ttl_uri(record_url)} .")
+    # foaf:page on every dataset → concept DOI landing page on Zenodo.
+    # Use the concept DOI so the link always resolves to the latest version.
+    if conceptdoi:
+        concept_page = f"https://doi.org/{conceptdoi}"
+        for ds in all_datasets:
+            lines.append(f"{ttl_uri(ds)} foaf:page {ttl_uri(concept_page)} .")
+        lines.append("")
+    elif record_url:
+        # Fallback: specific-version record URL (less preferred than concept DOI)
+        for ds in all_datasets:
+            lines.append(f"{ttl_uri(ds)} foaf:page {ttl_uri(record_url)} .")
         lines.append("")
 
     # dcterms:issued = date the RDF was generated (today), not the GPML input date.
