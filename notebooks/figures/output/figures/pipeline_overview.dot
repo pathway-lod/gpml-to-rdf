@@ -65,21 +65,10 @@ https://plantmetwiki.bioinformatics.nl" fillcolor=white shape=box style="filled,
 github.com/pathway-lod/SPARQLQueries
 customizable via Snorql-UI settings" fillcolor=white shape=note style=filled]
 		tutorials [label="Tutorial pages
-Step-by-step SPARQL
-federated queries" fillcolor=white shape=note style=filled]
+Step-by-step SPARQL · federated queries" fillcolor=white shape=note style=filled]
 		notebooks [label="Jupyter notebooks
 4,577 metabolites (4,111 with InChIKey)
 Figures · Cross-species inference · Federated queries" fillcolor=white shape=note style=filled]
-	}
-	{
-		rank=same
-		validate
-		snorql
-	}
-	{
-		rank=same
-		sparql
-		notebooks
 	}
 	plantcyc -> validate
 	validate -> cyc2wiki [label="5 ERRORs skipped"]
@@ -99,9 +88,9 @@ Figures · Cross-species inference · Federated queries" fillcolor=white shape=n
 	g_propextra -> sparql
 	g_bgc -> sparql
 	g_ncbi -> sparql
-	sparql -> snorql [constraint=false]
-	sparql -> notebooks [constraint=false]
-	snorql -> sparql_examples [label="loads from GitHub" constraint=false style=dashed]
-	snorql -> tutorials [constraint=false style=dashed]
-	wikidata_src -> notebooks [label="federated SPARQL" constraint=false style=dashed]
+	sparql -> snorql
+	sparql -> notebooks
+	snorql -> sparql_examples [label="loads from GitHub" style=dashed]
+	snorql -> tutorials [style=dashed]
+	wikidata_src -> notebooks [label="federated SPARQL" style=dashed]
 }
