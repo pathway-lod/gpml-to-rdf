@@ -254,8 +254,9 @@ def main() -> int:
     )
     all_passed &= result("properties-extra bundle (size + patterns)", errors)
 
-    errors = validate_prefix_uniqueness(properties_bundle)
-    all_passed &= result("properties-extra bundle (prefix uniqueness)", errors)
+    if properties_bundle.exists():
+        errors = validate_prefix_uniqueness(properties_bundle)
+        all_passed &= result("properties-extra bundle (prefix uniqueness)", errors)
 
     # Core bundle — large, use size + pattern scan
     errors = validate_large_bundle(
@@ -268,8 +269,9 @@ def main() -> int:
     )
     all_passed &= result("core bundle (size + patterns)", errors)
 
-    errors = validate_prefix_uniqueness(core_bundle)
-    all_passed &= result("core bundle (prefix uniqueness)", errors)
+    if core_bundle.exists():
+        errors = validate_prefix_uniqueness(core_bundle)
+        all_passed &= result("core bundle (prefix uniqueness)", errors)
 
     # VoID — small, full RDFlib parse
     errors = validate_void(void_file)
