@@ -162,7 +162,7 @@ def main() -> None:
             "",
             f"{ttl_uri(taxonomy_dataset)} a void:Dataset ;",
             f"    dcterms:title {ttl_literal('PlantMetWiki taxonomy extra RDF derived from ' + title, 'en')} ;",
-            f"    dcterms:description {ttl_literal('Extra RDF layer adding Viridiplantae pathway/reaction annotations and specific NCBI Taxonomy annotations for GeneProduct and Protein nodes. Taxon IRIs use the OBO Foundry NCBITaxon namespace (purl.obolibrary.org/obo/NCBITaxon_). A data-driven MIREOT subset of the full NCBITaxon release (containing all taxa present in this dataset and their complete ancestor lineages) is generated with ROBOT extract and loaded into the local SPARQL endpoint.', 'en')} ;",
+            f"    dcterms:description {ttl_literal('Extra RDF layer adding Viridiplantae pathway/reaction annotations and specific NCBI Taxonomy annotations for GeneProduct and Protein nodes. Taxon IRIs use the OBO Foundry NCBITaxon namespace (purl.obolibrary.org/obo/NCBITaxon_).', 'en')} ;",
             f"    dcterms:isPartOf {ttl_uri(core_dataset)} ;",
             f"    dcterms:hasVersion {ttl_literal(version)} ;",
             f"    dcterms:references {ttl_uri('http://purl.obolibrary.org/obo/ncbitaxon.owl')} ;",
