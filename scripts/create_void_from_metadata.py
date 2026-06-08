@@ -141,6 +141,33 @@ def main() -> None:
 
     add_pmn_license_document(lines)
 
+    # Source GPML dataset — the Zenodo record that was used as input.
+    # Recording this as a void:Dataset makes the provenance navigable: anyone
+    # loading this VoID can follow the DOI to find the exact GPML release.
+    if doi:
+        source_uri = f"https://doi.org/{doi}"
+        lines.extend(
+            [
+                f"{ttl_uri(source_uri)} a void:Dataset ;",
+                f"    dcterms:title {ttl_literal(title, 'en')} ;",
+                f"    dcterms:identifier {ttl_literal(doi)} ;",
+                f"    dcterms:hasVersion {ttl_literal(version)} ;",
+                f"    foaf:page {ttl_uri(source_uri)} .",
+                "",
+            ]
+        )
+    if conceptdoi and conceptdoi != doi:
+        concept_uri = f"https://doi.org/{conceptdoi}"
+        lines.extend(
+            [
+                f"{ttl_uri(concept_uri)} a void:Dataset ;",
+                f"    dcterms:title {ttl_literal(title + ' (concept DOI — always resolves to latest release)', 'en')} ;",
+                f"    dcterms:identifier {ttl_literal(conceptdoi)} ;",
+                f"    foaf:page {ttl_uri(concept_uri)} .",
+                "",
+            ]
+        )
+
     lines.extend(
         [
             f"{ttl_uri(core_dataset)} a void:Dataset ;",

@@ -83,6 +83,26 @@ groovy scripts/createReactionfiles.groovy
 
 Output: `input/gpml/renamed/pathways/PC1.gpml … PC1162.gpml` and `input/gpml/renamed/reactions/RC1.gpml … RC1316.gpml`.
 
+**Reproducibility check** — verify that the renamed files match the downloaded version before proceeding:
+
+```bash
+python -c "
+import json, re, xml.etree.ElementTree as ET
+meta = json.load(open('build/zenodo_gpml_metadata.json'))
+gpml_ver = ET.parse('input/gpml/renamed/pathways/PC1.gpml').getroot().get('version', 'NOT FOUND')
+# GPML version format: 17.0.0_YYYYMMDD-HHMMSS — extract the embedded date for comparison
+m = re.match(r'\d+\.\d+\.\d+_(\d{4})(\d{2})(\d{2})', gpml_ver)
+gpml_date = f'{m.group(1)}-{m.group(2)}-{m.group(3)}' if m else 'unparseable'
+pub_date = meta.get('publication_date', '')
+status = 'OK — dates match' if gpml_date == pub_date else 'MISMATCH — renamed files may be from a different release, re-run Groovy scripts'
+print(f'Zenodo release : {meta[\"version\"]}  (DOI: {meta[\"doi\"]},  published: {pub_date})')
+print(f'GPML file ver  : {gpml_ver}  (date extracted: {gpml_date})')
+print(status)
+"
+```
+
+If the output shows `MISMATCH`, the renamed files are stale — re-run the Groovy steps above before continuing.
+
 ---
 
 ## 3. Generate index files
@@ -120,8 +140,13 @@ Adds `wp:organism` triples at pathway and DataNode level:
 - Species-specific NCBI taxon IDs on GeneProduct, Protein, and Metabolite nodes where GPML contains `<AnnotationRef>` taxonomy annotations
 
 ```bash
-python scripts/create_gpml_taxonomy_extra_rdf.py
+VERSION=$(python -c 'import json; print(json.load(open("build/zenodo_gpml_metadata.json"))["version"])')
+
+python scripts/create_gpml_taxonomy_extra_rdf.py \
+  --aggregate-file output/bundles/all_gpml_taxonomy_extra-${VERSION}.ttl
 ```
+
+The `--aggregate-file` flag is required to get the correct versioned output name — the script default is hardcoded to an older name.
 
 Output: `output/rdf/taxonomy-extra/` and `output/bundles/all_gpml_taxonomy_extra-<VERSION>.ttl`.
 
@@ -170,8 +195,13 @@ A previous version of the pipeline published OBO↔BioPortal `owl:sameAs` mappin
 Preserves all `<Property key="" value="">` elements from Pathway, DataNode, and Interaction elements as `pmw:gpmlProperty` blank nodes:
 
 ```bash
-python scripts/create_gpml_properties_extra_rdf.py
+VERSION=$(python -c 'import json; print(json.load(open("build/zenodo_gpml_metadata.json"))["version"])')
+
+python scripts/create_gpml_properties_extra_rdf.py \
+  --aggregate-file output/bundles/all_gpml_properties_extra-${VERSION}.ttl
 ```
+
+The `--aggregate-file` flag is required to get the correct versioned output name — the script default is hardcoded to an older name.
 
 Output: `output/rdf/properties-extra/` and `output/bundles/all_gpml_properties_extra-<VERSION>.ttl`.
 
@@ -216,7 +246,7 @@ rapper -i turtle -t -q output/bundles/all-${VERSION}.ttl > /dev/null
 
 ---
 
-## 10. Create VoID metadata
+## 9. Create VoID metadata
 
 ```bash
 VERSION=$(python -c 'import json; print(json.load(open("build/zenodo_gpml_metadata.json"))["version"])')
@@ -230,7 +260,7 @@ python scripts/create_void_from_metadata.py \
 
 ---
 
-## 11. Validate RDF bundles
+## 10. Validate RDF bundles
 
 Run before uploading to Zenodo. Checks individual TTL files, bundle sizes, expected predicates, and the VoID file:
 
@@ -246,7 +276,7 @@ python scripts/validate_rdf.py --skip-individual
 
 ---
 
-## 12. Upload to Zenodo
+## 11. Upload to Zenodo
 
 ### Option A — local upload
 

@@ -5,6 +5,7 @@ import java.util.HashMap
 
 import java.nio.file.Path
 import java.nio.file.Files
+import java.nio.file.StandardCopyOption
 
 import static groovy.io.FileType.FILES
 
@@ -25,5 +26,5 @@ files.each { file ->
   println file.name + " -> ${wpid}"
   source = new File(file.path)
   target = new File("input/gpml/renamed/pathways/${wpid}.gpml")
-  Files.copy(source.toPath(), target.toPath())
+  Files.copy(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING)
 }
