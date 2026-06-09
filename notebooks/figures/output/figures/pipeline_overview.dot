@@ -1,10 +1,10 @@
 // PlantMetWiki data transformation pipeline
 digraph PlantMetWiki_pipeline {
-	bgcolor=white fontname=Helvetica fontsize=11 nodesep=0.6 rankdir=TB ranksep=0.8 splines=ortho
-	node [fontname=Helvetica fontsize=10 margin="0.15,0.10"]
-	edge [color="#555555" fontname=Helvetica fontsize=9]
+	bgcolor=white fontname=Arial fontsize=11 nodesep=0.5 rankdir=TB ranksep=0.7
+	node [fontname=Arial fontsize=10 margin="0.15,0.10"]
+	edge [color="#555555" fontname=Arial fontsize=9]
 	subgraph cluster_source {
-		color="#2980b9" fillcolor="#dbe9f4" fontcolor="#2980b9" fontsize=11 label="Source data" penwidth=1.5 style="filled,rounded"
+		color="#2980b9" fillcolor="#dbe9f4" fontcolor="#2980b9" fontname=Arial fontsize=11 label="Source data" penwidth=1.5 style="filled,rounded"
 		plantcyc [label="PlantCyc 17.0
 1,162 pathways · 1,316 reactions
 455 ORG-IDs → 439 NCBI taxa" fillcolor=white shape=cylinder style=filled]
@@ -18,58 +18,66 @@ CC0 licence" fillcolor=white shape=cylinder style=filled]
 (federated via InChIKey)" fillcolor=white shape=cylinder style=filled]
 	}
 	subgraph cluster_tools {
-		color="#e67e22" fillcolor="#fef3cd" fontcolor="#e67e22" fontsize=11 label="Pipeline tools" penwidth=1.5 style="filled,rounded"
+		color="#e67e22" fillcolor="#fef3cd" fontcolor="#e67e22" fontname=Arial fontsize=11 label="Pipeline tools" penwidth=1.5 style="filled,rounded"
 		validate [label="validate_plantcyc_input.py
-5 ERRORs (taxonomy skipped)
-2 WARNINGs" fillcolor=white shape=diamond style=filled]
-		cyc2wiki [label="Cyc_to_wiki · build_pathways.py
+5 ERRORs (skipped) · 2 WARNINGs" fillcolor=white shape=diamond style=filled]
+		cyc2wiki [label="Cyc_to_wiki + build_pathways.py
 2,478 GPML2021 files
 8,259 GeneProduct · 10,715 Protein
 23,449 Metabolite · 34,273 interactions" fillcolor=white shape=box style="filled,rounded"]
 		xsd_val [label="test_gpml_files.py
 GPML2021 XSD validation
-✓ 0 errors" fillcolor=white shape=box style="filled,rounded"]
-		gpml2rdf [label="gpml-to-rdf
-gpml2rdf-4.0.4.jar + Python scripts
-Core · Taxonomy · Properties RDF" fillcolor=white shape=box style="filled,rounded"]
+0 errors" fillcolor=white shape=box style="filled,rounded"]
+		gpml2rdf [label="gpml-to-rdf  (Java + Python scripts)
+gpml2rdf-4.0.4.jar · taxonomy extra · properties extra
+Core 3,826,567 + Tax 30,176 + Prop 2,617,839 triples" fillcolor=white shape=box style="filled,rounded"]
+		rdf_validate [label="validate_rdf.py
+0 errors · 6,474,582 triples verified" fillcolor=white shape=diamond style=filled]
+		load_ncbi [label="load-ncbitaxon.sh --subset plantmetwiki
+ROBOT v1.9.6  extract --method MIREOT
+424 seed taxa + ancestors  →  17,707 triples
+1.4 MB  (full release: 1,800 MB)" fillcolor=white shape=box style="filled,rounded"]
 		map2rdf [label="map-to-rdf
-199 BGC-pathway crosslinks
-13,450 triples" fillcolor=white shape=box style="filled,rounded"]
-		load_ncbi [label="load-ncbitaxon.sh
-OBO Foundry NCBITaxon" fillcolor=white shape=box style="filled,rounded"]
+199 BGC-pathway crosslinks · 13,450 triples" fillcolor=white shape=box style="filled,rounded"]
 	}
 	subgraph cluster_virtuoso {
-		color="#27ae60" fillcolor="#d5f5e3" fontcolor="#27ae60" fontsize=11 label="Virtuoso 7.2  —  28,207,418 total triples" penwidth=1.5 style="filled,rounded"
+		color="#27ae60" fillcolor="#d5f5e3" fontcolor="#27ae60" fontname=Arial fontsize=11 label="Virtuoso 7.2  —  6,505,863 total triples  (6 named graphs)" penwidth=1.5 style="filled,rounded"
 		g_pathways [label="graph/pathways
 3,826,567 triples" fillcolor=white shape=tab style=filled]
 		g_taxextra [label="graph/gpml-taxonomy-extra
 30,176 triples
-425/439 taxa (96%)" fillcolor=white shape=tab style=filled]
+425/439 taxa · 6 absent from OBO Foundry" fillcolor=white shape=tab style=filled]
 		g_propextra [label="graph/gpml-properties-extra
 2,617,839 triples" fillcolor=white shape=tab style=filled]
 		g_bgc [label="graph/bgc-*
 13,450 triples" fillcolor=white shape=tab style=filled]
 		g_ncbi [label="graph/ncbitaxon
-21,719,262 triples" fillcolor=white shape=tab style=filled]
+17,707 triples
+MIREOT subset  v2026-05-13" fillcolor=white shape=tab style=filled]
 		sparql [label="SPARQL endpoint
 https://sparql-plantmetwiki.bioinformatics.nl" fillcolor=white shape=component style=filled]
 	}
 	subgraph cluster_access {
-		color="#8e44ad" fillcolor="#e8daef" fontcolor="#8e44ad" fontsize=11 label="Access & results" penwidth=1.5 style="filled,rounded"
+		color="#8e44ad" fillcolor="#e8daef" fontcolor="#8e44ad" fontname=Arial fontsize=11 label="Access & results" penwidth=1.5 style="filled,rounded"
 		snorql [label="Snorql-UI
 https://plantmetwiki.bioinformatics.nl" fillcolor=white shape=box style="filled,rounded"]
+		sparql_examples [label="SPARQL query examples
+github.com/pathway-lod/SPARQLQueries
+customizable via Snorql-UI settings" fillcolor=white shape=note style=filled]
+		tutorials [label="Tutorial pages
+Step-by-step SPARQL · federated queries" fillcolor=white shape=note style=filled]
 		notebooks [label="Jupyter notebooks
 4,577 metabolites (4,111 with InChIKey)
-Figures · Cross-species inference
-Federated queries" fillcolor=white shape=note style=filled]
+Figures · Cross-species inference · Federated queries" fillcolor=white shape=note style=filled]
 	}
 	plantcyc -> validate
-	validate -> cyc2wiki [label="  5 ERRORs skipped"]
-	cyc2wiki -> xsd_val [label="  2,478 GPML files"]
-	xsd_val -> gpml2rdf [label="  ✓ XSD pass"]
-	gpml2rdf -> g_pathways
-	gpml2rdf -> g_taxextra
-	gpml2rdf -> g_propextra
+	validate -> cyc2wiki [label="5 ERRORs skipped"]
+	cyc2wiki -> xsd_val [label="2,478 GPML files"]
+	xsd_val -> gpml2rdf [label="XSD pass"]
+	gpml2rdf -> rdf_validate [label="TTL output"]
+	rdf_validate -> g_pathways [label="0 errors"]
+	rdf_validate -> g_taxextra
+	rdf_validate -> g_propextra
 	mibig -> map2rdf
 	plantismash -> map2rdf
 	map2rdf -> g_bgc
@@ -82,6 +90,7 @@ Federated queries" fillcolor=white shape=note style=filled]
 	g_ncbi -> sparql
 	sparql -> snorql
 	sparql -> notebooks
-	wikidata_src -> notebooks [label="  federated
-  SPARQL" style=dashed]
+	snorql -> sparql_examples [label="loads from GitHub" style=dashed]
+	snorql -> tutorials [style=dashed]
+	wikidata_src -> notebooks [label="federated SPARQL" style=dashed]
 }
