@@ -1,0 +1,226 @@
+source,bgc_label,gene_id,pw_id,pw_title
+plantiSMASH,#cluster-11,AT1G62800,PC1002,"C4 photosynthetic carbon assimilation cycle, PEPCK type"
+plantiSMASH,#cluster-12,AT1G62960,PC1002,"C4 photosynthetic carbon assimilation cycle, PEPCK type"
+plantiSMASH,#cluster-12,AT1G62960,PC1015,L-phenylalanine degradation III
+plantiSMASH,#cluster-24,AT2G29740,PC1026,eupatolitin 3-O-glucoside biosynthesis
+plantiSMASH,#cluster-24,AT2G29750,PC1026,eupatolitin 3-O-glucoside biosynthesis
+plantiSMASH,#cluster-10,AT1G60440,PC1036,phosphopantothenate biosynthesis I
+plantiSMASH,#cluster-4,AT1G24100,PC1048,glucosinolate biosynthesis from homomethionine
+plantiSMASH,#cluster-14,AT1G65860,PC1048,glucosinolate biosynthesis from homomethionine
+plantiSMASH,#cluster-16,AT1G73370,PC1056,sucrose degradation II (sucrose synthase)
+plantiSMASH,#cluster-57,AT5G42600,PC1079,marneral biosynthesis
+plantiSMASH,#cluster-14,AT1G65880,PC1086,"benzoate biosynthesis I (CoA-dependent, β-oxidative)"
+plantiSMASH,#cluster-17,AT1G78500,PC1093,oleanolate biosynthesis
+plantiSMASH,#cluster-21,AT2G24210,PC1113,superpathway of oleoresin turpentine biosynthesis
+plantiSMASH,#cluster-52,AT5G23960,PC1113,superpathway of oleoresin turpentine biosynthesis
+plantiSMASH,#cluster-17,AT1G78500,PC1125,ginsenosides biosynthesis
+plantiSMASH,#cluster-52,AT5G23960,PC1137,zerumbone biosynthesis
+plantiSMASH,#cluster-31,AT3G13730,PC113,superpathway of C28 brassinosteroid biosynthesis
+plantiSMASH,#cluster-4,AT1G24100,PC1144,glucosinolate biosynthesis from dihomomethionine
+plantiSMASH,#cluster-14,AT1G65860,PC1144,glucosinolate biosynthesis from dihomomethionine
+plantiSMASH,#cluster-11,AT1G62800,PC1147,superpathway of L-threonine biosynthesis
+plantiSMASH,#cluster-12,AT1G62960,PC1147,superpathway of L-threonine biosynthesis
+plantiSMASH,#cluster-38,AT3G45130,PC1155,cholesterol biosynthesis I
+plantiSMASH,#cluster-3,AT1G23820,PC1158,spermidine biosynthesis I
+plantiSMASH,#cluster-15,AT1G70310,PC1158,spermidine biosynthesis I
+plantiSMASH,#cluster-47,AT4G16700,PC1160,superpathway of phospholipid biosynthesis II (plants)
+plantiSMASH,#cluster-3,AT1G23820,PC130,L-methionine salvage cycle I (bacteria and plants)
+plantiSMASH,#cluster-15,AT1G70310,PC130,L-methionine salvage cycle I (bacteria and plants)
+plantiSMASH,#cluster-3,AT1G23740,PC132,detoxification of reactive carbonyls in chloroplasts
+plantiSMASH,#cluster-21,AT2G24190,PC132,detoxification of reactive carbonyls in chloroplasts
+plantiSMASH,#cluster-25,AT2G31750,PC146,superpathway of indole-3-acetate conjugate biosynthesis
+plantiSMASH,#cluster-19,AT2G22990,PC150,sinapate ester biosynthesis
+plantiSMASH,#cluster-24,AT2G29730,PC152,rutin biosynthesis
+plantiSMASH,#cluster-24,AT2G29740,PC152,rutin biosynthesis
+plantiSMASH,#cluster-46,AT4G15280,PC152,rutin biosynthesis
+plantiSMASH,#cluster-51,AT5G17030,PC152,rutin biosynthesis
+plantiSMASH,#cluster-46,AT4G15340,PC169,"(3E)-4,8-dimethylnona-1,3,7-triene biosynthesis II"
+plantiSMASH,#cluster-17,AT1G78500,PC173,"avenacin biosynthesis, initial reactions"
+plantiSMASH,#cluster-34,AT3G29200,PC180,superpathway of L-phenylalanine and L-tyrosine biosynthesis
+plantiSMASH,#cluster-21,AT2G24190,PC184,traumatin and (Z)-3-hexen-1-yl acetate biosynthesis
+plantiSMASH,#cluster-49,AT4G20870,PC203,sphingolipid biosynthesis (plants)
+plantiSMASH,#cluster-12,AT1G62940,PC219,sporopollenin precursors biosynthesis
+plantiSMASH,#cluster-47,AT4G16760,PC22,"fatty acid β-oxidation V (unsaturated, odd number, di-isomerase-dependent)"
+plantiSMASH,#cluster-4,AT1G24100,PC233,glucosinolate biosynthesis from tetrahomomethionine
+plantiSMASH,#cluster-14,AT1G65860,PC233,glucosinolate biosynthesis from tetrahomomethionine
+plantiSMASH,#cluster-17,AT1G78500,PC241,superpathway of avenacin A biosynthesis
+plantiSMASH,#cluster-34,AT3G29200,PC246,L-phenylalanine biosynthesis II
+plantiSMASH,#cluster-1,AT1G02050,PC247,resveratrol biosynthesis
+plantiSMASH,#cluster-52,AT5G23980,PC254,iron reduction and absorption
+plantiSMASH,#cluster-17,AT1G78580,PC25,trehalose biosynthesis I
+plantiSMASH,#cluster-17,AT1G78510,PC260,polyisoprenoid biosynthesis
+plantiSMASH,#cluster-10,AT1G60440,PC264,superpathway of coenzyme A biosynthesis II (plants)
+plantiSMASH,#cluster-10,AT1G60440,PC275,superpathway of pantothenate and coenzymeA biosynthesis
+plantiSMASH,#cluster-21,AT2G24210,PC279,perillyl aldehyde biosynthesis
+plantiSMASH,#cluster-24,AT2G29730,PC332,superpathway of flavones and derivatives biosynthesis
+plantiSMASH,#cluster-24,AT2G29740,PC332,superpathway of flavones and derivatives biosynthesis
+plantiSMASH,#cluster-24,AT2G29750,PC332,superpathway of flavones and derivatives biosynthesis
+plantiSMASH,#cluster-46,AT4G15280,PC332,superpathway of flavones and derivatives biosynthesis
+plantiSMASH,#cluster-51,AT5G17030,PC332,superpathway of flavones and derivatives biosynthesis
+plantiSMASH,#cluster-1,AT1G02050,PC348,olivetol biosynthesis
+plantiSMASH,#cluster-8,AT1G49430,PC350,long-chain fatty acid activation
+plantiSMASH,#cluster-12,AT1G62940,PC350,long-chain fatty acid activation
+plantiSMASH,#cluster-24,AT2G29730,PC356,quercetin glucoside biosynthesis (Allium)
+plantiSMASH,#cluster-24,AT2G29740,PC356,quercetin glucoside biosynthesis (Allium)
+plantiSMASH,#cluster-24,AT2G29750,PC356,quercetin glucoside biosynthesis (Allium)
+plantiSMASH,#cluster-46,AT4G15280,PC356,quercetin glucoside biosynthesis (Allium)
+plantiSMASH,#cluster-51,AT5G17030,PC356,quercetin glucoside biosynthesis (Allium)
+plantiSMASH,#cluster-16,AT1G73370,PC360,superpathway of anaerobic sucrose degradation
+plantiSMASH,#cluster-6,AT1G30520,PC382,"2-carboxy-1,4-naphthoquinol biosynthesis"
+plantiSMASH,#cluster-38,AT3G45130,PC387,lanosterol biosynthesis
+plantiSMASH,#cluster-10,AT1G60440,PC412,phosphopantothenate biosynthesis II
+plantiSMASH,#cluster-4,AT1G24100,PC414,glucosinolate biosynthesis from pentahomomethionine
+plantiSMASH,#cluster-14,AT1G65860,PC414,glucosinolate biosynthesis from pentahomomethionine
+plantiSMASH,#cluster-24,AT2G29730,PC420,flavonol acylglucoside biosynthesis III-quercetin derivatives
+plantiSMASH,#cluster-24,AT2G29740,PC420,flavonol acylglucoside biosynthesis III-quercetin derivatives
+plantiSMASH,#cluster-46,AT4G15280,PC420,flavonol acylglucoside biosynthesis III-quercetin derivatives
+plantiSMASH,#cluster-51,AT5G17030,PC420,flavonol acylglucoside biosynthesis III-quercetin derivatives
+plantiSMASH,#cluster-47,AT4G16740,PC437,farnesene biosynthesis
+plantiSMASH,#cluster-17,AT1G78500,PC439,mangrove triterpenoid biosynthesis
+plantiSMASH,#cluster-24,AT2G29690,PC445,L-tryptophan biosynthesis
+plantiSMASH,#cluster-24,AT2G29730,PC446,quercetin triglucoside biosynthesis
+plantiSMASH,#cluster-24,AT2G29740,PC446,quercetin triglucoside biosynthesis
+plantiSMASH,#cluster-46,AT4G15280,PC446,quercetin triglucoside biosynthesis
+plantiSMASH,#cluster-51,AT5G17030,PC446,quercetin triglucoside biosynthesis
+plantiSMASH,#cluster-4,AT1G24100,PC450,glucosinolate biosynthesis from hexahomomethionine
+plantiSMASH,#cluster-14,AT1G65860,PC450,glucosinolate biosynthesis from hexahomomethionine
+plantiSMASH,#cluster-24,AT2G29730,PC50,superpathway of flavones and derivatives biosynthesis
+plantiSMASH,#cluster-24,AT2G29740,PC50,superpathway of flavones and derivatives biosynthesis
+plantiSMASH,#cluster-24,AT2G29750,PC50,superpathway of flavones and derivatives biosynthesis
+plantiSMASH,#cluster-46,AT4G15280,PC50,superpathway of flavones and derivatives biosynthesis
+plantiSMASH,#cluster-51,AT5G17030,PC50,superpathway of flavones and derivatives biosynthesis
+plantiSMASH,#cluster-6,AT1G30520,PC512,"1,4-dihydroxy-2-naphthoate biosynthesis II (plants)"
+plantiSMASH,#cluster-16,AT1G73370,PC526,UDP-glucose biosynthesis (from sucrose)
+plantiSMASH,#cluster-4,AT1G24100,PC53,glucosinolate biosynthesis from trihomomethionine
+plantiSMASH,#cluster-14,AT1G65860,PC53,glucosinolate biosynthesis from trihomomethionine
+plantiSMASH,#cluster-31,AT3G13730,PC561,brassinolide biosynthesis II
+plantiSMASH,#cluster-21,AT2G24210,PC566,(4R)-carvone biosynthesis
+plantiSMASH,#cluster-3,AT1G23820,PC607,superpathway of polyamine biosynthesis
+plantiSMASH,#cluster-15,AT1G70310,PC607,superpathway of polyamine biosynthesis
+plantiSMASH,#cluster-17,AT1G78510,PC634,taxadiene biosynthesis (engineered)
+plantiSMASH,#cluster-35,AT3G29430,PC634,taxadiene biosynthesis (engineered)
+plantiSMASH,#cluster-37,AT3G32040,PC634,taxadiene biosynthesis (engineered)
+plantiSMASH,#cluster-11,AT1G62800,PC645,superpathway of L-isoleucine biosynthesis I
+plantiSMASH,#cluster-12,AT1G62960,PC645,superpathway of L-isoleucine biosynthesis I
+plantiSMASH,#cluster-24,AT2G29690,PC65,acridone alkaloid biosynthesis
+plantiSMASH,#cluster-42,AT3G57050,PC664,homocysteine and cysteine interconversion
+plantiSMASH,#cluster-50,AT4G23600,PC664,homocysteine and cysteine interconversion
+plantiSMASH,#cluster-17,AT1G78440,PC666,gibberellin inactivation I (2β-hydroxylation)
+plantiSMASH,#cluster-28,AT2G44490,PC674,indole glucosinolate activation (herbivore attack)
+plantiSMASH,#cluster-24,AT2G29730,PC675,quercetin glycoside biosynthesis (Arabidopsis)
+plantiSMASH,#cluster-24,AT2G29740,PC675,quercetin glycoside biosynthesis (Arabidopsis)
+plantiSMASH,#cluster-24,AT2G29750,PC675,quercetin glycoside biosynthesis (Arabidopsis)
+plantiSMASH,#cluster-46,AT4G15280,PC675,quercetin glycoside biosynthesis (Arabidopsis)
+plantiSMASH,#cluster-51,AT5G17030,PC675,quercetin glycoside biosynthesis (Arabidopsis)
+plantiSMASH,#cluster-17,AT1G78500,PC677,avenacin A-1 biosynthesis
+plantiSMASH,#cluster-18,AT2G11810,PC686,galactolipid biosynthesis I
+plantiSMASH,#cluster-17,AT1G78500,PC68,glycyrrhetinate biosynthesis
+plantiSMASH,#cluster-17,AT1G78510,PC691,geranylgeranyl pyrophosphate biosynthesis
+plantiSMASH,#cluster-35,AT3G29430,PC691,geranylgeranyl pyrophosphate biosynthesis
+plantiSMASH,#cluster-37,AT3G32040,PC691,geranylgeranyl pyrophosphate biosynthesis
+plantiSMASH,#cluster-21,AT2G24210,PC704,oleoresin monoterpene volatiles biosynthesis
+plantiSMASH,#cluster-15,AT1G70560,PC715,indole-3-acetate biosynthesis I
+plantiSMASH,#cluster-17,AT1G78510,PC716,nonaprenyl pyrophosphate biosynthesis II
+plantiSMASH,#cluster-6,AT1G30520,PC721,superpathway of phylloquinol biosynthesis
+plantiSMASH,#cluster-17,AT1G78510,PC721,superpathway of phylloquinol biosynthesis
+plantiSMASH,#cluster-35,AT3G29430,PC721,superpathway of phylloquinol biosynthesis
+plantiSMASH,#cluster-37,AT3G32040,PC721,superpathway of phylloquinol biosynthesis
+plantiSMASH,#cluster-4,AT1G24100,PC722,glucosinolate biosynthesis from tryptophan
+plantiSMASH,#cluster-63,AT5G57220,PC722,glucosinolate biosynthesis from tryptophan
+plantiSMASH,#cluster-8,AT1G49430,PC72,wax esters biosynthesis II
+plantiSMASH,#cluster-12,AT1G62940,PC72,wax esters biosynthesis II
+plantiSMASH,#cluster-8,AT1G49430,PC736,palmitate biosynthesis II (type II fatty acid synthase)
+plantiSMASH,#cluster-17,AT1G78510,PC743,superpathway of geranylgeranyl pyrophosphate biosynthesis II (via MEP)
+plantiSMASH,#cluster-35,AT3G29430,PC743,superpathway of geranylgeranyl pyrophosphate biosynthesis II (via MEP)
+plantiSMASH,#cluster-37,AT3G32040,PC743,superpathway of geranylgeranyl pyrophosphate biosynthesis II (via MEP)
+plantiSMASH,#cluster-21,AT2G24210,PC769,menthol biosynthesis
+plantiSMASH,#cluster-28,AT2G44490,PC778,indole glucosinolate activation (intact plant cell)
+plantiSMASH,#cluster-63,AT5G57220,PC778,indole glucosinolate activation (intact plant cell)
+plantiSMASH,#cluster-52,AT5G23960,PC781,β-caryophyllene biosynthesis
+plantiSMASH,#cluster-60,AT5G47990,PC800,thalianol and derivatives biosynthesis
+plantiSMASH,#cluster-60,AT5G48000,PC800,thalianol and derivatives biosynthesis
+plantiSMASH,#cluster-60,AT5G48010,PC800,thalianol and derivatives biosynthesis
+plantiSMASH,#cluster-21,AT2G24210,PC812,monoterpene biosynthesis
+plantiSMASH,#cluster-47,AT4G16740,PC812,monoterpene biosynthesis
+plantiSMASH,#cluster-17,AT1G78510,PC835,superpathway of geranylgeranylpyrophosphate biosynthesis I (via mevalonate)
+plantiSMASH,#cluster-35,AT3G29430,PC835,superpathway of geranylgeranylpyrophosphate biosynthesis I (via mevalonate)
+plantiSMASH,#cluster-37,AT3G32040,PC835,superpathway of geranylgeranylpyrophosphate biosynthesis I (via mevalonate)
+plantiSMASH,#cluster-8,AT1G49430,PC838,superpathway of fatty acid biosynthesis II (plant)
+plantiSMASH,#cluster-21,AT2G24210,PC855,fenchol biosynthesis II
+plantiSMASH,#cluster-31,AT3G13730,PC858,brassinolide biosynthesis I
+plantiSMASH,#cluster-17,AT1G78510,PC859,plaunotol biosynthesis
+plantiSMASH,#cluster-35,AT3G29430,PC859,plaunotol biosynthesis
+plantiSMASH,#cluster-37,AT3G32040,PC859,plaunotol biosynthesis
+plantiSMASH,#cluster-25,AT2G31750,PC86,indole-3-acetate inactivation IX
+plantiSMASH,#cluster-24,AT2G29730,PC870,flavonol glucosylation I
+plantiSMASH,#cluster-24,AT2G29740,PC870,flavonol glucosylation I
+plantiSMASH,#cluster-46,AT4G15280,PC870,flavonol glucosylation I
+plantiSMASH,#cluster-51,AT5G17030,PC870,flavonol glucosylation I
+plantiSMASH,#cluster-8,AT1G49430,PC877,alkane biosynthesis II
+plantiSMASH,#cluster-12,AT1G62940,PC877,alkane biosynthesis II
+plantiSMASH,#cluster-46,AT4G15370,PC888,baruol biosynthesis
+plantiSMASH,#cluster-34,AT3G29200,PC896,L-tyrosine biosynthesis II
+plantiSMASH,#cluster-24,AT2G29730,PC900,quercetin gentiotetraside biosynthesis
+plantiSMASH,#cluster-24,AT2G29740,PC900,quercetin gentiotetraside biosynthesis
+plantiSMASH,#cluster-46,AT4G15280,PC900,quercetin gentiotetraside biosynthesis
+plantiSMASH,#cluster-51,AT5G17030,PC900,quercetin gentiotetraside biosynthesis
+plantiSMASH,#cluster-17,AT1G78500,PC904,lupeol biosynthesis
+plantiSMASH,#cluster-11,AT1G62800,PC90,"C4 photosynthetic carbon assimilation cycle, NAD-ME type"
+plantiSMASH,#cluster-12,AT1G62960,PC90,"C4 photosynthetic carbon assimilation cycle, NAD-ME type"
+plantiSMASH,#cluster-4,AT1G24100,PC913,glucosinolate biosynthesis from phenylalanine
+plantiSMASH,#cluster-21,AT2G24190,PC921,superpathway of lipoxygenase
+plantiSMASH,#cluster-52,AT5G23960,PC929,oleoresin sesquiterpene volatiles biosynthesis
+plantiSMASH,#cluster-34,AT3G29200,PC932,L-tyrosine biosynthesis III
+plantiSMASH,#cluster-17,AT1G78510,PC940,superpathway of plastoquinol biosynthesis
+plantiSMASH,#cluster-47,AT4G16700,PC950,phosphatidylserine and phosphatidylethanolamine biosynthesis I
+plantiSMASH,#cluster-8,AT1G49430,PC954,phosphatidylcholine acyl editing
+plantiSMASH,#cluster-12,AT1G62940,PC954,phosphatidylcholine acyl editing
+plantiSMASH,#cluster-8,AT1G49430,PC966,oleate biosynthesis I (plants)
+plantiSMASH,#cluster-3,AT1G23820,PC978,superpathway of polyamine biosynthesis II
+plantiSMASH,#cluster-15,AT1G70310,PC978,superpathway of polyamine biosynthesis II
+plantiSMASH,#cluster-17,AT1G78510,PC985,nonaprenyl pyrophosphate biosynthesis I
+plantiSMASH,#cluster-11,AT1G62800,PC992,L-aspartate biosynthesis
+plantiSMASH,#cluster-12,AT1G62960,PC992,L-aspartate biosynthesis
+plantiSMASH,#cluster-17,AT1G78500,PC998,soybean saponin I biosynthesis
+plantiSMASH,#cluster-45,AT4G14070,RC1010,RXN-5741
+plantiSMASH,#cluster-17,AT1G78510,RC1174,TRANS-HEXAPRENYLTRANSTRANSFERASE-RXN
+plantiSMASH,#cluster-64,AT5G58780,RC1174,TRANS-HEXAPRENYLTRANSTRANSFERASE-RXN
+plantiSMASH,#cluster-51,AT5G16970,RC183,2-HEXADECENAL-REDUCTASE-RXN
+plantiSMASH,#cluster-8,AT1G49430,RC226,RXN-9673
+plantiSMASH,#cluster-1,AT1G02050,RC293,RXN-12183
+plantiSMASH,#cluster-30,AT3G10370,RC304,RXN-6841
+plantiSMASH,#cluster-17,AT1G78510,RC369,TRANS-PENTAPRENYLTRANSFERASE-RXN
+plantiSMASH,#cluster-21,AT2G24210,RC374,RXN-5122
+plantiSMASH,#cluster-25,AT2G31750,RC396,RXN-11655
+plantiSMASH,#cluster-45,AT4G14070,RC442,ACYLACPSYNTH-RXN
+plantiSMASH,#cluster-30,AT3G10370,RC509,sn-glycerol 3-phosphate:ubiquinone oxidoreductase
+plantiSMASH,#cluster-12,AT1G62940,RC538,RXN-12185
+plantiSMASH,#cluster-17,AT1G78510,RC594,RXN-8992
+plantiSMASH,#cluster-30,AT3G10370,RC632,GLYC3PDEHYDROG-RXN
+plantiSMASH,#cluster-22,AT2G26300,RC736,RXN0-1021
+plantiSMASH,#cluster-44,AT4G13350,RC736,RXN0-1021
+plantiSMASH,#cluster-24,AT2G29740,RC800,RXN-10787
+plantiSMASH,#cluster-24,AT2G29750,RC800,RXN-10787
+plantiSMASH,#cluster-31,AT3G13730,RC803,RXN-11529
+plantiSMASH,#cluster-30,AT3G10370,RC869,Glycerol-3-phosphate dehydrogenase
+plantiSMASH,#cluster-52,AT5G23960,RC925,RXN-8416
+plantiSMASH,#cluster-17,AT1G78510,RC99,RXN-8813
+MIBiG,mibig:BGC0000669,AT5G42600,PC1079,marneral biosynthesis
+MIBiG,mibig:BGC0001313,AT4G15340,PC169,"(3E)-4,8-dimethylnona-1,3,7-triene biosynthesis II"
+MIBiG,mibig:BGC0002397,AT3G32040,PC634,taxadiene biosynthesis (engineered)
+MIBiG,mibig:BGC0002398,AT3G29430,PC634,taxadiene biosynthesis (engineered)
+MIBiG,mibig:BGC0002397,AT3G32040,PC691,geranylgeranyl pyrophosphate biosynthesis
+MIBiG,mibig:BGC0002398,AT3G29430,PC691,geranylgeranyl pyrophosphate biosynthesis
+MIBiG,mibig:BGC0002397,AT3G32040,PC721,superpathway of phylloquinol biosynthesis
+MIBiG,mibig:BGC0002398,AT3G29430,PC721,superpathway of phylloquinol biosynthesis
+MIBiG,mibig:BGC0002397,AT3G32040,PC743,superpathway of geranylgeranyl pyrophosphate biosynthesis II (via MEP)
+MIBiG,mibig:BGC0002398,AT3G29430,PC743,superpathway of geranylgeranyl pyrophosphate biosynthesis II (via MEP)
+MIBiG,mibig:BGC0000670,AT5G48010,PC800,thalianol and derivatives biosynthesis
+MIBiG,mibig:BGC0000670,AT5G47990,PC800,thalianol and derivatives biosynthesis
+MIBiG,mibig:BGC0000670,AT5G48000,PC800,thalianol and derivatives biosynthesis
+MIBiG,mibig:BGC0002397,AT3G32040,PC835,superpathway of geranylgeranylpyrophosphate biosynthesis I (via mevalonate)
+MIBiG,mibig:BGC0002398,AT3G29430,PC835,superpathway of geranylgeranylpyrophosphate biosynthesis I (via mevalonate)
+MIBiG,mibig:BGC0002397,AT3G32040,PC859,plaunotol biosynthesis
+MIBiG,mibig:BGC0002398,AT3G29430,PC859,plaunotol biosynthesis
+MIBiG,mibig:BGC0001313,AT4G15370,PC888,baruol biosynthesis
+MIBiG,mibig:BGC0002906,AT5G25265,RC491,RXN-15011
