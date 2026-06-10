@@ -1,0 +1,51 @@
+pwID,title,genes,metabolites,species
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC50_r17.0.0_20260520160610,superpathway of flavones and derivatives biosynthesis,112.0,83.0,28.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC870_r17.0.0_20260520160610,flavonol glucosylation I,94.0,19.0,9.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC332_r17.0.0_20260520160610,superpathway of flavones and derivatives biosynthesis,85.0,47.0,12.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC675_r17.0.0_20260520160610,quercetin glycoside biosynthesis (Arabidopsis),85.0,35.0,12.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC356_r17.0.0_20260520160610,quercetin glucoside biosynthesis (Allium),85.0,27.0,11.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC504_r17.0.0_20260520160610,monolignol biosynthesis,62.0,34.0,29.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC152_r17.0.0_20260520160610,rutin biosynthesis,62.0,23.0,14.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC900_r17.0.0_20260520160610,quercetin gentiotetraside biosynthesis,58.0,19.0,10.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC420_r17.0.0_20260520160610,flavonol acylglucoside biosynthesis III-quercetin derivatives,57.0,24.0,10.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC446_r17.0.0_20260520160610,quercetin triglucoside biosynthesis,57.0,17.0,9.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC861_r17.0.0_20260520160610,cytokinin-O-glucosides biosynthesis,57.0,15.0,5.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1026_r17.0.0_20260520160610,eupatolitin 3-O-glucoside biosynthesis,51.0,32.0,10.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC857_r17.0.0_20260520160610,superpathway of gibberellin biosynthesis,47.0,40.0,13.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC843_r17.0.0_20260520160610,secologanin and strictosidine biosynthesis,46.0,34.0,12.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC360_r17.0.0_20260520160610,superpathway of anaerobic sucrose degradation,43.0,73.0,19.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1113_r17.0.0_20260520160610,superpathway of oleoresin turpentine biosynthesis,42.0,17.0,17.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC911_r17.0.0_20260520160610,"superpathway of cytosolic glycolysis (plants), pyruvate dehydrogenase and TCA cycle",37.0,65.0,18.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1160_r17.0.0_20260520160610,superpathway of phospholipid biosynthesis II (plants),37.0,50.0,12.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC68_r17.0.0_20260520160610,glycyrrhetinate biosynthesis,35.0,14.0,14.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1118_r17.0.0_20260520160610,flavonoid biosynthesis,34.0,25.0,23.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1019_r17.0.0_20260520160610,superpathway of ergosterol biosynthesis II,33.0,50.0,18.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC523_r17.0.0_20260520160610,superpathway of scopolin and esculin biosynthesis,33.0,37.0,9.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC795_r17.0.0_20260520160610,chlorogenic acid biosynthesis I,33.0,25.0,19.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1134_r17.0.0_20260520160610,superpathway of carotenoid biosynthesis in plants,32.0,37.0,11.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC891_r17.0.0_20260520160610,superpathway of sucrose and starch metabolism I (non-photosynthetic tissue),32.0,35.0,11.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1002_r17.0.0_20260520160610,"C4 photosynthetic carbon assimilation cycle, PEPCK type",32.0,21.0,7.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC267_r17.0.0_20260520160610,anthocyanin biosynthesis,32.0,11.0,5.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC241_r17.0.0_20260520160610,superpathway of avenacin A biosynthesis,31.0,23.0,15.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC90_r17.0.0_20260520160610,"C4 photosynthetic carbon assimilation cycle, NAD-ME type",31.0,22.0,11.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC697_r17.0.0_20260520160610,esculetin modification,31.0,21.0,7.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC307_r17.0.0_20260520160610,cinnamate esters biosynthesis,31.0,4.0,8.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC212_r17.0.0_20260520160610,gluconeogenesis I,29.0,49.0,16.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1082_r17.0.0_20260520160610,flavonoid di-C-glucosylation,29.0,32.0,21.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC164_r17.0.0_20260520160610,flavonoid biosynthesis (in equisetum),29.0,29.0,19.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC616_r17.0.0_20260520160610,diterpene phytoalexins precursors biosynthesis,29.0,16.0,7.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC439_r17.0.0_20260520160610,mangrove triterpenoid biosynthesis,29.0,7.0,15.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC448_r17.0.0_20260520160610,salicylate glucosides biosynthesis IV,29.0,5.0,4.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC573_r17.0.0_20260520160610,superpathway of gibberellin GA₁₂ biosynthesis,28.0,13.0,9.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC402_r17.0.0_20260520160610,coniferin metabolism,28.0,8.0,9.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC921_r17.0.0_20260520160610,superpathway of lipoxygenase,27.0,36.0,6.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC634_r17.0.0_20260520160610,taxadiene biosynthesis (engineered),27.0,31.0,11.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC173_r17.0.0_20260520160610,"avenacin biosynthesis, initial reactions",27.0,3.0,14.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC345_r17.0.0_20260520160610,TCA cycle variation V (plant),26.0,31.0,9.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC194_r17.0.0_20260520160610,superpathway of glyoxylate cycle and fatty acid degradation,26.0,29.0,9.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC81_r17.0.0_20260520160610,ATPSYN-RXN,26.0,5.0,2.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC743_r17.0.0_20260520160610,superpathway of geranylgeranyl pyrophosphate biosynthesis II (via MEP),25.0,30.0,9.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1022_r17.0.0_20260520160610,simplecoumarins biosynthesis,25.0,27.0,16.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC835_r17.0.0_20260520160610,superpathway of geranylgeranylpyrophosphate biosynthesis I (via mevalonate),25.0,27.0,10.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC758_r17.0.0_20260520160610,coumarin biosynthesis (via 2-coumarate),25.0,18.0,5.0
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC210_r17.0.0_20260520160610,bisabolene biosynthesis (engineered),25.0,14.0,15.0

@@ -19,3 +19,5 @@ dependencies:
       - SPARQLWrapper
       - adjustText
       - graphviz      # Python graphviz package
+      - networkx       # network visualizations (notebook 07)
+      - matplotlib-venn # Venn diagrams (notebook 07)
