@@ -1,0 +1,1179 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d9" for="edge" attr.name="source_graph" attr.type="string"/>
+<key id="d8" for="edge" attr.name="predicate" attr.type="string"/>
+<key id="d7" for="node" attr.name="y" attr.type="double"/>
+<key id="d6" for="node" attr.name="x" attr.type="double"/>
+<key id="d5" for="node" attr.name="level" attr.type="long"/>
+<key id="d4" for="node" attr.name="source_graph" attr.type="string"/>
+<key id="d3" for="node" attr.name="category" attr.type="string"/>
+<key id="d2" for="node" attr.name="rdf_type" attr.type="string"/>
+<key id="d1" for="node" attr.name="label" attr.type="string"/>
+<key id="d0" for="node" attr.name="iri" attr.type="string"/>
+<graph edgedefault="directed"><node id="n739776da2f">
+  <data key="d0">http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC629_r17.0.0_20260520160610</data>
+  <data key="d1">PC629</data>
+  <data key="d2">wp:Pathway</data>
+  <data key="d3">wp:Pathway</data>
+  <data key="d4">core</data>
+  <data key="d5">0</data>
+  <data key="d6">0.0</data>
+  <data key="d7">0.0</data>
+</node>
+<node id="nfb19700307">
+  <data key="d0">http://vocabularies.wikipathways.org/wp#Pathway</data>
+  <data key="d1">wp:Pathway</data>
+  <data key="d2">rdfs:Class</data>
+  <data key="d3">Class</data>
+  <data key="d4">core</data>
+  <data key="d5">1</data>
+  <data key="d6">6.123233995736766e-15</data>
+  <data key="d7">-100.0</data>
+</node>
+<node id="nf2a00617f1">
+  <data key="d0">http://vocabularies.wikipathways.org/wp#GeneProduct</data>
+  <data key="d1">wp:GeneProduct</data>
+  <data key="d2">rdfs:Class</data>
+  <data key="d3">Class</data>
+  <data key="d4">core</data>
+  <data key="d5">1</data>
+  <data key="d6">100.0</data>
+  <data key="d7">0.0</data>
+</node>
+<node id="nfe4fd2973f">
+  <data key="d0">http://vocabularies.wikipathways.org/wp#Protein</data>
+  <data key="d1">wp:Protein</data>
+  <data key="d2">rdfs:Class</data>
+  <data key="d3">Class</data>
+  <data key="d4">core</data>
+  <data key="d5">1</data>
+  <data key="d6">6.123233995736766e-15</data>
+  <data key="d7">100.0</data>
+</node>
+<node id="n18c1b22de8">
+  <data key="d0">http://vocabularies.wikipathways.org/wp#Metabolite</data>
+  <data key="d1">wp:Metabolite</data>
+  <data key="d2">rdfs:Class</data>
+  <data key="d3">Class</data>
+  <data key="d4">core</data>
+  <data key="d5">1</data>
+  <data key="d6">-100.0</data>
+  <data key="d7">1.2246467991473532e-14</data>
+</node>
+<node id="n0d1e1b57c2">
+  <data key="d0">https://identifiers.org/tair.name/At1G67990</data>
+  <data key="d1">AT1G67990</data>
+  <data key="d2">wp:GeneProduct</data>
+  <data key="d3">wp:GeneProduct</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">1.4083438190194561e-14</data>
+  <data key="d7">-229.99999999999997</data>
+</node>
+<node id="ne8096d7ae4">
+  <data key="d0">https://identifiers.org/ncbigene/AF360317</data>
+  <data key="d1">AT4G26220</data>
+  <data key="d2">wp:GeneProduct</data>
+  <data key="d3">wp:GeneProduct</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">28.264306852884282</data>
+  <data key="d7">-228.25671722454518</data>
+</node>
+<node id="n6a0b2b7f66">
+  <data key="d0">https://identifiers.org/plantcyc/G4FS-25</data>
+  <data key="d1">CAMT_MEDSA</data>
+  <data key="d2">wp:GeneProduct</data>
+  <data key="d3">wp:GeneProduct</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">56.10015562492674</data>
+  <data key="d7">-223.05329528805217</data>
+</node>
+<node id="n51d3dfc9cf">
+  <data key="d0">https://identifiers.org/ncbigene/AF081214</data>
+  <data key="d1">CCoAOMT</data>
+  <data key="d2">wp:GeneProduct</data>
+  <data key="d3">wp:GeneProduct</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">83.08558322304519</data>
+  <data key="d7">-214.46861276300183</data>
+</node>
+<node id="nd5202226aa">
+  <data key="d0">https://identifiers.org/plantcyc/G-10891</data>
+  <data key="d1">CCoAOMT1</data>
+  <data key="d2">wp:GeneProduct</data>
+  <data key="d3">wp:GeneProduct</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">108.81151807228231</data>
+  <data key="d7">-202.6328046857304</data>
+</node>
+<node id="n3cccb4c5ac">
+  <data key="d0">https://identifiers.org/tair.name/AT4G34050</data>
+  <data key="d1">CCoAOMT1</data>
+  <data key="d2">wp:GeneProduct</data>
+  <data key="d3">wp:GeneProduct</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">132.88798122389775</data>
+  <data key="d7">-187.725289841931</data>
+</node>
+<node id="n994a8458c7">
+  <data key="d0">https://identifiers.org/plantcyc/G-10304</data>
+  <data key="d1">HCHL</data>
+  <data key="d2">wp:GeneProduct</data>
+  <data key="d3">wp:GeneProduct</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">154.94999803870815</data>
+  <data key="d7">-169.97205096075157</data>
+</node>
+<node id="n5097cad8e2">
+  <data key="d0">https://identifiers.org/plantcyc/G4FS-24</data>
+  <data key="d1">Lus10019841.g</data>
+  <data key="d2">wp:GeneProduct</data>
+  <data key="d3">wp:GeneProduct</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">174.66313083058262</data>
+  <data key="d7">-149.64220904697564</data>
+</node>
+<node id="nefb6eceff1">
+  <data key="d0">https://identifiers.org/plantcyc/G-58318</data>
+  <data key="d1">ROMT-15</data>
+  <data key="d2">wp:GeneProduct</data>
+  <data key="d3">wp:GeneProduct</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">191.72854860085747</data>
+  <data key="d7">-127.04394378091632</data>
+</node>
+<node id="n519f114e94">
+  <data key="d0">https://identifiers.org/plantcyc/G-10302</data>
+  <data key="d1">csy1</data>
+  <data key="d2">wp:GeneProduct</data>
+  <data key="d3">wp:GeneProduct</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">205.8875570116643</data>
+  <data key="d7">-102.5198218286038</data>
+</node>
+<node id="n1969433431">
+  <data key="d0">https://identifiers.org/plantcyc/G-10298</data>
+  <data key="d1">pAMT</data>
+  <data key="d2">wp:GeneProduct</data>
+  <data key="d3">wp:GeneProduct</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">216.92551992839378</data>
+  <data key="d7">-76.4416038803217</data>
+</node>
+<node id="n8f83352632">
+  <data key="d0">https://identifiers.org/plantcyc/MONOMER4FS-35</data>
+  <data key="d1">Caffeoyl coenzyme A O-</data>
+  <data key="d2">wp:Protein</data>
+  <data key="d3">wp:Protein</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">224.67511308470813</data>
+  <data key="d7">-49.204609137494415</data>
+</node>
+<node id="n3914bbf184">
+  <data key="d0">https://identifiers.org/plantcyc/MONOMER4FS-36</data>
+  <data key="d1">Caffeoyl coenzyme A O-</data>
+  <data key="d2">wp:Protein</data>
+  <data key="d3">wp:Protein</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">229.01886054785794</data>
+  <data key="d7">-21.221722676559445</data>
+</node>
+<node id="n10dbeb3b61">
+  <data key="d0">https://identifiers.org/uniprot/O81646</data>
+  <data key="d1">MONOMER-13528</data>
+  <data key="d2">wp:Protein</data>
+  <data key="d3">wp:Protein</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">229.8909155340741</data>
+  <data key="d7">7.082863467919212</data>
+</node>
+<node id="n3236bd1315">
+  <data key="d0">https://identifiers.org/uniprot/O82521</data>
+  <data key="d1">MONOMER-13529</data>
+  <data key="d2">wp:Protein</data>
+  <data key="d3">wp:Protein</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">227.27805857868964</data>
+  <data key="d7">35.28008062209763</data>
+</node>
+<node id="n140a949daa">
+  <data key="d0">https://identifiers.org/uniprot/Q09UW0</data>
+  <data key="d1">MONOMER-13532</data>
+  <data key="d2">wp:Protein</data>
+  <data key="d3">wp:Protein</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">221.21989792974838</data>
+  <data key="d7">62.94248771657902</data>
+</node>
+<node id="nfc84b6d743">
+  <data key="d0">https://identifiers.org/plantcyc/MONOMER-13534</data>
+  <data key="d1">MONOMER-13534</data>
+  <data key="d2">wp:Protein</data>
+  <data key="d3">wp:Protein</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">211.80826912733934</data>
+  <data key="d7">89.65075085731624</data>
+</node>
+<node id="n2584726edf">
+  <data key="d0">https://identifiers.org/uniprot/A4ZKM6</data>
+  <data key="d1">MONOMER-14260</data>
+  <data key="d2">wp:Protein</data>
+  <data key="d3">wp:Protein</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">199.18584287042083</data>
+  <data key="d7">115.00000000000003</data>
+</node>
+<node id="n48f3fc105e">
+  <data key="d0">https://identifiers.org/uniprot/Q9C5D7</data>
+  <data key="d1">O-methyltransferase</data>
+  <data key="d2">wp:Protein</data>
+  <data key="d3">wp:Protein</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">183.54396227445505</data>
+  <data key="d7">138.60596636722892</data>
+</node>
+<node id="n151c81d7e5">
+  <data key="d0">https://identifiers.org/uniprot/Q6YI95</data>
+  <data key="d1">PFOMT subunit</data>
+  <data key="d2">wp:Protein</data>
+  <data key="d3">wp:Protein</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">165.11974230482164</data>
+  <data key="d7">160.11080757147312</data>
+</node>
+<node id="n7733ce070f">
+  <data key="d0">https://identifiers.org/uniprot/O49499</data>
+  <data key="d1">caffeoyl-CoA O-methylt</data>
+  <data key="d2">wp:Protein</data>
+  <data key="d3">wp:Protein</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">144.19247535564446</data>
+  <data key="d7">179.1885321409042</data>
+</node>
+<node id="n82208a1357">
+  <data key="d0">https://identifiers.org/plantcyc/MONOMER-13531</data>
+  <data key="d1">thioesterase</data>
+  <data key="d2">wp:Protein</data>
+  <data key="d3">wp:Protein</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">121.07939746179177</data>
+  <data key="d7">195.54994121781127</data>
+</node>
+<node id="n89061e5a8f">
+  <data key="d0">https://identifiers.org/uniprot/Q9XGP7</data>
+  <data key="d1">tricin synthase 1</data>
+  <data key="d2">wp:Protein</data>
+  <data key="d3">wp:Protein</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">96.13087932396022</data>
+  <data key="d7">208.94701251849042</data>
+</node>
+<node id="n7bfc985c17">
+  <data key="d0">https://identifiers.org/uniprot/Q9C9W4</data>
+  <data key="d1">trihydroxyferuloyl spe</data>
+  <data key="d2">wp:Protein</data>
+  <data key="d3">wp:Protein</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">69.72511504600001</data>
+  <data key="d7">219.17666009824597</data>
+</node>
+<node id="n4d61794c36">
+  <data key="d0">https://identifiers.org/inchikey/OCALSPDXYQHUHA-FNORWQNLSA-M</data>
+  <data key="d1">(E)-8-methylnon-6-enoa</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">42.26238909781117</data>
+  <data key="d7">226.08381292729737</data>
+</node>
+<node id="n24837929e0">
+  <data key="d0">https://identifiers.org/inchikey/JGNCYWQFXLYWMO-RSERDAIDSA-J</data>
+  <data key="d1">(E)-8-methylnon-6-enoy</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">14.159008410806825</data>
+  <data key="d7">229.56376560952015</data>
+</node>
+<node id="n14a5186e7e">
+  <data key="d0">https://identifiers.org/inchikey/QHRGJMIMHCLHRG-ZSELIEHESA-J</data>
+  <data key="d1">(E)-caffeoyl-CoA</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-14.159008410806898</data>
+  <data key="d7">229.56376560952015</data>
+</node>
+<node id="nc1834b6665">
+  <data key="d0">https://identifiers.org/inchikey/SDNPOBCYTJKZSD-XWQDBIPASA-J</data>
+  <data key="d1">3-hydroxy-3-(4-hydroxy</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-42.262389097811145</data>
+  <data key="d7">226.08381292729737</data>
+</node>
+<node id="n21e52a49d0">
+  <data key="d0">https://identifiers.org/inchikey/XTWYTFMLZFPYCI-KQYNXXCUSA-K</data>
+  <data key="d1">ADP</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-69.72511504599998</data>
+  <data key="d7">219.176660098246</data>
+</node>
+<node id="n4d51fcb3ca">
+  <data key="d0">https://identifiers.org/inchikey/ZKHQWZAMYRWXGA-KQYNXXCUSA-J</data>
+  <data key="d1">ATP</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-96.1308793239602</data>
+  <data key="d7">208.94701251849042</data>
+</node>
+<node id="nf9a848976f">
+  <data key="d0">https://identifiers.org/inchikey/BHPQYMZQTOCNFJ-UHFFFAOYSA-N</data>
+  <data key="d1">Ca²⁺</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-121.07939746179174</data>
+  <data key="d7">195.5499412178113</data>
+</node>
+<node id="n7466c0970b">
+  <data key="d0">https://identifiers.org/inchikey/XLJKHNWPARRRJB-UHFFFAOYSA-N</data>
+  <data key="d1">Co²⁺</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-144.19247535564446</data>
+  <data key="d7">179.18853214090421</data>
+</node>
+<node id="n28f2c7c4e5">
+  <data key="d0">https://identifiers.org/inchikey/JPVYNHNXODAKFH-UHFFFAOYSA-N</data>
+  <data key="d1">Cu²⁺</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-165.1197423048216</data>
+  <data key="d7">160.11080757147312</data>
+</node>
+<node id="n7b3d1d834c">
+  <data key="d0">https://identifiers.org/inchikey/GPRLSGONYQIRFK-UHFFFAOYSA-N</data>
+  <data key="d1">H⁺</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-183.54396227445505</data>
+  <data key="d7">138.60596636722897</data>
+</node>
+<node id="n9a7970920d">
+  <data key="d0">https://identifiers.org/inchikey/XLYOFNOQVPJJNP-UHFFFAOYSA-N</data>
+  <data key="d1">H₂O</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-199.18584287042094</data>
+  <data key="d7">114.99999999999989</data>
+</node>
+<node id="n04de64e90e">
+  <data key="d0">https://identifiers.org/inchikey/QNAYBMKLOCPYGJ-REOHCLBHSA-N</data>
+  <data key="d1">L-alanine</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-211.80826912733934</data>
+  <data key="d7">89.65075085731621</data>
+</node>
+<node id="n69ab90bbe3">
+  <data key="d0">https://identifiers.org/inchikey/JLVVSXFLKOJNIY-UHFFFAOYSA-N</data>
+  <data key="d1">Mg²⁺</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-221.21989792974836</data>
+  <data key="d7">62.9424877165791</data>
+</node>
+<node id="n14cbbeace0">
+  <data key="d0">https://identifiers.org/inchikey/ACFIXJIJDZMPPO-NNYOXOHSSA-J</data>
+  <data key="d1">NADPH</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-227.27805857868967</data>
+  <data key="d7">35.28008062209756</data>
+</node>
+<node id="n6194cf3322">
+  <data key="d0">https://identifiers.org/inchikey/XJLXINKUBYWONI-NNYOXOHSSA-K</data>
+  <data key="d1">NADP⁺</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-229.8909155340741</data>
+  <data key="d7">7.082863467919188</data>
+</node>
+<node id="n85e2035b39">
+  <data key="d0">https://identifiers.org/inchikey/ZJUKTBDSGOFHSH-WFMPWKQPSA-N</data>
+  <data key="d1">S-adenosyl-L-homocyste</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-229.01886054785794</data>
+  <data key="d7">-21.22172267655937</data>
+</node>
+<node id="n7bbbcbaa45">
+  <data key="d0">https://identifiers.org/inchikey/MEFKEPWMEQBLKI-FCKMPRQPSA-O</data>
+  <data key="d1">S-adenosyl-L-methionin</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-224.67511308470813</data>
+  <data key="d7">-49.204609137494444</data>
+</node>
+<node id="n308b3b7e80">
+  <data key="d0">https://identifiers.org/inchikey/PTFCDOFLOPIGGS-UHFFFAOYSA-N</data>
+  <data key="d1">Zn²⁺</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-216.92551992839384</data>
+  <data key="d7">-76.44160388032168</data>
+</node>
+<node id="n6d17f87722">
+  <data key="d0">https://identifiers.org/inchikey/ZSLZBFCDCINBPY-ZSJPKINUSA-J</data>
+  <data key="d1">acetyl-CoA</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-205.88755701166428</data>
+  <data key="d7">-102.51982182860387</data>
+</node>
+<node id="nb297e13197">
+  <data key="d0">https://identifiers.org/inchikey/YKPUWZUDDOIDPM-SOFGYWHQSA-N</data>
+  <data key="d1">capsaicin</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-191.72854860085747</data>
+  <data key="d7">-127.04394378091632</data>
+</node>
+<node id="n38235df163">
+  <data key="d0">https://identifiers.org/inchikey/RGJOEKWQDUBAIZ-IBOSZNHHSA-J</data>
+  <data key="d1">coenzyme A</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-174.66313083058267</data>
+  <data key="d7">-149.6422090469756</data>
+</node>
+<node id="ned150d6dc2">
+  <data key="d0">https://identifiers.org/inchikey/GBXZVJQQDAJGSO-NBXNMEGSSA-J</data>
+  <data key="d1">feruloyl-CoA</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-154.94999803870812</data>
+  <data key="d7">-169.9720509607516</data>
+</node>
+<node id="n6bb022c452">
+  <data key="d0">https://identifiers.org/inchikey/AEWHYWSPVRZHCT-NDZSKPAWSA-J</data>
+  <data key="d1">isobutanoyl-CoA</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-132.88798122389778</data>
+  <data key="d7">-187.72528984193096</data>
+</node>
+<node id="n2ca52515be">
+  <data key="d0">https://identifiers.org/inchikey/NBIIXXVUZAFLBC-UHFFFAOYSA-L</data>
+  <data key="d1">phosphate</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-108.81151807228224</data>
+  <data key="d7">-202.63280468573046</data>
+</node>
+<node id="nca45fefbae">
+  <data key="d0">https://identifiers.org/inchikey/LCTONWCANYUPML-UHFFFAOYSA-M</data>
+  <data key="d1">pyruvate</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-83.08558322304518</data>
+  <data key="d7">-214.46861276300183</data>
+</node>
+<node id="nb5f92ec5a3">
+  <data key="d0">https://identifiers.org/inchikey/MWOOGOJBHIARFG-UHFFFAOYSA-N</data>
+  <data key="d1">vanillin</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-56.10015562492682</data>
+  <data key="d7">-223.05329528805214</data>
+</node>
+<node id="n3ef66052ce">
+  <data key="d0">https://identifiers.org/inchikey/WRPWWVNUCXQDQV-UHFFFAOYSA-O</data>
+  <data key="d1">vanillylamine</data>
+  <data key="d2">wp:Metabolite</data>
+  <data key="d3">wp:Metabolite</data>
+  <data key="d4">core</data>
+  <data key="d5">2</data>
+  <data key="d6">-28.264306852884207</data>
+  <data key="d7">-228.25671722454518</data>
+</node>
+<node id="n624f942063">
+  <data key="d0">http://purl.obolibrary.org/obo/NCBITaxon_3544</data>
+  <data key="d1">Mesembryanthemum crystallinum
+(NCBITaxon:3544)</data>
+  <data key="d2">owl:Class</data>
+  <data key="d3">NCBITaxon</data>
+  <data key="d4">taxonomy-extra</data>
+  <data key="d5">3</data>
+  <data key="d6">-282.8265482620774</data>
+  <data key="d7">-337.05955497235027</data>
+</node>
+<node id="n2e3726c591">
+  <data key="d0">http://purl.obolibrary.org/obo/NCBITaxon_3702</data>
+  <data key="d1">Arabidopsis thaliana
+(NCBITaxon:3702)</data>
+  <data key="d2">owl:Class</data>
+  <data key="d3">NCBITaxon</data>
+  <data key="d4">taxonomy-extra</data>
+  <data key="d5">3</data>
+  <data key="d6">150.4888630632943</data>
+  <data key="d7">413.4647531457997</data>
+</node>
+<node id="n37f4fcc388">
+  <data key="d0">http://purl.obolibrary.org/obo/NCBITaxon_3879</data>
+  <data key="d1">Medicago sativa
+(NCBITaxon:3879)</data>
+  <data key="d2">owl:Class</data>
+  <data key="d3">NCBITaxon</data>
+  <data key="d4">taxonomy-extra</data>
+  <data key="d5">3</data>
+  <data key="d6">2.6942229581241774e-14</data>
+  <data key="d7">-440.00000000000006</data>
+</node>
+<node id="nf41b31960f">
+  <data key="d0">http://purl.obolibrary.org/obo/NCBITaxon_39947</data>
+  <data key="d1">Oryza sativa Japonica Group
+(NCBITaxon:39947)</data>
+  <data key="d2">owl:Class</data>
+  <data key="d3">NCBITaxon</data>
+  <data key="d4">taxonomy-extra</data>
+  <data key="d5">3</data>
+  <data key="d6">-433.3154113253716</data>
+  <data key="d7">-76.40519817344922</data>
+</node>
+<node id="nb4af3ad3f6">
+  <data key="d0">http://purl.obolibrary.org/obo/NCBITaxon_4006</data>
+  <data key="d1">Linum usitatissimum
+(NCBITaxon:4006)</data>
+  <data key="d2">owl:Class</data>
+  <data key="d3">NCBITaxon</data>
+  <data key="d4">taxonomy-extra</data>
+  <data key="d5">3</data>
+  <data key="d6">282.8265482620774</data>
+  <data key="d7">-337.0595549723503</data>
+</node>
+<node id="n930b9d2d2a">
+  <data key="d0">http://purl.obolibrary.org/obo/NCBITaxon_4071</data>
+  <data key="d1">Capsicum
+(NCBITaxon:4071)</data>
+  <data key="d2">owl:Class</data>
+  <data key="d3">NCBITaxon</data>
+  <data key="d4">taxonomy-extra</data>
+  <data key="d5">3</data>
+  <data key="d6">-381.051177665153</data>
+  <data key="d7">220.00000000000014</data>
+</node>
+<node id="nf5b08c9886">
+  <data key="d0">http://purl.obolibrary.org/obo/NCBITaxon_4073</data>
+  <data key="d1">Capsicum frutescens
+(NCBITaxon:4073)</data>
+  <data key="d2">owl:Class</data>
+  <data key="d3">NCBITaxon</data>
+  <data key="d4">taxonomy-extra</data>
+  <data key="d5">3</data>
+  <data key="d6">-150.48886306329425</data>
+  <data key="d7">413.46475314579976</data>
+</node>
+<node id="n2679d31985">
+  <data key="d0">http://purl.obolibrary.org/obo/NCBITaxon_49390</data>
+  <data key="d1">Coffea canephora
+(NCBITaxon:49390)</data>
+  <data key="d2">owl:Class</data>
+  <data key="d3">NCBITaxon</data>
+  <data key="d4">taxonomy-extra</data>
+  <data key="d5">3</data>
+  <data key="d6">381.0511776651531</data>
+  <data key="d7">219.99999999999994</data>
+</node>
+<node id="n95b851452e">
+  <data key="d0">http://purl.obolibrary.org/obo/NCBITaxon_80379</data>
+  <data key="d1">Capsicum chinense
+(NCBITaxon:80379)</data>
+  <data key="d2">owl:Class</data>
+  <data key="d3">NCBITaxon</data>
+  <data key="d4">taxonomy-extra</data>
+  <data key="d5">3</data>
+  <data key="d6">433.31541132537154</data>
+  <data key="d7">-76.40519817344936</data>
+</node>
+<edge source="n739776da2f" target="nfb19700307" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n0d1e1b57c2" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n0d1e1b57c2" target="nf2a00617f1" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n0d1e1b57c2" target="n2e3726c591" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="ne8096d7ae4" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="ne8096d7ae4" target="nf2a00617f1" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="ne8096d7ae4" target="n2e3726c591" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n6a0b2b7f66" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n6a0b2b7f66" target="nf2a00617f1" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n6a0b2b7f66" target="n37f4fcc388" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n51d3dfc9cf" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n51d3dfc9cf" target="nf2a00617f1" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n51d3dfc9cf" target="n95b851452e" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="nd5202226aa" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="nd5202226aa" target="nf2a00617f1" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="nd5202226aa" target="n2679d31985" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n3cccb4c5ac" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n3cccb4c5ac" target="nf2a00617f1" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n3cccb4c5ac" target="n2e3726c591" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n994a8458c7" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n994a8458c7" target="nf2a00617f1" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n994a8458c7" target="n930b9d2d2a" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n5097cad8e2" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n5097cad8e2" target="nf2a00617f1" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n5097cad8e2" target="nb4af3ad3f6" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="nefb6eceff1" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="nefb6eceff1" target="nf2a00617f1" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="nefb6eceff1" target="nf41b31960f" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n519f114e94" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n519f114e94" target="nf2a00617f1" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n519f114e94" target="nf5b08c9886" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n1969433431" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n1969433431" target="nf2a00617f1" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n1969433431" target="n95b851452e" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n8f83352632" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n8f83352632" target="nfe4fd2973f" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n8f83352632" target="nb4af3ad3f6" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n3914bbf184" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n3914bbf184" target="nfe4fd2973f" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n3914bbf184" target="n37f4fcc388" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n10dbeb3b61" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n10dbeb3b61" target="nfe4fd2973f" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n10dbeb3b61" target="n95b851452e" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n3236bd1315" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n3236bd1315" target="nfe4fd2973f" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n3236bd1315" target="n95b851452e" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n140a949daa" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n140a949daa" target="nfe4fd2973f" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n140a949daa" target="nf5b08c9886" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="nfc84b6d743" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="nfc84b6d743" target="nfe4fd2973f" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="nfc84b6d743" target="n930b9d2d2a" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n2584726edf" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n2584726edf" target="nfe4fd2973f" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n2584726edf" target="n2679d31985" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n48f3fc105e" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n48f3fc105e" target="nfe4fd2973f" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n48f3fc105e" target="n2e3726c591" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n151c81d7e5" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n151c81d7e5" target="nfe4fd2973f" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n151c81d7e5" target="n624f942063" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n7733ce070f" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n7733ce070f" target="nfe4fd2973f" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n7733ce070f" target="n2e3726c591" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n82208a1357" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n82208a1357" target="nfe4fd2973f" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n82208a1357" target="n930b9d2d2a" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n89061e5a8f" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n89061e5a8f" target="nfe4fd2973f" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n89061e5a8f" target="nf41b31960f" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n7bfc985c17" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n7bfc985c17" target="nfe4fd2973f" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n7bfc985c17" target="n2e3726c591" id="0">
+  <data key="d8">wp:organism</data>
+  <data key="d9">taxonomy-extra</data>
+</edge>
+<edge source="n4d61794c36" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n4d61794c36" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n24837929e0" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n24837929e0" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n14a5186e7e" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n14a5186e7e" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="nc1834b6665" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="nc1834b6665" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n21e52a49d0" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n21e52a49d0" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n4d51fcb3ca" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n4d51fcb3ca" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="nf9a848976f" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="nf9a848976f" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n7466c0970b" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n7466c0970b" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n28f2c7c4e5" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n28f2c7c4e5" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n7b3d1d834c" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n7b3d1d834c" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n9a7970920d" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n9a7970920d" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n04de64e90e" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n04de64e90e" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n69ab90bbe3" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n69ab90bbe3" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n14cbbeace0" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n14cbbeace0" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n6194cf3322" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n6194cf3322" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n85e2035b39" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n85e2035b39" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n7bbbcbaa45" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n7bbbcbaa45" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n308b3b7e80" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n308b3b7e80" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n6d17f87722" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n6d17f87722" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="nb297e13197" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="nb297e13197" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n38235df163" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n38235df163" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="ned150d6dc2" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="ned150d6dc2" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n6bb022c452" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n6bb022c452" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n2ca52515be" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n2ca52515be" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="nca45fefbae" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="nca45fefbae" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="nb5f92ec5a3" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="nb5f92ec5a3" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n3ef66052ce" target="n739776da2f" id="0">
+  <data key="d8">dcterms:isPartOf</data>
+  <data key="d9">core</data>
+</edge>
+<edge source="n3ef66052ce" target="n18c1b22de8" id="0">
+  <data key="d8">rdf:type</data>
+  <data key="d9">core</data>
+</edge>
+</graph></graphml>
