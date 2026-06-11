@@ -1,0 +1,2389 @@
+{
+  "data": [],
+  "directed": true,
+  "multigraph": true,
+  "elements": {
+    "nodes": [
+      {
+        "data": {
+          "iri": "http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC629_r17.0.0_20260520160610",
+          "label": "PC629",
+          "rdf_type": "wp:Pathway",
+          "category": "wp:Pathway",
+          "source_graph": "core",
+          "level": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "id": "n739776da2f",
+          "value": "n739776da2f",
+          "name": "n739776da2f"
+        },
+        "position": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      {
+        "data": {
+          "iri": "http://vocabularies.wikipathways.org/wp#Pathway",
+          "label": "wp:Pathway",
+          "rdf_type": "rdfs:Class",
+          "category": "Class",
+          "source_graph": "core",
+          "level": 1,
+          "x": 6.123233995736766e-15,
+          "y": -100.0,
+          "id": "nfb19700307",
+          "value": "nfb19700307",
+          "name": "nfb19700307"
+        },
+        "position": {
+          "x": 6.123233995736766e-15,
+          "y": -100.0
+        }
+      },
+      {
+        "data": {
+          "iri": "http://vocabularies.wikipathways.org/wp#GeneProduct",
+          "label": "wp:GeneProduct",
+          "rdf_type": "rdfs:Class",
+          "category": "Class",
+          "source_graph": "core",
+          "level": 1,
+          "x": 100.0,
+          "y": 0.0,
+          "id": "nf2a00617f1",
+          "value": "nf2a00617f1",
+          "name": "nf2a00617f1"
+        },
+        "position": {
+          "x": 100.0,
+          "y": 0.0
+        }
+      },
+      {
+        "data": {
+          "iri": "http://vocabularies.wikipathways.org/wp#Protein",
+          "label": "wp:Protein",
+          "rdf_type": "rdfs:Class",
+          "category": "Class",
+          "source_graph": "core",
+          "level": 1,
+          "x": 6.123233995736766e-15,
+          "y": 100.0,
+          "id": "nfe4fd2973f",
+          "value": "nfe4fd2973f",
+          "name": "nfe4fd2973f"
+        },
+        "position": {
+          "x": 6.123233995736766e-15,
+          "y": 100.0
+        }
+      },
+      {
+        "data": {
+          "iri": "http://vocabularies.wikipathways.org/wp#Metabolite",
+          "label": "wp:Metabolite",
+          "rdf_type": "rdfs:Class",
+          "category": "Class",
+          "source_graph": "core",
+          "level": 1,
+          "x": -100.0,
+          "y": 1.2246467991473532e-14,
+          "id": "n18c1b22de8",
+          "value": "n18c1b22de8",
+          "name": "n18c1b22de8"
+        },
+        "position": {
+          "x": -100.0,
+          "y": 1.2246467991473532e-14
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/tair.name/At1G67990",
+          "label": "AT1G67990",
+          "rdf_type": "wp:GeneProduct",
+          "category": "wp:GeneProduct",
+          "source_graph": "core",
+          "level": 2,
+          "x": 1.4083438190194561e-14,
+          "y": -229.99999999999997,
+          "id": "n0d1e1b57c2",
+          "value": "n0d1e1b57c2",
+          "name": "n0d1e1b57c2"
+        },
+        "position": {
+          "x": 1.4083438190194561e-14,
+          "y": -229.99999999999997
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/ncbigene/AF360317",
+          "label": "AT4G26220",
+          "rdf_type": "wp:GeneProduct",
+          "category": "wp:GeneProduct",
+          "source_graph": "core",
+          "level": 2,
+          "x": 28.264306852884282,
+          "y": -228.25671722454518,
+          "id": "ne8096d7ae4",
+          "value": "ne8096d7ae4",
+          "name": "ne8096d7ae4"
+        },
+        "position": {
+          "x": 28.264306852884282,
+          "y": -228.25671722454518
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/plantcyc/G4FS-25",
+          "label": "CAMT_MEDSA",
+          "rdf_type": "wp:GeneProduct",
+          "category": "wp:GeneProduct",
+          "source_graph": "core",
+          "level": 2,
+          "x": 56.10015562492674,
+          "y": -223.05329528805217,
+          "id": "n6a0b2b7f66",
+          "value": "n6a0b2b7f66",
+          "name": "n6a0b2b7f66"
+        },
+        "position": {
+          "x": 56.10015562492674,
+          "y": -223.05329528805217
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/ncbigene/AF081214",
+          "label": "CCoAOMT",
+          "rdf_type": "wp:GeneProduct",
+          "category": "wp:GeneProduct",
+          "source_graph": "core",
+          "level": 2,
+          "x": 83.08558322304519,
+          "y": -214.46861276300183,
+          "id": "n51d3dfc9cf",
+          "value": "n51d3dfc9cf",
+          "name": "n51d3dfc9cf"
+        },
+        "position": {
+          "x": 83.08558322304519,
+          "y": -214.46861276300183
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/plantcyc/G-10891",
+          "label": "CCoAOMT1",
+          "rdf_type": "wp:GeneProduct",
+          "category": "wp:GeneProduct",
+          "source_graph": "core",
+          "level": 2,
+          "x": 108.81151807228231,
+          "y": -202.6328046857304,
+          "id": "nd5202226aa",
+          "value": "nd5202226aa",
+          "name": "nd5202226aa"
+        },
+        "position": {
+          "x": 108.81151807228231,
+          "y": -202.6328046857304
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/tair.name/AT4G34050",
+          "label": "CCoAOMT1",
+          "rdf_type": "wp:GeneProduct",
+          "category": "wp:GeneProduct",
+          "source_graph": "core",
+          "level": 2,
+          "x": 132.88798122389775,
+          "y": -187.725289841931,
+          "id": "n3cccb4c5ac",
+          "value": "n3cccb4c5ac",
+          "name": "n3cccb4c5ac"
+        },
+        "position": {
+          "x": 132.88798122389775,
+          "y": -187.725289841931
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/plantcyc/G-10304",
+          "label": "HCHL",
+          "rdf_type": "wp:GeneProduct",
+          "category": "wp:GeneProduct",
+          "source_graph": "core",
+          "level": 2,
+          "x": 154.94999803870815,
+          "y": -169.97205096075157,
+          "id": "n994a8458c7",
+          "value": "n994a8458c7",
+          "name": "n994a8458c7"
+        },
+        "position": {
+          "x": 154.94999803870815,
+          "y": -169.97205096075157
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/plantcyc/G4FS-24",
+          "label": "Lus10019841.g",
+          "rdf_type": "wp:GeneProduct",
+          "category": "wp:GeneProduct",
+          "source_graph": "core",
+          "level": 2,
+          "x": 174.66313083058262,
+          "y": -149.64220904697564,
+          "id": "n5097cad8e2",
+          "value": "n5097cad8e2",
+          "name": "n5097cad8e2"
+        },
+        "position": {
+          "x": 174.66313083058262,
+          "y": -149.64220904697564
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/plantcyc/G-58318",
+          "label": "ROMT-15",
+          "rdf_type": "wp:GeneProduct",
+          "category": "wp:GeneProduct",
+          "source_graph": "core",
+          "level": 2,
+          "x": 191.72854860085747,
+          "y": -127.04394378091632,
+          "id": "nefb6eceff1",
+          "value": "nefb6eceff1",
+          "name": "nefb6eceff1"
+        },
+        "position": {
+          "x": 191.72854860085747,
+          "y": -127.04394378091632
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/plantcyc/G-10302",
+          "label": "csy1",
+          "rdf_type": "wp:GeneProduct",
+          "category": "wp:GeneProduct",
+          "source_graph": "core",
+          "level": 2,
+          "x": 205.8875570116643,
+          "y": -102.5198218286038,
+          "id": "n519f114e94",
+          "value": "n519f114e94",
+          "name": "n519f114e94"
+        },
+        "position": {
+          "x": 205.8875570116643,
+          "y": -102.5198218286038
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/plantcyc/G-10298",
+          "label": "pAMT",
+          "rdf_type": "wp:GeneProduct",
+          "category": "wp:GeneProduct",
+          "source_graph": "core",
+          "level": 2,
+          "x": 216.92551992839378,
+          "y": -76.4416038803217,
+          "id": "n1969433431",
+          "value": "n1969433431",
+          "name": "n1969433431"
+        },
+        "position": {
+          "x": 216.92551992839378,
+          "y": -76.4416038803217
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/plantcyc/MONOMER4FS-35",
+          "label": "Caffeoyl coenzyme A O-",
+          "rdf_type": "wp:Protein",
+          "category": "wp:Protein",
+          "source_graph": "core",
+          "level": 2,
+          "x": 224.67511308470813,
+          "y": -49.204609137494415,
+          "id": "n8f83352632",
+          "value": "n8f83352632",
+          "name": "n8f83352632"
+        },
+        "position": {
+          "x": 224.67511308470813,
+          "y": -49.204609137494415
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/plantcyc/MONOMER4FS-36",
+          "label": "Caffeoyl coenzyme A O-",
+          "rdf_type": "wp:Protein",
+          "category": "wp:Protein",
+          "source_graph": "core",
+          "level": 2,
+          "x": 229.01886054785794,
+          "y": -21.221722676559445,
+          "id": "n3914bbf184",
+          "value": "n3914bbf184",
+          "name": "n3914bbf184"
+        },
+        "position": {
+          "x": 229.01886054785794,
+          "y": -21.221722676559445
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/uniprot/O81646",
+          "label": "MONOMER-13528",
+          "rdf_type": "wp:Protein",
+          "category": "wp:Protein",
+          "source_graph": "core",
+          "level": 2,
+          "x": 229.8909155340741,
+          "y": 7.082863467919212,
+          "id": "n10dbeb3b61",
+          "value": "n10dbeb3b61",
+          "name": "n10dbeb3b61"
+        },
+        "position": {
+          "x": 229.8909155340741,
+          "y": 7.082863467919212
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/uniprot/O82521",
+          "label": "MONOMER-13529",
+          "rdf_type": "wp:Protein",
+          "category": "wp:Protein",
+          "source_graph": "core",
+          "level": 2,
+          "x": 227.27805857868964,
+          "y": 35.28008062209763,
+          "id": "n3236bd1315",
+          "value": "n3236bd1315",
+          "name": "n3236bd1315"
+        },
+        "position": {
+          "x": 227.27805857868964,
+          "y": 35.28008062209763
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/uniprot/Q09UW0",
+          "label": "MONOMER-13532",
+          "rdf_type": "wp:Protein",
+          "category": "wp:Protein",
+          "source_graph": "core",
+          "level": 2,
+          "x": 221.21989792974838,
+          "y": 62.94248771657902,
+          "id": "n140a949daa",
+          "value": "n140a949daa",
+          "name": "n140a949daa"
+        },
+        "position": {
+          "x": 221.21989792974838,
+          "y": 62.94248771657902
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/plantcyc/MONOMER-13534",
+          "label": "MONOMER-13534",
+          "rdf_type": "wp:Protein",
+          "category": "wp:Protein",
+          "source_graph": "core",
+          "level": 2,
+          "x": 211.80826912733934,
+          "y": 89.65075085731624,
+          "id": "nfc84b6d743",
+          "value": "nfc84b6d743",
+          "name": "nfc84b6d743"
+        },
+        "position": {
+          "x": 211.80826912733934,
+          "y": 89.65075085731624
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/uniprot/A4ZKM6",
+          "label": "MONOMER-14260",
+          "rdf_type": "wp:Protein",
+          "category": "wp:Protein",
+          "source_graph": "core",
+          "level": 2,
+          "x": 199.18584287042083,
+          "y": 115.00000000000003,
+          "id": "n2584726edf",
+          "value": "n2584726edf",
+          "name": "n2584726edf"
+        },
+        "position": {
+          "x": 199.18584287042083,
+          "y": 115.00000000000003
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/uniprot/Q9C5D7",
+          "label": "O-methyltransferase",
+          "rdf_type": "wp:Protein",
+          "category": "wp:Protein",
+          "source_graph": "core",
+          "level": 2,
+          "x": 183.54396227445505,
+          "y": 138.60596636722892,
+          "id": "n48f3fc105e",
+          "value": "n48f3fc105e",
+          "name": "n48f3fc105e"
+        },
+        "position": {
+          "x": 183.54396227445505,
+          "y": 138.60596636722892
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/uniprot/Q6YI95",
+          "label": "PFOMT subunit",
+          "rdf_type": "wp:Protein",
+          "category": "wp:Protein",
+          "source_graph": "core",
+          "level": 2,
+          "x": 165.11974230482164,
+          "y": 160.11080757147312,
+          "id": "n151c81d7e5",
+          "value": "n151c81d7e5",
+          "name": "n151c81d7e5"
+        },
+        "position": {
+          "x": 165.11974230482164,
+          "y": 160.11080757147312
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/uniprot/O49499",
+          "label": "caffeoyl-CoA O-methylt",
+          "rdf_type": "wp:Protein",
+          "category": "wp:Protein",
+          "source_graph": "core",
+          "level": 2,
+          "x": 144.19247535564446,
+          "y": 179.1885321409042,
+          "id": "n7733ce070f",
+          "value": "n7733ce070f",
+          "name": "n7733ce070f"
+        },
+        "position": {
+          "x": 144.19247535564446,
+          "y": 179.1885321409042
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/plantcyc/MONOMER-13531",
+          "label": "thioesterase",
+          "rdf_type": "wp:Protein",
+          "category": "wp:Protein",
+          "source_graph": "core",
+          "level": 2,
+          "x": 121.07939746179177,
+          "y": 195.54994121781127,
+          "id": "n82208a1357",
+          "value": "n82208a1357",
+          "name": "n82208a1357"
+        },
+        "position": {
+          "x": 121.07939746179177,
+          "y": 195.54994121781127
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/uniprot/Q9XGP7",
+          "label": "tricin synthase 1",
+          "rdf_type": "wp:Protein",
+          "category": "wp:Protein",
+          "source_graph": "core",
+          "level": 2,
+          "x": 96.13087932396022,
+          "y": 208.94701251849042,
+          "id": "n89061e5a8f",
+          "value": "n89061e5a8f",
+          "name": "n89061e5a8f"
+        },
+        "position": {
+          "x": 96.13087932396022,
+          "y": 208.94701251849042
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/uniprot/Q9C9W4",
+          "label": "trihydroxyferuloyl spe",
+          "rdf_type": "wp:Protein",
+          "category": "wp:Protein",
+          "source_graph": "core",
+          "level": 2,
+          "x": 69.72511504600001,
+          "y": 219.17666009824597,
+          "id": "n7bfc985c17",
+          "value": "n7bfc985c17",
+          "name": "n7bfc985c17"
+        },
+        "position": {
+          "x": 69.72511504600001,
+          "y": 219.17666009824597
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/OCALSPDXYQHUHA-FNORWQNLSA-M",
+          "label": "(E)-8-methylnon-6-enoa",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": 42.26238909781117,
+          "y": 226.08381292729737,
+          "id": "n4d61794c36",
+          "value": "n4d61794c36",
+          "name": "n4d61794c36"
+        },
+        "position": {
+          "x": 42.26238909781117,
+          "y": 226.08381292729737
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/JGNCYWQFXLYWMO-RSERDAIDSA-J",
+          "label": "(E)-8-methylnon-6-enoy",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": 14.159008410806825,
+          "y": 229.56376560952015,
+          "id": "n24837929e0",
+          "value": "n24837929e0",
+          "name": "n24837929e0"
+        },
+        "position": {
+          "x": 14.159008410806825,
+          "y": 229.56376560952015
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/QHRGJMIMHCLHRG-ZSELIEHESA-J",
+          "label": "(E)-caffeoyl-CoA",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -14.159008410806898,
+          "y": 229.56376560952015,
+          "id": "n14a5186e7e",
+          "value": "n14a5186e7e",
+          "name": "n14a5186e7e"
+        },
+        "position": {
+          "x": -14.159008410806898,
+          "y": 229.56376560952015
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/SDNPOBCYTJKZSD-XWQDBIPASA-J",
+          "label": "3-hydroxy-3-(4-hydroxy",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -42.262389097811145,
+          "y": 226.08381292729737,
+          "id": "nc1834b6665",
+          "value": "nc1834b6665",
+          "name": "nc1834b6665"
+        },
+        "position": {
+          "x": -42.262389097811145,
+          "y": 226.08381292729737
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/XTWYTFMLZFPYCI-KQYNXXCUSA-K",
+          "label": "ADP",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -69.72511504599998,
+          "y": 219.176660098246,
+          "id": "n21e52a49d0",
+          "value": "n21e52a49d0",
+          "name": "n21e52a49d0"
+        },
+        "position": {
+          "x": -69.72511504599998,
+          "y": 219.176660098246
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/ZKHQWZAMYRWXGA-KQYNXXCUSA-J",
+          "label": "ATP",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -96.1308793239602,
+          "y": 208.94701251849042,
+          "id": "n4d51fcb3ca",
+          "value": "n4d51fcb3ca",
+          "name": "n4d51fcb3ca"
+        },
+        "position": {
+          "x": -96.1308793239602,
+          "y": 208.94701251849042
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/BHPQYMZQTOCNFJ-UHFFFAOYSA-N",
+          "label": "Ca\u00b2\u207a",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -121.07939746179174,
+          "y": 195.5499412178113,
+          "id": "nf9a848976f",
+          "value": "nf9a848976f",
+          "name": "nf9a848976f"
+        },
+        "position": {
+          "x": -121.07939746179174,
+          "y": 195.5499412178113
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/XLJKHNWPARRRJB-UHFFFAOYSA-N",
+          "label": "Co\u00b2\u207a",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -144.19247535564446,
+          "y": 179.18853214090421,
+          "id": "n7466c0970b",
+          "value": "n7466c0970b",
+          "name": "n7466c0970b"
+        },
+        "position": {
+          "x": -144.19247535564446,
+          "y": 179.18853214090421
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/JPVYNHNXODAKFH-UHFFFAOYSA-N",
+          "label": "Cu\u00b2\u207a",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -165.1197423048216,
+          "y": 160.11080757147312,
+          "id": "n28f2c7c4e5",
+          "value": "n28f2c7c4e5",
+          "name": "n28f2c7c4e5"
+        },
+        "position": {
+          "x": -165.1197423048216,
+          "y": 160.11080757147312
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/GPRLSGONYQIRFK-UHFFFAOYSA-N",
+          "label": "H\u207a",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -183.54396227445505,
+          "y": 138.60596636722897,
+          "id": "n7b3d1d834c",
+          "value": "n7b3d1d834c",
+          "name": "n7b3d1d834c"
+        },
+        "position": {
+          "x": -183.54396227445505,
+          "y": 138.60596636722897
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/XLYOFNOQVPJJNP-UHFFFAOYSA-N",
+          "label": "H\u2082O",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -199.18584287042094,
+          "y": 114.99999999999989,
+          "id": "n9a7970920d",
+          "value": "n9a7970920d",
+          "name": "n9a7970920d"
+        },
+        "position": {
+          "x": -199.18584287042094,
+          "y": 114.99999999999989
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/QNAYBMKLOCPYGJ-REOHCLBHSA-N",
+          "label": "L-alanine",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -211.80826912733934,
+          "y": 89.65075085731621,
+          "id": "n04de64e90e",
+          "value": "n04de64e90e",
+          "name": "n04de64e90e"
+        },
+        "position": {
+          "x": -211.80826912733934,
+          "y": 89.65075085731621
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/JLVVSXFLKOJNIY-UHFFFAOYSA-N",
+          "label": "Mg\u00b2\u207a",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -221.21989792974836,
+          "y": 62.9424877165791,
+          "id": "n69ab90bbe3",
+          "value": "n69ab90bbe3",
+          "name": "n69ab90bbe3"
+        },
+        "position": {
+          "x": -221.21989792974836,
+          "y": 62.9424877165791
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/ACFIXJIJDZMPPO-NNYOXOHSSA-J",
+          "label": "NADPH",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -227.27805857868967,
+          "y": 35.28008062209756,
+          "id": "n14cbbeace0",
+          "value": "n14cbbeace0",
+          "name": "n14cbbeace0"
+        },
+        "position": {
+          "x": -227.27805857868967,
+          "y": 35.28008062209756
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/XJLXINKUBYWONI-NNYOXOHSSA-K",
+          "label": "NADP\u207a",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -229.8909155340741,
+          "y": 7.082863467919188,
+          "id": "n6194cf3322",
+          "value": "n6194cf3322",
+          "name": "n6194cf3322"
+        },
+        "position": {
+          "x": -229.8909155340741,
+          "y": 7.082863467919188
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/ZJUKTBDSGOFHSH-WFMPWKQPSA-N",
+          "label": "S-adenosyl-L-homocyste",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -229.01886054785794,
+          "y": -21.22172267655937,
+          "id": "n85e2035b39",
+          "value": "n85e2035b39",
+          "name": "n85e2035b39"
+        },
+        "position": {
+          "x": -229.01886054785794,
+          "y": -21.22172267655937
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/MEFKEPWMEQBLKI-FCKMPRQPSA-O",
+          "label": "S-adenosyl-L-methionin",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -224.67511308470813,
+          "y": -49.204609137494444,
+          "id": "n7bbbcbaa45",
+          "value": "n7bbbcbaa45",
+          "name": "n7bbbcbaa45"
+        },
+        "position": {
+          "x": -224.67511308470813,
+          "y": -49.204609137494444
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/PTFCDOFLOPIGGS-UHFFFAOYSA-N",
+          "label": "Zn\u00b2\u207a",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -216.92551992839384,
+          "y": -76.44160388032168,
+          "id": "n308b3b7e80",
+          "value": "n308b3b7e80",
+          "name": "n308b3b7e80"
+        },
+        "position": {
+          "x": -216.92551992839384,
+          "y": -76.44160388032168
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/ZSLZBFCDCINBPY-ZSJPKINUSA-J",
+          "label": "acetyl-CoA",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -205.88755701166428,
+          "y": -102.51982182860387,
+          "id": "n6d17f87722",
+          "value": "n6d17f87722",
+          "name": "n6d17f87722"
+        },
+        "position": {
+          "x": -205.88755701166428,
+          "y": -102.51982182860387
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/YKPUWZUDDOIDPM-SOFGYWHQSA-N",
+          "label": "capsaicin",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -191.72854860085747,
+          "y": -127.04394378091632,
+          "id": "nb297e13197",
+          "value": "nb297e13197",
+          "name": "nb297e13197"
+        },
+        "position": {
+          "x": -191.72854860085747,
+          "y": -127.04394378091632
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/RGJOEKWQDUBAIZ-IBOSZNHHSA-J",
+          "label": "coenzyme A",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -174.66313083058267,
+          "y": -149.6422090469756,
+          "id": "n38235df163",
+          "value": "n38235df163",
+          "name": "n38235df163"
+        },
+        "position": {
+          "x": -174.66313083058267,
+          "y": -149.6422090469756
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/GBXZVJQQDAJGSO-NBXNMEGSSA-J",
+          "label": "feruloyl-CoA",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -154.94999803870812,
+          "y": -169.9720509607516,
+          "id": "ned150d6dc2",
+          "value": "ned150d6dc2",
+          "name": "ned150d6dc2"
+        },
+        "position": {
+          "x": -154.94999803870812,
+          "y": -169.9720509607516
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/AEWHYWSPVRZHCT-NDZSKPAWSA-J",
+          "label": "isobutanoyl-CoA",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -132.88798122389778,
+          "y": -187.72528984193096,
+          "id": "n6bb022c452",
+          "value": "n6bb022c452",
+          "name": "n6bb022c452"
+        },
+        "position": {
+          "x": -132.88798122389778,
+          "y": -187.72528984193096
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/NBIIXXVUZAFLBC-UHFFFAOYSA-L",
+          "label": "phosphate",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -108.81151807228224,
+          "y": -202.63280468573046,
+          "id": "n2ca52515be",
+          "value": "n2ca52515be",
+          "name": "n2ca52515be"
+        },
+        "position": {
+          "x": -108.81151807228224,
+          "y": -202.63280468573046
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/LCTONWCANYUPML-UHFFFAOYSA-M",
+          "label": "pyruvate",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -83.08558322304518,
+          "y": -214.46861276300183,
+          "id": "nca45fefbae",
+          "value": "nca45fefbae",
+          "name": "nca45fefbae"
+        },
+        "position": {
+          "x": -83.08558322304518,
+          "y": -214.46861276300183
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/MWOOGOJBHIARFG-UHFFFAOYSA-N",
+          "label": "vanillin",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -56.10015562492682,
+          "y": -223.05329528805214,
+          "id": "nb5f92ec5a3",
+          "value": "nb5f92ec5a3",
+          "name": "nb5f92ec5a3"
+        },
+        "position": {
+          "x": -56.10015562492682,
+          "y": -223.05329528805214
+        }
+      },
+      {
+        "data": {
+          "iri": "https://identifiers.org/inchikey/WRPWWVNUCXQDQV-UHFFFAOYSA-O",
+          "label": "vanillylamine",
+          "rdf_type": "wp:Metabolite",
+          "category": "wp:Metabolite",
+          "source_graph": "core",
+          "level": 2,
+          "x": -28.264306852884207,
+          "y": -228.25671722454518,
+          "id": "n3ef66052ce",
+          "value": "n3ef66052ce",
+          "name": "n3ef66052ce"
+        },
+        "position": {
+          "x": -28.264306852884207,
+          "y": -228.25671722454518
+        }
+      },
+      {
+        "data": {
+          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_3544",
+          "label": "Mesembryanthemum crystallinum\n(NCBITaxon:3544)",
+          "rdf_type": "owl:Class",
+          "category": "NCBITaxon",
+          "source_graph": "taxonomy-extra",
+          "level": 3,
+          "x": -282.8265482620774,
+          "y": -337.05955497235027,
+          "id": "n624f942063",
+          "value": "n624f942063",
+          "name": "n624f942063"
+        },
+        "position": {
+          "x": -282.8265482620774,
+          "y": -337.05955497235027
+        }
+      },
+      {
+        "data": {
+          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_3702",
+          "label": "Arabidopsis thaliana\n(NCBITaxon:3702)",
+          "rdf_type": "owl:Class",
+          "category": "NCBITaxon",
+          "source_graph": "taxonomy-extra",
+          "level": 3,
+          "x": 150.4888630632943,
+          "y": 413.4647531457997,
+          "id": "n2e3726c591",
+          "value": "n2e3726c591",
+          "name": "n2e3726c591"
+        },
+        "position": {
+          "x": 150.4888630632943,
+          "y": 413.4647531457997
+        }
+      },
+      {
+        "data": {
+          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_3879",
+          "label": "Medicago sativa\n(NCBITaxon:3879)",
+          "rdf_type": "owl:Class",
+          "category": "NCBITaxon",
+          "source_graph": "taxonomy-extra",
+          "level": 3,
+          "x": 2.6942229581241774e-14,
+          "y": -440.00000000000006,
+          "id": "n37f4fcc388",
+          "value": "n37f4fcc388",
+          "name": "n37f4fcc388"
+        },
+        "position": {
+          "x": 2.6942229581241774e-14,
+          "y": -440.00000000000006
+        }
+      },
+      {
+        "data": {
+          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_39947",
+          "label": "Oryza sativa Japonica Group\n(NCBITaxon:39947)",
+          "rdf_type": "owl:Class",
+          "category": "NCBITaxon",
+          "source_graph": "taxonomy-extra",
+          "level": 3,
+          "x": -433.3154113253716,
+          "y": -76.40519817344922,
+          "id": "nf41b31960f",
+          "value": "nf41b31960f",
+          "name": "nf41b31960f"
+        },
+        "position": {
+          "x": -433.3154113253716,
+          "y": -76.40519817344922
+        }
+      },
+      {
+        "data": {
+          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_4006",
+          "label": "Linum usitatissimum\n(NCBITaxon:4006)",
+          "rdf_type": "owl:Class",
+          "category": "NCBITaxon",
+          "source_graph": "taxonomy-extra",
+          "level": 3,
+          "x": 282.8265482620774,
+          "y": -337.0595549723503,
+          "id": "nb4af3ad3f6",
+          "value": "nb4af3ad3f6",
+          "name": "nb4af3ad3f6"
+        },
+        "position": {
+          "x": 282.8265482620774,
+          "y": -337.0595549723503
+        }
+      },
+      {
+        "data": {
+          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_4071",
+          "label": "Capsicum\n(NCBITaxon:4071)",
+          "rdf_type": "owl:Class",
+          "category": "NCBITaxon",
+          "source_graph": "taxonomy-extra",
+          "level": 3,
+          "x": -381.051177665153,
+          "y": 220.00000000000014,
+          "id": "n930b9d2d2a",
+          "value": "n930b9d2d2a",
+          "name": "n930b9d2d2a"
+        },
+        "position": {
+          "x": -381.051177665153,
+          "y": 220.00000000000014
+        }
+      },
+      {
+        "data": {
+          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_4073",
+          "label": "Capsicum frutescens\n(NCBITaxon:4073)",
+          "rdf_type": "owl:Class",
+          "category": "NCBITaxon",
+          "source_graph": "taxonomy-extra",
+          "level": 3,
+          "x": -150.48886306329425,
+          "y": 413.46475314579976,
+          "id": "nf5b08c9886",
+          "value": "nf5b08c9886",
+          "name": "nf5b08c9886"
+        },
+        "position": {
+          "x": -150.48886306329425,
+          "y": 413.46475314579976
+        }
+      },
+      {
+        "data": {
+          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_49390",
+          "label": "Coffea canephora\n(NCBITaxon:49390)",
+          "rdf_type": "owl:Class",
+          "category": "NCBITaxon",
+          "source_graph": "taxonomy-extra",
+          "level": 3,
+          "x": 381.0511776651531,
+          "y": 219.99999999999994,
+          "id": "n2679d31985",
+          "value": "n2679d31985",
+          "name": "n2679d31985"
+        },
+        "position": {
+          "x": 381.0511776651531,
+          "y": 219.99999999999994
+        }
+      },
+      {
+        "data": {
+          "iri": "http://purl.obolibrary.org/obo/NCBITaxon_80379",
+          "label": "Capsicum chinense\n(NCBITaxon:80379)",
+          "rdf_type": "owl:Class",
+          "category": "NCBITaxon",
+          "source_graph": "taxonomy-extra",
+          "level": 3,
+          "x": 433.31541132537154,
+          "y": -76.40519817344936,
+          "id": "n95b851452e",
+          "value": "n95b851452e",
+          "name": "n95b851452e"
+        },
+        "position": {
+          "x": 433.31541132537154,
+          "y": -76.40519817344936
+        }
+      }
+    ],
+    "edges": [
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n739776da2f",
+          "target": "nfb19700307",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n0d1e1b57c2",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n0d1e1b57c2",
+          "target": "nf2a00617f1",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n0d1e1b57c2",
+          "target": "n2e3726c591",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "ne8096d7ae4",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "ne8096d7ae4",
+          "target": "nf2a00617f1",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "ne8096d7ae4",
+          "target": "n2e3726c591",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n6a0b2b7f66",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n6a0b2b7f66",
+          "target": "nf2a00617f1",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n6a0b2b7f66",
+          "target": "n37f4fcc388",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n51d3dfc9cf",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n51d3dfc9cf",
+          "target": "nf2a00617f1",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n51d3dfc9cf",
+          "target": "n95b851452e",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "nd5202226aa",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "nd5202226aa",
+          "target": "nf2a00617f1",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "nd5202226aa",
+          "target": "n2679d31985",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n3cccb4c5ac",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n3cccb4c5ac",
+          "target": "nf2a00617f1",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n3cccb4c5ac",
+          "target": "n2e3726c591",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n994a8458c7",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n994a8458c7",
+          "target": "nf2a00617f1",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n994a8458c7",
+          "target": "n930b9d2d2a",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n5097cad8e2",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n5097cad8e2",
+          "target": "nf2a00617f1",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n5097cad8e2",
+          "target": "nb4af3ad3f6",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "nefb6eceff1",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "nefb6eceff1",
+          "target": "nf2a00617f1",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "nefb6eceff1",
+          "target": "nf41b31960f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n519f114e94",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n519f114e94",
+          "target": "nf2a00617f1",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n519f114e94",
+          "target": "nf5b08c9886",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n1969433431",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n1969433431",
+          "target": "nf2a00617f1",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n1969433431",
+          "target": "n95b851452e",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n8f83352632",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n8f83352632",
+          "target": "nfe4fd2973f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n8f83352632",
+          "target": "nb4af3ad3f6",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n3914bbf184",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n3914bbf184",
+          "target": "nfe4fd2973f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n3914bbf184",
+          "target": "n37f4fcc388",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n10dbeb3b61",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n10dbeb3b61",
+          "target": "nfe4fd2973f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n10dbeb3b61",
+          "target": "n95b851452e",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n3236bd1315",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n3236bd1315",
+          "target": "nfe4fd2973f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n3236bd1315",
+          "target": "n95b851452e",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n140a949daa",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n140a949daa",
+          "target": "nfe4fd2973f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n140a949daa",
+          "target": "nf5b08c9886",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "nfc84b6d743",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "nfc84b6d743",
+          "target": "nfe4fd2973f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "nfc84b6d743",
+          "target": "n930b9d2d2a",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n2584726edf",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n2584726edf",
+          "target": "nfe4fd2973f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n2584726edf",
+          "target": "n2679d31985",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n48f3fc105e",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n48f3fc105e",
+          "target": "nfe4fd2973f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n48f3fc105e",
+          "target": "n2e3726c591",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n151c81d7e5",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n151c81d7e5",
+          "target": "nfe4fd2973f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n151c81d7e5",
+          "target": "n624f942063",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n7733ce070f",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n7733ce070f",
+          "target": "nfe4fd2973f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n7733ce070f",
+          "target": "n2e3726c591",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n82208a1357",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n82208a1357",
+          "target": "nfe4fd2973f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n82208a1357",
+          "target": "n930b9d2d2a",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n89061e5a8f",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n89061e5a8f",
+          "target": "nfe4fd2973f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n89061e5a8f",
+          "target": "nf41b31960f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n7bfc985c17",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n7bfc985c17",
+          "target": "nfe4fd2973f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "wp:organism",
+          "source_graph": "taxonomy-extra",
+          "source": "n7bfc985c17",
+          "target": "n2e3726c591",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n4d61794c36",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n4d61794c36",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n24837929e0",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n24837929e0",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n14a5186e7e",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n14a5186e7e",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "nc1834b6665",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "nc1834b6665",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n21e52a49d0",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n21e52a49d0",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n4d51fcb3ca",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n4d51fcb3ca",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "nf9a848976f",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "nf9a848976f",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n7466c0970b",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n7466c0970b",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n28f2c7c4e5",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n28f2c7c4e5",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n7b3d1d834c",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n7b3d1d834c",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n9a7970920d",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n9a7970920d",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n04de64e90e",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n04de64e90e",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n69ab90bbe3",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n69ab90bbe3",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n14cbbeace0",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n14cbbeace0",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n6194cf3322",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n6194cf3322",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n85e2035b39",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n85e2035b39",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n7bbbcbaa45",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n7bbbcbaa45",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n308b3b7e80",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n308b3b7e80",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n6d17f87722",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n6d17f87722",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "nb297e13197",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "nb297e13197",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n38235df163",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n38235df163",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "ned150d6dc2",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "ned150d6dc2",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n6bb022c452",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n6bb022c452",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n2ca52515be",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n2ca52515be",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "nca45fefbae",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "nca45fefbae",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "nb5f92ec5a3",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "nb5f92ec5a3",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "dcterms:isPartOf",
+          "source_graph": "core",
+          "source": "n3ef66052ce",
+          "target": "n739776da2f",
+          "key": 0
+        }
+      },
+      {
+        "data": {
+          "predicate": "rdf:type",
+          "source_graph": "core",
+          "source": "n3ef66052ce",
+          "target": "n18c1b22de8",
+          "key": 0
+        }
+      }
+    ]
+  }
+}
