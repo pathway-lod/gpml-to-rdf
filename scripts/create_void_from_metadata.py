@@ -21,9 +21,9 @@ PMN_LICENSE_RIGHTS = (
     "identify or summarize modifications."
 )
 
-PUBLISHER_URI = "http://rdf-plantmetwiki.bioinformatics.nl/organization/wur-bioinformatics"
-PUBLISHER_NAME = "Wageningen University & Research, Bioinformatics Group"
-PUBLISHER_HOMEPAGE = "https://www.bioinformatics.nl/"
+PUBLISHER_URI = "http://rdf-plantmetwiki.bioinformatics.nl/organization/wur-plant-sciences"
+PUBLISHER_NAME = "Wageningen University & Research, Department of Plant Sciences"
+PUBLISHER_HOMEPAGE = "https://www.wur.nl/"
 
 # Documents the wp:/pmw: RDF model used by all PlantMetWiki datasets.
 CLASS_STRUCTURE_PAGE = (
