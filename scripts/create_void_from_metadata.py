@@ -21,6 +21,16 @@ PMN_LICENSE_RIGHTS = (
     "identify or summarize modifications."
 )
 
+PUBLISHER_URI = "http://rdf-plantmetwiki.bioinformatics.nl/organization/wur-bioinformatics"
+PUBLISHER_NAME = "Wageningen University & Research, Bioinformatics Group"
+PUBLISHER_HOMEPAGE = "https://www.bioinformatics.nl/"
+
+# Documents the wp:/pmw: RDF model used by all PlantMetWiki datasets.
+CLASS_STRUCTURE_PAGE = (
+    "https://github.com/pathway-lod/gpml-to-rdf/blob/main/README.md"
+    "#three-layer-rdf-architecture"
+)
+
 
 def ttl_uri(uri: str) -> str:
     return f"<{uri}>"
@@ -39,6 +49,17 @@ def add_pmn_license_document(lines: list[str]) -> None:
             f"    dcterms:title {ttl_literal(PMN_LICENSE_TITLE, 'en')} ;",
             f"    dcterms:description {ttl_literal(PMN_LICENSE_RIGHTS, 'en')} ;",
             f"    foaf:page {ttl_uri(PMN_LICENSE_PAGE)} .",
+            "",
+        ]
+    )
+
+
+def add_publisher_org(lines: list[str]) -> None:
+    lines.extend(
+        [
+            f"{ttl_uri(PUBLISHER_URI)} a foaf:Organization ;",
+            f"    foaf:name {ttl_literal(PUBLISHER_NAME, 'en')} ;",
+            f"    foaf:homepage {ttl_uri(PUBLISHER_HOMEPAGE)} .",
             "",
         ]
     )
@@ -140,6 +161,7 @@ def main() -> None:
     ]
 
     add_pmn_license_document(lines)
+    add_publisher_org(lines)
 
     # Source GPML dataset — the Zenodo record that was used as input.
     # Recording this as a void:Dataset makes the provenance navigable: anyone
@@ -232,8 +254,16 @@ def main() -> None:
 
     # dcterms:issued = date the RDF was generated (today), not the GPML input date.
     # The GPML input date is already captured via dcterms:source / pav:derivedFrom above.
+    # dcterms:modified mirrors dcterms:issued here since each release regenerates
+    # the full bundle from scratch (no incremental updates).
     for ds in all_datasets:
         lines.append(f"{ttl_uri(ds)} dcterms:issued {ttl_literal(today)}^^xsd:date .")
+        lines.append(f"{ttl_uri(ds)} dcterms:modified {ttl_literal(today)}^^xsd:date .")
+    lines.append("")
+
+    for ds in all_datasets:
+        lines.append(f"{ttl_uri(ds)} dcterms:publisher {ttl_uri(PUBLISHER_URI)} .")
+        lines.append(f"{ttl_uri(ds)} foaf:page {ttl_uri(CLASS_STRUCTURE_PAGE)} .")
     lines.append("")
 
     for ds in all_datasets:
