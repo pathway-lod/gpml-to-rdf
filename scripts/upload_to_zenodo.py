@@ -246,8 +246,10 @@ def update_draft_metadata(
     source_record_metadata: dict,
     build_metadata: dict,
     token: str,
+    version_label: str | None = None,
 ) -> dict:
     version = build_metadata["version"]
+    zenodo_version = version_label or version
     zenodo_input_doi = build_metadata.get("doi")
     zenodo_input_record = build_metadata.get("zenodo_record_url")
     gpml_file_key = build_metadata.get("gpml_file", {}).get("key")
@@ -311,7 +313,7 @@ def update_draft_metadata(
             "description": description,
             "notes": notes,
             "creators": creators_from_existing_record(source_record_metadata),
-            "version": version,
+            "version": zenodo_version,
             "access_right": "open",   # legacy deposit API field; "open" = publicly accessible
             "license": "other-open",   # closest Zenodo built-in for custom open licenses
             "keywords": existing_metadata.get("keywords", [])
@@ -363,6 +365,13 @@ def main() -> int:
     parser.add_argument("--publish", action="store_true")
     parser.add_argument("--overwrite-gzip", action="store_true")
     parser.add_argument("--keep-existing-draft-files", action="store_true")
+    parser.add_argument(
+        "--version-label",
+        default=None,
+        help="Override the Zenodo 'version' metadata field (e.g. "
+             "'plantcyc17.0.0-gpml2021-v3.1') without changing the release "
+             "filenames, which are still derived from build_metadata['version'].",
+    )
 
     args = parser.parse_args()
 
@@ -393,6 +402,7 @@ def main() -> int:
         source_record_metadata=source_record_metadata,
         build_metadata=build_metadata,
         token=token,
+        version_label=args.version_label,
     )
 
     print()
