@@ -8042,7 +8042,10 @@ jupyter<span class="w"> </span>notebook<span class="w"> </span>notebooks/cross_s
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
 <h2 id="Part-1-%E2%80%94-Pathway-selection-methodology">Part 1 — Pathway selection methodology<a class="anchor-link" href="#Part-1-%E2%80%94-Pathway-selection-methodology">¶</a></h2><p>To identify pathways where cross-species inference is most biologically meaningful,
-we screened all 1,162 multispecies pathways (PC* IRIs) using three criteria:</p>
+we screened the <strong>1,093</strong> <code>PC*</code> pathways in PlantMetWiki that have at least one
+species-annotated (<code>wp:organism</code>) enzyme — i.e. the genuinely "multispecies" subset
+of the 1,162 <code>PC*</code> pathways in <code>graph/pathways</code> overall (the remaining 69 pathways
+have no taxon-tagged protein annotations at all) — using three criteria:</p>
 <table>
 <thead>
 <tr>
@@ -8059,7 +8062,7 @@ we screened all 1,162 multispecies pathways (PC* IRIs) using three criteria:</p>
 </tr>
 <tr>
 <td><code>n_conversions</code> ≥ 8</td>
-<td>≥ 8 <code>wp:Conversion</code> nodes</td>
+<td>≥ 8 <code>wp:Conversion</code> nodes (excluding GPML anchor sub-nodes)</td>
 <td>Filters out trivial 1–2 step pathways</td>
 </tr>
 <tr>
@@ -8069,6 +8072,7 @@ we screened all 1,162 multispecies pathways (PC* IRIs) using three criteria:</p>
 </tr>
 </tbody>
 </table>
+<p>154 pathways meet all three criteria.</p>
 <p>From the resulting set, we computed a <strong>gap score</strong>: the fraction of species whose
 enzyme count is &lt; 70% of the best-annotated species in the same pathway.
 High gap scores indicate pathways where most species are incompletely annotated

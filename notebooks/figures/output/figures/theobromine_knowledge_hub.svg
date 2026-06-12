@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-06-02T20:30:33.503579</dc:date>
+    <dc:date>2026-06-12T15:37:35.706301</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -94,7 +94,7 @@ Q 10.71 35.180062 10.71 45.243563
 L 10.71 219.677562 
 Q 10.71 229.741062 21.24 229.741062 
 z
-" clip-path="url(#pfe16158a62)" style="fill: #1a6e9f; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: miter"/>
+" clip-path="url(#pbff3a32528)" style="fill: #1a6e9f; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: miter"/>
    </g>
    <g id="patch_9">
     <path d="M 21.24 551.773062 
@@ -107,7 +107,7 @@ Q 10.71 357.212062 10.71 367.275562
 L 10.71 541.709562 
 Q 10.71 551.773062 21.24 551.773062 
 z
-" clip-path="url(#pfe16158a62)" style="fill: #1a6e9f; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: miter"/>
+" clip-path="url(#pbff3a32528)" style="fill: #1a6e9f; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: miter"/>
    </g>
    <g id="patch_10">
     <path d="M 575.82 229.741062 
@@ -120,7 +120,7 @@ Q 565.29 35.180062 565.29 45.243563
 L 565.29 219.677562 
 Q 565.29 229.741062 575.82 229.741062 
 z
-" clip-path="url(#pfe16158a62)" style="fill: #1a7a44; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: miter"/>
+" clip-path="url(#pbff3a32528)" style="fill: #1a7a44; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: miter"/>
    </g>
    <g id="patch_11">
     <path d="M 575.82 551.773062 
@@ -133,7 +133,7 @@ Q 565.29 357.212062 565.29 367.275562
 L 565.29 541.709562 
 Q 565.29 551.773062 575.82 551.773062 
 z
-" clip-path="url(#pfe16158a62)" style="fill: #8e5a00; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: miter"/>
+" clip-path="url(#pbff3a32528)" style="fill: #8e5a00; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: miter"/>
    </g>
    <g id="text_1">
     <!-- PlantMetWiki — 7 pathways -->
@@ -2429,7 +2429,7 @@ Q 288 226.386562 288 239.804562
 L 288 347.148562 
 Q 288 360.566562 302.04 360.566562 
 z
-" clip-path="url(#pfe16158a62)" style="fill: #2c3e50; stroke: #f0f0f0; stroke-width: 2.5; stroke-linejoin: miter"/>
+" clip-path="url(#pbff3a32528)" style="fill: #2c3e50; stroke: #f0f0f0; stroke-width: 2.5; stroke-linejoin: miter"/>
    </g>
    <g id="text_12">
     <!-- Theobromine -->
@@ -2774,7 +2774,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="pfe16158a62">
+  <clipPath id="pbff3a32528">
    <rect x="7.2" y="25.116562" width="842.4" height="536.72"/>
   </clipPath>
  </defs>
