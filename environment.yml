@@ -1,0 +1,23 @@
+name: plantmetwiki-rdf
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - requests
+  - groovy 
+  - rdflib
+  - lxml
+  - click
+  - tqdm
+  - pandas
+  - matplotlib
+  - jupyter
+  - wget
+  - graphviz        # system dot renderer (conda-forge)
+  - pip:
+      - SPARQLWrapper
+      - adjustText
+      - graphviz      # Python graphviz package
+      - networkx       # network visualizations (notebook 07)
+      - matplotlib-venn # Venn diagrams (notebook 07)

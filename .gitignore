@@ -1,6 +1,13 @@
-orig*/
+input/gpml/original/
+input/gpml/renamed/
 pathways.txt
 reactions.txt
-react/
-pw/
+output/rdf/
+output/bundles/
 *.ttl.gz
+*.ttl
+build/
+# Local secrets — never commit
+.env
+# AI usage
+CLAUDE.md

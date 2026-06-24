@@ -1,0 +1,281 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import datetime as dt
+import json
+import shutil
+import subprocess
+from pathlib import Path
+
+
+PMN_LICENSE_URI = "http://rdf-plantmetwiki.bioinformatics.nl/license/pmn-open-database-license"
+PMN_LICENSE_PAGE = "https://plantcyc.org/?webform=license-agreement"
+PMN_LICENSE_TITLE = "OPEN DATABASE LICENSE FOR THE PLANT METABOLIC NETWORK DATABASES"
+PMN_LICENSE_RIGHTS = (
+    "OPEN DATABASE LICENSE FOR THE PLANT METABOLIC NETWORK DATABASES (PMN). "
+    "The databases may be used royalty-free worldwide and may be modified and "
+    "redistributed, provided that derived copies clearly identify the source "
+    "database(s), include applicable copyright notices and author lists, and "
+    "identify or summarize modifications."
+)
+
+PUBLISHER_URI = "http://rdf-plantmetwiki.bioinformatics.nl/organization/wur-plant-sciences"
+PUBLISHER_NAME = "Wageningen University & Research, Department of Plant Sciences"
+PUBLISHER_HOMEPAGE = "https://www.wur.nl/"
+
+# Documents the wp:/pmw: RDF model used by all PlantMetWiki datasets.
+CLASS_STRUCTURE_PAGE = (
+    "https://github.com/pathway-lod/gpml-to-rdf/blob/main/README.md"
+    "#three-layer-rdf-architecture"
+)
+
+
+def ttl_uri(uri: str) -> str:
+    return f"<{uri}>"
+
+
+def ttl_literal(value: str, lang: str | None = None) -> str:
+    value = str(value).replace("\\", "\\\\").replace('"', '\\"')
+    value = value.replace("\n", "\\n").replace("\r", "")
+    return f'"{value}"@{lang}' if lang else f'"{value}"'
+
+
+def add_pmn_license_document(lines: list[str]) -> None:
+    lines.extend(
+        [
+            f"{ttl_uri(PMN_LICENSE_URI)} a dcterms:LicenseDocument ;",
+            f"    dcterms:title {ttl_literal(PMN_LICENSE_TITLE, 'en')} ;",
+            f"    dcterms:description {ttl_literal(PMN_LICENSE_RIGHTS, 'en')} ;",
+            f"    foaf:page {ttl_uri(PMN_LICENSE_PAGE)} .",
+            "",
+        ]
+    )
+
+
+def add_publisher_org(lines: list[str]) -> None:
+    lines.extend(
+        [
+            f"{ttl_uri(PUBLISHER_URI)} a foaf:Organization ;",
+            f"    foaf:name {ttl_literal(PUBLISHER_NAME, 'en')} ;",
+            f"    foaf:homepage {ttl_uri(PUBLISHER_HOMEPAGE)} .",
+            "",
+        ]
+    )
+
+
+def add_pmn_license_to_dataset(lines: list[str], dataset_uri: str) -> None:
+    lines.extend(
+        [
+            f"{ttl_uri(dataset_uri)} dcterms:license {ttl_uri(PMN_LICENSE_URI)} ;",
+            f"    dcterms:rights {ttl_literal(PMN_LICENSE_RIGHTS, 'en')} .",
+            "",
+        ]
+    )
+
+
+def count_triples_with_rapper(file_path: Path) -> int | None:
+    if not file_path.exists() or not shutil.which("rapper"):
+        return None
+
+    try:
+        result = subprocess.run(
+            ["rapper", "-i", "turtle", "-o", "ntriples", str(file_path)],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+    except subprocess.SubprocessError:
+        return None
+
+    return sum(
+        1
+        for line in result.stdout.splitlines()
+        if line.strip() and not line.startswith("#")
+    )
+
+
+def file_distribution(dataset_uri: str, file_path: Path) -> list[str]:
+    if not file_path.exists():
+        return []
+
+    file_uri = f"{dataset_uri}/distribution/{file_path.name}"
+
+    return [
+        f"{ttl_uri(dataset_uri)} dcat:distribution {ttl_uri(file_uri)} .",
+        f"{ttl_uri(file_uri)} a dcat:Distribution ;",
+        f"    dcterms:title {ttl_literal(file_path.name)} ;",
+        f"    dcat:byteSize {file_path.stat().st_size} .",
+        "",
+    ]
+
+
+def add_dataset_file_info(lines: list[str], dataset_uri: str, file_path: Path) -> None:
+    lines.extend(file_distribution(dataset_uri, file_path))
+
+    triples = count_triples_with_rapper(file_path)
+    if triples is not None:
+        lines.append(f"{ttl_uri(dataset_uri)} void:triples {triples} .")
+        lines.append("")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--metadata-file",
+        default="build/zenodo_gpml_metadata.json",
+    )
+    parser.add_argument("--core-rdf", required=True)
+    parser.add_argument("--taxonomy-extra", required=True)
+    parser.add_argument("--properties-extra", required=True)
+    parser.add_argument("--output", required=True)
+
+    args = parser.parse_args()
+
+    metadata = json.loads(Path(args.metadata_file).read_text(encoding="utf-8"))
+
+    version = metadata["version"]
+    title = metadata.get("title", f"PlantCyc GPML release {version}")
+    doi = metadata.get("doi")
+    conceptdoi = metadata.get("conceptdoi")
+    publication_date = metadata.get("publication_date")
+    record_url = metadata.get("zenodo_record_url")
+
+    today = dt.date.today().isoformat()
+
+    base = "http://rdf-plantmetwiki.bioinformatics.nl/dataset"
+    core_dataset       = f"{base}/{version}/core"
+    taxonomy_dataset   = f"{base}/{version}/taxonomy-extra"
+    properties_dataset = f"{base}/{version}/properties-extra"
+
+    lines = [
+        "@prefix void:    <http://rdfs.org/ns/void#> .",
+        "@prefix dcterms: <http://purl.org/dc/terms/> .",
+        "@prefix pav:     <http://purl.org/pav/> .",
+        "@prefix dcat:    <http://www.w3.org/ns/dcat#> .",
+        "@prefix foaf:    <http://xmlns.com/foaf/0.1/> .",
+        "@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .",
+        "",
+    ]
+
+    add_pmn_license_document(lines)
+    add_publisher_org(lines)
+
+    # Source GPML dataset — the Zenodo record that was used as input.
+    # Recording this as a void:Dataset makes the provenance navigable: anyone
+    # loading this VoID can follow the DOI to find the exact GPML release.
+    if doi:
+        source_uri = f"https://doi.org/{doi}"
+        lines.extend(
+            [
+                f"{ttl_uri(source_uri)} a void:Dataset ;",
+                f"    dcterms:title {ttl_literal(title, 'en')} ;",
+                f"    dcterms:identifier {ttl_literal(doi)} ;",
+                f"    dcterms:hasVersion {ttl_literal(version)} ;",
+                f"    foaf:page {ttl_uri(source_uri)} .",
+                "",
+            ]
+        )
+    if conceptdoi and conceptdoi != doi:
+        concept_uri = f"https://doi.org/{conceptdoi}"
+        lines.extend(
+            [
+                f"{ttl_uri(concept_uri)} a void:Dataset ;",
+                f"    dcterms:title {ttl_literal(title + ' (concept DOI — always resolves to latest release)', 'en')} ;",
+                f"    dcterms:identifier {ttl_literal(conceptdoi)} ;",
+                f"    foaf:page {ttl_uri(concept_uri)} .",
+                "",
+            ]
+        )
+
+    lines.extend(
+        [
+            f"{ttl_uri(core_dataset)} a void:Dataset ;",
+            f"    dcterms:title {ttl_literal('PlantMetWiki core RDF derived from ' + title, 'en')} ;",
+            f"    dcterms:description {ttl_literal('Core WikiPathways RDF generated from PlantCyc-derived GPML2021 pathway and reaction files.', 'en')} ;",
+            f"    dcterms:hasVersion {ttl_literal(version)} ;",
+            f"    pav:version {ttl_literal(version)} ;",
+            f"    pav:createdOn {ttl_literal(today)}^^xsd:date ;",
+            f"    pav:createdWith {ttl_literal('gpml2rdf-4.0.4-SNAPSHOT.jar')} ;",
+            f"    void:sparqlEndpoint {ttl_uri('https://sparql-plantmetwiki.bioinformatics.nl/sparql')} ;",
+            f"    void:vocabulary {ttl_uri('http://vocabularies.wikipathways.org/wp#')} ,",
+            f"                    {ttl_uri('http://vocabularies.wikipathways.org/gpml#')} ,",
+            f"                    {ttl_uri('http://purl.org/dc/terms/')} ,",
+            f"                    {ttl_uri('http://purl.org/pav/')} ;",
+            f"    foaf:homepage {ttl_uri('https://plantmetwiki.bioinformatics.nl/')} .",
+            "",
+            f"{ttl_uri(taxonomy_dataset)} a void:Dataset ;",
+            f"    dcterms:title {ttl_literal('PlantMetWiki taxonomy extra RDF derived from ' + title, 'en')} ;",
+            f"    dcterms:description {ttl_literal('Extra RDF layer adding Viridiplantae pathway/reaction annotations and specific NCBI Taxonomy annotations for GeneProduct and Protein nodes. Taxon IRIs use the OBO Foundry NCBITaxon namespace (purl.obolibrary.org/obo/NCBITaxon_).', 'en')} ;",
+            f"    dcterms:isPartOf {ttl_uri(core_dataset)} ;",
+            f"    dcterms:hasVersion {ttl_literal(version)} ;",
+            f"    dcterms:references {ttl_uri('http://purl.obolibrary.org/obo/ncbitaxon.owl')} ;",
+            f"    void:vocabulary {ttl_uri('http://purl.obolibrary.org/obo/NCBITaxon_')} ;",
+            f"    pav:createdOn {ttl_literal(today)}^^xsd:date .",
+            "",
+            f"{ttl_uri(properties_dataset)} a void:Dataset ;",
+            f"    dcterms:title {ttl_literal('PlantMetWiki GPML property extra RDF derived from ' + title, 'en')} ;",
+            f"    dcterms:description {ttl_literal('Extra RDF layer preserving PlantCyc and GPML key-value Property elements from Pathway, DataNode, and Interaction elements.', 'en')} ;",
+            f"    dcterms:isPartOf {ttl_uri(core_dataset)} ;",
+            f"    dcterms:hasVersion {ttl_literal(version)} ;",
+            f"    pav:createdOn {ttl_literal(today)}^^xsd:date .",
+            "",
+        ]
+    )
+
+    all_datasets = [core_dataset, taxonomy_dataset, properties_dataset]
+
+    if doi:
+        source_uri = f"https://doi.org/{doi}"
+        for ds in all_datasets:
+            lines.append(f"{ttl_uri(ds)} dcterms:source {ttl_uri(source_uri)} .")
+        lines.append("")
+
+    if conceptdoi:
+        concept_uri = f"https://doi.org/{conceptdoi}"
+        for ds in all_datasets:
+            lines.append(f"{ttl_uri(ds)} pav:derivedFrom {ttl_uri(concept_uri)} .")
+        lines.append("")
+
+    # foaf:page on every dataset → concept DOI landing page on Zenodo.
+    # Use the concept DOI so the link always resolves to the latest version.
+    if conceptdoi:
+        concept_page = f"https://doi.org/{conceptdoi}"
+        for ds in all_datasets:
+            lines.append(f"{ttl_uri(ds)} foaf:page {ttl_uri(concept_page)} .")
+        lines.append("")
+    elif record_url:
+        # Fallback: specific-version record URL (less preferred than concept DOI)
+        for ds in all_datasets:
+            lines.append(f"{ttl_uri(ds)} foaf:page {ttl_uri(record_url)} .")
+        lines.append("")
+
+    # dcterms:issued = date the RDF was generated (today), not the GPML input date.
+    # The GPML input date is already captured via dcterms:source / pav:derivedFrom above.
+    # dcterms:modified mirrors dcterms:issued here since each release regenerates
+    # the full bundle from scratch (no incremental updates).
+    for ds in all_datasets:
+        lines.append(f"{ttl_uri(ds)} dcterms:issued {ttl_literal(today)}^^xsd:date .")
+        lines.append(f"{ttl_uri(ds)} dcterms:modified {ttl_literal(today)}^^xsd:date .")
+    lines.append("")
+
+    for ds in all_datasets:
+        lines.append(f"{ttl_uri(ds)} dcterms:publisher {ttl_uri(PUBLISHER_URI)} .")
+        lines.append(f"{ttl_uri(ds)} foaf:page {ttl_uri(CLASS_STRUCTURE_PAGE)} .")
+    lines.append("")
+
+    for ds in all_datasets:
+        add_pmn_license_to_dataset(lines, ds)
+
+    add_dataset_file_info(lines, core_dataset, Path(args.core_rdf))
+    add_dataset_file_info(lines, taxonomy_dataset, Path(args.taxonomy_extra))
+    add_dataset_file_info(lines, properties_dataset, Path(args.properties_extra))
+
+    Path(args.output).write_text("\n".join(lines), encoding="utf-8")
+    print(f"Wrote VoID metadata: {args.output}")
+
+
+if __name__ == "__main__":
+    main()

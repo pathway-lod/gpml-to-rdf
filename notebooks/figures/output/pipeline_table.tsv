@@ -1,0 +1,11 @@
+Stage	Tool / Script	Output artefact	Key statistics	Notes
+1. PlantCyc 17.0 (source)	BioCyc flat files (.dat)	455 ORG-IDs → 439 NCBI taxa	1,162 pathways · 1,316 reactions	PMN/PlantCyc licence
+2. Input validation	validate_plantcyc_input.py	VALIDATION_REPORT.txt, VALIDATION_SUMMARY.tsv	5 ERRORs skipped · 2 WARNINGs	Deterministic build; documented in Table S3
+3. GPML conversion	build_pathways.py + gpml2rdf-4.0.4.jar	2,478 GPML2021 files	8,259 GeneProduct · 10,715 Protein · 23,449 Metabolite · 34,273 interactions; Taxon coverage: 98.7% genes · 98.8% proteins	GPML2021 XSD validated (0 errors)
+4. Core RDF	gpml-to-rdf (Java + Makefile)	graph/pathways	3,826,567 triples	WikiPathways wp: vocabulary
+5. Taxonomy extra RDF	create_gpml_taxonomy_extra_rdf.py	graph/gpml-taxonomy-extra	30,176 triples · 425/439 NCBI taxa annotated · 6 taxa absent from OBO Foundry (37 DataNodes affected)	wp:organism ncbi:XXXX per DataNode; absent taxa documented in explore_taxonomy_rdf.ipynb
+6. Properties extra RDF	create_gpml_properties_extra_rdf.py	graph/gpml-properties-extra	2,617,839 triples	PlantCyc key-value metadata preserved
+7. RDF validation	validate_rdf.py	RDF_VALIDATION_REPORT.txt	0 errors · 3,826,567 + 30,176 + 2,617,839 triples across 3 graphs verified	TTL syntax + content checks on all output files before Virtuoso load
+8. NCBITaxon ontology (ROBOT MIREOT)	load-ncbitaxon.sh --subset plantmetwiki (Snorql-UI)	graph/ncbitaxon	17,707 triples · MIREOT subset: 424 seed taxa + ancestors · 1.4 MB (from 1,800 MB full release, v2026-05-13)	ROBOT v1.9.6 extract --method MIREOT; OBO Foundry CC0 licence
+9. BGC integration	map-to-rdf	graph/bgc-mibig, graph/bgc-plantismash	13,450 triples · 199 pathway crosslinks	MIBiG 4.0 + plantiSMASH predictions
+10. Triplestore (Virtuoso 7.2)	docker compose up -d virtuoso	SPARQL endpoint + Snorql-UI browser	6,505,863 total triples across 6 named graphs	https://sparql-plantmetwiki.bioinformatics.nl
