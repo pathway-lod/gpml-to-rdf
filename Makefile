@@ -1,13 +1,26 @@
+SHELL := /bin/bash
+
 PCWPRDFS := ${shell cat pathways.txt | sed -e 's/\(.*\)/output\/rdf\/core\/pathways\/Human\/\1.ttl/' }
 PCGPMLRDFS := ${shell cat pathways.txt | sed -e 's/\(.*\)/output\/rdf\/core\/pathways\/gpml\/Human\/\1.ttl/' }
 RCWPRDFS := ${shell cat reactions.txt | sed -e 's/\(.*\)/output\/rdf\/core\/reactions\/Human\/\1.ttl/' }
 RCGPMLRDFS := ${shell cat reactions.txt | sed -e 's/\(.*\)/output\/rdf\/core\/reactions\/gpml\/Human\/\1.ttl/' }
 
 GPMLRDFJAR = tools/gpml2rdf-4.0.4-SNAPSHOT.jar
+LOG_DIR = logs
+
+.PHONY: all rdf
 
 all: rdf
 
-rdf: pcrdf reactrdf
+# Wraps pcrdf/reactrdf in a sub-make so the combined output (including
+# parallel -j jobs) is captured to a timestamped log file as well as
+# printed live, e.g. `make -B -k -j 12 rdf` -> logs/rdf-<timestamp>.log
+rdf:
+	@mkdir -p $(LOG_DIR)
+	@logfile="$(LOG_DIR)/rdf-$$(date +%Y%m%d-%H%M%S).log"; \
+	echo "Logging build output to $$logfile"; \
+	$(MAKE) pcrdf reactrdf 2>&1 | tee "$$logfile"; \
+	exit $${PIPESTATUS[0]}
 
 pathways.txt:
 	@find input/gpml/renamed/pathways -name "*.gpml" | xargs -I{} basename {} .gpml | sort | grep "^PC" > pathways.txt

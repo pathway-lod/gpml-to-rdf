@@ -4,6 +4,7 @@ pathways.txt
 reactions.txt
 output/rdf/
 output/bundles/
+logs/
 *.ttl.gz
 *.ttl
 build/
