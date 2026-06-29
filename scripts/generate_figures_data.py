@@ -20,6 +20,7 @@ Usage
 from __future__ import annotations
 
 import argparse
+import re
 from pathlib import Path
 
 import pandas as pd
@@ -46,16 +47,50 @@ PREFIX ncbi:    <http://purl.obolibrary.org/obo/NCBITaxon_>
 
 # ── SPARQL helper ─────────────────────────────────────────────────────────────
 
-def sparql(endpoint: str, query: str, timeout: int = 300) -> pd.DataFrame:
-    """Run a SELECT query against Virtuoso; return results as a DataFrame."""
+def sparql(endpoint: str, query: str, timeout: int = 300, page_size: int = 10_000) -> pd.DataFrame:
+    """Run a SELECT query against Virtuoso; return results as a DataFrame.
+
+    Paginates with LIMIT/OFFSET so results aren't silently truncated by
+    Virtuoso's default 10,000-row SPARQL endpoint cap -- this previously
+    caused undercounted results for any query returning ungrouped
+    (pwID, entity) pairs (e.g. wp:Metabolite memberships: 22,109 true pairs,
+    only 10,000 returned without pagination).
+
+    page_size MUST match (or be below) the server's actual enforced cap:
+    Virtuoso silently caps every response at that cap regardless of the
+    LIMIT requested, so a larger page_size makes a capped (partial-looking)
+    response indistinguishable from a genuinely final page, ending
+    pagination early with data silently missing.
+    """
     sw = SPARQLWrapper(endpoint)
     sw.setReturnFormat(JSON)
     sw.setTimeout(timeout)
-    sw.setQuery(PREFIXES + "\n" + query.strip())
-    results = sw.query().convert()
-    vars_   = results["head"]["vars"]
-    rows    = [{v: r.get(v, {}).get("value", "") for v in vars_}
-               for r in results["results"]["bindings"]]
+    base_query = PREFIXES + "\n" + query.strip()
+
+    # Caller already specified its own LIMIT (e.g. a connectivity probe) --
+    # run as-is, single page, no pagination appended.
+    if re.search(r"\bLIMIT\s+\d+", query, re.IGNORECASE):
+        sw.setQuery(base_query)
+        results = sw.query().convert()
+        vars_ = results["head"]["vars"]
+        rows = [{v: r.get(v, {}).get("value", "") for v in vars_}
+                for r in results["results"]["bindings"]]
+        return pd.DataFrame(rows, columns=vars_)
+
+    vars_: list[str] = []
+    all_bindings: list[dict] = []
+    offset = 0
+    while True:
+        sw.setQuery(f"{base_query}\nLIMIT {page_size} OFFSET {offset}")
+        results = sw.query().convert()
+        vars_ = results["head"]["vars"]
+        bindings = results["results"]["bindings"]
+        all_bindings.extend(bindings)
+        if len(bindings) < page_size:
+            break
+        offset += page_size
+
+    rows = [{v: r.get(v, {}).get("value", "") for v in vars_} for r in all_bindings]
     return pd.DataFrame(rows, columns=vars_)
 
 
@@ -507,9 +542,10 @@ def per_species_nrs(ep: str, out_dir: Path) -> pd.DataFrame:
     for col in ("pathways", "genes", "enzymes", "metabolites", "conversions",
                 "catalysis", "publications"):
         df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0).astype(int)
+    df["taxon_id"] = df["taxon"].str.rsplit("_", n=1).str[-1]
     df = df.sort_values("pathways", ascending=False)
 
-    return save(df[["species", "pathways", "genes", "enzymes",
+    return save(df[["species", "taxon_id", "pathways", "genes", "enzymes",
                      "metabolites", "conversions", "catalysis", "publications"]],
                 out_dir, "per_species_nrs.csv")
 

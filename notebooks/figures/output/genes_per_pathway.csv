@@ -504,8 +504,8 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC990_r17.0.0_20260605-171052
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC141_r17.0.0_20260605-171052,CO₂ fixation into oxaloacetate (anaplerotic),4
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC32_r17.0.0_20260605-171052,gibberellin biosynthesis II (early C-3 hydroxylation),4
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1151_r17.0.0_20260605-171052,pyridoxal 5'-phosphate salvage I,4
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC839_r17.0.0_20260605-171052,TRANS-RXN-186,4
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1089_r17.0.0_20260605-171052,luteolinidin 5-O-glucoside biosynthesis,4
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC839_r17.0.0_20260605-171052,TRANS-RXN-186,4
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1141_r17.0.0_20260605-171052,PRPP biosynthesis,4
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC29_r17.0.0_20260605-171052,chorismate biosynthesis from 3-dehydroquinate,4
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC520_r17.0.0_20260605-171052,hyperxanthone E biosynthesis,4
@@ -1028,8 +1028,8 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC360_r17.0.0_20260605-171052
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC191_r17.0.0_20260605-171052,RXN-7876,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC401_r17.0.0_20260605-171052,RXN-6542,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC116_r17.0.0_20260605-171052,MALTODEG-RXN,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC965_r17.0.0_20260605-171052,RXN4FS-15,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1222_r17.0.0_20260605-171052,RXN-18451,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC965_r17.0.0_20260605-171052,RXN4FS-15,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC610_r17.0.0_20260605-171052,HYDROXYPRODEHYDROG-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC216_r17.0.0_20260605-171052,Formaldehyde dehydrogenase (glutathione),1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC409_r17.0.0_20260605-171052,RXN-12242,1
@@ -1051,8 +1051,8 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC514_r17.0.0_20260605-171052
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC433_r17.0.0_20260605-171052,RXN-7892,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1218_r17.0.0_20260605-171052,dihydroorotate dehydrogenase,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1224_r17.0.0_20260605-171052,2.3.1.162-RXN,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1068_r17.0.0_20260605-171052,RXN-7183,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC562_r17.0.0_20260605-171052,CELLULOSE-SYNTHASE-GDP-FORMING-RXN,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1068_r17.0.0_20260605-171052,RXN-7183,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC496_r17.0.0_20260605-171052,RXN4FS-5,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC860_r17.0.0_20260605-171052,FAD-PYROPHOSPHATASE-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC612_r17.0.0_20260605-171052,L-glutamate biosynthesis V,1
@@ -1076,8 +1076,8 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC344_r17.0.0_20260605-171052
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC357_r17.0.0_20260605-171052,pinitol biosynthesis I,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1153_r17.0.0_20260605-171052,RXN4FS-28,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC41_r17.0.0_20260605-171052,RXN-9023,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC999_r17.0.0_20260605-171052,RXN-3103,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC183_r17.0.0_20260605-171052,2-HEXADECENAL-REDUCTASE-RXN,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC999_r17.0.0_20260605-171052,RXN-3103,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC128_r17.0.0_20260605-171052,hypericin biosynthesis,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1121_r17.0.0_20260605-171052,RXN-7875,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1226_r17.0.0_20260605-171052,RXN-8345,1
@@ -1145,8 +1145,8 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC857_r17.0.0_20260605-171052
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1116_r17.0.0_20260605-171052,pyrethrin I biosynthesis,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC221_r17.0.0_20260605-171052,NADH-DEHYDROGENASE-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC213_r17.0.0_20260605-171052,RXNQT-4372,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC352_r17.0.0_20260605-171052,kaempferol diglycoside biosynthesis (pollen-specific),1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC760_r17.0.0_20260605-171052,RXN-8564,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC352_r17.0.0_20260605-171052,kaempferol diglycoside biosynthesis (pollen-specific),1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC889_r17.0.0_20260605-171052,benzoyl-CoA biosynthesis,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC472_r17.0.0_20260605-171052,RXN-12516,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC848_r17.0.0_20260605-171052,(+)-secoisolariciresinol diglucoside biosynthesis,1
@@ -1162,8 +1162,8 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC957_r17.0.0_20260605-171052
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC725_r17.0.0_20260605-171052,galloylated catechin biosynthesis,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1199_r17.0.0_20260605-171052,7KAPSYN-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC634_r17.0.0_20260605-171052,2.8.1.6-RXN,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC293_r17.0.0_20260605-171052,guanosine nucleotides degradation II,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC51_r17.0.0_20260605-171052,RXN-10869,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC293_r17.0.0_20260605-171052,guanosine nucleotides degradation II,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC447_r17.0.0_20260605-171052,coumestrol biosynthesis,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1092_r17.0.0_20260605-171052,Farnesyl-diphosphate farnesyltransferase,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC563_r17.0.0_20260605-171052,RXN-19008,1
@@ -1177,8 +1177,8 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC428_r17.0.0_20260605-171052
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC761_r17.0.0_20260605-171052,(5Z)-icosenoate biosynthesis,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1277_r17.0.0_20260605-171052,RXN-7878,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC766_r17.0.0_20260605-171052,TRANS-RXN4LZ-4,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC585_r17.0.0_20260605-171052,RXN4FS-17,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC270_r17.0.0_20260605-171052,RXNQT-4387,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC585_r17.0.0_20260605-171052,RXN4FS-17,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1241_r17.0.0_20260605-171052,RXN-2103,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC442_r17.0.0_20260605-171052,ACYLACPSYNTH-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC203_r17.0.0_20260605-171052,RXN-8557,1
@@ -1204,8 +1204,8 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC299_r17.0.0_20260605-171052
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC255_r17.0.0_20260605-171052,ubiquinol-9 biosynthesis (late decarboxylation),1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC951_r17.0.0_20260605-171052,RXN-8355,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC792_r17.0.0_20260605-171052,6-methoxypodophyllotoxin biosynthesis,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC126_r17.0.0_20260605-171052,L-proline biosynthesis III (from L-ornithine),1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC543_r17.0.0_20260605-171052,RXN-8418,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC126_r17.0.0_20260605-171052,L-proline biosynthesis III (from L-ornithine),1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC2_r17.0.0_20260605-171052,RXN-7617,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1025_r17.0.0_20260605-171052,RXN-15556,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC98_r17.0.0_20260605-171052,MALTODEXGLUCOSID-RXN,1
@@ -1228,8 +1228,8 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC389_r17.0.0_20260605-171052
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC252_r17.0.0_20260605-171052,gramine biosynthesis,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1015_r17.0.0_20260605-171052,TRANS-RXN4LZ-45,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1193_r17.0.0_20260605-171052,RXNQT-4171,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC547_r17.0.0_20260605-171052,1.3.7.2-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC608_r17.0.0_20260605-171052,luteolin glycosides biosynthesis,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC547_r17.0.0_20260605-171052,1.3.7.2-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC206_r17.0.0_20260605-171052,RXN-11936,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC683_r17.0.0_20260605-171052,rosmarinic acid biosynthesis II,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC255_r17.0.0_20260605-171052,RXN-10868,1
@@ -1255,20 +1255,20 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC40_r17.0.0_20260605-171052,
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC721_r17.0.0_20260605-171052,RXN-19007,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC826_r17.0.0_20260605-171052,RXN4KF-52,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC829_r17.0.0_20260605-171052,UDP-β-L-arabinose biosynthesis I (from UDP-α-D-xylose),1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC704_r17.0.0_20260605-171052,KETOLACTOSE-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC376_r17.0.0_20260605-171052,1.5.1.7-RXN,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC704_r17.0.0_20260605-171052,KETOLACTOSE-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC357_r17.0.0_20260605-171052,RXN4FS-16,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC76_r17.0.0_20260605-171052,1.3.7.5-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC198_r17.0.0_20260605-171052,RXN-11473,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC285_r17.0.0_20260605-171052,3.2.1.7-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC170_r17.0.0_20260605-171052,RXN4FS-11,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC285_r17.0.0_20260605-171052,3.2.1.7-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC697_r17.0.0_20260605-171052,RXN-8544,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC604_r17.0.0_20260605-171052,2.7.9.4-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1249_r17.0.0_20260605-171052,RXN-13728,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC253_r17.0.0_20260605-171052,RXN-14981,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC31_r17.0.0_20260605-171052,matairesinol biosynthesis,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC906_r17.0.0_20260605-171052,cyanide degradation,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC176_r17.0.0_20260605-171052,RXN-1824,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC906_r17.0.0_20260605-171052,cyanide degradation,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC844_r17.0.0_20260605-171052,RXN-10769,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC988_r17.0.0_20260605-171052,tetraacylsucrose biosynthesis (Solanum),1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC714_r17.0.0_20260605-171052,RXN-12309,1
@@ -1278,8 +1278,8 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC294_r17.0.0_20260605-171052
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC959_r17.0.0_20260605-171052,RXN-7673,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC408_r17.0.0_20260605-171052,starch degradation I,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC457_r17.0.0_20260605-171052,Fe(II)-nicotianamine transport in phloem,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC729_r17.0.0_20260605-171052,RXN-13373,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1276_r17.0.0_20260605-171052,RXN-12085,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC729_r17.0.0_20260605-171052,RXN-13373,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC300_r17.0.0_20260605-171052,RXN-7883,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1272_r17.0.0_20260605-171052,RXN-7897,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1004_r17.0.0_20260605-171052,cadmium transport I,1
@@ -1298,8 +1298,8 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC492_r17.0.0_20260605-171052
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC665_r17.0.0_20260605-171052,HYPOXANPRIBOSYLTRAN-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC797_r17.0.0_20260605-171052,parkeol biosynthesis,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1017_r17.0.0_20260605-171052,RXN-12417,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC784_r17.0.0_20260605-171052,crocetin esters biosynthesis,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1044_r17.0.0_20260605-171052,"(9Z,11E,14Z)-(13S)-hydroperoxyoctadeca-9,11,14-trienoate 12,13-hydro-lyase",1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC784_r17.0.0_20260605-171052,crocetin esters biosynthesis,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC466_r17.0.0_20260605-171052,RXN-14355,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1055_r17.0.0_20260605-171052,L-glutamate biosynthesis II,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC517_r17.0.0_20260605-171052,LACCASE-RXN,1
@@ -1307,8 +1307,8 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC252_r17.0.0_20260605-171052
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC104_r17.0.0_20260605-171052,RXN-7877,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1286_r17.0.0_20260605-171052,RXN-8426,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1063_r17.0.0_20260605-171052,RXN-6546,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC991_r17.0.0_20260605-171052,RXN-10938,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC471_r17.0.0_20260605-171052,hexaprenyldihydroxybenzoate methyltransferase,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC991_r17.0.0_20260605-171052,RXN-10938,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC741_r17.0.0_20260605-171052,RXN-5481,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC120_r17.0.0_20260605-171052,RXN-18444,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC940_r17.0.0_20260605-171052,RXN-8545,1
@@ -1326,8 +1326,8 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC656_r17.0.0_20260605-171052
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC324_r17.0.0_20260605-171052,RXN-10770,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC402_r17.0.0_20260605-171052,RXN-12307,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1195_r17.0.0_20260605-171052,3.2.1.3-RXN,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC963_r17.0.0_20260605-171052,RXN-11230,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC311_r17.0.0_20260605-171052,furcatin degradation,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC963_r17.0.0_20260605-171052,RXN-11230,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC8_r17.0.0_20260605-171052,glycerol degradation I,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC469_r17.0.0_20260605-171052,RXN-10879,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC739_r17.0.0_20260605-171052,RXN-13187,1
@@ -1341,12 +1341,12 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1315_r17.0.0_20260605-17105
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC917_r17.0.0_20260605-171052,glycine cleavage,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1075_r17.0.0_20260605-171052,3.1.4.37-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC878_r17.0.0_20260605-171052,MANNPGUANYLTRANGDP-RXN,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC558_r17.0.0_20260605-171052,choline monooxygenase (NADP),1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC874_r17.0.0_20260605-171052,sulfoquinovosyl diacylglycerol biosynthesis,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC558_r17.0.0_20260605-171052,choline monooxygenase (NADP),1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC983_r17.0.0_20260605-171052,"fructose 2,6-bisphosphate biosynthesis",1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC18_r17.0.0_20260605-171052,RXN0-5363,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC92_r17.0.0_20260605-171052,RXN-8556,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1071_r17.0.0_20260605-171052,wogonin metabolism,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC92_r17.0.0_20260605-171052,RXN-8556,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC118_r17.0.0_20260605-171052,RXN4KF-11495,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC734_r17.0.0_20260605-171052,"fatty acid β-oxidation III (unsaturated, odd number)",1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC608_r17.0.0_20260605-171052,2.7.9.5-RXN,1
@@ -1403,8 +1403,8 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC329_r17.0.0_20260605-171052
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC404_r17.0.0_20260605-171052,RXN-8419,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC477_r17.0.0_20260605-171052,RXN-8571,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC789_r17.0.0_20260605-171052,aloenin biosynthesis,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC954_r17.0.0_20260605-171052,RXN-19657,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC726_r17.0.0_20260605-171052,6-phospho-&beta;-fructofuranosidase,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC954_r17.0.0_20260605-171052,RXN-19657,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1047_r17.0.0_20260605-171052,gallate biosynthesis,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC290_r17.0.0_20260605-171052,RXN-8737,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC639_r17.0.0_20260605-171052,1.14.19.1-RXN,1
@@ -1420,12 +1420,12 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC700_r17.0.0_20260605-171052
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC434_r17.0.0_20260605-171052,glutamate-glutamine shuttle,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC847_r17.0.0_20260605-171052,cannabinoid biosynthesis,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC788_r17.0.0_20260605-171052,D-myo-inositol-5-phosphate metabolism,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC139_r17.0.0_20260605-171052,"(7Z,10Z,13Z)-hexadecatrienoate biosynthesis",1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1023_r17.0.0_20260605-171052,RXN-10884,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC139_r17.0.0_20260605-171052,"(7Z,10Z,13Z)-hexadecatrienoate biosynthesis",1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC788_r17.0.0_20260605-171052,RXN-8548,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC302_r17.0.0_20260605-171052,RXN4FS-27,1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1270_r17.0.0_20260605-171052,RXNQT-4385,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC1079_r17.0.0_20260605-171052,marneral biosynthesis,1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1270_r17.0.0_20260605-171052,RXNQT-4385,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC575_r17.0.0_20260605-171052,RXN-10874,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC455_r17.0.0_20260605-171052,3.2.1.23-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC398_r17.0.0_20260605-171052,sapienate biosynthesis,1
@@ -1478,8 +1478,8 @@ http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1086_r17.0.0_20260605-17105
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC863_r17.0.0_20260605-171052,RXNQT-4383,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC950_r17.0.0_20260605-171052,3.6.3.35-RXN,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC77_r17.0.0_20260605-171052,"L-ascorbate biosynthesis II (plants, L-gulose pathway)",1
-http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC728_r17.0.0_20260605-171052,RXN-7920,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC71_r17.0.0_20260605-171052,L-asparagine biosynthesis III (tRNA-dependent),1
+http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC728_r17.0.0_20260605-171052,RXN-7920,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1033_r17.0.0_20260605-171052,RXNQT-4384,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/RC1243_r17.0.0_20260605-171052,RXN4FS-25,1
 http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC276_r17.0.0_20260605-171052,furaneol and mesifurane biosynthesis,1

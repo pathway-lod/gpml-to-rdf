@@ -1,321 +1,321 @@
-species,pathways,genes,enzymes,metabolites,conversions,catalysis,publications
-Arabidopsis thaliana,1038,1121,1325,1354,2323,4732,3929
-Zea mays subsp. mays,142,71,111,170,229,324,1149
-Glycine max,142,120,160,158,198,665,1124
-Solanum lycopersicum,123,78,82,192,255,284,1039
-Chlamydomonas reinhardtii,111,94,156,141,204,264,860
-Lathyrus oleraceus,100,20,52,105,171,193,725
-Oryza sativa Japonica Group,72,34,36,78,109,132,582
-Nicotiana tabacum,67,23,42,79,111,119,598
-Oryza sativa,64,38,44,98,125,149,521
-Catharanthus roseus,61,18,30,70,99,113,544
-Spinacia oleracea,60,9,36,50,94,121,522
-Triticum aestivum,59,13,29,68,99,121,605
-Petunia x hybrida,59,19,22,55,78,84,502
-Lotus japonicus,56,115,115,68,71,513,475
-Solanum tuberosum,54,70,100,66,79,198,641
-Abies grandis,52,11,12,57,92,194,168
-Hordeum vulgare,38,19,32,43,40,54,357
-Solanum habrochaites,35,17,16,44,72,105,258
-Capsicum annuum,34,5,10,23,36,36,346
-Picea abies,33,10,12,36,69,121,160
-Medicago sativa,30,9,12,19,39,39,388
-Petroselinum crispum,29,2,7,16,32,32,278
-Hevea brasiliensis,29,2,7,16,44,44,267
-Ricinus communis,28,3,18,27,39,68,273
-Ocimum basilicum,26,15,18,31,38,47,178
-Rosa hybrid cultivar,25,12,12,24,36,42,211
-Sorghum bicolor,25,14,15,19,33,35,227
-Zea mays,24,10,15,24,27,35,243
-Panicum virgatum,24,7,4,13,34,38,258
-Vitis vinifera,23,10,10,34,31,37,182
-Daucus carota,22,1,16,27,44,44,235
-Allium cepa,21,6,13,28,43,62,158
-Glycyrrhiza glabra,21,6,7,19,30,30,158
-Cicer arietinum,21,1,37,29,60,60,147
-Populus trichocarpa,21,9,10,16,22,28,316
-Mesembryanthemum crystallinum,20,1,2,2,1,1,224
-Artemisia annua,20,8,9,13,27,31,175
-Fagopyrum esculentum,20,3,6,17,21,29,194
-Perilla frutescens,19,5,5,23,34,34,166
-Setaria italica,19,17,18,19,27,100,180
-Papaver somniferum,18,21,26,38,48,70,156
-Ginkgo biloba,18,8,8,17,24,25,292
-Medicago truncatula,18,9,9,34,33,35,145
-Clarkia breweri,18,6,9,10,10,11,144
-Lithospermum erythrorhizon,17,4,6,8,20,37,184
-Humulus lupulus,17,6,7,31,49,52,123
-Cucumis melo,17,8,12,15,26,39,185
-Brassica napus,17,4,9,10,12,14,200
-Linum usitatissimum,16,2,5,9,14,14,166
-Citrus x paradisi,16,2,3,12,20,37,149
-Lupinus luteus,16,0,8,23,33,43,72
-Pinus massoniana,16,1,1,2,16,16,181
-Phaseolus vulgaris,16,0,10,17,17,17,91
-Glycyrrhiza echinata,15,4,13,23,37,41,164
-Avena sativa,15,5,9,14,15,21,105
-Musa acuminata,15,0,5,2,5,10,168
-Physcomitrium patens,15,6,6,21,19,19,103
-Cucumis sativus,15,3,12,19,23,56,140
-Panax ginseng,15,4,5,9,24,24,186
-Equisetum arvense,15,2,5,13,23,23,220
-Fragaria x ananassa,14,2,5,13,10,10,156
-Dianthus caryophyllus,13,8,11,22,18,28,102
-Cucurbita maxima,13,5,5,24,42,52,66
-Vigna radiata var. radiata,13,0,9,21,29,29,156
-Panicum miliaceum,13,3,5,8,22,22,132
-Coffea canephora,12,6,6,7,30,38,138
-Selaginella moellendorffii,12,3,3,8,13,21,59
-Pinus sylvestris,12,2,6,26,27,27,161
-Camellia sinensis,12,4,10,14,20,24,91
-Rhizophora stylosa,12,3,3,6,17,27,135
-Malus domestica,11,8,10,16,13,20,200
-Mentha x piperita,11,11,12,24,23,29,97
-Secale cereale,11,1,12,12,14,23,139
-Chrysosplenium americanum,10,4,12,26,55,62,121
-Amaranthus cruentus,10,0,2,3,13,13,142
-Matthiola incana,10,0,4,18,27,27,121
-Vicia faba,10,0,4,10,14,14,66
-Carthamus tinctorius,10,1,4,7,10,10,88
-Cannabis sativa,10,3,6,12,13,13,104
-Kalanchoe daigremontiana,10,3,3,5,11,30,85
-Oryza,10,10,10,9,14,19,76
-Eschscholzia californica,9,9,13,24,31,35,78
-Robinia pseudoacacia,9,1,2,4,9,9,68
-Bruguiera gymnorhiza,9,2,2,3,10,10,87
-Pinus taeda,9,3,3,22,32,32,33
-Petunia axillaris,9,13,13,13,10,46,59
-Ipomoea batatas,8,3,5,10,8,9,98
-Capsicum chinense,8,2,2,4,9,9,129
-Lactuca sativa,8,5,5,11,16,25,90
-Coptis japonica,8,4,6,12,9,9,75
-Salvia fruticosa,8,3,3,5,10,10,31
-Thalictrum flavum subsp. glaucum,8,1,1,3,9,9,44
-Berberis,8,0,4,5,13,13,44
-Taxus cuspidata,8,9,12,19,15,15,19
-Rudbeckia hirta,7,0,5,9,14,14,112
-Cichorium intybus,7,3,8,9,13,28,59
-Ruta graveolens,7,6,6,9,10,13,105
-Nicotiana attenuata,7,8,8,14,15,30,112
-Hypericum androsaemum,7,0,6,10,16,16,47
-Mentha spicata,7,2,2,3,8,9,67
-Solanum pennellii,7,4,4,15,30,30,40
-Rubus idaeus,7,2,3,6,8,14,106
-Narcissus pseudonarcissus,7,2,2,6,17,17,75
-Brassica rapa,7,0,2,2,1,1,125
-Pueraria montana var. lobata,7,1,2,6,7,7,113
-Nicotiana sylvestris,6,3,5,6,10,18,52
-Camptotheca acuminata,6,4,4,2,6,12,61
-Vigna aconitifolia,6,1,2,2,1,1,48
-Gerbera hybrid cultivar,6,1,1,6,7,7,68
-Helianthus tuberosus,6,0,4,6,5,5,26
-Curcuma longa,6,4,4,7,7,11,35
-Glandularia x hybrida,6,1,1,6,8,8,28
-Berberis stolonifera,6,1,2,5,7,7,68
-Nicotiana benthamiana,6,6,6,22,15,15,105
-Allium sativum,6,1,4,5,7,7,50
-Adiantum capillus-veneris,6,2,2,5,7,7,72
-Citrus unshiu,6,1,1,7,10,10,142
-Sinopodophyllum hexandrum,5,7,7,9,10,10,19
-Pogostemon cablin,5,5,5,5,6,10,28
-Limnanthes douglasii,5,2,2,2,5,10,44
-Zingiber zerumbet,5,3,3,6,8,8,46
-Manihot esculenta,5,4,6,15,24,40,22
-Fagopyrum tataricum,5,1,5,6,9,13,128
-Datura stramonium,5,2,3,5,8,8,46
-Actinidia chinensis,5,3,3,6,6,6,47
-Argemone mexicana,5,2,2,6,8,8,40
-Lavandula angustifolia,5,2,2,4,5,5,27
-Antirrhinum majus,5,2,3,9,8,9,25
-Nicotiana rustica,5,1,1,2,5,5,46
-Lupinus angustifolius,5,0,1,3,5,5,37
-Amaranthus hypochondriacus,5,0,1,3,5,5,63
-Portulaca grandiflora,5,1,3,4,7,7,73
-Chrysanthemum x morifolium,5,2,2,7,6,11,25
-Digitalis lanata,5,4,9,10,9,9,11
-Botryococcus braunii,5,1,2,4,5,5,99
-Podophyllum peltatum,5,1,3,4,3,3,40
-Delphinium grandiflorum,5,4,4,14,12,14,14
-Astragalus bisulcatus,4,1,2,4,5,5,44
-Brassica oleracea var. italica,4,2,2,4,5,7,46
-Rhodiola rosea,4,1,1,2,4,4,65
-Euphorbia lagascae,4,1,3,6,4,4,7
-Ipomoea nil,4,1,1,6,6,6,42
-Apium graveolens,4,2,5,6,8,8,15
-Agapanthus africanus,4,1,1,8,6,6,14
-Cistus creticus,4,2,2,4,4,4,50
-Tanacetum parthenium,4,3,3,6,6,6,29
-Brassica juncea,4,2,2,2,4,8,24
-Rubia tinctorum,4,0,1,2,4,4,33
-Vigna angularis,4,2,2,8,4,4,37
-Cassia,4,0,1,2,4,4,15
-Haematococcus lacustris,4,1,1,6,10,10,88
-Santalum austrocaledonicum,4,1,1,5,7,7,28
-Aloe arborescens,4,4,4,6,4,7,14
-Salvia splendens,4,2,2,5,6,6,27
-Ipomoea purpurea,4,1,1,6,6,6,42
-Hyoscyamus niger,4,2,4,3,4,4,48
-Citrus japonica,4,1,1,9,7,7,48
-Ajuga reptans,4,2,2,6,6,6,24
-Lupinus albus,4,1,2,7,7,7,32
-Citrus maxima,4,1,3,8,4,4,46
-Santalum album,4,1,1,5,7,7,28
-Populus deltoides,4,2,2,8,6,6,53
-Phaseolus coccineus,4,2,2,10,10,10,59
-Wollastonia biflora,3,0,2,2,2,2,23
-Mentha aquatica,3,1,1,2,3,3,19
-Cucurbita pepo,3,0,4,7,4,4,31
-Quercus rubra,3,0,1,2,3,3,27
-Pimpinella,3,0,2,3,3,3,4
-Brassica oleracea,3,2,6,6,4,9,31
-Quercus robur,3,1,5,6,9,12,27
-Senecio,3,0,1,2,3,3,26
-Zea luxurians,3,1,1,2,3,3,37
-Aquilaria crassna,3,2,2,3,4,8,24
-Vitis labrusca,3,1,1,2,3,3,26
-Nepenthes alata,3,4,4,3,3,5,19
-Linum perenne,3,2,2,6,4,4,23
-Allium cepa var. aggregatum,3,1,1,4,3,3,23
-Nicotiana plumbaginifolia,3,1,1,3,5,5,69
-Lilium longiflorum,3,0,2,2,1,1,39
-Coffea arabica,3,6,6,6,7,18,10
-Scutellaria baicalensis,3,4,5,5,3,5,23
-Raphanus sativus,3,1,8,9,8,8,37
-Gossypium arboreum,3,4,4,5,4,6,21
-Gossypium hirsutum,3,0,1,2,3,3,41
-Zea mays subsp. huehuetenangensis,3,1,1,2,3,3,37
-Gentiana triflora,3,4,4,6,11,11,27
-Rosa x damascena,3,1,1,6,3,3,8
-Pinus radiata,3,1,1,2,3,3,68
-Simmondsia chinensis,3,3,3,3,4,4,20
-Coleus scutellarioides,3,1,4,9,16,16,44
-Ceratodon purpureus,3,2,2,6,6,10,18
-Urochloa panicoides,3,0,1,2,3,3,102
-Clitoria ternatea,3,0,4,4,6,6,17
-Cinnamomum tenuipile,2,1,1,2,2,2,27
-Vanilla planifolia,2,3,3,4,4,4,5
-Capsicum,2,1,2,3,2,2,36
-Lolium perenne,2,2,2,4,3,3,70
-Lupinus polyphyllus,2,0,3,5,4,4,14
-Bixa orellana,2,3,3,5,5,5,15
-Flaveria chlorifolia,2,0,4,6,8,8,78
-Oryza sativa Indica Group,2,1,1,2,2,2,31
-Picea sitchensis,2,1,1,2,2,2,35
-Oxybasis rubra,2,0,1,3,4,4,29
-Crocus sativus,2,2,2,7,4,4,18
-Zingiber officinale,2,2,2,4,2,2,22
-Stevia rebaudiana,2,3,4,8,8,8,27
-Desmodium uncinatum,2,1,1,4,2,2,11
-Solanum melongena,2,0,1,2,2,2,47
-Pimpinella anisum,2,2,2,3,4,4,4
-Saccharum officinarum,2,0,3,3,2,2,20
-Liquidambar styraciflua,2,1,1,2,2,2,70
-Eustoma russellianum,2,1,1,3,2,2,3
-Glycine soja,2,2,2,4,2,4,3
-Magnolia grandiflora,2,2,2,4,2,2,27
-Rosa chinensis,2,4,4,6,4,6,8
-Sauromatum venosum,2,1,1,2,2,2,24
-Allioideae,2,0,1,2,2,2,21
-Mirabilis jalapa,2,1,1,2,2,2,29
-Brassica oleracea var. botrytis,2,0,2,2,1,1,33
-Prunus serotina,2,3,3,4,4,4,15
-Rauvolfia serpentina,2,4,9,13,9,11,13
-Atropa belladonna,2,1,1,2,2,2,28
-Picea glauca,2,0,1,2,2,2,10
-Limnanthes alba,2,2,2,4,2,2,20
-Anemone leveillei,2,2,2,4,2,4,6
-Lens culinaris,2,0,1,8,5,5,20
-Sesamum indicum,2,3,3,6,4,4,18
-Silene latifolia,2,0,3,6,3,3,11
-Stellaria media,2,0,2,4,4,4,13
-Solanum aculeatissimum,2,1,1,2,2,2,47
-Calendula officinalis,2,2,3,4,2,4,8
-Sanguinaria canadensis,2,0,1,4,2,2,31
-Pinus strobus,2,0,1,10,5,5,22
-Salvia officinalis,2,0,3,3,2,2,13
-Forsythia x intermedia,2,0,2,0,0,0,22
-Flaveria bidentis,2,0,2,4,4,4,78
-Lavandula,2,0,0,0,0,0,20
-Sorbus aucuparia,2,5,6,6,4,5,16
-Fragaria,2,1,1,4,2,2,12
-Rheum palmatum,2,0,2,0,0,0,22
-Barnadesia spinosa,2,1,1,4,6,6,12
-Actinidia deliciosa,2,2,2,4,2,2,9
-Saussurea medusa,2,1,1,6,3,3,28
-Melilotus albus,2,0,5,7,5,5,16
-Nicotiana glutinosa,2,0,1,3,4,4,32
-Senecio vulgaris,1,1,1,2,1,1,4
-Trifolium incarnatum,1,0,2,3,2,2,5
-Punica granatum,1,1,1,2,1,2,2
-Vernicia fordii,1,1,1,2,1,1,2
-Pinus contorta,1,1,1,2,1,1,20
-Solidago canadensis,1,2,2,3,2,2,17
-Saccharopolyspora erythraea NRRL 2338,1,0,0,0,0,0,2
-Nerine bowdenii,1,0,2,3,2,2,23
-Pinus banksiana,1,0,1,2,1,1,20
-Dryopteris crassirhizoma,1,1,1,2,1,1,2
-Prunus dulcis,1,4,4,3,2,4,6
-Brachypodium distachyon,1,1,1,2,1,1,64
-Crepis alpina,1,1,1,2,1,1,1
-Batis maritima,1,1,1,4,3,3,8
-Senecio vernalis,1,1,1,2,1,1,4
-Rosa,1,0,1,2,1,1,4
-Tanacetum cinerariifolium,1,1,1,2,1,1,5
-Euonymus alatus,1,0,2,2,1,2,10
-Auxenochlorella pyrenoidosa,1,0,1,2,1,1,3
-Rosa multiflora,1,0,3,4,3,3,9
-Camellia sinensis var. assamica,1,0,1,5,3,3,21
-Borago officinalis,1,1,1,2,1,1,4
-Lupinus,1,0,1,2,1,1,7
-Pteris vittata,1,1,1,2,1,1,14
-Prunus mume,1,0,1,2,1,1,6
-Beta vulgaris subsp. vulgaris,1,0,1,2,1,1,5
-Digitalis purpurea,1,0,1,2,1,1,4
-Glebionis coronaria,1,0,0,0,0,0,2
-Glycyrrhiza uralensis,1,2,2,8,8,8,24
-Bromus inermis,1,0,1,2,1,1,5
-Astragalus mongholicus,1,1,1,2,1,1,15
-Santalum spicatum,1,1,1,2,1,1,10
-Citrus sinensis,1,1,1,2,1,1,5
-Phaseolus lunatus,1,1,1,4,2,2,13
-Taxus brevifolia,1,1,1,2,1,1,32
-Hydrangea macrophylla,1,1,1,2,1,1,22
-Cryptomeria japonica,1,0,1,2,1,1,24
-Actinidia eriantha,1,1,1,2,1,1,9
-Taxus chinensis,1,1,1,2,1,1,32
-Canavalia ensiformis,1,0,1,2,1,1,5
-Diospyros kaki,1,0,1,2,1,1,12
-Pseudotsuga menziesii,1,1,1,2,1,1,23
-Thalictrum,1,0,2,3,2,2,16
-Narcissus aff. pseudonarcissus MK-2014,1,2,2,5,4,4,23
-Capsicum frutescens,1,1,1,2,1,1,17
-Pinus densiflora,1,0,2,0,0,0,16
-Coriandrum sativum,1,1,2,0,2,2,2
-Viburnum furcatum,1,1,1,2,1,1,6
-Sesbania rostrata,1,1,1,2,1,1,58
-Juglans regia,1,0,1,2,1,1,9
-Phleum pratense,1,1,1,2,1,1,5
-Thunbergia alata,1,1,1,0,1,1,1
-Vicia sativa subsp. nigra,1,1,1,2,1,1,11
-Citrus junos,1,1,1,2,1,1,23
-Dimorphotheca sinuata,1,2,2,3,2,2,6
-Leucaena leucocephala,1,0,1,0,0,0,5
-Populus tremuloides,1,1,1,2,1,1,23
-Canavalia lineata,1,0,3,3,2,2,5
-Ammi majus,1,1,4,6,5,5,11
-Mimosa pudica,1,1,1,2,1,1,2
-Piper nigrum,1,0,1,2,1,1,3
-Gossypium barbadense,1,0,1,0,0,0,12
-Momordica charantia,1,1,1,2,1,1,2
-Trichosanthes kirilowii,1,1,1,2,1,1,2
-Tagetes erecta,1,0,1,2,1,1,25
-Silene latifolia subsp. alba,1,0,2,3,2,2,8
-Carica papaya,1,0,0,0,0,0,9
-Toxicodendron vernicifluum,1,1,3,3,2,6,3
-Impatiens balsamina,1,1,1,2,1,1,2
-Cestrum elegans,1,0,1,2,1,1,2
-Lathyrus tingitanus,1,0,1,2,1,1,2
-Hyoscyamus muticus,1,2,2,4,3,3,7
-Dalbergia nigrescens,1,1,1,4,2,2,5
-Lolium multiflorum,1,0,0,0,0,0,2
-Sophora flavescens,1,2,4,4,3,4,8
+species,taxon_id,pathways,genes,enzymes,metabolites,conversions,catalysis,publications
+Arabidopsis thaliana,3702,1038,1121,1325,1354,2323,4732,3929
+Zea mays subsp. mays,381124,142,71,111,170,229,324,1149
+Glycine max,3847,142,120,160,158,198,665,1124
+Solanum lycopersicum,4081,123,78,82,192,255,284,1039
+Chlamydomonas reinhardtii,3055,111,94,156,141,204,264,860
+Lathyrus oleraceus,3888,100,20,52,105,171,193,725
+Oryza sativa Japonica Group,39947,72,34,36,78,109,132,582
+Nicotiana tabacum,4097,67,23,42,79,111,119,598
+Oryza sativa,4530,64,38,44,98,125,149,521
+Catharanthus roseus,4058,61,18,30,70,99,113,544
+Spinacia oleracea,3562,60,9,36,50,94,121,522
+Triticum aestivum,4565,59,13,29,68,99,121,605
+Petunia x hybrida,4102,59,19,22,55,78,84,502
+Lotus japonicus,34305,56,115,115,68,71,513,475
+Solanum tuberosum,4113,54,70,100,66,79,198,641
+Abies grandis,46611,52,11,12,57,92,194,168
+Hordeum vulgare,4513,38,19,32,43,40,54,357
+Solanum habrochaites,62890,35,17,16,44,72,105,258
+Capsicum annuum,4072,34,5,10,23,36,36,346
+Picea abies,3329,33,10,12,36,69,121,160
+Medicago sativa,3879,30,9,12,19,39,39,388
+Petroselinum crispum,4043,29,2,7,16,32,32,278
+Hevea brasiliensis,3981,29,2,7,16,44,44,267
+Ricinus communis,3988,28,3,18,27,39,68,273
+Ocimum basilicum,39350,26,15,18,31,38,47,178
+Rosa hybrid cultivar,128735,25,12,12,24,36,42,211
+Sorghum bicolor,4558,25,14,15,19,33,35,227
+Zea mays,4577,24,10,15,24,27,35,243
+Panicum virgatum,38727,24,7,4,13,34,38,258
+Vitis vinifera,29760,23,10,10,34,31,37,182
+Daucus carota,4039,22,1,16,27,44,44,235
+Allium cepa,4679,21,6,13,28,43,62,158
+Glycyrrhiza glabra,49827,21,6,7,19,30,30,158
+Cicer arietinum,3827,21,1,37,29,60,60,147
+Populus trichocarpa,3694,21,9,10,16,22,28,316
+Mesembryanthemum crystallinum,3544,20,1,2,2,1,1,224
+Artemisia annua,35608,20,8,9,13,27,31,175
+Fagopyrum esculentum,3617,20,3,6,17,21,29,194
+Perilla frutescens,48386,19,5,5,23,34,34,166
+Setaria italica,4555,19,17,18,19,27,100,180
+Papaver somniferum,3469,18,21,26,38,48,70,156
+Ginkgo biloba,3311,18,8,8,17,24,25,292
+Medicago truncatula,3880,18,9,9,34,33,35,145
+Clarkia breweri,36903,18,6,9,10,10,11,144
+Lithospermum erythrorhizon,34254,17,4,6,8,20,37,184
+Humulus lupulus,3486,17,6,7,31,49,52,123
+Cucumis melo,3656,17,8,12,15,26,39,185
+Brassica napus,3708,17,4,9,10,12,14,200
+Linum usitatissimum,4006,16,2,5,9,14,14,166
+Citrus x paradisi,37656,16,2,3,12,20,37,149
+Lupinus luteus,3873,16,0,8,23,33,43,72
+Pinus massoniana,88730,16,1,1,2,16,16,181
+Phaseolus vulgaris,3885,16,0,10,17,17,17,91
+Glycyrrhiza echinata,46348,15,4,13,23,37,41,164
+Avena sativa,4498,15,5,9,14,15,21,105
+Musa acuminata,4641,15,0,5,2,5,10,168
+Physcomitrium patens,3218,15,6,6,21,19,19,103
+Cucumis sativus,3659,15,3,12,19,23,56,140
+Panax ginseng,4054,15,4,5,9,24,24,186
+Equisetum arvense,3258,15,2,5,13,23,23,220
+Fragaria x ananassa,3747,14,2,5,13,10,10,156
+Dianthus caryophyllus,3570,13,8,11,22,18,28,102
+Cucurbita maxima,3661,13,5,5,24,42,52,66
+Vigna radiata var. radiata,3916,13,0,9,21,29,29,156
+Panicum miliaceum,4540,13,3,5,8,22,22,132
+Coffea canephora,49390,12,6,6,7,30,38,138
+Selaginella moellendorffii,88036,12,3,3,8,13,21,59
+Pinus sylvestris,3349,12,2,6,26,27,27,161
+Camellia sinensis,4442,12,4,10,14,20,24,91
+Rhizophora stylosa,98588,12,3,3,6,17,27,135
+Malus domestica,3750,11,8,10,16,13,20,200
+Mentha x piperita,34256,11,11,12,24,23,29,97
+Secale cereale,4550,11,1,12,12,14,23,139
+Chrysosplenium americanum,36749,10,4,12,26,55,62,121
+Amaranthus cruentus,117272,10,0,2,3,13,13,142
+Matthiola incana,3724,10,0,4,18,27,27,121
+Vicia faba,3906,10,0,4,10,14,14,66
+Carthamus tinctorius,4222,10,1,4,7,10,10,88
+Cannabis sativa,3483,10,3,6,12,13,13,104
+Kalanchoe daigremontiana,23013,10,3,3,5,11,30,85
+Oryza,4527,10,10,10,9,14,19,76
+Eschscholzia californica,3467,9,9,13,24,31,35,78
+Robinia pseudoacacia,35938,9,1,2,4,9,9,68
+Bruguiera gymnorhiza,39984,9,2,2,3,10,10,87
+Pinus taeda,3352,9,3,3,22,32,32,33
+Petunia axillaris,33119,9,13,13,13,10,46,59
+Ipomoea batatas,4120,8,3,5,10,8,9,98
+Capsicum chinense,80379,8,2,2,4,9,9,129
+Lactuca sativa,4236,8,5,5,11,16,25,90
+Coptis japonica,3442,8,4,6,12,9,9,75
+Salvia fruticosa,268906,8,3,3,5,10,10,31
+Thalictrum flavum subsp. glaucum,150095,8,1,1,3,9,9,44
+Berberis,22774,8,0,4,5,13,13,44
+Taxus cuspidata,99806,8,9,12,19,15,15,19
+Rudbeckia hirta,52299,7,0,5,9,14,14,112
+Cichorium intybus,13427,7,3,8,9,13,28,59
+Ruta graveolens,37565,7,6,6,9,10,13,105
+Nicotiana attenuata,49451,7,8,8,14,15,30,112
+Hypericum androsaemum,140968,7,0,6,10,16,16,47
+Mentha spicata,29719,7,2,2,3,8,9,67
+Solanum pennellii,28526,7,4,4,15,30,30,40
+Rubus idaeus,32247,7,2,3,6,8,14,106
+Narcissus pseudonarcissus,39639,7,2,2,6,17,17,75
+Brassica rapa,3711,7,0,2,2,1,1,125
+Pueraria montana var. lobata,3893,7,1,2,6,7,7,113
+Nicotiana sylvestris,4096,6,3,5,6,10,18,52
+Camptotheca acuminata,16922,6,4,4,2,6,12,61
+Vigna aconitifolia,3918,6,1,2,2,1,1,48
+Gerbera hybrid cultivar,18101,6,1,1,6,7,7,68
+Helianthus tuberosus,4233,6,0,4,6,5,5,26
+Curcuma longa,136217,6,4,4,7,7,11,35
+Glandularia x hybrida,76714,6,1,1,6,8,8,28
+Berberis stolonifera,33814,6,1,2,5,7,7,68
+Nicotiana benthamiana,4100,6,6,6,22,15,15,105
+Allium sativum,4682,6,1,4,5,7,7,50
+Adiantum capillus-veneris,13818,6,2,2,5,7,7,72
+Citrus unshiu,55188,6,1,1,7,10,10,142
+Sinopodophyllum hexandrum,93608,5,7,7,9,10,10,19
+Pogostemon cablin,28511,5,5,5,5,6,10,28
+Limnanthes douglasii,28973,5,2,2,2,5,10,44
+Zingiber zerumbet,311405,5,3,3,6,8,8,46
+Manihot esculenta,3983,5,4,6,15,24,40,22
+Fagopyrum tataricum,62330,5,1,5,6,9,13,128
+Datura stramonium,4076,5,2,3,5,8,8,46
+Actinidia chinensis,3625,5,3,3,6,6,6,47
+Argemone mexicana,54796,5,2,2,6,8,8,40
+Lavandula angustifolia,39329,5,2,2,4,5,5,27
+Antirrhinum majus,4151,5,2,3,9,8,9,25
+Nicotiana rustica,4093,5,1,1,2,5,5,46
+Lupinus angustifolius,3871,5,0,1,3,5,5,37
+Amaranthus hypochondriacus,28502,5,0,1,3,5,5,63
+Portulaca grandiflora,3583,5,1,3,4,7,7,73
+Chrysanthemum x morifolium,41568,5,2,2,7,6,11,25
+Digitalis lanata,49450,5,4,9,10,9,9,11
+Botryococcus braunii,38881,5,1,2,4,5,5,99
+Podophyllum peltatum,35933,5,1,3,4,3,3,40
+Delphinium grandiflorum,85439,5,4,4,14,12,14,14
+Astragalus bisulcatus,20406,4,1,2,4,5,5,44
+Brassica oleracea var. italica,36774,4,2,2,4,5,7,46
+Rhodiola rosea,203015,4,1,1,2,4,4,65
+Euphorbia lagascae,54672,4,1,3,6,4,4,7
+Ipomoea nil,35883,4,1,1,6,6,6,42
+Apium graveolens,4045,4,2,5,6,8,8,15
+Agapanthus africanus,51501,4,1,1,8,6,6,14
+Cistus creticus,191224,4,2,2,4,4,4,50
+Tanacetum parthenium,127999,4,3,3,6,6,6,29
+Brassica juncea,3707,4,2,2,2,4,8,24
+Rubia tinctorum,29802,4,0,1,2,4,4,33
+Vigna angularis,3914,4,2,2,8,4,4,37
+Cassia,53851,4,0,1,2,4,4,15
+Haematococcus lacustris,44745,4,1,1,6,10,10,88
+Santalum austrocaledonicum,293154,4,1,1,5,7,7,28
+Aloe arborescens,45385,4,4,4,6,4,7,14
+Salvia splendens,180675,4,2,2,5,6,6,27
+Ipomoea purpurea,4121,4,1,1,6,6,6,42
+Hyoscyamus niger,4079,4,2,4,3,4,4,48
+Citrus japonica,76966,4,1,1,9,7,7,48
+Ajuga reptans,38596,4,2,2,6,6,6,24
+Lupinus albus,3870,4,1,2,7,7,7,32
+Citrus maxima,37334,4,1,3,8,4,4,46
+Santalum album,35974,4,1,1,5,7,7,28
+Populus deltoides,3696,4,2,2,8,6,6,53
+Phaseolus coccineus,3886,4,2,2,10,10,10,59
+Wollastonia biflora,101473,3,0,2,2,2,2,23
+Mentha aquatica,190902,3,1,1,2,3,3,19
+Cucurbita pepo,3663,3,0,4,7,4,4,31
+Quercus rubra,3512,3,0,1,2,3,3,27
+Pimpinella,40958,3,0,2,3,3,3,4
+Brassica oleracea,3712,3,2,6,6,4,9,31
+Quercus robur,38942,3,1,5,6,9,12,27
+Senecio,18794,3,0,1,2,3,3,26
+Zea luxurians,15945,3,1,1,2,3,3,37
+Aquilaria crassna,223751,3,2,2,3,4,8,24
+Vitis labrusca,103355,3,1,1,2,3,3,26
+Nepenthes alata,4376,3,4,4,3,3,5,19
+Linum perenne,35941,3,2,2,6,4,4,23
+Allium cepa var. aggregatum,28911,3,1,1,4,3,3,23
+Nicotiana plumbaginifolia,4092,3,1,1,3,5,5,69
+Lilium longiflorum,4690,3,0,2,2,1,1,39
+Coffea arabica,13443,3,6,6,6,7,18,10
+Scutellaria baicalensis,65409,3,4,5,5,3,5,23
+Raphanus sativus,3726,3,1,8,9,8,8,37
+Gossypium arboreum,29729,3,4,4,5,4,6,21
+Gossypium hirsutum,3635,3,0,1,2,3,3,41
+Zea mays subsp. huehuetenangensis,112001,3,1,1,2,3,3,37
+Gentiana triflora,55190,3,4,4,6,11,11,27
+Rosa x damascena,3765,3,1,1,6,3,3,8
+Pinus radiata,3347,3,1,1,2,3,3,68
+Simmondsia chinensis,3999,3,3,3,3,4,4,20
+Coleus scutellarioides,4142,3,1,4,9,16,16,44
+Ceratodon purpureus,3225,3,2,2,6,6,10,18
+Urochloa panicoides,37563,3,0,1,2,3,3,102
+Clitoria ternatea,43366,3,0,4,4,6,6,17
+Cinnamomum tenuipile,192326,2,1,1,2,2,2,27
+Vanilla planifolia,51239,2,3,3,4,4,4,5
+Capsicum,4071,2,1,2,3,2,2,36
+Lolium perenne,4522,2,2,2,4,3,3,70
+Lupinus polyphyllus,3874,2,0,3,5,4,4,14
+Bixa orellana,66672,2,3,3,5,5,5,15
+Flaveria chlorifolia,4228,2,0,4,6,8,8,78
+Oryza sativa Indica Group,39946,2,1,1,2,2,2,31
+Picea sitchensis,3332,2,1,1,2,2,2,35
+Oxybasis rubra,3560,2,0,1,3,4,4,29
+Crocus sativus,82528,2,2,2,7,4,4,18
+Zingiber officinale,94328,2,2,2,4,2,2,22
+Stevia rebaudiana,55670,2,3,4,8,8,8,27
+Desmodium uncinatum,225101,2,1,1,4,2,2,11
+Solanum melongena,4111,2,0,1,2,2,2,47
+Pimpinella anisum,271192,2,2,2,3,4,4,4
+Saccharum officinarum,4547,2,0,3,3,2,2,20
+Liquidambar styraciflua,4400,2,1,1,2,2,2,70
+Eustoma russellianum,52518,2,1,1,3,2,2,3
+Glycine soja,3848,2,2,2,4,2,4,3
+Magnolia grandiflora,3406,2,2,2,4,2,2,27
+Rosa chinensis,74649,2,4,4,6,4,6,8
+Sauromatum venosum,4463,2,1,1,2,2,2,24
+Allioideae,40553,2,0,1,2,2,2,21
+Mirabilis jalapa,3538,2,1,1,2,2,2,29
+Brassica oleracea var. botrytis,3715,2,0,2,2,1,1,33
+Prunus serotina,23207,2,3,3,4,4,4,15
+Rauvolfia serpentina,4060,2,4,9,13,9,11,13
+Atropa belladonna,33113,2,1,1,2,2,2,28
+Picea glauca,3330,2,0,1,2,2,2,10
+Limnanthes alba,42439,2,2,2,4,2,2,20
+Anemone leveillei,212809,2,2,2,4,2,4,6
+Lens culinaris,3864,2,0,1,8,5,5,20
+Sesamum indicum,4182,2,3,3,6,4,4,18
+Silene latifolia,37657,2,0,3,6,3,3,11
+Stellaria media,13274,2,0,2,4,4,4,13
+Solanum aculeatissimum,267265,2,1,1,2,2,2,47
+Calendula officinalis,41496,2,2,3,4,2,4,8
+Sanguinaria canadensis,3472,2,0,1,4,2,2,31
+Pinus strobus,3348,2,0,1,10,5,5,22
+Salvia officinalis,38868,2,0,3,3,2,2,13
+Forsythia x intermedia,55183,2,0,2,0,0,0,22
+Flaveria bidentis,4224,2,0,2,4,4,4,78
+Lavandula,39169,2,0,0,0,0,0,20
+Sorbus aucuparia,36599,2,5,6,6,4,5,16
+Fragaria,3746,2,1,1,4,2,2,12
+Rheum palmatum,137221,2,0,2,0,0,0,22
+Barnadesia spinosa,171760,2,1,1,4,6,6,12
+Actinidia deliciosa,3627,2,2,2,4,2,2,9
+Saussurea medusa,137893,2,1,1,6,3,3,28
+Melilotus albus,47082,2,0,5,7,5,5,16
+Nicotiana glutinosa,35889,2,0,1,3,4,4,32
+Senecio vulgaris,76276,1,1,1,2,1,1,4
+Trifolium incarnatum,60916,1,0,2,3,2,2,5
+Punica granatum,22663,1,1,1,2,1,2,2
+Vernicia fordii,73154,1,1,1,2,1,1,2
+Pinus contorta,3339,1,1,1,2,1,1,20
+Solidago canadensis,59297,1,2,2,3,2,2,17
+Saccharopolyspora erythraea NRRL 2338,405948,1,0,0,0,0,0,2
+Nerine bowdenii,59042,1,0,2,3,2,2,23
+Pinus banksiana,3353,1,0,1,2,1,1,20
+Dryopteris crassirhizoma,97234,1,1,1,2,1,1,2
+Prunus dulcis,3755,1,4,4,3,2,4,6
+Brachypodium distachyon,15368,1,1,1,2,1,1,64
+Crepis alpina,72610,1,1,1,2,1,1,1
+Batis maritima,4436,1,1,1,4,3,3,8
+Senecio vernalis,93496,1,1,1,2,1,1,4
+Rosa,3764,1,0,1,2,1,1,4
+Tanacetum cinerariifolium,118510,1,1,1,2,1,1,5
+Euonymus alatus,4307,1,0,2,2,1,2,10
+Auxenochlorella pyrenoidosa,3078,1,0,1,2,1,1,3
+Rosa multiflora,74647,1,0,3,4,3,3,9
+Camellia sinensis var. assamica,261999,1,0,1,5,3,3,21
+Borago officinalis,13363,1,1,1,2,1,1,4
+Lupinus,3869,1,0,1,2,1,1,7
+Pteris vittata,13821,1,1,1,2,1,1,14
+Prunus mume,102107,1,0,1,2,1,1,6
+Beta vulgaris subsp. vulgaris,3555,1,0,1,2,1,1,5
+Digitalis purpurea,4164,1,0,1,2,1,1,4
+Glebionis coronaria,99038,1,0,0,0,0,0,2
+Glycyrrhiza uralensis,74613,1,2,2,8,8,8,24
+Bromus inermis,15371,1,0,1,2,1,1,5
+Astragalus mongholicus,119829,1,1,1,2,1,1,15
+Santalum spicatum,453088,1,1,1,2,1,1,10
+Citrus sinensis,2711,1,1,1,2,1,1,5
+Phaseolus lunatus,3884,1,1,1,4,2,2,13
+Taxus brevifolia,46220,1,1,1,2,1,1,32
+Hydrangea macrophylla,23110,1,1,1,2,1,1,22
+Cryptomeria japonica,3369,1,0,1,2,1,1,24
+Actinidia eriantha,165200,1,1,1,2,1,1,9
+Taxus chinensis,29808,1,1,1,2,1,1,32
+Canavalia ensiformis,3823,1,0,1,2,1,1,5
+Diospyros kaki,35925,1,0,1,2,1,1,12
+Pseudotsuga menziesii,3357,1,1,1,2,1,1,23
+Thalictrum,46968,1,0,2,3,2,2,16
+Narcissus aff. pseudonarcissus MK-2014,1540222,1,2,2,5,4,4,23
+Capsicum frutescens,4073,1,1,1,2,1,1,17
+Pinus densiflora,77912,1,0,2,0,0,0,16
+Coriandrum sativum,4047,1,1,2,0,2,2,2
+Viburnum furcatum,237940,1,1,1,2,1,1,6
+Sesbania rostrata,3895,1,1,1,2,1,1,58
+Juglans regia,51240,1,0,1,2,1,1,9
+Phleum pratense,15957,1,1,1,2,1,1,5
+Thunbergia alata,32198,1,1,1,0,1,1,1
+Vicia sativa subsp. nigra,3909,1,1,1,2,1,1,11
+Citrus junos,135197,1,1,1,2,1,1,23
+Dimorphotheca sinuata,112408,1,2,2,3,2,2,6
+Leucaena leucocephala,3866,1,0,1,0,0,0,5
+Populus tremuloides,3693,1,1,1,2,1,1,23
+Canavalia lineata,28957,1,0,3,3,2,2,5
+Ammi majus,48026,1,1,4,6,5,5,11
+Mimosa pudica,76306,1,1,1,2,1,1,2
+Piper nigrum,13216,1,0,1,2,1,1,3
+Gossypium barbadense,3634,1,0,1,0,0,0,12
+Momordica charantia,3673,1,1,1,2,1,1,2
+Trichosanthes kirilowii,3677,1,1,1,2,1,1,2
+Tagetes erecta,13708,1,0,1,2,1,1,25
+Silene latifolia subsp. alba,52853,1,0,2,3,2,2,8
+Carica papaya,3649,1,0,0,0,0,0,9
+Toxicodendron vernicifluum,4013,1,1,3,3,2,6,3
+Impatiens balsamina,63779,1,1,1,2,1,1,2
+Cestrum elegans,103475,1,0,1,2,1,1,2
+Lathyrus tingitanus,3862,1,0,1,2,1,1,2
+Hyoscyamus muticus,35626,1,2,2,4,3,3,7
+Dalbergia nigrescens,298683,1,1,1,4,2,2,5
+Lolium multiflorum,4521,1,0,0,0,0,0,2
+Sophora flavescens,49840,1,2,4,4,3,4,8

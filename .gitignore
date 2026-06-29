@@ -8,6 +8,7 @@ logs/
 *.ttl.gz
 *.ttl
 build/
+__pycache__/
 # Local secrets — never commit
 .env
 # AI usage
