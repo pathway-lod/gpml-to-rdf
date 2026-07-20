@@ -6,17 +6,17 @@
     "nodes": [
       {
         "data": {
-          "iri": "http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC629_r17.0.0_20260520160610",
-          "label": "PC629",
+          "iri": "http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC629_r17.0.0_20260605-171052",
+          "label": "PWY-5710",
           "rdf_type": "wp:Pathway",
           "category": "wp:Pathway",
           "source_graph": "core",
           "level": 0,
           "x": 0.0,
           "y": 0.0,
-          "id": "n739776da2f",
-          "value": "n739776da2f",
-          "name": "n739776da2f"
+          "id": "ncf7a503e51",
+          "value": "ncf7a503e51",
+          "name": "ncf7a503e51"
         },
         "position": {
           "x": 0.0,
@@ -1245,7 +1245,7 @@
         "data": {
           "predicate": "rdf:type",
           "source_graph": "core",
-          "source": "n739776da2f",
+          "source": "ncf7a503e51",
           "target": "nfb19700307",
           "key": 0
         }
@@ -1255,7 +1255,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n0d1e1b57c2",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1282,7 +1282,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "ne8096d7ae4",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1309,7 +1309,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n6a0b2b7f66",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1336,7 +1336,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n51d3dfc9cf",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1363,7 +1363,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "nd5202226aa",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1390,7 +1390,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n3cccb4c5ac",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1417,7 +1417,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n994a8458c7",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1444,7 +1444,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n5097cad8e2",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1471,7 +1471,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "nefb6eceff1",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1498,7 +1498,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n519f114e94",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1525,7 +1525,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n1969433431",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1552,7 +1552,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n8f83352632",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1579,7 +1579,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n3914bbf184",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1606,7 +1606,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n10dbeb3b61",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1633,7 +1633,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n3236bd1315",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1660,7 +1660,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n140a949daa",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1687,7 +1687,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "nfc84b6d743",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1714,7 +1714,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n2584726edf",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1741,7 +1741,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n48f3fc105e",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1768,7 +1768,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n151c81d7e5",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1795,7 +1795,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n7733ce070f",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1822,7 +1822,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n82208a1357",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1849,7 +1849,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n89061e5a8f",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1876,7 +1876,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n7bfc985c17",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1903,7 +1903,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n4d61794c36",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1921,7 +1921,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n24837929e0",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1939,7 +1939,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n14a5186e7e",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1957,7 +1957,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "nc1834b6665",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1975,7 +1975,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n21e52a49d0",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -1993,7 +1993,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n4d51fcb3ca",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2011,7 +2011,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "nf9a848976f",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2029,7 +2029,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n7466c0970b",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2047,7 +2047,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n28f2c7c4e5",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2065,7 +2065,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n7b3d1d834c",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2083,7 +2083,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n9a7970920d",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2101,7 +2101,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n04de64e90e",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2119,7 +2119,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n69ab90bbe3",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2137,7 +2137,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n14cbbeace0",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2155,7 +2155,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n6194cf3322",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2173,7 +2173,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n85e2035b39",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2191,7 +2191,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n7bbbcbaa45",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2209,7 +2209,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n308b3b7e80",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2227,7 +2227,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n6d17f87722",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2245,7 +2245,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "nb297e13197",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2263,7 +2263,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n38235df163",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2281,7 +2281,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "ned150d6dc2",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2299,7 +2299,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n6bb022c452",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2317,7 +2317,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n2ca52515be",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2335,7 +2335,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "nca45fefbae",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2353,7 +2353,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "nb5f92ec5a3",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },
@@ -2371,7 +2371,7 @@
           "predicate": "dcterms:isPartOf",
           "source_graph": "core",
           "source": "n3ef66052ce",
-          "target": "n739776da2f",
+          "target": "ncf7a503e51",
           "key": 0
         }
       },

@@ -236,7 +236,10 @@ Apply hotfixes to normalise identifiers:
 perl -pi -e 's|identifiers\.org/TAIR_gene_name|identifiers.org/tair.name|g' output/bundles/all-${VERSION}.ttl
 perl -pi -e 's|SLM_SLM%3A|SLM_|g' output/bundles/all-${VERSION}.ttl
 perl -pi -e 's|/obo/NCBI Taxonomy_|/obo/NCBITaxon_|g' output/bundles/all-${VERSION}.ttl
+perl -pi -e 's|/obo/NCBITaxon_131567|/obo/NCBITaxon_33090|g' output/bundles/all-${VERSION}.ttl
 ```
+
+The last hotfix corrects a BridgeDb species-lookup gap: the Java `gpml2rdf` tool resolves the GPML `organism="Viridiplantae"` attribute against `org/bridgedb/bio/organisms.tsv` (bundled in `tools/gpml2rdf-4.0.4-SNAPSHOT.jar`), which only lists individual species (e.g. "Arabidopsis thaliana"), not kingdom-level names. Since "Viridiplantae" isn't in that table, the tool falls back to NCBI taxon `131567` ("cellular organisms") for the pathway-level `wp:organism` triple in the core RDF graph. The correct `ncbi:33090` (Viridiplantae) triple is added separately and correctly by `create_gpml_taxonomy_extra_rdf.py` in the taxonomy-extra graph — this hotfix just brings the core graph's pathway-level value in line with it.
 
 Optional syntax validation (requires `rapper`):
 

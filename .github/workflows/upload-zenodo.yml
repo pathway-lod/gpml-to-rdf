@@ -104,6 +104,14 @@ jobs:
           # Fix invalid URIs: gpml2rdf uses dataSource="NCBI Taxonomy" literally → space in URI
           perl -pi -e 's|/obo/NCBI Taxonomy_|/obo/NCBITaxon_|g' \
             output/bundles/all-${VERSION}.ttl
+          # gpml2rdf resolves organism="Viridiplantae" against BridgeDb's
+          # species-only organisms.tsv, which has no kingdom-level entries,
+          # and falls back to NCBITaxon_131567 ("cellular organisms"). The
+          # correct ncbi:33090 is already added separately in the
+          # taxonomy-extra graph (create_gpml_taxonomy_extra_rdf.py) - this
+          # just fixes the bogus value in the core graph.
+          perl -pi -e 's|/obo/NCBITaxon_131567|/obo/NCBITaxon_33090|g' \
+            output/bundles/all-${VERSION}.ttl
 
       - name: Create VoID metadata file
         shell: bash -el {0}
