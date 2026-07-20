@@ -9,9 +9,9 @@
 <key id="d2" for="node" attr.name="rdf_type" attr.type="string"/>
 <key id="d1" for="node" attr.name="label" attr.type="string"/>
 <key id="d0" for="node" attr.name="iri" attr.type="string"/>
-<graph edgedefault="directed"><node id="n739776da2f">
-  <data key="d0">http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC629_r17.0.0_20260520160610</data>
-  <data key="d1">PC629</data>
+<graph edgedefault="directed"><node id="ncf7a503e51">
+  <data key="d0">http://rdf-plantmetwiki.bioinformatics.nl/pathways/PC629_r17.0.0_20260605-171052</data>
+  <data key="d1">PWY-5710</data>
   <data key="d2">wp:Pathway</data>
   <data key="d3">wp:Pathway</data>
   <data key="d4">core</data>
@@ -668,11 +668,11 @@
   <data key="d6">433.31541132537154</data>
   <data key="d7">-76.40519817344936</data>
 </node>
-<edge source="n739776da2f" target="nfb19700307" id="0">
+<edge source="ncf7a503e51" target="nfb19700307" id="0">
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n0d1e1b57c2" target="n739776da2f" id="0">
+<edge source="n0d1e1b57c2" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -684,7 +684,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="ne8096d7ae4" target="n739776da2f" id="0">
+<edge source="ne8096d7ae4" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -696,7 +696,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n6a0b2b7f66" target="n739776da2f" id="0">
+<edge source="n6a0b2b7f66" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -708,7 +708,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n51d3dfc9cf" target="n739776da2f" id="0">
+<edge source="n51d3dfc9cf" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -720,7 +720,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="nd5202226aa" target="n739776da2f" id="0">
+<edge source="nd5202226aa" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -732,7 +732,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n3cccb4c5ac" target="n739776da2f" id="0">
+<edge source="n3cccb4c5ac" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -744,7 +744,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n994a8458c7" target="n739776da2f" id="0">
+<edge source="n994a8458c7" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -756,7 +756,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n5097cad8e2" target="n739776da2f" id="0">
+<edge source="n5097cad8e2" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -768,7 +768,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="nefb6eceff1" target="n739776da2f" id="0">
+<edge source="nefb6eceff1" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -780,7 +780,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n519f114e94" target="n739776da2f" id="0">
+<edge source="n519f114e94" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -792,7 +792,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n1969433431" target="n739776da2f" id="0">
+<edge source="n1969433431" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -804,7 +804,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n8f83352632" target="n739776da2f" id="0">
+<edge source="n8f83352632" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -816,7 +816,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n3914bbf184" target="n739776da2f" id="0">
+<edge source="n3914bbf184" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -828,7 +828,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n10dbeb3b61" target="n739776da2f" id="0">
+<edge source="n10dbeb3b61" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -840,7 +840,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n3236bd1315" target="n739776da2f" id="0">
+<edge source="n3236bd1315" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -852,7 +852,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n140a949daa" target="n739776da2f" id="0">
+<edge source="n140a949daa" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -864,7 +864,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="nfc84b6d743" target="n739776da2f" id="0">
+<edge source="nfc84b6d743" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -876,7 +876,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n2584726edf" target="n739776da2f" id="0">
+<edge source="n2584726edf" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -888,7 +888,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n48f3fc105e" target="n739776da2f" id="0">
+<edge source="n48f3fc105e" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -900,7 +900,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n151c81d7e5" target="n739776da2f" id="0">
+<edge source="n151c81d7e5" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -912,7 +912,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n7733ce070f" target="n739776da2f" id="0">
+<edge source="n7733ce070f" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -924,7 +924,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n82208a1357" target="n739776da2f" id="0">
+<edge source="n82208a1357" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -936,7 +936,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n89061e5a8f" target="n739776da2f" id="0">
+<edge source="n89061e5a8f" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -948,7 +948,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n7bfc985c17" target="n739776da2f" id="0">
+<edge source="n7bfc985c17" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -960,7 +960,7 @@
   <data key="d8">wp:organism</data>
   <data key="d9">taxonomy-extra</data>
 </edge>
-<edge source="n4d61794c36" target="n739776da2f" id="0">
+<edge source="n4d61794c36" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -968,7 +968,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n24837929e0" target="n739776da2f" id="0">
+<edge source="n24837929e0" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -976,7 +976,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n14a5186e7e" target="n739776da2f" id="0">
+<edge source="n14a5186e7e" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -984,7 +984,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="nc1834b6665" target="n739776da2f" id="0">
+<edge source="nc1834b6665" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -992,7 +992,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n21e52a49d0" target="n739776da2f" id="0">
+<edge source="n21e52a49d0" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1000,7 +1000,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n4d51fcb3ca" target="n739776da2f" id="0">
+<edge source="n4d51fcb3ca" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1008,7 +1008,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="nf9a848976f" target="n739776da2f" id="0">
+<edge source="nf9a848976f" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1016,7 +1016,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n7466c0970b" target="n739776da2f" id="0">
+<edge source="n7466c0970b" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1024,7 +1024,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n28f2c7c4e5" target="n739776da2f" id="0">
+<edge source="n28f2c7c4e5" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1032,7 +1032,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n7b3d1d834c" target="n739776da2f" id="0">
+<edge source="n7b3d1d834c" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1040,7 +1040,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n9a7970920d" target="n739776da2f" id="0">
+<edge source="n9a7970920d" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1048,7 +1048,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n04de64e90e" target="n739776da2f" id="0">
+<edge source="n04de64e90e" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1056,7 +1056,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n69ab90bbe3" target="n739776da2f" id="0">
+<edge source="n69ab90bbe3" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1064,7 +1064,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n14cbbeace0" target="n739776da2f" id="0">
+<edge source="n14cbbeace0" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1072,7 +1072,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n6194cf3322" target="n739776da2f" id="0">
+<edge source="n6194cf3322" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1080,7 +1080,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n85e2035b39" target="n739776da2f" id="0">
+<edge source="n85e2035b39" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1088,7 +1088,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n7bbbcbaa45" target="n739776da2f" id="0">
+<edge source="n7bbbcbaa45" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1096,7 +1096,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n308b3b7e80" target="n739776da2f" id="0">
+<edge source="n308b3b7e80" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1104,7 +1104,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n6d17f87722" target="n739776da2f" id="0">
+<edge source="n6d17f87722" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1112,7 +1112,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="nb297e13197" target="n739776da2f" id="0">
+<edge source="nb297e13197" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1120,7 +1120,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n38235df163" target="n739776da2f" id="0">
+<edge source="n38235df163" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1128,7 +1128,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="ned150d6dc2" target="n739776da2f" id="0">
+<edge source="ned150d6dc2" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1136,7 +1136,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n6bb022c452" target="n739776da2f" id="0">
+<edge source="n6bb022c452" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1144,7 +1144,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n2ca52515be" target="n739776da2f" id="0">
+<edge source="n2ca52515be" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1152,7 +1152,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="nca45fefbae" target="n739776da2f" id="0">
+<edge source="nca45fefbae" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1160,7 +1160,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="nb5f92ec5a3" target="n739776da2f" id="0">
+<edge source="nb5f92ec5a3" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>
@@ -1168,7 +1168,7 @@
   <data key="d8">rdf:type</data>
   <data key="d9">core</data>
 </edge>
-<edge source="n3ef66052ce" target="n739776da2f" id="0">
+<edge source="n3ef66052ce" target="ncf7a503e51" id="0">
   <data key="d8">dcterms:isPartOf</data>
   <data key="d9">core</data>
 </edge>

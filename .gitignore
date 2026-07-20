@@ -13,3 +13,6 @@ __pycache__/
 .env
 # AI usage
 CLAUDE.md
+# Office lock/temp files
+~$*
+.~lock.*

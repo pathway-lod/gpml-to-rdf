@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="856.8pt" height="569.036562pt" viewBox="0 0 856.8 569.036562" xmlns="http://www.w3.org/2000/svg" version="1.1">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="846pt" height="558.236562pt" viewBox="0 0 846 558.236562" xmlns="http://www.w3.org/2000/svg" version="1.1">
  <metadata>
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-06-12T15:37:35.706301</dc:date>
+    <dc:date>2026-07-20T12:08:43.895206</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -21,123 +21,123 @@
  </defs>
  <g id="figure_1">
   <g id="patch_1">
-   <path d="M 0 569.036562 
-L 856.8 569.036562 
-L 856.8 0 
+   <path d="M 0 558.236562 
+L 846 558.236562 
+L 846 0 
 L 0 0 
 z
 " style="fill: #ffffff"/>
   </g>
   <g id="axes_1">
    <g id="patch_2">
-    <path d="M 282.041741 174.405735 
-Q 302.038346 206.256928 321.143244 236.687783 
+    <path d="M 278.538431 171.433804 
+Q 298.258891 202.61281 317.082893 232.374471 
 " style="fill: none; stroke: #555555; stroke-width: 1.5; stroke-linecap: round"/>
-    <path d="M 320.71025 232.236658 
-L 321.143244 236.687783 
-L 317.322548 234.363503 
+    <path d="M 316.411049 225.699995 
+L 317.082893 232.374471 
+L 311.340206 228.907261 
 " style="fill: none; stroke: #555555; stroke-width: 1.5; stroke-linecap: round"/>
    </g>
    <g id="patch_3">
-    <path d="M 281.971044 419.211142 
-Q 302.040363 384.047427 321.278388 350.340232 
+    <path d="M 278.466103 411.250187 
+Q 298.258927 376.827429 317.215798 343.858521 
 " style="fill: none; stroke: #555555; stroke-width: 1.5; stroke-linecap: round"/>
-    <path d="M 317.558636 352.82286 
-L 321.278388 350.340232 
-L 321.032639 354.805611 
+    <path d="M 311.624273 347.564578 
+L 317.215798 343.858521 
+L 316.825728 350.555375 
 " style="fill: none; stroke: #555555; stroke-width: 1.5; stroke-linecap: round"/>
    </g>
    <g id="patch_4">
-    <path d="M 552.761631 239.804563 
-Q 547.741835 239.804563 544.39909 239.804563 
+    <path d="M 545.740181 235.484563 
+Q 540.810504 235.484563 537.557877 235.484563 
 " style="fill: none; stroke: #555555; stroke-width: 1.5; stroke-linecap: round"/>
-    <path d="M 548.39909 241.804563 
-L 544.39909 239.804563 
-L 548.39909 237.804563 
+    <path d="M 543.557877 238.484563 
+L 537.557877 235.484563 
+L 543.557877 232.484563 
 " style="fill: none; stroke: #555555; stroke-width: 1.5; stroke-linecap: round"/>
    </g>
    <g id="patch_5">
-    <path d="M 554.76 329.021487 
-Q 554.76 367.276444 554.76 403.854351 
+    <path d="M 547.74 322.944763 
+Q 547.74 360.387711 547.74 396.153609 
 " style="fill: none; stroke: #555555; stroke-width: 1.5; stroke-linecap: round"/>
-    <path d="M 556.76 399.854351 
-L 554.76 403.854351 
-L 552.76 399.854351 
+    <path d="M 550.74 390.153609 
+L 547.74 396.153609 
+L 544.74 390.153609 
 " style="fill: none; stroke: #555555; stroke-width: 1.5; stroke-linecap: round"/>
    </g>
    <g id="patch_6">
-    <path d="M 548.246448 237.868518 
-Q 561.78036 186.131187 574.889855 136.016315 
+    <path d="M 541.320106 233.548956 
+Q 554.670542 182.890507 567.593602 133.85374 
 " style="fill: none; stroke: #555555; stroke-width: 1.5; stroke-linecap: round"/>
-    <path d="M 571.942667 139.379956 
-L 574.889855 136.016315 
-L 575.812455 140.39225 
+    <path d="M 563.163627 138.891132 
+L 567.593602 133.85374 
+L 568.965531 140.420155 
 " style="fill: none; stroke: #555555; stroke-width: 1.5; stroke-linecap: round"/>
    </g>
    <g id="patch_7">
-    <path d="M 548.246448 335.666607 
-Q 561.78036 387.403938 574.889855 437.51881 
+    <path d="M 541.320106 329.456169 
+Q 554.670542 380.114618 567.593602 429.151385 
 " style="fill: none; stroke: #555555; stroke-width: 1.5; stroke-linecap: round"/>
-    <path d="M 575.812455 433.142875 
-L 574.889855 437.51881 
-L 571.942667 434.155169 
+    <path d="M 568.965531 422.58497 
+L 567.593602 429.151385 
+L 563.163627 424.113993 
 " style="fill: none; stroke: #555555; stroke-width: 1.5; stroke-linecap: round"/>
    </g>
    <g id="patch_8">
-    <path d="M 21.24 229.741062 
-L 280.98 229.741062 
-Q 291.51 229.741062 291.51 219.677562 
-L 291.51 45.243563 
-Q 291.51 35.180062 280.98 35.180062 
-L 21.24 35.180062 
-Q 10.71 35.180062 10.71 45.243563 
-L 10.71 219.677562 
-Q 10.71 229.741062 21.24 229.741062 
+    <path d="M 21.06 225.623562 
+L 277.47 225.623562 
+Q 287.865 225.623562 287.865 215.762563 
+L 287.865 44.838563 
+Q 287.865 34.977562 277.47 34.977562 
+L 21.06 34.977562 
+Q 10.665 34.977562 10.665 44.838563 
+L 10.665 215.762563 
+Q 10.665 225.623562 21.06 225.623562 
 z
-" clip-path="url(#pbff3a32528)" style="fill: #1a6e9f; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: miter"/>
+" clip-path="url(#p0838e903f3)" style="fill: #1a6e9f; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: miter"/>
    </g>
    <g id="patch_9">
-    <path d="M 21.24 551.773062 
-L 280.98 551.773062 
-Q 291.51 551.773062 291.51 541.709562 
-L 291.51 367.275562 
-Q 291.51 357.212062 280.98 357.212062 
-L 21.24 357.212062 
-Q 10.71 357.212062 10.71 367.275562 
-L 10.71 541.709562 
-Q 10.71 551.773062 21.24 551.773062 
+    <path d="M 21.06 541.175562 
+L 277.47 541.175562 
+Q 287.865 541.175562 287.865 531.314562 
+L 287.865 360.390562 
+Q 287.865 350.529562 277.47 350.529562 
+L 21.06 350.529562 
+Q 10.665 350.529562 10.665 360.390562 
+L 10.665 531.314562 
+Q 10.665 541.175562 21.06 541.175562 
 z
-" clip-path="url(#pbff3a32528)" style="fill: #1a6e9f; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: miter"/>
+" clip-path="url(#p0838e903f3)" style="fill: #1a6e9f; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: miter"/>
    </g>
    <g id="patch_10">
-    <path d="M 575.82 229.741062 
-L 835.56 229.741062 
-Q 846.09 229.741062 846.09 219.677562 
-L 846.09 45.243563 
-Q 846.09 35.180062 835.56 35.180062 
-L 575.82 35.180062 
-Q 565.29 35.180062 565.29 45.243563 
-L 565.29 219.677562 
-Q 565.29 229.741062 575.82 229.741062 
+    <path d="M 568.53 225.623562 
+L 824.94 225.623562 
+Q 835.335 225.623562 835.335 215.762563 
+L 835.335 44.838563 
+Q 835.335 34.977562 824.94 34.977562 
+L 568.53 34.977562 
+Q 558.135 34.977562 558.135 44.838563 
+L 558.135 215.762563 
+Q 558.135 225.623562 568.53 225.623562 
 z
-" clip-path="url(#pbff3a32528)" style="fill: #1a7a44; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: miter"/>
+" clip-path="url(#p0838e903f3)" style="fill: #1a7a44; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: miter"/>
    </g>
    <g id="patch_11">
-    <path d="M 575.82 551.773062 
-L 835.56 551.773062 
-Q 846.09 551.773062 846.09 541.709562 
-L 846.09 367.275562 
-Q 846.09 357.212062 835.56 357.212062 
-L 575.82 357.212062 
-Q 565.29 357.212062 565.29 367.275562 
-L 565.29 541.709562 
-Q 565.29 551.773062 575.82 551.773062 
+    <path d="M 568.53 541.175562 
+L 824.94 541.175562 
+Q 835.335 541.175562 835.335 531.314562 
+L 835.335 360.390562 
+Q 835.335 350.529562 824.94 350.529562 
+L 568.53 350.529562 
+Q 558.135 350.529562 558.135 360.390562 
+L 558.135 531.314562 
+Q 558.135 541.175562 568.53 541.175562 
 z
-" clip-path="url(#pbff3a32528)" style="fill: #8e5a00; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: miter"/>
+" clip-path="url(#p0838e903f3)" style="fill: #8e5a00; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: miter"/>
    </g>
    <g id="text_1">
     <!-- PlantMetWiki — 7 pathways -->
-    <g style="fill: #ffffff" transform="translate(95.092734 66.48055) scale(0.09 -0.09)">
+    <g style="fill: #ffffff" transform="translate(93.247734 65.77855) scale(0.09 -0.09)">
      <defs>
       <path id="Helvetica-50" d="M 547 4591 
 L 2613 4591 
@@ -527,7 +527,7 @@ z
    </g>
    <g id="text_2">
     <!-- theobromine biosynthesis I -->
-    <g style="fill: #ffffff" transform="translate(103.53125 130.569063) scale(0.08 -0.08)">
+    <g style="fill: #ffffff" transform="translate(101.68625 128.139063) scale(0.08 -0.08)">
      <defs>
       <path id="Helvetica-6f" d="M 1741 363 
 Q 2300 363 2508 786 
@@ -662,7 +662,7 @@ z
      <use xlink:href="#Helvetica-49" transform="translate(1161.767578 0)"/>
     </g>
     <!-- theobromine biosynthesis II -->
-    <g style="fill: #ffffff" transform="translate(102.42 139.193063) scale(0.08 -0.08)">
+    <g style="fill: #ffffff" transform="translate(100.575 136.763063) scale(0.08 -0.08)">
      <use xlink:href="#Helvetica-74"/>
      <use xlink:href="#Helvetica-68" transform="translate(27.783203 0)"/>
      <use xlink:href="#Helvetica-65" transform="translate(83.398438 0)"/>
@@ -692,7 +692,7 @@ z
      <use xlink:href="#Helvetica-49" transform="translate(1189.550781 0)"/>
     </g>
     <!-- (via xanthine) -->
-    <g style="fill: #ffffff" transform="translate(127.1 147.865063) scale(0.08 -0.08)">
+    <g style="fill: #ffffff" transform="translate(125.255 145.435063) scale(0.08 -0.08)">
      <defs>
       <path id="Helvetica-28" d="M 1894 4666 
 Q 1403 3713 1256 3263 
@@ -766,7 +766,7 @@ z
      <use xlink:href="#Helvetica-29" transform="translate(566.992188 0)"/>
     </g>
     <!-- caffeine biosynthesis I -->
-    <g style="fill: #ffffff" transform="translate(111.756875 156.516563) scale(0.08 -0.08)">
+    <g style="fill: #ffffff" transform="translate(109.911875 154.086563) scale(0.08 -0.08)">
      <defs>
       <path id="Helvetica-63" d="M 1703 3444 
 Q 2269 3444 2623 3169 
@@ -840,7 +840,7 @@ z
      <use xlink:href="#Helvetica-49" transform="translate(956.103516 0)"/>
     </g>
     <!-- (+ 4 related pathways) -->
-    <g style="fill: #ffffff" transform="translate(111.425 165.230563) scale(0.08 -0.08)">
+    <g style="fill: #ffffff" transform="translate(109.58 162.800563) scale(0.08 -0.08)">
      <defs>
       <path id="Helvetica-2b" d="M 288 1369 
 L 288 1894 
@@ -929,7 +929,7 @@ z
    </g>
    <g id="text_3">
     <!-- PlantMetWiki — species with genes -->
-    <g style="fill: #ffffff" transform="translate(79.835625 388.51255) scale(0.09 -0.09)">
+    <g style="fill: #ffffff" transform="translate(77.990625 381.33055) scale(0.09 -0.09)">
      <defs>
       <path id="Helvetica-67" d="M 1594 3406 
 Q 1988 3406 2281 3213 
@@ -1005,7 +1005,7 @@ z
    </g>
    <g id="text_4">
     <!-- ✓ Coffea arabica  (12 annotated genes) -->
-    <g style="fill: #ffffff" transform="translate(85.571133 449.500406) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(83.726133 440.590406) scale(0.075 -0.075)">
      <defs>
       <path id="Helvetica-2713" d="M 206 0 
 L 206 4591 
@@ -1121,7 +1121,7 @@ z
      <use xlink:href="#Helvetica-29" transform="translate(1714.550781 0)"/>
     </g>
     <!-- ✓ Camellia sinensis (4 annotated genes) -->
-    <g style="fill: #ffffff" transform="translate(83.909414 457.791656) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(82.064414 448.881656) scale(0.075 -0.075)">
      <use xlink:href="#Helvetica-2713"/>
      <use xlink:href="#Helvetica-20" transform="translate(63.378906 0)"/>
      <use xlink:href="#Helvetica-43" transform="translate(91.162109 0)"/>
@@ -1163,9 +1163,9 @@ z
      <use xlink:href="#Helvetica-29" transform="translate(1758.837891 0)"/>
     </g>
     <!--  -->
-    <g style="fill: #ffffff" transform="translate(151.11 465.907125) scale(0.075 -0.075)"/>
+    <g style="fill: #ffffff" transform="translate(149.265 456.997125) scale(0.075 -0.075)"/>
     <!-- ✗ Theobroma cacao — ABSENT -->
-    <g style="fill: #ffffff" transform="translate(96.631289 473.9265) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(94.786289 465.0165) scale(0.075 -0.075)">
      <defs>
       <path id="Helvetica-2717" d="M 206 0 
 L 206 4591 
@@ -1336,7 +1336,7 @@ z
      <use xlink:href="#Helvetica-54" transform="translate(1391.748047 0)"/>
     </g>
     <!--    (0 annotated genes in PlantMetWiki) -->
-    <g style="fill: #ffffff" transform="translate(87.539883 482.051344) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(85.694883 473.141344) scale(0.075 -0.075)">
      <defs>
       <path id="Helvetica-30" d="M 1731 4475 
 Q 2600 4475 2988 3759 
@@ -1400,7 +1400,7 @@ z
      <use xlink:href="#Helvetica-29" transform="translate(1662.011719 0)"/>
     </g>
     <!--    despite naming the compound! -->
-    <g style="fill: #ffffff" transform="translate(96.704531 490.187906) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(94.859531 481.277906) scale(0.075 -0.075)">
      <defs>
       <path id="Helvetica-75" d="M 975 3347 
 L 975 1125 
@@ -1475,7 +1475,7 @@ z
    </g>
    <g id="text_5">
     <!-- Wikidata -->
-    <g style="fill: #ffffff" transform="translate(688.435312 66.459456) scale(0.09 -0.09)">
+    <g style="fill: #ffffff" transform="translate(679.480312 65.757456) scale(0.09 -0.09)">
      <use xlink:href="#Helvetica-57"/>
      <use xlink:href="#Helvetica-69" transform="translate(94.384766 0)"/>
      <use xlink:href="#Helvetica-6b" transform="translate(116.601562 0)"/>
@@ -1488,7 +1488,7 @@ z
    </g>
    <g id="text_6">
     <!-- Q206844  ·  methylxanthine alkaloid -->
-    <g style="fill: #ffffff" transform="translate(646.073203 123.677625) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(637.118203 121.247625) scale(0.075 -0.075)">
      <defs>
       <path id="Helvetica-51" d="M 4688 13 
 L 4375 -366 
@@ -1639,7 +1639,7 @@ z
      <use xlink:href="#Helvetica-64" transform="translate(1534.277344 0)"/>
     </g>
     <!-- bitter taste compound  ·  stimulant -->
-    <g style="fill: #ffffff" transform="translate(649.416562 131.762625) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(640.461562 129.332625) scale(0.075 -0.075)">
      <use xlink:href="#Helvetica-62"/>
      <use xlink:href="#Helvetica-69" transform="translate(55.615234 0)"/>
      <use xlink:href="#Helvetica-74" transform="translate(77.832031 0)"/>
@@ -1677,7 +1677,7 @@ z
      <use xlink:href="#Helvetica-74" transform="translate(1472.949219 0)"/>
     </g>
     <!-- PDE inhibitor  ·  adenosine antagonist -->
-    <g style="fill: #ffffff" transform="translate(642.945469 139.803094) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(633.990469 137.373094) scale(0.075 -0.075)">
      <defs>
       <path id="Helvetica-44" d="M 2250 531 
 Q 2566 531 2769 597 
@@ -1741,9 +1741,9 @@ z
      <use xlink:href="#Helvetica-74" transform="translate(1645.507812 0)"/>
     </g>
     <!--  -->
-    <g style="fill: #ffffff" transform="translate(705.69 147.918563) scale(0.075 -0.075)"/>
+    <g style="fill: #ffffff" transform="translate(696.735 145.488563) scale(0.075 -0.075)"/>
     <!-- Found in taxon (wdt:P703): -->
-    <g style="fill: #ffffff" transform="translate(660.667734 156.004031) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(651.712734 153.574031) scale(0.075 -0.075)">
      <defs>
       <path id="Helvetica-46" d="M 547 4591 
 L 3731 4591 
@@ -1834,7 +1834,7 @@ z
      <use xlink:href="#Helvetica-3a" transform="translate(1172.900391 0)"/>
     </g>
     <!-- Theobroma cacao, Coffea arabica, -->
-    <g style="fill: #ffffff" transform="translate(647.954062 164.023406) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(638.999062 161.593406) scale(0.075 -0.075)">
      <defs>
       <path id="Helvetica-2c" d="M 531 -653 
 Q 747 -616 834 -350 
@@ -1885,7 +1885,7 @@ z
      <use xlink:href="#Helvetica-2c" transform="translate(1511.962891 0)"/>
     </g>
     <!-- Camellia sinensis, Cola nitida -->
-    <g style="fill: #ffffff" transform="translate(656.711484 172.042781) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(647.756484 169.612781) scale(0.075 -0.075)">
      <use xlink:href="#Helvetica-43"/>
      <use xlink:href="#Helvetica-61" transform="translate(72.216797 0)"/>
      <use xlink:href="#Helvetica-6d" transform="translate(127.832031 0)"/>
@@ -1920,7 +1920,7 @@ z
    </g>
    <g id="text_7">
     <!-- Chemical databases -->
-    <g style="fill: #ffffff" transform="translate(664.92 388.491456) scale(0.09 -0.09)">
+    <g style="fill: #ffffff" transform="translate(655.965 381.309456) scale(0.09 -0.09)">
      <use xlink:href="#Helvetica-43"/>
      <use xlink:href="#Helvetica-68" transform="translate(72.216797 0)"/>
      <use xlink:href="#Helvetica-65" transform="translate(127.832031 0)"/>
@@ -1943,7 +1943,7 @@ z
    </g>
    <g id="text_8">
     <!-- ChEBI: CHEBI:28946 -->
-    <g style="fill: #ffffff" transform="translate(669.838828 445.643648) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(660.883828 436.733648) scale(0.075 -0.075)">
      <defs>
       <path id="Helvetica-48" d="M 503 4591 
 L 1131 4591 
@@ -2011,7 +2011,7 @@ z
      <use xlink:href="#Helvetica-36" transform="translate(900.439453 0)"/>
     </g>
     <!--    xanthine alkaloid, plant metabolite -->
-    <g style="fill: #ffffff" transform="translate(646.073203 453.684117) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(637.118203 444.774117) scale(0.075 -0.075)">
      <use xlink:href="#Helvetica-20"/>
      <use xlink:href="#Helvetica-20" transform="translate(27.783203 0)"/>
      <use xlink:href="#Helvetica-20" transform="translate(55.566406 0)"/>
@@ -2052,7 +2052,7 @@ z
      <use xlink:href="#Helvetica-65" transform="translate(1534.277344 0)"/>
     </g>
     <!-- PubChem: CID 5429 -->
-    <g style="fill: #ffffff" transform="translate(671.090391 461.703492) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(662.135391 452.793492) scale(0.075 -0.075)">
      <defs>
       <path id="Helvetica-35" d="M 791 1141 
 Q 847 659 1238 475 
@@ -2100,7 +2100,7 @@ z
      <use xlink:href="#Helvetica-39" transform="translate(867.089844 0)"/>
     </g>
     <!--    bronchodilator, vasodilator -->
-    <g style="fill: #ffffff" transform="translate(658.584141 469.722867) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(649.629141 460.812867) scale(0.075 -0.075)">
      <use xlink:href="#Helvetica-20"/>
      <use xlink:href="#Helvetica-20" transform="translate(27.783203 0)"/>
      <use xlink:href="#Helvetica-20" transform="translate(55.566406 0)"/>
@@ -2133,7 +2133,7 @@ z
      <use xlink:href="#Helvetica-72" transform="translate(1222.949219 0)"/>
     </g>
     <!-- DrugBank: DB01412 -->
-    <g style="fill: #ffffff" transform="translate(671.295469 477.742242) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(662.340469 468.832242) scale(0.075 -0.075)">
      <use xlink:href="#Helvetica-44"/>
      <use xlink:href="#Helvetica-72" transform="translate(72.216797 0)"/>
      <use xlink:href="#Helvetica-75" transform="translate(105.517578 0)"/>
@@ -2153,7 +2153,7 @@ z
      <use xlink:href="#Helvetica-32" transform="translate(861.621094 0)"/>
     </g>
     <!--    adenosine receptor antagonist -->
-    <g style="fill: #ffffff" transform="translate(652.115977 485.878805) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(643.160977 476.968805) scale(0.075 -0.075)">
      <use xlink:href="#Helvetica-20"/>
      <use xlink:href="#Helvetica-20" transform="translate(27.783203 0)"/>
      <use xlink:href="#Helvetica-20" transform="translate(55.566406 0)"/>
@@ -2188,7 +2188,7 @@ z
      <use xlink:href="#Helvetica-74" transform="translate(1400.976562 0)"/>
     </g>
     <!-- CAS: 83-67-0 -->
-    <g style="fill: #ffffff" transform="translate(682.971445 493.994273) scale(0.075 -0.075)">
+    <g style="fill: #ffffff" transform="translate(674.016445 485.084273) scale(0.075 -0.075)">
      <defs>
       <path id="Helvetica-2d" d="M 266 2072 
 L 1834 2072 
@@ -2214,7 +2214,7 @@ z
    </g>
    <g id="text_9">
     <!-- InChIKey bridge -->
-    <g style="fill: #888888" transform="translate(536.683359 291.92675) scale(0.07 -0.07)">
+    <g style="fill: #888888" transform="translate(529.573359 286.59425) scale(0.07 -0.07)">
      <defs>
       <path id="Helvetica-4b" d="M 488 4591 
 L 1094 4591 
@@ -2250,34 +2250,34 @@ z
     </g>
    </g>
    <g id="patch_12">
-    <path d="M 574.416 296.843998 
-Q 574.416 290.120063 574.416 283.396129 
+    <path d="M 567.144 291.310721 
+Q 567.144 284.792186 567.144 278.27365 
 " style="fill: none; stroke: #888888; stroke-width: 1.2; stroke-linecap: round"/>
-    <path d="M 576.416 292.843998 
-L 574.416 296.843998 
-L 572.416 292.843998 
+    <path d="M 570.144 285.310721 
+L 567.144 291.310721 
+L 564.144 285.310721 
 " style="fill: none; stroke: #888888; stroke-width: 1.2; stroke-linecap: round"/>
-    <path d="M 572.416 287.396129 
-L 574.416 283.396129 
-L 576.416 287.396129 
+    <path d="M 564.144 284.27365 
+L 567.144 278.27365 
+L 570.144 284.27365 
 " style="fill: none; stroke: #888888; stroke-width: 1.2; stroke-linecap: round"/>
    </g>
    <g id="patch_13">
-    <path d="M 572.144687 454.492562 
-Q 431.911786 454.492562 291.678885 454.492562 
+    <path d="M 564.854293 445.852562 
+Q 426.46658 445.852562 288.078868 445.852562 
 " style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #e74c3c; stroke-width: 1.5; stroke-linecap: round"/>
-    <path d="M 568.144687 452.492562 
-L 572.144687 454.492562 
-L 568.144687 456.492562 
+    <path d="M 558.854293 442.852562 
+L 564.854293 445.852562 
+L 558.854293 448.852562 
 " style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #e74c3c; stroke-width: 1.5; stroke-linecap: round"/>
-    <path d="M 295.678885 456.492562 
-L 291.678885 454.492562 
-L 295.678885 452.492562 
+    <path d="M 294.078868 448.852562 
+L 288.078868 445.852562 
+L 294.078868 442.852562 
 " style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #e74c3c; stroke-width: 1.5; stroke-linecap: round"/>
    </g>
    <g id="text_10">
     <!-- Annotation gap: -->
-    <g style="fill: #e74c3c" transform="translate(405.640078 432.737612) scale(0.075 -0.075)">
+    <g style="fill: #e74c3c" transform="translate(400.195078 424.340613) scale(0.075 -0.075)">
      <use xlink:href="#Helvetica-41"/>
      <use xlink:href="#Helvetica-6e" transform="translate(66.699219 0)"/>
      <use xlink:href="#Helvetica-6e" transform="translate(122.314453 0)"/>
@@ -2295,7 +2295,7 @@ L 295.678885 452.492562
      <use xlink:href="#Helvetica-3a" transform="translate(672.802734 0)"/>
     </g>
     <!-- Cacao in Wikidata but not PlantMetWiki -->
-    <g style="fill: #e74c3c" transform="translate(366.260391 440.853081) scale(0.075 -0.075)">
+    <g style="fill: #e74c3c" transform="translate(360.815391 432.456081) scale(0.075 -0.075)">
      <use xlink:href="#Helvetica-43"/>
      <use xlink:href="#Helvetica-61" transform="translate(72.216797 0)"/>
      <use xlink:href="#Helvetica-63" transform="translate(127.832031 0)"/>
@@ -2338,7 +2338,7 @@ L 295.678885 452.492562
    </g>
    <g id="text_11">
     <!-- Theobromine: knowledge integration across PlantMetWiki and external databases -->
-    <g transform="translate(229.387656 15.116562) scale(0.11 -0.11)">
+    <g transform="translate(223.987656 15.116562) scale(0.11 -0.11)">
      <use xlink:href="#Helvetica-54"/>
      <use xlink:href="#Helvetica-68" transform="translate(61.083984 0)"/>
      <use xlink:href="#Helvetica-65" transform="translate(116.699219 0)"/>
@@ -2419,21 +2419,21 @@ L 295.678885 452.492562
     </g>
    </g>
    <g id="patch_14">
-    <path d="M 302.04 360.566562 
-L 554.76 360.566562 
-Q 568.8 360.566562 568.8 347.148562 
-L 568.8 239.804562 
-Q 568.8 226.386562 554.76 226.386562 
-L 302.04 226.386562 
-Q 288 226.386562 288 239.804562 
-L 288 347.148562 
-Q 288 360.566562 302.04 360.566562 
+    <path d="M 298.26 353.816562 
+L 547.74 353.816562 
+Q 561.6 353.816562 561.6 340.668562 
+L 561.6 235.484562 
+Q 561.6 222.336562 547.74 222.336562 
+L 298.26 222.336562 
+Q 284.4 222.336562 284.4 235.484562 
+L 284.4 340.668562 
+Q 284.4 353.816562 298.26 353.816562 
 z
-" clip-path="url(#pbff3a32528)" style="fill: #2c3e50; stroke: #f0f0f0; stroke-width: 2.5; stroke-linejoin: miter"/>
+" clip-path="url(#p0838e903f3)" style="fill: #2c3e50; stroke: #f0f0f0; stroke-width: 2.5; stroke-linejoin: miter"/>
    </g>
    <g id="text_12">
     <!-- Theobromine -->
-    <g style="fill: #ffffff" transform="translate(390.104844 273.168773) scale(0.13 -0.13)">
+    <g style="fill: #ffffff" transform="translate(384.704844 268.243973) scale(0.13 -0.13)">
      <use xlink:href="#Helvetica-54"/>
      <use xlink:href="#Helvetica-68" transform="translate(61.083984 0)"/>
      <use xlink:href="#Helvetica-65" transform="translate(116.699219 0)"/>
@@ -2449,7 +2449,7 @@ z
    </g>
    <g id="text_13">
     <!-- InChIKey: YAPQBXQYLJRXSA-UHFFFAOYSA-N -->
-    <g style="fill: #aaaaaa" transform="translate(350.991484 303.892832) scale(0.07 -0.07)">
+    <g style="fill: #aaaaaa" transform="translate(345.591484 298.320033) scale(0.07 -0.07)">
      <defs>
       <path id="Helvetica-59" d="M 131 4591 
 L 856 4591 
@@ -2626,7 +2626,7 @@ z
    </g>
    <g id="text_14">
     <!-- C₇H₈N₄O₂  ·  MW: 180.16 g/mol -->
-    <g style="fill: #cccccc" transform="translate(377.554102 329.269807) scale(0.075 -0.075)">
+    <g style="fill: #cccccc" transform="translate(372.154102 323.178607) scale(0.075 -0.075)">
      <defs>
       <path id="Helvetica-2087" d="M 1672 13 
 L 1672 -231 
@@ -2774,8 +2774,8 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="pbff3a32528">
-   <rect x="7.2" y="25.116562" width="842.4" height="536.72"/>
+  <clipPath id="p0838e903f3">
+   <rect x="7.2" y="25.116562" width="831.6" height="525.92"/>
   </clipPath>
  </defs>
 </svg>
