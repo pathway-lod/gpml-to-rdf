@@ -1,0 +1,11 @@
+# BridgeDb ID-mapping configuration for gpml2rdf
+# (read by org.wikipathways.wp2rdf.CreateRDF from /tmp/OPSBRIDGEDB/config.properties)
+#
+# 'bridgefiles' MUST be an ABSOLUTE path to a DIRECTORY. ALL *.bridge mapping
+# databases in that directory are loaded into the IDMapperStack. For metabolite
+# mapping, place metabolites_YYYYMMDD.bridge there. Gene/protein *.bridge files
+# (optional) can live in the same folder and will also be loaded.
+#
+# setup_opsbridgedb.sh generates this file for you; edit only if you download
+# the .bridge file(s) to a non-default location.
+bridgefiles=/ABSOLUTE/PATH/TO/bridgedb-data
