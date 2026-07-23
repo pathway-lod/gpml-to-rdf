@@ -16,3 +16,5 @@ CLAUDE.md
 # Office lock/temp files
 ~$*
 .~lock.*
+# BridgeDb / Derby runtime artifacts
+derby.log
