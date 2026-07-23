@@ -131,6 +131,13 @@ For each GPML file, two Turtle files are created:
 - `output/rdf/core/pathways/Human/` — **WPRDF** (WikiPathways RDF, standard model)
 - `output/rdf/core/pathways/gpml/Human/` — **GPMLRDF** (direct GPML structure in RDF)
 
+**Metabolite cross-references (BridgeDb).** To materialise metabolite links to
+ChEBI, HMDB, Wikidata, PubChem, KEGG, LipidMaps, ChemSpider and InChIKey
+(`wp:bdb*` predicates) during this step, set up the BridgeDb mapping database
+first — see [`bridgedb/README.md`](bridgedb/README.md). Without it the converter
+logs `WARN: BridgeDb config file folder does not exist:` and emits no metabolite
+cross-references.
+
 ---
 
 ## 5. Generate taxonomy extra RDF
@@ -260,6 +267,36 @@ python scripts/create_void_from_metadata.py \
   --properties-extra output/bundles/all_gpml_properties_extra-${VERSION}.ttl \
   --output           output/bundles/void-${VERSION}.ttl
 ```
+
+When the core RDF was built with BridgeDb enabled, pass the mapping-database
+build and release details so the VoID records the `wp:bdb*` cross-references as a
+`void:Linkset` and identifies the RDF release record:
+
+```bash
+python scripts/create_void_from_metadata.py \
+  --core-rdf         output/bundles/all-${VERSION}.ttl \
+  --taxonomy-extra   output/bundles/all_gpml_taxonomy_extra-${VERSION}.ttl \
+  --properties-extra output/bundles/all_gpml_properties_extra-${VERSION}.ttl \
+  --output           output/bundles/void-${VERSION}.ttl \
+  --bridgedb-build      20260102 \
+  --bridgedb-source-doi 10.6084/m9.figshare.30993322 \
+  --rdf-conceptdoi      10.5281/zenodo.17967619 \
+  --release-version     3.2
+```
+
+### Release naming across versions
+
+The Zenodo record versions independently of the pipeline label. Release **3.2**
+re-releases the **v3** pipeline output with BridgeDb metabolite mapping enabled.
+Only the files whose bytes changed are re-labelled; unchanged bundles keep their
+`-v3` names (and md5s):
+
+| File | Release 3.2 |
+|---|---|
+| `all-plantcyc17.0.0-gpml2021-v3.2.ttl.gz` (core) | **new** — includes BridgeDb `wp:bdb*` cross-references |
+| `void-plantcyc17.0.0-gpml2021-v3.2.ttl` | **new** — adds the BridgeDb `void:Linkset` + release metadata |
+| `all_gpml_taxonomy_extra-plantcyc17.0.0-gpml2021-v3.ttl.gz` | unchanged (identical to v3.1) |
+| `all_gpml_properties_extra-plantcyc17.0.0-gpml2021-v3.ttl.gz` | unchanged (identical to v3.1) |
 
 ---
 
