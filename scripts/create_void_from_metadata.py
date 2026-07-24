@@ -33,6 +33,35 @@ CLASS_STRUCTURE_PAGE = (
 
 # BridgeDb metabolite cross-reference predicates materialised in the core graph
 # (org.pathvisio.io.rdf BridgeDbIDMapper, bundled in gpml2rdf-4.0.4-SNAPSHOT.jar).
+# Canonical public SPARQL endpoint (must match the URL monitored by YummyData and
+# declared to consumers). Used for both void:sparqlEndpoint and the sd:Service.
+SPARQL_ENDPOINT = "https://plantmetwiki.bioinformatics.nl/sparql"
+
+
+def add_service_description(lines: list[str], core_dataset: str) -> None:
+    """Emit a SPARQL 1.1 Service Description for the public endpoint, combined into
+    the VoID document. Advertises the endpoint URL, query language, result formats
+    and features, and links its default dataset to the core VoID dataset — this is
+    what tools like YummyData look for when dereferencing the endpoint."""
+    svc = f"{SPARQL_ENDPOINT}#service"
+    ds = f"{SPARQL_ENDPOINT}#dataset"
+    lines.extend(
+        [
+            f"{ttl_uri(svc)} a sd:Service ;",
+            f"    sd:endpoint {ttl_uri(SPARQL_ENDPOINT)} ;",
+            "    sd:supportedLanguage sd:SPARQL11Query ;",
+            "    sd:resultFormat formats:Turtle , formats:RDF_XML , formats:N-Triples ,",
+            "                    formats:SPARQL_Results_JSON , formats:SPARQL_Results_XML , formats:SPARQL_Results_CSV ;",
+            "    sd:feature sd:UnionDefaultGraph , sd:BasicFederatedQuery ;",
+            f"    sd:defaultDataset {ttl_uri(ds)} .",
+            "",
+            f"{ttl_uri(ds)} a sd:Dataset ;",
+            f"    sd:defaultGraph [ a sd:Graph ; dcterms:isPartOf {ttl_uri(core_dataset)} ] .",
+            "",
+        ]
+    )
+
+
 BRIDGEDB_LINK_PREDICATES = [
     "http://vocabularies.wikipathways.org/wp#bdbChEBI",
     "http://vocabularies.wikipathways.org/wp#bdbHmdb",
@@ -244,6 +273,8 @@ def main() -> None:
         "@prefix dcat:    <http://www.w3.org/ns/dcat#> .",
         "@prefix foaf:    <http://xmlns.com/foaf/0.1/> .",
         "@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .",
+        "@prefix sd:      <http://www.w3.org/ns/sparql-service-description#> .",
+        "@prefix formats: <http://www.w3.org/ns/formats/> .",
         "",
     ]
 
@@ -286,7 +317,7 @@ def main() -> None:
             f"    pav:version {ttl_literal(version)} ;",
             f"    pav:createdOn {ttl_literal(today)}^^xsd:date ;",
             f"    pav:createdWith {ttl_literal('gpml2rdf-4.0.4-SNAPSHOT.jar')} ;",
-            f"    void:sparqlEndpoint {ttl_uri('https://plantmetwiki.bioinformatics.nl/sparql')} ;",
+            f"    void:sparqlEndpoint {ttl_uri(SPARQL_ENDPOINT)} ;",
             f"    void:vocabulary {ttl_uri('http://vocabularies.wikipathways.org/wp#')} ,",
             f"                    {ttl_uri('http://vocabularies.wikipathways.org/gpml#')} ,",
             f"                    {ttl_uri('http://purl.org/dc/terms/')} ,",
@@ -387,6 +418,9 @@ def main() -> None:
             args.bridgedb_source_doi,
             today,
         )
+
+    # SPARQL 1.1 Service Description (combined into the VoID document).
+    add_service_description(lines, core_dataset)
 
     Path(args.output).write_text("\n".join(lines), encoding="utf-8")
     print(f"Wrote VoID metadata: {args.output}")
