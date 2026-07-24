@@ -286,7 +286,7 @@ def main() -> None:
             f"    pav:version {ttl_literal(version)} ;",
             f"    pav:createdOn {ttl_literal(today)}^^xsd:date ;",
             f"    pav:createdWith {ttl_literal('gpml2rdf-4.0.4-SNAPSHOT.jar')} ;",
-            f"    void:sparqlEndpoint {ttl_uri('https://sparql-plantmetwiki.bioinformatics.nl/sparql')} ;",
+            f"    void:sparqlEndpoint {ttl_uri('https://plantmetwiki.bioinformatics.nl/sparql')} ;",
             f"    void:vocabulary {ttl_uri('http://vocabularies.wikipathways.org/wp#')} ,",
             f"                    {ttl_uri('http://vocabularies.wikipathways.org/gpml#')} ,",
             f"                    {ttl_uri('http://purl.org/dc/terms/')} ,",
