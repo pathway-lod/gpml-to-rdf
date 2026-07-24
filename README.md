@@ -16,13 +16,35 @@ Converts PlantCyc-derived GPML2021 pathway and reaction files into RDF using the
 
 The plugin layers preserve PlantCyc-specific information while keeping the core WikiPathways RDF model unchanged.
 
+## Metabolite cross-references (BridgeDb)
+
+The **core** layer is optionally enriched with metabolite cross-references to
+external chemical databases, materialised during conversion by the BridgeDb
+ID-mapping database. For each `wp:Metabolite`, dedicated `wp:bdb*` predicates link
+to ChEBI, HMDB, Wikidata, PubChem, KEGG Compound, LipidMaps, ChemSpider and
+InChIKey. These are **added alongside** — never overwriting — the curated PlantCyc
+identifier (`dc:source` / `dcterms:identifier`), so a compound resolves to those
+databases directly in the graph, without a federated query.
+
+| | |
+|---|---|
+| Predicates | `wp:bdbChEBI`, `wp:bdbHmdb`, `wp:bdbWikidata`, `wp:bdbPubChem`, `wp:bdbKeggCompound`, `wp:bdbLipidMaps`, `wp:bdbChemspider`, `wp:bdbInChIKey` |
+| Coverage (release v3.2) | 3,198 / 4,577 metabolites (69.9%) gain ≥1 cross-reference — e.g. 3,059 Wikidata, 2,926 PubChem, 2,805 ChEBI |
+| Mapping database | Metabolite BridgeDb ID Mapping Database, build 20260102 (from HMDB, ChEBI, Wikidata) — [figshare 10.6084/m9.figshare.30993322](https://doi.org/10.6084/m9.figshare.30993322) |
+| Setup & run | [`bridgedb/README.md`](bridgedb/README.md) — download the `.bridge` DB and write `/tmp/OPSBRIDGEDB/config.properties` **before** the core RDF step (§4) |
+
+Mapping is **opt-in**: if the BridgeDb config is absent, the converter logs
+`WARN: BridgeDb config file folder does not exist:` and emits no `wp:bdb*`
+predicates — the rest of the core RDF is unaffected. In the VoID metadata these
+cross-references are described as a `void:Linkset` (§9).
+
 ## Pipeline overview
 
 ```
 1.  Download GPML         →  input/gpml/original/
 2.  Rename files          →  input/gpml/renamed/   (stable PC*/RC* identifiers)
 3.  Generate index        →  pathways.txt, reactions.txt
-4.  Core RDF              →  output/rdf/core/
+4.  Core RDF              →  output/rdf/core/   (+ optional BridgeDb metabolite cross-references, wp:bdb*)
 5.  Taxonomy extra        →  output/rdf/taxonomy-extra/
 6.  Properties extra      →  output/rdf/properties-extra/
 7.  Bundle                →  output/bundles/all-*.ttl
@@ -130,6 +152,13 @@ Flags:
 For each GPML file, two Turtle files are created:
 - `output/rdf/core/pathways/Human/` — **WPRDF** (WikiPathways RDF, standard model)
 - `output/rdf/core/pathways/gpml/Human/` — **GPMLRDF** (direct GPML structure in RDF)
+
+**Metabolite cross-references (BridgeDb).** To materialise metabolite links to
+ChEBI, HMDB, Wikidata, PubChem, KEGG, LipidMaps, ChemSpider and InChIKey
+(`wp:bdb*` predicates) during this step, set up the BridgeDb mapping database
+first — see [`bridgedb/README.md`](bridgedb/README.md). Without it the converter
+logs `WARN: BridgeDb config file folder does not exist:` and emits no metabolite
+cross-references.
 
 ---
 
@@ -261,6 +290,36 @@ python scripts/create_void_from_metadata.py \
   --output           output/bundles/void-${VERSION}.ttl
 ```
 
+When the core RDF was built with BridgeDb enabled, pass the mapping-database
+build and release details so the VoID records the `wp:bdb*` cross-references as a
+`void:Linkset` and identifies the RDF release record:
+
+```bash
+python scripts/create_void_from_metadata.py \
+  --core-rdf         output/bundles/all-${VERSION}.ttl \
+  --taxonomy-extra   output/bundles/all_gpml_taxonomy_extra-${VERSION}.ttl \
+  --properties-extra output/bundles/all_gpml_properties_extra-${VERSION}.ttl \
+  --output           output/bundles/void-${VERSION}.ttl \
+  --bridgedb-build      20260102 \
+  --bridgedb-source-doi 10.6084/m9.figshare.30993322 \
+  --rdf-conceptdoi      10.5281/zenodo.17967619 \
+  --release-version     3.2
+```
+
+### Release naming across versions
+
+The Zenodo record versions independently of the pipeline label. Release **3.2**
+re-releases the **v3** pipeline output with BridgeDb metabolite mapping enabled.
+Only the files whose bytes changed are re-labelled; unchanged bundles keep their
+`-v3` names (and md5s):
+
+| File | Release 3.2 |
+|---|---|
+| `all-plantcyc17.0.0-gpml2021-v3.2.ttl.gz` (core) | **new** — includes BridgeDb `wp:bdb*` cross-references |
+| `void-plantcyc17.0.0-gpml2021-v3.2.ttl` | **new** — adds the BridgeDb `void:Linkset` + release metadata |
+| `all_gpml_taxonomy_extra-plantcyc17.0.0-gpml2021-v3.ttl.gz` | unchanged (identical to v3.1) |
+| `all_gpml_properties_extra-plantcyc17.0.0-gpml2021-v3.ttl.gz` | unchanged (identical to v3.1) |
+
 ---
 
 ## 10. Validate RDF bundles
@@ -316,10 +375,14 @@ output/bundles/void-<VERSION>.ttl
 
 Recommended Virtuoso graphs:
 ```
-http://rdf-plantmetwiki.bioinformatics.nl/graph/pathways
+http://rdf-plantmetwiki.bioinformatics.nl/graph/pathways              (core; includes BridgeDb wp:bdb* cross-references)
 http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-taxonomy-extra
 http://rdf-plantmetwiki.bioinformatics.nl/graph/gpml-properties-extra
 ```
+
+From release **v3.2**, the core bundle (`all-*.ttl`) carries the BridgeDb
+metabolite cross-references and the VoID (`void-*.ttl`) describes them as a
+`void:Linkset`. See [Metabolite cross-references (BridgeDb)](#metabolite-cross-references-bridgedb).
 
 ---
 

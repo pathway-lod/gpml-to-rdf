@@ -31,6 +31,70 @@ CLASS_STRUCTURE_PAGE = (
     "#three-layer-rdf-architecture"
 )
 
+# BridgeDb metabolite cross-reference predicates materialised in the core graph
+# (org.pathvisio.io.rdf BridgeDbIDMapper, bundled in gpml2rdf-4.0.4-SNAPSHOT.jar).
+BRIDGEDB_LINK_PREDICATES = [
+    "http://vocabularies.wikipathways.org/wp#bdbChEBI",
+    "http://vocabularies.wikipathways.org/wp#bdbHmdb",
+    "http://vocabularies.wikipathways.org/wp#bdbWikidata",
+    "http://vocabularies.wikipathways.org/wp#bdbPubChem",
+    "http://vocabularies.wikipathways.org/wp#bdbKeggCompound",
+    "http://vocabularies.wikipathways.org/wp#bdbLipidMaps",
+    "http://vocabularies.wikipathways.org/wp#bdbChemspider",
+    "http://vocabularies.wikipathways.org/wp#bdbInChIKey",
+]
+
+
+def add_bridgedb_linkset(
+    lines: list[str],
+    core_dataset: str,
+    build: str,
+    source_doi: str,
+    today: str,
+) -> None:
+    """Describe the BridgeDb-materialised metabolite cross-references (wp:bdb*)
+    as a void:Linkset that is a subset of the core dataset, with the BridgeDb
+    mapping database recorded as its source."""
+    linkset = f"{core_dataset}/bridgedb-linkset"
+    source_uri = f"https://doi.org/{source_doi}"
+
+    # BridgeDb mapping database (figshare) as a source void:Dataset
+    lines.extend(
+        [
+            f"{ttl_uri(source_uri)} a void:Dataset ;",
+            f"    dcterms:title {ttl_literal('Metabolite BridgeDb ID Mapping Database (' + build + ')', 'en')} ;",
+            f"    dcterms:identifier {ttl_literal(source_doi)} ;",
+            f"    dcterms:description {ttl_literal('BridgeDb metabolite identifier-mapping database built from HMDB, ChEBI and Wikidata; used to materialise metabolite cross-references during GPML-to-RDF conversion.', 'en')} ;",
+            f"    pav:version {ttl_literal(build)} ;",
+            f"    foaf:page {ttl_uri(source_uri)} .",
+            "",
+        ]
+    )
+
+    # The cross-references themselves as a void:Linkset (subset of core)
+    lines.extend(
+        [
+            f"{ttl_uri(linkset)} a void:Linkset ;",
+            f"    dcterms:title {ttl_literal('PlantMetWiki metabolite BridgeDb cross-references', 'en')} ;",
+            f"    dcterms:description {ttl_literal('BridgeDb-materialised cross-references (wp:bdb* predicates) linking PlantMetWiki wp:Metabolite nodes to ChEBI, HMDB, Wikidata, PubChem, KEGG Compound, LipidMaps, ChemSpider and InChIKey. Added under dedicated predicates that augment, and never overwrite, the curated PlantCyc source identifier.', 'en')} ;",
+            f"    void:subjectsTarget {ttl_uri(core_dataset)} ;",
+            f"    dcterms:source {ttl_uri(source_uri)} ;",
+            f"    pav:derivedFrom {ttl_uri(source_uri)} ;",
+            f"    pav:createdWith {ttl_literal('gpml2rdf-4.0.4-SNAPSHOT.jar (org.pathvisio.io.rdf BridgeDbIDMapper)')} ;",
+            f"    pav:version {ttl_literal(build)} ;",
+            f"    pav:createdOn {ttl_literal(today)}^^xsd:date ;",
+        ]
+    )
+    for pred in BRIDGEDB_LINK_PREDICATES:
+        lines.append(f"    void:linkPredicate {ttl_uri(pred)} ;")
+    lines.append(f"    dcterms:publisher {ttl_uri(PUBLISHER_URI)} ;")
+    lines.append(f"    foaf:page {ttl_uri(source_uri)} .")
+    lines.append("")
+
+    # Tie the linkset into the core dataset
+    lines.append(f"{ttl_uri(core_dataset)} void:subset {ttl_uri(linkset)} .")
+    lines.append("")
+
 
 def ttl_uri(uri: str) -> str:
     return f"<{uri}>"
@@ -131,6 +195,29 @@ def main() -> None:
     parser.add_argument("--taxonomy-extra", required=True)
     parser.add_argument("--properties-extra", required=True)
     parser.add_argument("--output", required=True)
+    # BridgeDb metabolite mapping (optional; enables the wp:bdb* linkset in VoID)
+    parser.add_argument(
+        "--bridgedb-build",
+        default=None,
+        help="BridgeDb metabolite mapping DB build (e.g. 20260102). If set, a "
+        "void:Linkset describing the materialised wp:bdb* cross-references is added.",
+    )
+    parser.add_argument(
+        "--bridgedb-source-doi",
+        default="10.6084/m9.figshare.30993322",
+        help="DOI of the BridgeDb metabolite mapping database (figshare).",
+    )
+    # RDF release record + human-facing release version (Zenodo of the RDF bundles)
+    parser.add_argument(
+        "--rdf-conceptdoi",
+        default=None,
+        help="Concept DOI of the RDF release record on Zenodo (self-identifier of these bundles).",
+    )
+    parser.add_argument(
+        "--release-version",
+        default=None,
+        help="Human-facing release version of the RDF deposit, e.g. 3.2.",
+    )
 
     args = parser.parse_args()
 
@@ -272,6 +359,34 @@ def main() -> None:
     add_dataset_file_info(lines, core_dataset, Path(args.core_rdf))
     add_dataset_file_info(lines, taxonomy_dataset, Path(args.taxonomy_extra))
     add_dataset_file_info(lines, properties_dataset, Path(args.properties_extra))
+
+    # RDF release record (this deposit) + human-facing release version.
+    if args.release_version:
+        lines.append(
+            f"{ttl_uri(core_dataset)} dcterms:hasVersion {ttl_literal(args.release_version)} ."
+        )
+    if args.rdf_conceptdoi:
+        rdf_uri = f"https://doi.org/{args.rdf_conceptdoi}"
+        lines.extend(
+            [
+                f"{ttl_uri(rdf_uri)} a void:Dataset ;",
+                f"    dcterms:title {ttl_literal('PlantMetWiki RDF release (concept DOI — always resolves to latest version)', 'en')} ;",
+                f"    dcterms:identifier {ttl_literal(args.rdf_conceptdoi)} ;",
+                f"    foaf:page {ttl_uri(rdf_uri)} .",
+                f"{ttl_uri(core_dataset)} dcterms:isVersionOf {ttl_uri(rdf_uri)} .",
+                "",
+            ]
+        )
+
+    # BridgeDb linkset (materialised metabolite cross-references) — optional.
+    if args.bridgedb_build:
+        add_bridgedb_linkset(
+            lines,
+            core_dataset,
+            args.bridgedb_build,
+            args.bridgedb_source_doi,
+            today,
+        )
 
     Path(args.output).write_text("\n".join(lines), encoding="utf-8")
     print(f"Wrote VoID metadata: {args.output}")
