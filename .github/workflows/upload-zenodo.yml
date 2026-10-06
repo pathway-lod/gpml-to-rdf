@@ -161,4 +161,5 @@ jobs:
 
           python scripts/upload_to_zenodo.py \
             --source-record "${{ inputs.source_record }}" \
+            --version-label "${{ inputs.release_version }}" \
             $PUBLISH_FLAG
