@@ -7,7 +7,6 @@ dependencies:
   - requests
   - groovy 
   - rdflib
-  - raptor          # provides the 'rapper' CLI used to count void:triples
   - lxml
   - click
   - tqdm

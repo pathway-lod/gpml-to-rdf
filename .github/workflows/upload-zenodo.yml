@@ -39,6 +39,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # rapper (raptor2-utils) counts triples for void:triples. It is not
+      # packaged on conda-forge, so install it from apt on the runner.
+      - name: Install rapper (raptor2-utils)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends raptor2-utils
+          rapper --version
+
       - name: Set up conda environment
         uses: conda-incubator/setup-miniconda@v3
         with:
