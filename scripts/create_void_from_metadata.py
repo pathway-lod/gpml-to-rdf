@@ -5,8 +5,10 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import re
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 
@@ -168,10 +170,46 @@ def add_pmn_license_to_dataset(lines: list[str], dataset_uri: str) -> None:
     )
 
 
+MISSING_TRIPLE_COUNTS: list[str] = []
+
+
 def count_triples_with_rapper(file_path: Path) -> int | None:
-    if not file_path.exists() or not shutil.which("rapper"):
+    """Count triples in a Turtle file with rapper.
+
+    Returns None and records the reason if the count cannot be produced. The
+    bundles use blank-node and predicate-list syntax, so a line-based count
+    would be wrong; a real parser is required. Failures are reported loudly
+    because a silently missing void:triples makes consumers such as YummyData
+    fall back to their own estimate of the dataset size.
+    """
+    if not file_path.exists():
+        MISSING_TRIPLE_COUNTS.append(f"{file_path}: file not found")
         return None
 
+    if not shutil.which("rapper"):
+        MISSING_TRIPLE_COUNTS.append(
+            f"{file_path}: 'rapper' not on PATH (install raptor, e.g. conda install -c conda-forge raptor)"
+        )
+        return None
+
+    # Preferred: `rapper -c` counts without serialising, reporting on stderr
+    #   "rapper: Parsing returned 3847644 triples"
+    try:
+        result = subprocess.run(
+            ["rapper", "-i", "turtle", "-c", "-q", str(file_path)],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        match = re.search(r"returned\s+([\d,]+)\s+triples", result.stderr)
+        if match:
+            return int(match.group(1).replace(",", ""))
+    except subprocess.SubprocessError:
+        pass
+
+    # Fallback: serialise to N-Triples and count lines. Slower and more memory
+    # hungry, but independent of how this rapper build words its summary.
     try:
         result = subprocess.run(
             ["rapper", "-i", "turtle", "-o", "ntriples", str(file_path)],
@@ -180,7 +218,8 @@ def count_triples_with_rapper(file_path: Path) -> int | None:
             stderr=subprocess.PIPE,
             text=True,
         )
-    except subprocess.SubprocessError:
+    except subprocess.SubprocessError as exc:
+        MISSING_TRIPLE_COUNTS.append(f"{file_path}: rapper failed ({exc})")
         return None
 
     return sum(
@@ -246,6 +285,12 @@ def main() -> None:
         "--release-version",
         default=None,
         help="Human-facing release version of the RDF deposit, e.g. 3.2.",
+    )
+    parser.add_argument(
+        "--require-triples",
+        action="store_true",
+        help="Exit non-zero if void:triples could not be emitted for every dataset. "
+        "Use in CI so a release can never publish a VoID without dataset sizes.",
     )
 
     args = parser.parse_args()
@@ -424,6 +469,20 @@ def main() -> None:
 
     Path(args.output).write_text("\n".join(lines), encoding="utf-8")
     print(f"Wrote VoID metadata: {args.output}")
+
+    if MISSING_TRIPLE_COUNTS:
+        print(
+            "\nWARNING: void:triples is missing for the following datasets.\n"
+            "Consumers that read dataset size from the VoID (e.g. YummyData) will\n"
+            "fall back to their own estimate, which skews performance scoring:",
+            file=sys.stderr,
+        )
+        for reason in MISSING_TRIPLE_COUNTS:
+            print(f"  - {reason}", file=sys.stderr)
+        if args.require_triples:
+            sys.exit(1)
+    else:
+        print("All datasets carry void:triples.")
 
 
 if __name__ == "__main__":

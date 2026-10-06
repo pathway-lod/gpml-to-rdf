@@ -15,7 +15,15 @@ on:
       source_record:
         description: 'Zenodo record ID to create a new version from'
         required: true
-        default: '18174552'
+        default: '21536898'
+      release_version:
+        description: 'Human-facing release version of the RDF deposit, e.g. 3.4'
+        required: true
+        default: '3.4'
+      bridgedb_build:
+        description: 'BridgeDb metabolite mapping build used for this release'
+        required: true
+        default: '20260102'
       publish:
         description: 'Publish the Zenodo draft immediately (leave false to review first)'
         required: false
@@ -121,6 +129,10 @@ jobs:
             --taxonomy-extra   output/bundles/all_gpml_taxonomy_extra-${VERSION}.ttl \
             --properties-extra output/bundles/all_gpml_properties_extra-${VERSION}.ttl \
             --ncbi-mappings    output/bundles/ncbi_iri_mappings-${VERSION}.ttl \
+            --release-version  "${{ inputs.release_version }}" \
+            --bridgedb-build   "${{ inputs.bridgedb_build }}" \
+            --rdf-conceptdoi   10.5281/zenodo.17967619 \
+            --require-triples \
             --output           output/bundles/void-${VERSION}.ttl
 
       # ------------------------------------------------------------------
