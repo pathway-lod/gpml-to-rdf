@@ -5,8 +5,10 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import re
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 
@@ -33,6 +35,35 @@ CLASS_STRUCTURE_PAGE = (
 
 # BridgeDb metabolite cross-reference predicates materialised in the core graph
 # (org.pathvisio.io.rdf BridgeDbIDMapper, bundled in gpml2rdf-4.0.4-SNAPSHOT.jar).
+# Canonical public SPARQL endpoint (must match the URL monitored by YummyData and
+# declared to consumers). Used for both void:sparqlEndpoint and the sd:Service.
+SPARQL_ENDPOINT = "https://plantmetwiki.bioinformatics.nl/sparql"
+
+
+def add_service_description(lines: list[str], core_dataset: str) -> None:
+    """Emit a SPARQL 1.1 Service Description for the public endpoint, combined into
+    the VoID document. Advertises the endpoint URL, query language, result formats
+    and features, and links its default dataset to the core VoID dataset — this is
+    what tools like YummyData look for when dereferencing the endpoint."""
+    svc = f"{SPARQL_ENDPOINT}#service"
+    ds = f"{SPARQL_ENDPOINT}#dataset"
+    lines.extend(
+        [
+            f"{ttl_uri(svc)} a sd:Service ;",
+            f"    sd:endpoint {ttl_uri(SPARQL_ENDPOINT)} ;",
+            "    sd:supportedLanguage sd:SPARQL11Query ;",
+            "    sd:resultFormat formats:Turtle , formats:RDF_XML , formats:N-Triples ,",
+            "                    formats:SPARQL_Results_JSON , formats:SPARQL_Results_XML , formats:SPARQL_Results_CSV ;",
+            "    sd:feature sd:UnionDefaultGraph , sd:BasicFederatedQuery ;",
+            f"    sd:defaultDataset {ttl_uri(ds)} .",
+            "",
+            f"{ttl_uri(ds)} a sd:Dataset ;",
+            f"    sd:defaultGraph [ a sd:Graph ; dcterms:isPartOf {ttl_uri(core_dataset)} ] .",
+            "",
+        ]
+    )
+
+
 BRIDGEDB_LINK_PREDICATES = [
     "http://vocabularies.wikipathways.org/wp#bdbChEBI",
     "http://vocabularies.wikipathways.org/wp#bdbHmdb",
@@ -139,10 +170,46 @@ def add_pmn_license_to_dataset(lines: list[str], dataset_uri: str) -> None:
     )
 
 
+MISSING_TRIPLE_COUNTS: list[str] = []
+
+
 def count_triples_with_rapper(file_path: Path) -> int | None:
-    if not file_path.exists() or not shutil.which("rapper"):
+    """Count triples in a Turtle file with rapper.
+
+    Returns None and records the reason if the count cannot be produced. The
+    bundles use blank-node and predicate-list syntax, so a line-based count
+    would be wrong; a real parser is required. Failures are reported loudly
+    because a silently missing void:triples makes consumers such as YummyData
+    fall back to their own estimate of the dataset size.
+    """
+    if not file_path.exists():
+        MISSING_TRIPLE_COUNTS.append(f"{file_path}: file not found")
         return None
 
+    if not shutil.which("rapper"):
+        MISSING_TRIPLE_COUNTS.append(
+            f"{file_path}: 'rapper' not on PATH (install raptor, e.g. conda install -c conda-forge raptor)"
+        )
+        return None
+
+    # Preferred: `rapper -c` counts without serialising, reporting on stderr
+    #   "rapper: Parsing returned 3847644 triples"
+    try:
+        result = subprocess.run(
+            ["rapper", "-i", "turtle", "-c", "-q", str(file_path)],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        match = re.search(r"returned\s+([\d,]+)\s+triples", result.stderr)
+        if match:
+            return int(match.group(1).replace(",", ""))
+    except subprocess.SubprocessError:
+        pass
+
+    # Fallback: serialise to N-Triples and count lines. Slower and more memory
+    # hungry, but independent of how this rapper build words its summary.
     try:
         result = subprocess.run(
             ["rapper", "-i", "turtle", "-o", "ntriples", str(file_path)],
@@ -151,7 +218,8 @@ def count_triples_with_rapper(file_path: Path) -> int | None:
             stderr=subprocess.PIPE,
             text=True,
         )
-    except subprocess.SubprocessError:
+    except subprocess.SubprocessError as exc:
+        MISSING_TRIPLE_COUNTS.append(f"{file_path}: rapper failed ({exc})")
         return None
 
     return sum(
@@ -218,6 +286,12 @@ def main() -> None:
         default=None,
         help="Human-facing release version of the RDF deposit, e.g. 3.2.",
     )
+    parser.add_argument(
+        "--require-triples",
+        action="store_true",
+        help="Exit non-zero if void:triples could not be emitted for every dataset. "
+        "Use in CI so a release can never publish a VoID without dataset sizes.",
+    )
 
     args = parser.parse_args()
 
@@ -244,6 +318,8 @@ def main() -> None:
         "@prefix dcat:    <http://www.w3.org/ns/dcat#> .",
         "@prefix foaf:    <http://xmlns.com/foaf/0.1/> .",
         "@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .",
+        "@prefix sd:      <http://www.w3.org/ns/sparql-service-description#> .",
+        "@prefix formats: <http://www.w3.org/ns/formats/> .",
         "",
     ]
 
@@ -286,7 +362,7 @@ def main() -> None:
             f"    pav:version {ttl_literal(version)} ;",
             f"    pav:createdOn {ttl_literal(today)}^^xsd:date ;",
             f"    pav:createdWith {ttl_literal('gpml2rdf-4.0.4-SNAPSHOT.jar')} ;",
-            f"    void:sparqlEndpoint {ttl_uri('https://sparql-plantmetwiki.bioinformatics.nl/sparql')} ;",
+            f"    void:sparqlEndpoint {ttl_uri(SPARQL_ENDPOINT)} ;",
             f"    void:vocabulary {ttl_uri('http://vocabularies.wikipathways.org/wp#')} ,",
             f"                    {ttl_uri('http://vocabularies.wikipathways.org/gpml#')} ,",
             f"                    {ttl_uri('http://purl.org/dc/terms/')} ,",
@@ -388,8 +464,25 @@ def main() -> None:
             today,
         )
 
+    # SPARQL 1.1 Service Description (combined into the VoID document).
+    add_service_description(lines, core_dataset)
+
     Path(args.output).write_text("\n".join(lines), encoding="utf-8")
     print(f"Wrote VoID metadata: {args.output}")
+
+    if MISSING_TRIPLE_COUNTS:
+        print(
+            "\nWARNING: void:triples is missing for the following datasets.\n"
+            "Consumers that read dataset size from the VoID (e.g. YummyData) will\n"
+            "fall back to their own estimate, which skews performance scoring:",
+            file=sys.stderr,
+        )
+        for reason in MISSING_TRIPLE_COUNTS:
+            print(f"  - {reason}", file=sys.stderr)
+        if args.require_triples:
+            sys.exit(1)
+    else:
+        print("All datasets carry void:triples.")
 
 
 if __name__ == "__main__":
