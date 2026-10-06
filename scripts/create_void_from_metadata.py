@@ -188,21 +188,28 @@ def count_triples_with_rapper(file_path: Path) -> int | None:
 
     if not shutil.which("rapper"):
         MISSING_TRIPLE_COUNTS.append(
-            f"{file_path}: 'rapper' not on PATH (install raptor, e.g. conda install -c conda-forge raptor)"
+            f"{file_path}: 'rapper' not on PATH "
+            "(Debian/Ubuntu: apt-get install raptor2-utils; macOS: brew install raptor). "
+            "It is not available on conda-forge."
         )
         return None
 
     # Preferred: `rapper -c` counts without serialising, reporting on stderr
     #   "rapper: Parsing returned 3847644 triples"
     try:
+        # No -q here: it suppresses the very summary line we parse.
         result = subprocess.run(
-            ["rapper", "-i", "turtle", "-c", "-q", str(file_path)],
+            ["rapper", "-i", "turtle", "-c", str(file_path)],
             check=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
         )
-        match = re.search(r"returned\s+([\d,]+)\s+triples", result.stderr)
+        # The summary normally goes to stderr, but scan both streams so the
+        # count is found regardless of how this build routes it.
+        match = re.search(
+            r"returned\s+([\d,]+)\s+triples", result.stderr + "\n" + result.stdout
+        )
         if match:
             return int(match.group(1).replace(",", ""))
     except subprocess.SubprocessError:
