@@ -69,6 +69,15 @@ jobs:
         shell: bash -el {0}
         run: python scripts/download_gpml_input.py --clean
 
+      # Resolved once here, not per-step: every bundle filename downstream is
+      # keyed on it, and download_gpml_input.py has just written the metadata.
+      - name: Resolve release version
+        shell: bash -el {0}
+        run: |
+          VERSION=$(python -c 'import json; print(json.load(open("build/zenodo_gpml_metadata.json"))["version"])')
+          echo "VERSION=${VERSION}" >> "$GITHUB_ENV"
+          echo "Bundle version: ${VERSION}"
+
       - name: Rename GPML files with stable PC*/RC* identifiers
         shell: bash -el {0}
         run: |
@@ -92,15 +101,15 @@ jobs:
 
       - name: Generate taxonomy extra RDF
         shell: bash -el {0}
-        run: python scripts/create_gpml_taxonomy_extra_rdf.py
-
-      - name: Generate NCBI IRI mappings (OBO → BioPortal)
-        shell: bash -el {0}
-        run: python scripts/create_ncbi_iri_mappings.py
+        run: |
+          python scripts/create_gpml_taxonomy_extra_rdf.py \
+            --aggregate-file output/bundles/all_gpml_taxonomy_extra-${VERSION}.ttl
 
       - name: Generate GPML property extra RDF
         shell: bash -el {0}
-        run: python scripts/create_gpml_properties_extra_rdf.py
+        run: |
+          python scripts/create_gpml_properties_extra_rdf.py \
+            --aggregate-file output/bundles/all_gpml_properties_extra-${VERSION}.ttl
 
       # ------------------------------------------------------------------
       # Assemble bundles
@@ -109,9 +118,6 @@ jobs:
       - name: Assemble and hotfix core bundle
         shell: bash -el {0}
         run: |
-          VERSION=$(python -c 'import json; print(json.load(open("build/zenodo_gpml_metadata.json"))["version"])')
-          echo "VERSION=${VERSION}" >> "$GITHUB_ENV"
-
           # bundle_rdf.py writes each @prefix exactly once at the top,
           # avoiding duplicate prefix declarations from the individual TTL files.
           python scripts/bundle_rdf.py \
@@ -143,7 +149,6 @@ jobs:
             --core-rdf         output/bundles/all-${VERSION}.ttl \
             --taxonomy-extra   output/bundles/all_gpml_taxonomy_extra-${VERSION}.ttl \
             --properties-extra output/bundles/all_gpml_properties_extra-${VERSION}.ttl \
-            --ncbi-mappings    output/bundles/ncbi_iri_mappings-${VERSION}.ttl \
             --release-version  "${{ inputs.release_version }}" \
             --bridgedb-build   "${{ inputs.bridgedb_build }}" \
             --rdf-conceptdoi   10.5281/zenodo.17967619 \

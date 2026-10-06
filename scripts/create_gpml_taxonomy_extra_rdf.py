@@ -204,6 +204,10 @@ def aggregate_ttls(output_root: Path, aggregate_file: Path) -> None:
                 if len(parts) >= 2 and parts[1] not in seen_prefixes:
                     seen_prefixes[parts[1]] = stripped
 
+    # output/bundles/ does not exist in a clean checkout (it is not tracked),
+    # so create it here rather than relying on an earlier step having done so.
+    aggregate_file.parent.mkdir(parents=True, exist_ok=True)
+
     with aggregate_file.open("w", encoding="utf-8") as out:
         for prefix_line in seen_prefixes.values():
             out.write(prefix_line + "\n")
