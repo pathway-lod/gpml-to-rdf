@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
-import re
 import shutil
 import subprocess
 import sys
@@ -174,13 +173,29 @@ MISSING_TRIPLE_COUNTS: list[str] = []
 
 
 def count_triples_with_rapper(file_path: Path) -> int | None:
-    """Count triples in a Turtle file with rapper.
+    """Count the DISTINCT triples in a Turtle file with rapper.
 
-    Returns None and records the reason if the count cannot be produced. The
-    bundles use blank-node and predicate-list syntax, so a line-based count
-    would be wrong; a real parser is required. Failures are reported loudly
-    because a silently missing void:triples makes consumers such as YummyData
-    fall back to their own estimate of the dataset size.
+    Returns None and records the reason if the count cannot be produced.
+    Failures are reported loudly because a silently missing void:triples makes
+    consumers such as YummyData fall back to their own estimate of the dataset
+    size.
+
+    IMPORTANT: this must count DISTINCT triples, not parsed statements.
+    core and taxonomy-extra are assembled by concatenating one TTL file per
+    pathway or reaction (see aggregate_ttls() in create_gpml_taxonomy_extra_rdf.py
+    and create_gpml_properties_extra_rdf.py). An entity shared across many
+    pathways -- a cofactor, a protein, a taxon -- gets its descriptive triples
+    re-asserted once per pathway file that mentions it: H+ alone appears in
+    1,436 pathway/reaction files in one release, so each of its 4 triples is
+    duplicated 1,436 times in the raw bundle. `rapper -c` counts parsed
+    statements and so reports this duplication; Virtuoso, like any RDF store,
+    treats a graph as a set and silently discards the duplicates on load. A
+    void:triples value from `rapper -c` therefore overstates the dataset a
+    client will actually query by a wide, release-dependent margin (verified:
+    +36% for one taxonomy-extra release, +7% for one core release), while
+    reporting zero spurious growth for properties-extra, whose triples are
+    pathway-scoped and never shared. Always serialise and deduplicate; never
+    trust a parse count alone for this value.
     """
     if not file_path.exists():
         MISSING_TRIPLE_COUNTS.append(f"{file_path}: file not found")
@@ -194,29 +209,10 @@ def count_triples_with_rapper(file_path: Path) -> int | None:
         )
         return None
 
-    # Preferred: `rapper -c` counts without serialising, reporting on stderr
-    #   "rapper: Parsing returned 3847644 triples"
-    try:
-        # No -q here: it suppresses the very summary line we parse.
-        result = subprocess.run(
-            ["rapper", "-i", "turtle", "-c", str(file_path)],
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-        )
-        # The summary normally goes to stderr, but scan both streams so the
-        # count is found regardless of how this build routes it.
-        match = re.search(
-            r"returned\s+([\d,]+)\s+triples", result.stderr + "\n" + result.stdout
-        )
-        if match:
-            return int(match.group(1).replace(",", ""))
-    except subprocess.SubprocessError:
-        pass
-
-    # Fallback: serialise to N-Triples and count lines. Slower and more memory
-    # hungry, but independent of how this rapper build words its summary.
+    # Serialise to canonical N-Triples (one triple per line) and deduplicate
+    # with a set. This is the only reliable way to get a distinct count: there
+    # is no rapper flag that reports it directly, since -c counts parsed
+    # statements before any notion of a graph-as-a-set applies.
     try:
         result = subprocess.run(
             ["rapper", "-i", "turtle", "-o", "ntriples", str(file_path)],
@@ -229,11 +225,22 @@ def count_triples_with_rapper(file_path: Path) -> int | None:
         MISSING_TRIPLE_COUNTS.append(f"{file_path}: rapper failed ({exc})")
         return None
 
-    return sum(
-        1
-        for line in result.stdout.splitlines()
+    lines = [
+        line for line in result.stdout.splitlines()
         if line.strip() and not line.startswith("#")
-    )
+    ]
+    distinct = len(set(lines))
+
+    if len(lines) != distinct:
+        dup = len(lines) - distinct
+        print(
+            f"  note: {file_path.name}: {len(lines):,} statements parsed, "
+            f"{distinct:,} distinct ({dup:,} duplicate{'s' if dup != 1 else ''} "
+            f"from entities shared across source files, discarded as they would "
+            f"be on load) -- using {distinct:,} for void:triples"
+        )
+
+    return distinct
 
 
 def file_distribution(dataset_uri: str, file_path: Path) -> list[str]:
