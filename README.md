@@ -356,11 +356,16 @@ Add `--sandbox` to test against the Zenodo sandbox first. The script creates a *
 
 ### Option B — GitHub Actions (recommended)
 
-A `workflow_dispatch` workflow at `.github/workflows/upload-zenodo.yml` runs the full pipeline (download → rename → RDF → bundle → validate → upload):
+A `workflow_dispatch` workflow at `.github/workflows/upload-zenodo.yml` runs the full pipeline (download → rename → RDF → bundle → validate → upload) on a GitHub-hosted runner, so no local setup is needed:
 
-1. Add `ZENODO_ACCESS_TOKEN` as a repository secret
-2. Go to **Actions** → **Upload to Zenodo** → **Run workflow**
-3. Enter the source Zenodo record ID
+1. Add `ZENODO_ACCESS_TOKEN` as a repository secret (**Settings → Secrets and variables → Actions**), with scopes `deposit:write` and `deposit:actions`
+2. Go to **Actions** → **Upload to Zenodo** → **Run workflow**, and fill in:
+   - `source_record` — the Zenodo record ID to create a new version from (the *previous* release's record, not its concept DOI)
+   - `release_version` — the human-facing label for this release, e.g. `3.4.1`
+   - `bridgedb_build` — the BridgeDb metabolite mapping build used for this release
+   - `publish` — leave unchecked to review the draft before it goes live; check it to publish immediately
+3. The run takes about 20–30 minutes: it downloads the GPML input, regenerates all RDF from scratch, bundles and validates it, then creates (or finds) a Zenodo draft. There is no partial-progress indicator beyond the live step log, and GitHub always reruns the whole job from the top — a retry after a late failure (e.g. at the upload step) repeats the full RDF generation rather than resuming, so a failure late in the run is the most expensive to retry.
+4. With `publish` unchecked, review the draft's files in the Zenodo UI — especially `void:triples` in the generated VoID file — before publishing it yourself.
 
 ---
 

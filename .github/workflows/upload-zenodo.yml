@@ -33,7 +33,7 @@ on:
 jobs:
   upload:
     runs-on: ubuntu-latest
-    timeout-minutes: 240   # full pipeline can take ~1-2 h in CI
+    timeout-minutes: 240   # typical run is ~20-30 min; generous ceiling for a slow runner or retry
 
     steps:
       - name: Checkout repository
